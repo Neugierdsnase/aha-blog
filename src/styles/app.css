@@ -1,13 +1,32 @@
 .postlist {
-  & a {
-    margin-right: 1rem;
-  }
+  & > li {
+    margin-bottom: 4rem;
 
-  & h3 {
-    display: inline;
-  }
+    & a {
+      margin-right: 1rem;
+    }
 
-  & span {
-    font-size: 0.9rem;
+    & h3 {
+      display: inline;
+    }
+
+    & span {
+      font-size: 1rem;
+      margin-left: 1rem;
+    }
+  }
+}
+
+.projectlist {
+  & > li {
+    margin-bottom: 4rem;
+
+    & h3 {
+      display: inline;
+    }
+
+    & p {
+      margin-left: 1rem;
+    }
   }
 }

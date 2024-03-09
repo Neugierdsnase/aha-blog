@@ -25,10 +25,7 @@ const posts = (await getCollection("blog")).sort(
 
       <hr />
 
-      <div>
-        <h2>About</h2>
-        <p></p>
-
+      <section>
         <h2>Blog</h2>
         <ul class="postlist">
           {
@@ -37,30 +34,46 @@ const posts = (await getCollection("blog")).sort(
                 <a href={`/blog/${post.slug}/`}>
                   <h3 class="title">{post.data.title}</h3>
                 </a>
-                <span class="postlist--date">
+                <span>
                   <FormattedDate date={post.data.pubDate} />
                 </span>
+                <p>{post.data.description}</p>
               </li>
             ))
           }
         </ul>
+      </section>
 
+      <section>
         <h2>Projects</h2>
-        <ul>
+        <ul class="projectlist">
           <li>
             <a href="https://prompt-dress.com"
               ><h3>Prompt Dress Browser Extension</h3></a
             >
+            <p>
+              Eine Browsererweiterung, zum lokalen abspeichern persönlicher KI <i
+                >Prompts,
+              </i> um sich das ständige neue <i>primen</i> der KI-Modelle durch manuelles
+              Kopieren und Einfügen zu ersparen.
+            </p>
           </li>
           <li>
             <a
               href="https://marketplace.visualstudio.com/items?itemName=KonstantinKovar.classnames-rainbow"
               ><h3>ClassNames Rainbow VSCode Extension</h3></a
             >
+            <span></span>
           </li>
         </ul>
-      </div>
+      </section>
+
+      <section>
+        <h2>About</h2>
+        <p></p>
+      </section>
     </article>
+
     <Footer />
   </body>
 </html>

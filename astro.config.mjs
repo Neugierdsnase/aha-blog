@@ -5,6 +5,13 @@ import htmx from "astro-htmx";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://example.com",
-  integrations: [mdx(), sitemap(), htmx()],
+  site: "https://blog.vomkonstant.in",
+  markdown: { syntaxHighlight: false, gfm: false },
+  ntegrations: [
+    mdx({
+      remarkPlugins: [],
+    }),
+    sitemap(),
+    htmx(),
+  ],
 });
