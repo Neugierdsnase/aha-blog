@@ -4,6 +4,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Sidenote from "../components/Sidenote.astro";
 import Marginnote from "../components/Marginnote.astro";
+import Newthought from "../components/Newthought.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
@@ -130,10 +131,10 @@ const posts = (await getCollection("blog")).sort(
         das ihn subventioniert.
       </p>
       <p>
-        Vor allem aber möchte ich das Schreiben üben. Denn Schreiben heißt
-        Denken. Und ich habe Angst, diese Fähigkeit zu verlieren. Wir sind es
-        nicht mehr gewohnt, uns länger als ein paar Sekunden mit einem Thema zu
-        beschäftigen, bevor wir total aus dem einen Kontext in den nächsten
+        <Newthought>Vor allem</Newthought> aber möchte ich das Schreiben üben. Denn
+        Schreiben heißt Denken. Und ich habe Angst, diese Fähigkeit zu verlieren.
+        Wir sind es nicht mehr gewohnt, uns länger als ein paar Sekunden mit einem
+        Thema zu beschäftigen, bevor wir total aus dem einen Kontext in den nächsten
         gezerrt werden.
       </p>
       <blockquote>

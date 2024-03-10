@@ -30,3 +30,12 @@
     }
   }
 }
+
+figure.fullwidth {
+  & > label {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 4px;
+  }
+}

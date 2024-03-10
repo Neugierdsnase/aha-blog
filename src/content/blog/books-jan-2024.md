@@ -6,6 +6,56 @@ slug: bucher-janner-2024
 date: 2024-02-01T14:24:38.000Z
 draft: true
 ---
+import Marginnote from '../components/Marginnote.astro'
+
+## Building A Second Brain
+
+Dieses Buch ist fast schon ein Klassiker. Auch ich habe es im englischen
+Original gelesen, aber es gibt eine deutsche Übersetzung. Die Ideen in dem Buch
+sind gut und können vermutlich für viele Menschen mächtige positive Auswirkungen
+auf ihr Leben haben. Ich bin mir aber nicht sicher, ob es das ganze Buch
+braucht, um diese Ideen zu kommunizieren. Thiago Forte, der Autor des Buches,
+war in so vielen Podcasts und hat so viel Information online gestellt, dass man
+sich die Lektüre getrost sparen kann. Zumal sich dieses Erstlingswerk auch nicht
+so flüssig liest, wie die Bücher erfahrener Autoren desselben Genres. Wenn man
+also der englischen Sprache einigermaßen mächtig ist, dann reichen die frei
+verfügbaren Ressourcen vollkommen aus, um damit beginnen zu können, nach den von
+Thiago Forte definierten Prozessen und Regeln, wie PARA (die Organisation der
+Notizen nach _Projects_, _Areas_, _Ressources_ und _Archive_) und CODE (der
+Lebenszyklus der Notizen nach _Create, Organise, Distill_ und _Express_), sein
+zweites Hirn zu kultivieren.
+
+## Café Untergang
+
+
+Am<Marginnote><img src="/img/cafecentral.jpg" alt="Schwarz-Weiß-Foto vermutlich um die Jahrhundertwende vom inneren des Wiener Café Central"/>
+</Marginnote> Salzburger Bahnhof entdeckte ich dieses Schmuckstück an der Spitze des
+Bestsellerregals im „Press&Books“ – und das vollkommen zurecht! Freilich muss
+ich zugeben, dass Wien in meinem Herzen einen ganz besonderen Platz einnimmt und
+ich deshalb nur schwer ein objektiver Zeuge dieses Werks sein kann.
+
+Dass sowohl Hitler, Stalin, Trotzki, als auch Tito im Jahr 1913 zeitgleich in
+der kaiserlich-königlichen Reichshaupt- und Residenzstadt wohnten, war für mich
+bis dato eher im Bereich des _nutzlosen Wissens_ angesiedelt. Etwas, das man in
+ungerechtfertigter Selbstzufriedenheit in eine nächtliche politische Diskussion
+einfließen ließ. Eine Kuriosität, die man auf der Heimfahrt mit dem Taxifahrer
+diskutieren konnte, der, wie er beim Bezahlen zugab, Philosophie studiert hatte.
+
+Dennoch ist es verwunderlich, dass sich vor Günter Haller noch niemand eingehend
+mit der Frage beschäftigt hat, wie es denn eigentlich zu diesem vermeintlichen
+Zufall kam. Haller findet die Antwort in der Nationalitätenfrage, die zu
+beantworten Stalin von Lenin speziell nach Wien geschickt wurde. In den
+„Schmelztiegel und Wasserkopf“ des – neben dem russischen – zweiten
+Vielvölkerstaates Europas.
+
+Dem Anekdotenliebhaber in mir gefällt die erste Hälfte des Buches, in der sich
+die Protagonisten durch die Straßen, Männerheime und Cafés meines Wiens
+schlagen, wesentlich besser als die makropolitischen Abhandlungen weithin
+bekannter Umstände, die im letzten Drittel drohen, das Buch zu einem
+Pflichtschulgeschichtsbuch zu deklassieren. Zum Glück gelingt ihnen das nicht
+ganz, und Haller schafft zuletzt einen bravourösen Abschluss mit herzerwärmenden
+Anekdoten.
+
 ## His Majesty's Dragon
 
 Bis auf eine tiefe Faszination für die Werke Tolkiens, die ich vermutlich mit
@@ -19,20 +69,12 @@ Beispiel für mich ist Neal Stephenson's „Anathem“, das mit einem kontextlos
 Abriss einer 7000-jährigen Geschichte in einer erfundenen Zeitrechnung beginnt,
 die schwer zu begreifen kaum sein könnte.
 
-<figure>
-<label for="mn-demo" class="margin-toggle">&#8853;</label>
-<input type="checkbox" id="mn-demo" class="margin-toggle"/>
-<span class="marginnote">Um all das zu verdauen, ist mein Enthusiasmus für ein Universum, das ich noch nicht kenne, nicht groß genug.
-</span>
-    <img src='/img/anathem_prolog.jpg'>
+<figure class="fullwidth">
+    <img client:idle src='/img/anathem_prolog.jpg' alt="Aufgeschlagenes Buch, dass eine Liste historischer Ereignisse aus Neil Stephenson's 'Anathem' zeigt."/>
+    <label>Ehrlich Neal? Ich habe mich gerade erst hingesetzt!</label>
 </figure>
 
-Da ist „His Majesty's Dragon“, das ich auf Englisch gelesen habe, von dem es
-aber auch eine deutsche Übersetzung gibt, schon eher nach meiner Façon: Zwar ist
-das Genre eindeutig Fantasy, aber – ähnlich wie bei „Das Lied von Eis und Feuer“
-– enger mit der Realität verwandt, die wir kennen. Die fantastischen Elemente
-sind so sparsam platziert, dass sich die Umstände, unter denen sich die
-Geschichte entfaltet, leichter nachvollziehen lassen.
+<Newthought>Da ist „His Majesty's Dragon“,</Newthought> das ich auf Englisch gelesen habe, von dem es aber auch eine deutsche Übersetzung gibt, schon eher nach meiner Façon: Zwar ist das Genre eindeutig Fantasy, aber – ähnlich wie bei „Das Lied von Eis und Feuer“ – enger mit der Realität verwandt, die wir kennen. Die fantastischen Elemente sind so sparsam platziert, dass sich die Umstände, unter denen sich die Geschichte entfaltet, leichter nachvollziehen lassen.
 
 So spielt diese Geschichte während der Napoleonischen Kriege und verfolgt einen
 jungen, britischen Marinekapitän, der nach der Enterung eines feindlichen
@@ -98,34 +140,6 @@ Temeraire, der ohnehin schon jakobinische Tendenzen zeigt, etwas aus, das man
 wohl als _Gewerkschaftsdenken_ bezeichnen könnte. Welche Früchte dies tragen
 wird, wird sich aber wohl erst im nächsten Band der Reihe zeigen.
 
-## Café Untergang
-
-Am Salzburger Bahnhof entdeckte ich dieses Schmuckstück an der Spitze des
-Bestsellerregals im „Press&Books“ – und das vollkommen zurecht! Freilich muss
-ich zugeben, dass Wien in meinem Herzen einen ganz besonderen Platz einnimmt und
-ich deshalb nur schwer ein objektiver Zeuge dieses Werks sein kann.
-
-Dass sowohl Hitler, Stalin, Trotzki, als auch Tito im Jahr 1913 zeitgleich in
-der kaiserlich-königlichen Reichshaupt- und Residenzstadt wohnten, war für mich
-bis dato eher im Bereich des _nutzlosen Wissens_ angesiedelt. Etwas, das man in
-ungerechtfertigter Selbstzufriedenheit in eine nächtliche politische Diskussion
-einfließen ließ. Eine Kuriosität, die man auf der Heimfahrt mit dem Taxifahrer
-diskutieren konnte, der, wie er beim Bezahlen zugab, Philosophie studiert hatte.
-
-Dennoch ist es verwunderlich, dass sich vor Günter Haller noch niemand eingehend
-mit der Frage beschäftigt hat, wie es denn eigentlich zu diesem vermeintlichen
-Zufall kam. Haller findet die Antwort in der Nationalitätenfrage, die zu
-beantworten Stalin von Lenin speziell nach Wien geschickt wurde. In den
-„Schmelztiegel und Wasserkopf“ des – neben dem russischen – zweiten
-Vielvölkerstaates Europas.
-
-Dem Anekdotenliebhaber in mir gefällt die erste Hälfte des Buches, in der sich
-die Protagonisten durch die Straßen, Männerheime und Cafés meines Wiens
-schlagen, wesentlich besser als die makropolitischen Abhandlungen weithin
-bekannter Umstände, die im letzten Drittel drohen, das Buch zu einem
-Pflichtschulgeschichtsbuch zu deklassieren. Zum Glück gelingt ihnen das nicht
-ganz, und Haller schafft zuletzt einen bravourösen Abschluss mit herzerwärmenden
-Anekdoten.
 
 ## Das Café am Rande der Welt
 
@@ -169,20 +183,3 @@ ipsum factum“ – _„Wir kennen nur, was wir (selbst) machen.“_
 
 Der „Follow Your Passion“-Ratschlag ist bestenfalls eine Binsenweisheit, das
 ändert sich auch nicht, wenn man ihn mit einer kleinen Erzählung umrahmt.
-
-## Building A Second Brain
-
-Dieses Buch ist fast schon ein Klassiker. Auch ich habe es im englischen
-Original gelesen, aber es gibt eine deutsche Übersetzung. Die Ideen in dem Buch
-sind gut und können vermutlich für viele Menschen mächtige positive Auswirkungen
-auf ihr Leben haben. Ich bin mir aber nicht sicher, ob es das ganze Buch
-braucht, um diese Ideen zu kommunizieren. Thiago Forte, der Autor des Buches,
-war in so vielen Podcasts und hat so viel Information online gestellt, dass man
-sich die Lektüre getrost sparen kann. Zumal sich dieses Erstlingswerk auch nicht
-so flüssig liest, wie die Bücher erfahrener Autoren desselben Genres. Wenn man
-also der englischen Sprache einigermaßen mächtig ist, dann reichen die frei
-verfügbaren Ressourcen vollkommen aus, um damit beginnen zu können, nach den von
-Thiago Forte definierten Prozessen und Regeln, wie PARA (die Organisation der
-Notizen nach _Projects_, _Areas_, _Ressources_ und _Archive_) und CODE (der
-Lebenszyklus der Notizen nach _Create, Organise, Distill_ und _Express_), sein
-zweites Hirn zu kultivieren.
