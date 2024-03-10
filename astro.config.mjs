@@ -7,11 +7,5 @@ import htmx from "astro-htmx";
 export default defineConfig({
   site: "https://blog.vomkonstant.in",
   markdown: { syntaxHighlight: false, gfm: false },
-  ntegrations: [
-    mdx({
-      remarkPlugins: [],
-    }),
-    sitemap(),
-    htmx(),
-  ],
+  integrations: [mdx(), sitemap(), htmx()],
 });
