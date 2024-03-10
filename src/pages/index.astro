@@ -2,9 +2,12 @@
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Sidenote from "../components/Sidenote.astro";
+import Marginnote from "../components/Marginnote.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
+import Layout from "../layouts/BlogPost.astro";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
@@ -20,8 +23,8 @@ const posts = (await getCollection("blog")).sort(
     <Header />
 
     <article>
-      <h1>Konstantin Kovar</h1>
-      <p class="subtitle">Web Developer und geiler Typ</p>
+      <h1>{SITE_TITLE}</h1>
+      <p class="subtitle">{SITE_DESCRIPTION}</p>
 
       <hr />
 
@@ -52,28 +55,112 @@ const posts = (await getCollection("blog")).sort(
               ><h3>Prompt Dress Browser Extension</h3></a
             >
             <p>
-              Eine Browsererweiterung, zum lokalen abspeichern persönlicher KI <i
+              Eine Browsererweiterung, zum lokalen abspeichern persönlicher KI <em
                 >Prompts,
-              </i> um sich das ständige neue <i>primen</i> der KI-Modelle durch manuelles
-              Kopieren und Einfügen zu ersparen.
+              </em> um sich das ständige neue <em>primen</em> der KI-Modelle durch
+              manuelles Kopieren und Einfügen zu ersparen.
             </p>
           </li>
           <li>
             <a
               href="https://marketplace.visualstudio.com/items?itemName=KonstantinKovar.classnames-rainbow"
-              ><h3>ClassNames Rainbow VSCode Extension</h3></a
+              ><h3>
+                ClassNames Rainbow VSCode Erweiterung <em>[deprecated]</em>
+              </h3></a
             >
-            <span></span>
+            <p></p>
+            Eine Erweiterung für Visual Studio Code, die <code>class</code
+            >-names durch Regenbogenoptik leichter identifizierbar macht, was
+            vor allem für
+            <a rel="noreferrer noopener" href="https://tailwindcss.com/"
+              >Tailwind CSS</a
+            > Nutzer hilfreich sein kann.
           </li>
         </ul>
       </section>
-
-      <section>
-        <h2>Wo bin ich hier?</h2>
-        <p></p>
-      </section>
     </article>
 
+    <Layout title="" description="" pubDate={new Date()}>
+      <h2>Wo bin ich hier?</h2>
+      <p>
+        In der Schule trafen sich die mutigsten in der langen Pause im
+        hintersten Eck der Schulbibliothek, wo wir uns mit zwölf Jahren
+        gegenseitig versuchten zu beeindrucken, indem wir uns Seiten wie
+        Rotten.com zeigten und uns so gegenseitig Trauma dazufügten, die vielen
+        von uns wahrscheinlich bis heute nachhängen.
+      </p>
+      <p>
+        Die Tatsache, dass ich auf diese Zeit mit nostalgischer Wehmut
+        zurückblicke, spricht wohl dafür, dass ich einen Hang dazu habe, die
+        Vergangenheit zu romantisieren. Aber einen kleinen, wahren Kern kann man
+        dem Gefühl, dass das Internet besser war, als es noch mehr als die
+        heutigen gefühlten fünf Seiten gab, besser war, spannender.
+      </p>
+      <p>
+        Es fällt mir der Vergleich mit Kinderspielplätzen ein, wo früher rostige
+        Nägel aus dem Klettergerüst ragten und steinharter Beton unvorsichtige
+        Handgriffe bestrafte, der versinnbildlichen heutzutage glasglatt
+        abgerundete Oberflächen und weicher Kautschukboden den Triumph des
+        Fortschritts. Wo früher <em>2 Girls 1 Cup</em> für Entsetzen und Schock sorgte,
+        da kuratiert heute der Algorithmus die Inhalte nicht nur nach Sicherheit,
+        sondern auch nach ökonomischer Wertigkeit.
+      </p>
+      <p>
+        Hier auf meiner Seite mache ich alles falsch. Die Zeilen, die Sie gerade
+        gelesen haben, sind denkbar schlecht suchmaschinenoptimiert. Die Sätze
+        sind viel zu lange für Menschen des TikTok-Zeitalters, die meistens
+        keinen zweiten Nebensatz schaffen. Die Seite verscherzt es sich mit
+        Google im Speziellen, weil sie keine AMP-Version anbietet. Ich sieze
+        meine Leser, was jeden Ratschlag über Inhalte im Internet widerspricht.
+        Ich versuche Anglizismen auf dieser <em>pagina domestica</em><Sidenote>
+          Latein für <em>Homepage</em>
+        </Sidenote>
+        zu vermeiden, obwohl das oft die Schlagwörter sind, die eine bessere Reihung
+        in den Suchergebnissen bringen. Ich bewerbe meine Texte nicht in den sozialen
+        Netzen. Sie können mir nirgends folgen, außer via RSS.
+      </p>
+      <p>
+        Aber warum das alles? Weil ich das alte Internet vermisse, weil mir die
+        Seiten im Internet fehlen, die ohne Gewinnabsicht existierten, weil mir
+        die Gedanken fehlen, die ins Netz gestellt wurden, ohne dass dahinter
+        jemand lauert, der will, dass ich ihm auf Instagram, YouTube, TikTok und
+        der Plattform formerly known as Twitter folge, seinen Kurs kaufe, mit
+        dem ich in sieben einfachen Schritten selbst zum <em>Influencer</em> werden
+        kann und außerdem seinen Bonuscode angebe, wenn ich endlich das VPN abonniere,
+        das ihn subventioniert.
+      </p>
+      <p>
+        Vor allem aber möchte ich das Schreiben üben. Denn Schreiben heißt
+        Denken. Und ich habe Angst, diese Fähigkeit zu verlieren. Wir sind es
+        nicht mehr gewohnt, uns länger als ein paar Sekunden mit einem Thema zu
+        beschäftigen, bevor wir total aus dem einen Kontext in den nächsten
+        gezerrt werden.
+      </p>
+      <blockquote>
+        <p>
+          <Marginnote>
+            Frei übersetzt: "Sehen Sie gleich..." ist wird meist von
+            Fernsehnachrichtensendungen verwendet, um anzudeuten, dass das eben
+            gesehene keine Relevanz für das hat, was Sie als nächstes sehen
+            werden, oder möglicherweise was Sie jemals sehen werden.
+          </Marginnote>
+          "Now...this" is commonly used on radio and television newscasts to indicate
+          that what one has just heard or seen has no relevance to what one is about
+          to hear or see, or possibly to anythinbg one is ever likely to hear or
+          see.
+        </p>
+        <footer>Neil Postman, "Amusing Ourselves To Death"</footer>
+      </blockquote>
+      <p>
+        Das ist keineswegs nur den jüngsten Technologien zuzuschulden. Schon
+        1985 beklagt Neil Postman in seinem Buch "Amusing Ourselves To Death"<Sidenote
+        >
+          deutscher Titel: "Wir amüsieren uns zu Tode"
+        </Sidenote> den ständigen Kontextwechsel der Television und den damit einhergehenden
+        Verlust einer strukturierten, tiefgehenden und bedeutsamen Auseinandersetzung
+        mit einem Thema. Die Fähigkeit zu denken, die will ich mir erhalten.
+      </p>
+    </Layout>
     <Footer />
   </body>
 </html>
