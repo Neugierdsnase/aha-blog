@@ -1,0 +1,14 @@
+---
+import { generateUuid } from "../utils/generateUuid.ts";
+const marginNoteId = generateUuid();
+
+interface Props {
+  content: string;
+}
+---
+
+<label for={marginNoteId} class="margin-toggle">&#8853;</label>
+<input type="checkbox" id={marginNoteId} class="margin-toggle" />
+<span class="marginnote">
+  {Astro.props.content}
+</span>
