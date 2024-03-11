@@ -23,66 +23,84 @@ const posts = (await getCollection("blog")).sort(
   <body>
     <Header />
 
-    <article>
-      <h1>{SITE_TITLE}</h1>
-      <p class="subtitle">{SITE_DESCRIPTION}</p>
+    <main style="margin-bottom: -8rem;">
+      <article>
+        <h1>{SITE_TITLE}</h1>
+        <p class="subtitle">{SITE_DESCRIPTION}</p>
 
-      <hr />
+        <hr />
 
-      <section>
-        <h2>Blog</h2>
-        <ul class="postlist">
-          {
-            posts.map((post) => (
-              <li>
-                <a href={`/blog/${post.slug}/`}>
-                  <h3 class="title">{post.data.title}</h3>
-                </a>
-                <span>
-                  <FormattedDate date={post.data.pubDate} />
-                </span>
-                <p>{post.data.description}</p>
-              </li>
-            ))
-          }
-        </ul>
-      </section>
+        <section>
+          <h2>Blog</h2>
+          <ul class="postlist">
+            {
+              posts.map((post) => (
+                <li>
+                  <a href={`/blog/${post.slug}/`}>
+                    <h3 class="title">{post.data.title}</h3>
+                  </a>
+                  <span>
+                    <FormattedDate date={post.data.pubDate} />
+                  </span>
+                  <p>{post.data.description}</p>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
 
-      <section>
-        <h2>Projects</h2>
-        <ul class="projectlist">
-          <li>
-            <a href="https://prompt-dress.com"
-              ><h3>Prompt Dress Browser Extension</h3></a
-            >
-            <p>
-              Eine Browsererweiterung, zum lokalen abspeichern persönlicher KI <em
-                >Prompts,
-              </em> um sich das ständige neue <em>primen</em> der KI-Modelle durch
-              manuelles Kopieren und Einfügen zu ersparen.
-            </p>
-          </li>
-          <li>
-            <a
-              href="https://marketplace.visualstudio.com/items?itemName=KonstantinKovar.classnames-rainbow"
-              ><h3>
-                ClassNames Rainbow VSCode Erweiterung <em>[deprecated]</em>
-              </h3></a
-            >
-            <p></p>
-            Eine Erweiterung für Visual Studio Code, die <code>class</code
-            >-names durch Regenbogenoptik leichter identifizierbar macht, was
-            vor allem für
-            <a rel="noreferrer noopener" href="https://tailwindcss.com/"
-              >Tailwind CSS</a
-            > Nutzer hilfreich sein kann.
-          </li>
-        </ul>
-      </section>
-    </article>
+        <section>
+          <h2>Projects</h2>
+          <ul class="projectlist">
+            <li>
+              <a href="https://prompt-dress.com"
+                ><h3>Prompt Dress Browser Extension</h3></a
+              >
+              <p>
+                Eine Browsererweiterung, zum lokalen abspeichern persönlicher KI <em
+                  >Prompts,
+                </em> um sich das ständige neue <em>primen</em> der KI-Modelle durch
+                manuelles Kopieren und Einfügen zu ersparen.
+              </p>
+            </li>
+            <li>
+              <a
+                href="https://marketplace.visualstudio.com/items?itemName=KonstantinKovar.classnames-rainbow"
+                ><h3>
+                  ClassNames Rainbow VSCode Erweiterung <em>[deprecated]</em>
+                </h3></a
+              >
+              <p></p>
+              Eine Erweiterung für Visual Studio Code, die <code>class</code
+              >-names durch Regenbogenoptik leichter identifizierbar macht, was
+              vor allem für
+              <a rel="noreferrer noopener" href="https://tailwindcss.com/"
+                >Tailwind CSS</a
+              > Nutzer hilfreich sein kann.
+            </li>
+          </ul>
+        </section>
+      </article>
+    </main>
 
     <Layout title="" description="" pubDate={new Date()}>
       <h2>Wo bin ich hier?</h2>
+      <div class="epigraph">
+        <blockquote>
+          <p>
+            Nothing is more responsible for the good old days than a bad memory.
+          </p>
+          <footer>
+            <cite
+              ><a
+                rel="noreferrer nofollower"
+                href="https://quoteinvestigator.com/2018/05/04/old-days/"
+                >– nicht zuordenbar</a
+              ></cite
+            >
+          </footer>
+        </blockquote>
+      </div>
       <p>
         In der Schule trafen sich die mutigsten in der langen Pause im
         hintersten Eck der Schulbibliothek, wo wir uns mit zwölf Jahren
@@ -140,17 +158,18 @@ const posts = (await getCollection("blog")).sort(
       <blockquote>
         <p>
           <Marginnote>
-            Frei übersetzt: "Sehen Sie gleich..." ist wird meist von
+            Frei übersetzt: " Sehen Sie gleich..." ist wird meist von
             Fernsehnachrichtensendungen verwendet, um anzudeuten, dass das eben
             gesehene keine Relevanz für das hat, was Sie als nächstes sehen
             werden, oder möglicherweise was Sie jemals sehen werden.
-          </Marginnote>
-          "Now...this" is commonly used on radio and television newscasts to indicate
-          that what one has just heard or seen has no relevance to what one is about
-          to hear or see, or possibly to anythinbg one is ever likely to hear or
-          see.
+          </Marginnote> "Now...this" is commonly used on radio and television newscasts
+          to indicate that what one has just heard or seen has no relevance to what
+          one is about to hear or see, or possibly to anythinbg one is ever likely
+          to hear or see.
         </p>
-        <footer>Neil Postman, "Amusing Ourselves To Death"</footer>
+        <footer>
+          <cite>– Neil Postman, "Amusing Ourselves To Death"</cite>
+        </footer>
       </blockquote>
       <p>
         Das ist keineswegs nur den jüngsten Technologien zuzuschulden. Schon
