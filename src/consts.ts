@@ -2,7 +2,7 @@
 // You can import this data from anywhere in your site by using the `import` keyword.
 
 export const SITE_TITLE = 'Konstantin Kovar';
-export const SITE_DESCRIPTION = 'Geiler Typ und Softwareentwickler';
+export const SITE_DESCRIPTION = 'Softwareentwickler und Freizeitnostalgiker';
 
 export const generateUuid = () => {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
