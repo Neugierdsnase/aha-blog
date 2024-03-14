@@ -83,70 +83,95 @@ const posts = (await getCollection("blog")).sort(
       </article>
     </main>
 
-    <Layout title="" description="" pubDate={new Date()}>
-      <h2>Wo bin ich hier?</h2>
-      <div class="epigraph">
-        <blockquote>
-          <p>Join the attention resistance.</p>
-          <footer>
-            <cite>- Cal Newport, <em>Digital Minimalism</em></cite>
-          </footer>
-        </blockquote>
-      </div>
-      <p>
-        Alles, was Sie hier sehen, ist falsch, Einen Blog kann man unmöglich so
-        gestalten. Da blinkt und leuchtet ja gar nichts, nicht einmal Bilder
-        gibt es hier. Es schiebt sich Ihnen auch keine Warnung vor
-        gemeingefährlichen <em>Cookies</em> in die Fresse und ich habe Sie auch nocht
-        nicht grfragt, ob Sie mir nicht auch auf Facebook, Instagram, TikTok oder
-        <em>the platform formerly known as Twitter</em> folgen wollen. Nach Ihrere
-        E-Mailadresse habe ich Sie auch noch nicht gefragt, sehr schleißig von mir.
-      </p>
-      <p>
-        Im ersten Absatz sind außerdem keine wichtigen Schlagworte vorgekommen,
-        komplett antithetisch zu den Regeln der Suchmaschinenoptimierung. Die
-        Sprache ist nicht übersimplifiziert. Wie ein Verrückter traue ich meinen
-        Lesern mehr als einen Nebensatz zu.
-      </p>
-      <p>
-        Ich sieze meine Leser, fast ein bisschen lächerlich, wenn wir uns
-        ehrlich sind, aber irgendwie fühle ich mich so wohler. Es kommt mir dann
-        so vor, als würde ich tatsächlich für Menschen schreiben, nicht für
-        Maschinen.
-      </p>
-      <p>
-        <Newthought>Mein Name ist Konstantin,</Newthought> ich selbstgelernter Softwareentwickler
-        bei Österreich's meist besuchtem Internetportal und mache mir schon länger
-        Gedanken über ein erfolgreiches Zusammenspiel von Maschine und Mensch. Für
-        mich ist klar, dass wir die Technologien, zu denen wir Zugang haben, nicht
-        optimal nutzen. Niemand hat mir bisher widersprochen, wenn ich unterstellt
-        habe, dass tägliche, dreistündige Instagram- oder TikTok-Sessions nicht zu
-        ihrer Vision eines gut gelebten Lebens gehören. Warum tun wir das also?
-      </p>
-      <p>
-        Das ist garn icht so einfach zu beantworten, aber auf dieser Seite will
-        ich das versuchen. Dafür stelle ich mich auf die Schultern großer
-        moderner Denker wie Cal Newport, Adam Alter, Neal Postman, Jaron Lanier,
-        Tristan Harris und vieler anderer.
-      </p>
-      <p>
-        Wenn Sie interessiert sind, dann sollten Sie deren Bücher lesen, oder
-        wenn Sie es vorverdaut bevorzugen, dann eben meine Gedanken hier auf
-        dieser Seite, der Sie (ausschließlich) <a href="./rss.xml"
-          >via RSS folgen können.</a
-        >
-      </p>
-      <p>
-        Auch technisch hab ich ein stabiles Fundament unter mir, das ich der
-        Arbeit anderer verdanke, nämlich <a rel="noreferrer nofollower"
-          >Astro,
-        </a><a rel="noreferrer nofollower">htmx</a> und <a
-          rel="noreferrer nofollower">tufte-css.</a
-        >
-      </p>
+    <article>
+      <section>
+        <h2>Wo bin ich hier?</h2>
 
-      <p>Willkommen im Widerstand.</p>
-    </Layout>
+        <p>
+          Alles, was ich hier gemacht habe, ist falsch. Einen Blog kann man so
+          nicht gestalten. Keine Bilder, keine grellen Farben, nichts, was Ihnen
+          ungefragt ins Sichtfeld springt. Es schiebt sich Ihnen auch keine
+          Warnung vor gemeingefährlichen <em>Cookies</em> in die Fresse und ich habe
+          Sie auch nocht nicht grfragt, ob Sie mir nicht auch auf Facebook, Instagram,
+          TikTok oder
+          <em>the platform formerly known as Twitter</em> folgen wollen. Nach Ihrer
+          E-Mailadresse habe ich Sie auch noch nicht gefragt, sehr schleißig von
+          mir.
+        </p>
+
+        <p>
+          Im ersten Absatz sind außerdem keine wichtigen Schlagworte
+          vorgekommen, komplett antithetisch zu den Regeln der
+          Suchmaschinenoptimierung. Die Sprache ist nicht übersimplifiziert, ich
+          erwarte von Ihnen also ein Leseverständnis über dem Volkschulniveau.
+          Schwerer Fehler, wäre dies hier ein Werbetext. Wie ein Verrückter
+          traue ich meinen Lesern mehr als einen Nebensatz zu.
+        </p>
+
+        <p>
+          Ich sieze meine Leser, ein bisschen lächerlich, wenn wir uns ehrlich
+          sind, aber irgendwie fühle ich mich so wohler. Es fühlt sich dann so
+          an, als würde ich tatsächlich für mündige, respektable Menschen
+          schreiben, nicht nur für Konsumenten und Suchmaschinen.
+        </p>
+      </section>
+
+      <section>
+        <p>
+          <Newthought>Mein Name ist Konstantin,</Newthought> ich selbstgelernter
+          Softwareentwickler bei Österreich's meist besuchtem Internetportal und
+          mache mir schon länger Gedanken über ein erfolgreiches Zusammenspiel von
+          Maschine und Mensch. Für mich ist klar, dass wir die Technologien, zu denen
+          wir Zugang haben, nicht optimal nutzen. Niemand hat mir bisher widersprochen,
+          wenn ich unterstellt habe, dass tägliche, dreistündige Instagram- oder
+          TikTok-Sessions nicht zu ihrer Vision eines gut gelebten Lebens gehören.
+          Warum integrieren wir sie dann so vehement in unseren Alltag?
+        </p>
+
+        <div>
+          <blockquote>
+            <p>
+              Das Verlangen Twitter zu checken or Reddit zu refreshen wird zu
+              einem nervösen Zwang, der ungestörte Zeitspannen in Scherben
+              zerschlägt, die zu klein sind, um ein bewusstes Leben voll Absicht
+              zu führen.
+            </p>
+            <footer>
+              <cite>- Cal Newport, <em>Digital Minimalism</em></cite>
+              (frei übersetzt)
+            </footer>
+          </blockquote>
+        </div>
+
+        <p>
+          Das ist gar nicht so einfach zu beantworten, aber auf dieser Seite
+          will ich das versuchen. Dafür stelle ich mich auf die Schultern großer
+          moderner Denker wie Cal Newport, Adam Alter, Neal Postman, Jaron
+          Lanier, Tristan Harris und vieler anderer.
+        </p>
+
+        <p>
+          Wenn Sie interessiert sind, dann sollten Sie deren Bücher lesen, oder
+          wenn Sie es vorverdaut (oder auf Deutsch) bevorzugen, dann eben meine
+          Gedanken hier auf dieser Seite, der Sie (ausschließlich) <a
+            href="./rss.xml">via RSS folgen können.</a
+          >
+        </p>
+
+        <p>
+          Auch technisch hab ich ein stabiles Fundament unter mir, das ich der
+          Arbeit anderer verdanke, nämlich <a
+            rel="noreferrer nofollower"
+            href="https://astro.build/"
+            >Astro,
+          </a><a rel="noreferrer nofollower" href="https://htmx.org/">htmx</a> und
+          <a
+            rel="noreferrer nofollower"
+            href="https://edwardtufte.github.io/tufte-css/">tufte-css.</a
+          >
+        </p>
+      </section>
+    </article>
     <Footer />
   </body>
 </html>
