@@ -1,0 +1,9 @@
+---
+import Marginnote from "./Marginnote.astro"
+
+const {title, author, releaseDate} = Astro.props.frontmatter
+---
+
+## {title}
+
+<p style="transform: translateY(-3rem);"><Marginnote>{author}, {releaseDate}</Marginnote></p>

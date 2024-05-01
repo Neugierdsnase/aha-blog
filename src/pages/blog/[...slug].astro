@@ -3,10 +3,10 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import BlogPost from "../../layouts/BlogPost.astro";
 
 type PostType = CollectionEntry<"blog">;
-const postIsDraft = (post: PostType) => post.data.pubDate <= new Date();
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
+  const postIsDraft = (post: PostType) => post.data.pubDate <= new Date();
   return posts.filter(postIsDraft).map((post) => ({
     params: { slug: post.slug },
     props: post,
