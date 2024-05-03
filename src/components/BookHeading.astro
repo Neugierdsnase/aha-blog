@@ -1,22 +1,40 @@
 ---
-import Marginnote from "./Marginnote.astro"
+import Marginnote from "./Marginnote.astro";
 
-const {title, authors, releaseDate} = Astro.props.frontmatter
+const { title, authors, releaseDate } = Astro.props.frontmatter;
 ---
 
 <style>
-span.authors:has(> :nth-child(2)) {
-& span.author:not(:nth-last-child(2))::after  {
-  content: ", ";
-}
+  span.authors:has(> :nth-child(2)) {
+    & span.author:not(:nth-last-child(2))::after {
+      content: ", ";
+    }
 
-& span.author:last-child::before {
-content: " und ";
-}
-}
+    & span.author:last-child::before {
+      content: " und ";
+    }
+  }
+
+  p {
+      transform: translateY(-4rem);
+      text-align: end;
+      opacity: 0.85;
+  }
+  @media screen(max-width: 760px) {
+    p {
+    margin-left: auto;
+    }
+  }
 </style>
 
 <h2>{title}</h2>
 
-<p style="transform: translateY(-4rem);"><Marginnote><span class="authors">{authors.map((author: string) => <span class="author">{author}</span>)}</span><br/><i>{releaseDate}</i></Marginnote></p>
-
+<p>
+  <Marginnote
+    ><span class="authors"
+      >{
+        authors.map((author: string) => <span class="author">{author}</span>)
+      }</span
+    ><br /><i>{releaseDate}</i></Marginnote
+  >
+</p>

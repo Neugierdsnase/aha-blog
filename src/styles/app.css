@@ -1,6 +1,7 @@
 body {
   position: relative;
   transition: background-color 0.5s, color 0.5s;
+  margin: 0;
 }
 
 .postlist {
@@ -49,6 +50,7 @@ body > footer {
   @media (max-width: 760px) {
     display: none;
   }
+
   margin-top: 3rem;
   padding-bottom: 0.1rem;
   padding-right: 0.4rem;
@@ -57,4 +59,27 @@ body > footer {
   top: calc(100% - 2rem);
   text-align: right;
   color: #666;
+}
+
+.neomorph {
+  background: #dddddd;
+  box-shadow: 11px 11px 22px #c5c5c5, -11px -11px 22px #f5f5f5;
+}
+
+@media (prefers-color-scheme: dark) {
+  .neomorph {
+    background: #151515;
+    box-shadow: 5px 5px 18px #080808, -5px -5px 18px #222222;
+  }
+}
+
+.slideInFromLeft {
+  transform: translateX(-20px);
+  opacity: 0;
+  transition: transform 150ms ease-in-out, opacity 150ms ease-in;
+}
+
+.slideInFromLeft.transitioned {
+  transform: translateX(0);
+  opacity: 1;
 }

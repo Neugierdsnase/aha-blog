@@ -3,6 +3,12 @@ import { generateUuid } from "../consts";
 const sideNoteId = generateUuid();
 ---
 
+<style>
+  input {
+    display: none;
+  }
+</style>
+
 <label for={sideNoteId} class="margin-toggle sidenote-number"></label>
 <input type="checkbox" id={sideNoteId} class="margin-toggle" />
 <span class="sidenote">

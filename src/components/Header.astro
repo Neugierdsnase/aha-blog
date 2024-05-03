@@ -1,7 +1,75 @@
----
-import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
----
+<style>
+  header {
+    padding: 34px;
+    padding-left: 0;
+    background-color: #fffff8;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    line-height: 0;
+    z-index: 10;
+    margin-bottom: -28px;
+    transition:
+      padding 200ms ease 300ms,
+      background-color 200ms ease,
+      margin 200ms ease 300ms;
+    &.thinner {
+      padding-top: 20px;
+      padding-bottom: 20px;
+      margin-bottom: 0;
+    }
+  }
 
-<header>
+  header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: -10px;
+    background-color: #fffff8;
+    z-index: 5;
+    -webkit-box-shadow: 0px 0px 19px 0px #fffff8;
+    -moz-box-shadow: 0px 0px 19px 0px #fffff8;
+    box-shadow: 0px 0px 19px 0px #fffff8;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    header {
+      background-color: #151515;
+    }
+    header::after {
+      background-color: #151515;
+      -webkit-box-shadow: 0px 0px 19px 0px #151515;
+      -moz-box-shadow: 0px 0px 19px 0px #151515;
+      box-shadow: 0px 0px 19px 0px #151515;
+    }
+  }
+
+  a {
+    position: absolute;
+    opacity: 0.85;
+    z-index: 11;
+    font-size: 20px;
+    & > span {
+      transform: translateY(-14);
+      font-style: italic;
+    }
+  }
+</style>
+
+<header
+  x-data="{ t: Boolean(scrollY > 111) }"
+  x-on:scrollend.window="t = window.scrollY > 111 ? true : false"
+  :class="t && 'thinner'"
+>
+  <a class="no-tufte-underline" href="/"
+    >◄
+    <span
+      x-show="!t"
+      x-transition:enter.delay.300ms
+      x-transition:leave.duration.250ms>nach Hause</span
+    ></a
+  >
 </header>

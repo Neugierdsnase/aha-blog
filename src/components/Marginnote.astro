@@ -3,7 +3,54 @@ import { generateUuid } from "../consts";
 const marginNoteId = generateUuid();
 ---
 
-<label for={marginNoteId} class="margin-toggle">&#8853;</label>
+<style>
+  label,
+  input {
+    display: none;
+  }
+
+  @media (max-width: 760px) {
+    label {
+      border-radius: 50%;
+      display: inline-flex;
+      justify-content: center;
+      line-height: 0;
+      align-items: center;
+      height: 19px;
+      width: 19px;
+      background: #fffff8;
+      box-shadow:
+        -3px 3px 3px #d9d9d0,
+        3px -3px 3px #fafaf5;
+      &::before {
+        content: "*";
+        transform: translateY(3.5px);
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      label {
+        background: #111;
+        box-shadow:
+          -2px 2px 3px #000,
+          2px -2px 3px #222222;
+      }
+    }
+
+    input:checked + span {
+      display: block;
+      float: left;
+      left: 1rem;
+      clear: both;
+      width: 95%;
+      margin: 1rem 2.5%;
+      vertical-align: baseline;
+      position: relative;
+    }
+  }
+</style>
+
+<label for={marginNoteId} class="margin-toggle"></label>
 <input type="checkbox" id={marginNoteId} class="margin-toggle" />
 <span class="marginnote">
   <slot />

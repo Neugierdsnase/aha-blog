@@ -359,15 +359,9 @@ span.newthought {
   font-variant: small-caps;
   font-size: 1.2em;
 }
-input.margin-toggle {
-  display: none;
-}
 label.sidenote-number {
   display: inline-block;
   max-height: 2rem;
-}
-label.margin-toggle:not(.sidenote-number) {
-  display: none;
 }
 .iframe-wrapper {
   position: relative;
@@ -418,14 +412,9 @@ label.margin-toggle:not(.sidenote-number) {
   blockquote p {
     width: 100%;
   }
-  label.margin-toggle:not(.sidenote-number) {
-    display: inline;
-  }
-  .marginnote,
   .sidenote {
     display: none;
   }
-  .margin-toggle:checked + .marginnote,
   .margin-toggle:checked + .sidenote {
     display: block;
     float: left;
@@ -433,7 +422,6 @@ label.margin-toggle:not(.sidenote-number) {
     clear: both;
     width: 95%;
     margin: 1rem 2.5%;
-    vertical-align: baseline;
     position: relative;
   }
   label {
