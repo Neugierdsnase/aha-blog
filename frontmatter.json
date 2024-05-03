@@ -40,6 +40,16 @@
           "name": "heroImage",
           "type": "image",
           "isPreviewImage": true
+        },
+        {
+          "title": "slug",
+          "name": "slug",
+          "type": "datetime"
+        },
+        {
+          "title": "draft",
+          "name": "draft",
+          "type": "boolean"
         }
       ]
     }
