@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import htmx from "astro-htmx";
 
 import alpinejs from "@astrojs/alpinejs";
 
@@ -11,7 +10,6 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: false,
     gfm: false,
-    remarkPlugins: ["remark-frontmatter", "remark-mdx-frontmatter"]
   },
-  integrations: [mdx(), sitemap(), htmx(), alpinejs()]
+  integrations: [mdx(), sitemap(), alpinejs()]
 });

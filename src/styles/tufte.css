@@ -146,23 +146,6 @@ p {
   padding-right: 0;
   vertical-align: baseline;
 }
-div.epigraph {
-  margin: 5em 0;
-}
-div.epigraph > blockquote {
-  margin-top: 3em;
-  margin-bottom: 3em;
-}
-div.epigraph > blockquote,
-div.epigraph > blockquote > p {
-  font-style: italic;
-}
-div.epigraph > blockquote > footer {
-  font-style: normal;
-}
-div.epigraph > blockquote > footer > cite {
-  font-style: italic;
-}
 blockquote {
   font-size: 1.4rem;
 }
