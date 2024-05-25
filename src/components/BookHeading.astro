@@ -20,7 +20,8 @@ const { title, authors, releaseDate } = Astro.props.frontmatter;
     text-align: end;
     opacity: 0.85;
   }
-  @media screen(max-width: 760px) {
+
+  @media screen(min-width: 760px) {
     p {
       margin-left: auto;
     }
