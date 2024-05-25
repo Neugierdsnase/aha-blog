@@ -11,5 +11,5 @@ export default defineConfig({
     syntaxHighlight: false,
     gfm: false,
   },
-  integrations: [mdx(), sitemap(), alpinejs()]
+  integrations: [mdx(), sitemap(), alpinejs()],
 });

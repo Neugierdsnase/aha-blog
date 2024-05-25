@@ -9,7 +9,7 @@ import FormattedDate from "../components/FormattedDate.astro";
 const SHOW_N_POSTS = 4;
 
 const posts = (await getCollection("blog"))
-  .filter(({data}) => !data.draft)
+  .filter(({ data }) => !data.draft)
   .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
   .reverse()
   .slice(0, SHOW_N_POSTS);
@@ -24,7 +24,7 @@ const posts = (await getCollection("blog"))
     <main style="margin-bottom: -8rem;">
       <article>
         <h1 class="slideInFromLeft">{SITE_TITLE}</h1>
-        <p class="slideInFromLeft">{SITE_DESCRIPTION}</p>
+        <p class="subtitle slideInFromLeft">{SITE_DESCRIPTION}</p>
 
         <hr class="slideInFromLeft" />
 
@@ -177,7 +177,10 @@ const posts = (await getCollection("blog"))
       document
         .querySelectorAll(".slideInFromLeft")
         .forEach((elem, index) =>
-          setTimeout(() => elem.classList.add("transitioned"), (index + 2) * 80)
+          setTimeout(
+            () => elem.classList.add("transitioned"),
+            (index + 2) * 80,
+          ),
         );
     </script>
   </body>
