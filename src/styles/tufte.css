@@ -63,9 +63,15 @@
   font-style: normal;
   font-display: swap;
 }
+
+:root {
+  --content-width: 55%;
+}
+
 html {
   font-size: 15px;
 }
+
 body {
   width: 87.5%;
   margin-left: auto;
@@ -154,18 +160,18 @@ blockquote {
   font-size: 1.4rem;
 }
 blockquote p {
-  width: 55%;
+  width: var(--content-width);
   margin-right: 40px;
 }
 blockquote footer {
-  width: 55%;
+  width: var(--content-width);
   font-size: 1.1rem;
   text-align: right;
 }
 section > footer,
 section > p,
 section > table {
-  width: 55%;
+  width: var(--content-width);
 }
 section > dl,
 section > ol,
@@ -177,6 +183,7 @@ dt:not(:first-child),
 li:not(:first-child) {
   margin-top: 0.25rem;
 }
+
 figure {
   padding: 0;
   border: 0;

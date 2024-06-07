@@ -5,12 +5,15 @@ const marginNoteId = generateUuid();
 
 <style>
   label,
-  span,
   input {
     display: none;
   }
 
   @media (max-width: 760px) {
+    span {
+      display: none;
+    }
+
     label {
       border-radius: 50%;
       display: inline-flex;
