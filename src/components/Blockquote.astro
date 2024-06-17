@@ -1,0 +1,46 @@
+---
+const { quote, footer } = Astro.props;
+---
+
+<style>
+  div {
+    margin: 5em 0;
+  }
+
+  blockquote {
+    margin-top: 3em;
+    margin-bottom: 3em;
+    margin-left: 1.5em;
+    margin-right: 0;
+    font-size: 1.4rem;
+  }
+
+  div > blockquote > footer {
+    font-style: normal;
+    width: 55%;
+    font-size: 1.1rem;
+    text-align: right;
+  }
+
+  div > blockquote > footer > cite {
+    font-style: italic;
+  }
+
+  @media (max-width: 760px) {
+    blockquote {
+      margin-left: 1.5em;
+      margin-right: 0;
+    }
+    footer,
+    p {
+      width: 100% !important; // TODO: remove !important
+    }
+  }
+</style>
+
+<p>
+  <blockquote>
+    <p set:html={quote} />
+    <footer set:html={footer} />
+  </blockquote>
+</p>

@@ -6,17 +6,23 @@ slug: books-05-2024
 ---
 
 import Epigraph from "../../components/Epigraph.astro";
+import Marginnote from "../../components/Marginnote.astro"
 
 import StolenFocus from "../book/stolen-focus.mdx";
 import Kafka from "../book/kafka-um-sein-leben-schreiben.mdx";
 import Wetter from "../book/wie-das-wetter-geschichte-macht.mdx";
 
 <Epigraph
-  quote="But time's a river, Locke, and we've always drifted farther down it than we think."
-  cite="Father Chains to young Locke Lamora"
+  quote="I wondered if the motto for our era should be: I tried to live, but I got distracted."
+  footer="<cite>- Johann Hari</cite>"
 />
 
 <StolenFocus />
+
+<figure>
+  <Marginnote>Franz Kafkas Zeichnungen in _transition_, Nr. 27 (1938)</Marginnote>
+  <img src="/img/kafka-transition.jpg" alt="Franz Kafkas Zeichnungen in transition, Nr. 27 (1938)"/>
+</figure>
 
 <Kafka />
 
