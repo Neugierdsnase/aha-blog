@@ -91,3 +91,7 @@ body > footer {
   transform: translateX(0);
   opacity: 1;
 }
+
+dd, dd > p, dd > span {
+  font-size: 1rem;
+}
