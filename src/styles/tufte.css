@@ -65,11 +65,21 @@
 }
 
 :root {
-  --content-width: 55%;
+  color-scheme: light dark;
+
+  @property --content-width {
+    syntax: "<length>";
+    initial-value: 55%;
+  }
+
+  @property --default-font-size {
+    syntax: "<length>";
+    initial-value: 15px;
+  }
 }
 
 html {
-  font-size: 15px;
+  font-size: var(--default-font-size);
 }
 
 body {
