@@ -5,12 +5,13 @@ import Newthought from "../components/Newthought.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
+import type { BlogPostType } from "./blog/[...slug].astro";
 
 const SHOW_N_POSTS = 4;
 
-const posts = (await getCollection("blog"))
-  .filter(({ data }) => !data.draft)
-  .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
+const posts: BlogPostType = (await getCollection("blog"))
+  .filter(({ data }: BlogPostType) => !data.draft)
+  .sort((a: BlogPostType, b: BlogPostType) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
   .reverse()
   .slice(0, SHOW_N_POSTS);
 ---
@@ -21,7 +22,7 @@ const posts = (await getCollection("blog"))
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
   <body>
-    <main style="margin-bottom: -8rem;">
+    <main>
       <article>
         <h1 class="slideInFromLeft">{SITE_TITLE}</h1>
         <p class="subtitle slideInFromLeft">{SITE_DESCRIPTION}</p>
@@ -32,15 +33,15 @@ const posts = (await getCollection("blog"))
           <h2 class="slideInFromLeft">Blog</h2>
           <ul class="postlist">
             {
-              posts.map((post) => (
+            posts.map(({slug, data}: BlogPostType) => (
                 <li class="slideInFromLeft">
-                  <a href={`/blog/${post.slug}/`}>
-                    <h3 class="title">{post.data.title}</h3>
+                  <a href={`/blog/${slug}/`}>
+                    <h3 class="title">{data.title}</h3>
                   </a>
                   <span>
-                    <FormattedDate date={post.data.pubDate} />
+                    <FormattedDate date={data.pubDate} />
                   </span>
-                  <p>{post.data.description}</p>
+                  <p>{data.description}</p>
                 </li>
               ))
             }
