@@ -2,12 +2,11 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import BookPost from "../../layouts/BookPost.astro";
 
-type PostType = CollectionEntry<"book">;
+export type BookPostType = CollectionEntry<"book">;
 
 export async function getStaticPaths() {
-  const books = await getCollection("book");
-  console.log(books);
-  const bookIsPublished = (post: PostType) => !post.data.draft;
+  const books: BookPostType[] = await getCollection("book");
+  const bookIsPublished = (post: BookPostType) => !post.data.draft;
   return books.filter(bookIsPublished).map((book) => ({
     params: { slug: book.slug },
     props: book,
@@ -16,9 +15,7 @@ export async function getStaticPaths() {
 
 const book = Astro.props;
 const rendered = await book.render();
-console.log("rendered: ", rendered);
 const { Content } = rendered;
-console.log("Content: ",Content);
 ---
 
 <BookPost {...book.data}>

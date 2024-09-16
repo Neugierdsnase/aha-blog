@@ -5,10 +5,12 @@ import Footer from "../../components/Footer.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
 import Header from "../../components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+import type { BlogPostType } from "./[...slug].astro";
+import type { BookPostType } from "../book/[...slug].astro";
 
-const posts = (await getCollection("blog"))
-  .filter(({ data }) => !data.draft)
-  .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
+const posts: BlogPostType[] = (await getCollection("blog"))
+  .filter(({ data }: BookPostType) => !data.draft)
+  .sort((a: BookPostType, b: BookPostType) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
   .reverse();
 ---
 
