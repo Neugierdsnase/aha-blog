@@ -17,7 +17,7 @@ const { quote, footer } = Astro.props;
 
   div > blockquote > footer {
     font-style: normal;
-    width: 55%;
+    width: var(--content-width);
     font-size: 1.1rem;
     text-align: right;
   }
@@ -26,16 +26,12 @@ const { quote, footer } = Astro.props;
     font-style: italic;
   }
 
-  @media (max-width: 760px) {
-    blockquote {
-      margin-left: 1.5em;
-      margin-right: 0;
-    }
-    footer,
-    p {
-      width: 100% !important; // TODO: remove !important
-    }
-  }
+  /* TODO: Necessary?  */
+  /* @media (max-width: 760px) { */
+  /*   p { */
+  /*     width: 100% !important; // TODO: remove !important */
+  /*   } */
+  /* } */
 </style>
 
 <p>

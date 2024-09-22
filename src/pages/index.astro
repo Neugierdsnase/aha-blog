@@ -9,14 +9,16 @@ import type { BlogPostType } from "./blog/[...slug].astro";
 
 const SHOW_N_POSTS = 4;
 
-const posts: BlogPostType = (await getCollection("blog"))
+const posts: BlogPostType[] = (await getCollection("blog"))
   .filter(({ data }: BlogPostType) => !data.draft)
-  .sort((a: BlogPostType, b: BlogPostType) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
+  .sort(
+    (a: BlogPostType, b: BlogPostType) =>
+      a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
+  )
   .reverse()
   .slice(0, SHOW_N_POSTS);
 ---
 
-<!doctype html>
 <html lang="en">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
@@ -33,7 +35,7 @@ const posts: BlogPostType = (await getCollection("blog"))
           <h2 class="slideInFromLeft">Blog</h2>
           <ul class="postlist">
             {
-            posts.map(({slug, data}: BlogPostType) => (
+              posts.map(({ slug, data }: BlogPostType) => (
                 <li class="slideInFromLeft">
                   <a href={`/blog/${slug}/`}>
                     <h3 class="title">{data.title}</h3>
