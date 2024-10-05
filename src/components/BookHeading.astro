@@ -1,6 +1,4 @@
 ---
-import Marginnote from "./Marginnote.astro";
-
 const { title, authors, releaseDate } = Astro.props.frontmatter;
 ---
 
@@ -16,25 +14,18 @@ const { title, authors, releaseDate } = Astro.props.frontmatter;
   }
 
   p {
-    transform: translateY(-4rem);
-    opacity: 0.85;
-  }
-
-  @media screen(min-width: 760px) {
-    p {
-      margin-left: auto;
-    }
+    margin-top: -1rem;
+    opacity: 0.8;
+    font-size: 1.1rem;
   }
 </style>
 
 <h2>{title}</h2>
 
 <p>
-  <Marginnote
-    ><span class="authors"
-      >{
-        authors.map((author: string) => <span class="author">{author}</span>)
-      }</span
-    ><br /><i>{releaseDate}</i></Marginnote
-  >
+  <span class="authors"
+    >{
+      authors.map((author: string) => <span class="author">{author}</span>)
+    }</span
+  >, {releaseDate}
 </p>
