@@ -1,0 +1,111 @@
+<style>
+  article {
+    display: grid;
+    grid-template-columns: 15px 1fr 15px;
+    grid-template-rows: 15px 1fr 15px;
+    grid-template-areas:
+      "deco-top-left deco-top deco-top-right"
+      "deco-left slot deco-right"
+      "deco-bottom-left deco-bottom deco-bottom-right";
+    margin-top: 20px;
+  }
+
+  .deco-top-left {
+    grid-area: deco-top-left;
+    transform: translate(10px, 10px);)
+  }
+
+  .deco-top {
+    grid-area: deco-top;
+    margin: 0 auto;
+    min-width: 89.5%;
+    border-bottom: 0.8px solid var(--text-color);
+    transform: translateY(-4.5px);
+  } 
+
+  .deco-top-right {
+    grid-area: deco-top-right;
+    transform: translate(-20px, 10px);)
+  }
+
+  .deco-left {
+    grid-area: deco-left;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    &:after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 72.5%;
+      border-right: 0.8px solid var(--text-color);
+      transform: translateX(-4.5px);
+    }
+  }
+
+  .slot {
+    grid-area: slot;
+    border: 0.8px solid var(--text-color);
+    padding: 20px;
+  }
+
+  .deco-right {
+    grid-area: deco-right;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    &:after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 72.5%;
+      border-left: 0.8px solid var(--text-color);
+      transform: translateX(4.5px);
+    }
+  }
+
+  .deco-bottom-left {
+    grid-area: deco-bottom-left;
+    transform: translate(10px, -20px);)
+  }
+
+  .deco-bottom {
+    grid-area: deco-bottom;
+    margin: 0 auto;
+    min-width: 89.5%;
+    border-top: 0.8px solid var(--text-color);
+    transform: translateY(4.5px);
+  }
+
+  .deco-bottom-right {
+    grid-area: deco-bottom-right;
+    transform: translate(-20px, -20px);)
+  }
+</style>
+
+<article>
+  <div class="deco-top-left">
+    <svg width="25" height="25" viewBox="0 0 25 25">
+      <path d="M 0 25 L 25 0" stroke="var(--text-color)" stroke-width="0.6" />
+      </svg>
+  </div>
+  <div class="deco-top" />
+  <div class="deco-top-right"><svg width="25" height="25" viewBox="0 0 25 25">
+      <path d="M 0 0 L 25 25" stroke="var(--text-color)" stroke-width="0.6" />
+      </svg></div>
+  <div class="deco-left"></div>
+  <div class="slot">
+    <h1>Titre</h1>
+    <p>Contenu</p>
+  </div>
+  <div class="deco-right"></div>
+  <div class="deco-bottom-left"><svg width="25" height="25" viewBox="0 0 25 25">
+      <path d="M 0 0 L 25 25" stroke="var(--text-color)" stroke-width="0.6" />
+      </svg></div>
+  <div class="deco-bottom"></div>
+  <div class="deco-bottom-right"><svg width="25" height="25" viewBox="0 0 25 25">
+      <path d="M 0 25 L 25 0" stroke="var(--text-color)" stroke-width="0.6" />
+      </svg></div>
+</article>

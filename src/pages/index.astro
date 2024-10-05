@@ -9,7 +9,7 @@ import type { BlogPostType } from "./blog/[...slug].astro";
 
 const SHOW_N_POSTS = 4;
 
-const posts: BlogPostType = (await getCollection("blog"))
+const posts: BlogPostType[] = (await getCollection("blog"))
   .filter(({ data }: BlogPostType) => !data.draft)
   .sort((a: BlogPostType, b: BlogPostType) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
   .reverse()

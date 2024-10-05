@@ -64,7 +64,7 @@
   font-display: swap;
 }
 
-:root {
+html {
   color-scheme: light dark;
 
   @property --content-width {
@@ -106,9 +106,7 @@
     syntax: "<color>";
     initial-value: light-dark(var(--text-color-light), var(--text-color-dark));
   }
-}
 
-html {
   font-size: var(--default-font-size);
 }
 
