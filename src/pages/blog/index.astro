@@ -6,11 +6,10 @@ import FormattedDate from "../../components/FormattedDate.astro";
 import Header from "../../components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 import type { BlogPostType } from "./[...slug].astro";
-import type { BookPostType } from "../book/[...slug].astro";
 
 const posts: BlogPostType[] = (await getCollection("blog"))
-  .filter(({ data }: BookPostType) => !data.draft)
-  .sort((a: BookPostType, b: BookPostType) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
+  .filter(({ data }: BlogPostType) => !data.draft)
+  .sort((a: BlogPostType, b: BlogPostType) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
   .reverse();
 ---
 
