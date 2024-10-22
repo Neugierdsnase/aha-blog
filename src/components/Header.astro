@@ -59,11 +59,7 @@
   }
 </style>
 
-<header
-  x-data="{ t: Boolean(scrollY > 111) }"
-  x-on:scrollend.window="t = window.scrollY > 111 ? true : false"
-  :class="t && 'thinner'"
->
+<header>
   <a class="no-tufte-underline" href="/"
     >◄
     <span

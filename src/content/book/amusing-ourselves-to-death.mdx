@@ -6,9 +6,9 @@ releaseDate: 1985
 finishedDate: 2024-03-30
 ---
 
-import BookHeading from "../../components/BookHeading.astro";
+import BookHeading from "../../native-components/book-heading.ts";
 
-<BookHeading frontmatter={frontmatter} />
+<BookHeading title={frontmatter.title} releaseDate={frontmatter.releaseDate} authors={frontmatter.authors} />
 
 Wie es in dem Vorwort der Auflage zum zwanzigsten Jubiläum der Erstauflage
 heißt, könnte man meinen, ich hätte Besseres zu tun, als ein derart altes Buch

@@ -1,9 +1,15 @@
 ---
 import Card from '../components/Card.astro';
+import CardCustom from '../native-components/card-custom.ts';
 
 import '../styles/app.css';
 import '../styles/tufte.css';
 ---
 <div style="max-width: 1400px; width: 100%; margin: auto;">
   <Card />
+
+  <CardCustom title="This is an HTML native card component."><p>
+    And I am content in the slot, set from the user of the component.
+    </p>
+  </p>
 </div> 
