@@ -1,8 +1,7 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-
-import alpinejs from "@astrojs/alpinejs";
+import lit from "@astrojs/lit";
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,5 +10,5 @@ export default defineConfig({
     syntaxHighlight: false,
     gfm: false,
   },
-  integrations: [mdx(), sitemap(), alpinejs()],
+  integrations: [mdx(), sitemap(), lit()],
 });

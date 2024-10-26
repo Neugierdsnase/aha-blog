@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseHead from "../../components/BaseHead.astro";
 import Footer from "../../components/Footer.astro";
-import FormattedDate from "../../components/FormattedDate.astro";
+import DateFormatted from "../../native-components/date-formatted.ts";
 import Header from "../../components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 import type { BookPostType } from "./[...slug].astro";
@@ -38,7 +38,7 @@ const books: BookPostType[] = (await getCollection("book"))
                 </dt>
                   <dd>
                     <p><span style="opacity: 0.8; font-style: italic;"> zu Ende gelesen am </span>
-                    <FormattedDate date={book.data.finishedDate} />
+                    <DateFormatted date={book.data.finishedDate} />
                 </p>
                   </dd>
 
