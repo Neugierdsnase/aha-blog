@@ -32,16 +32,9 @@ const posts: BlogPostType[] = (await getCollection("blog"))
         <h2>Blog</h2>
         <ul class="grid desktop:grid-cols-2 gap-6">
           {
-            posts.map(({ slug, data }: BlogPostType) => (
+            posts.map((blogpost: BlogPostType) => (
               <li>
-                <!-- <a href={`/blog/${slug}/`}> -->
-                <!--   <h3 class="title">{data.title}</h3> -->
-                <!-- </a> -->
-                <!-- <span> -->
-                <!--   <FormattedDate date={data.pubDate} /> -->
-                <!-- </span> -->
-                <!-- <p>{data.description}</p> -->
-            <ContentCard title={data.title} description={data.description} date={data.pubDate} className="col-span-1" />
+                <ContentCard blogpost={blogpost} />
               </li>
             ))
           }
@@ -53,8 +46,8 @@ const posts: BlogPostType[] = (await getCollection("blog"))
 
       <section>
         <h2>Projekte</h2>
-        <ul class="projectlist">
-          <li class="slideInFromLeft">
+        <ul>
+          <li>
             <a href="https://prompt-dress.com"
               ><h3>Prompt Dress Browser Extension</h3></a
             >
@@ -65,7 +58,7 @@ const posts: BlogPostType[] = (await getCollection("blog"))
               manuelles Kopieren und Einfügen zu ersparen.
             </p>
           </li>
-          <li class="slideInFromLeft">
+          <li>
             <a
               href="https://marketplace.visualstudio.com/items?itemName=KonstantinKovar.classnames-rainbow"
               ><h3>
@@ -85,7 +78,7 @@ const posts: BlogPostType[] = (await getCollection("blog"))
       </section>
     </main>
 
-    <article class="slideInFromLeft">
+    <article class="article">
       <section>
         <h2>Wo bin ich hier?</h2>
 
@@ -122,7 +115,7 @@ const posts: BlogPostType[] = (await getCollection("blog"))
         <div>
           <blockquote>
             <p>
-              Das Verlangen Twitter zu checken odr Reddit zu refreshen wird zu
+              Das Verlangen Twitter zu checken oder Reddit zu refreshen wird zu
               einem nervösen Zwang, der ungestörte Zeit in Scherben zerschlägt,
               die zu klein sind, um ein bewusstes Leben mit Intention zu führen.
             </p>
