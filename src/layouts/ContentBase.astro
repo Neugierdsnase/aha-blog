@@ -6,15 +6,14 @@ import Footer from "../components/Footer.astro";
 type Props = { title: string; description: string };
 ---
 
-<html lang="en">
-  <head>
-    <BaseHead title={Astro.props.title} description={Astro.props.description} />
-  </head>
+<!doctype html>
+<html lang="de-AT">
+  <BaseHead title={Astro.props.title} description={Astro.props.description} />
 
-  <body id="tailwind-root">
+  <body>
     <Header />
     <main>
-      <article>
+      <article class="article">
         <section>
           <slot />
         </section>

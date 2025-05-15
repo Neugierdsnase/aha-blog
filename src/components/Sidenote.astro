@@ -1,0 +1,23 @@
+---
+import { generateUuid } from "../consts";
+const sideNoteId = generateUuid();
+---
+
+<style>
+  label:after {
+    content: counter(sidenote-counter);
+    transform: translateY(-3.5px);
+    counter-increment: sidenote-counter;
+  }
+</style>
+
+<label
+  for={sideNoteId}
+  class="inline-block max-h-8 font-old relative align-baseline -top-[0.5rem] left-[0.1rem] after:text-base"
+></label>
+<input type="checkbox" id={sideNoteId} class="hidden" />
+<span
+  class="[&>code]:text-base hidden desktop:block float-right clear-right -mr-[60%] w-1/2 mt-[0.3rem] text-[1.1rem] leading-[1.3] relative"
+>
+  <slot />
+</span>

@@ -14,21 +14,20 @@ const books: BookPostType[] = (await getCollection("book"))
 ---
 
 <!doctype html>
-<html lang="en">
-  <head>
+<html lang="de-AT">
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
+
   <body>
     <Header />
 
-    <main style="margin-bottom: -8rem;">
-      <article>
-        <h1>Alle Bücher</h1>
+    <main>
+    <article class="article">
+      <h1>Alle Bücher</h1>
 
-        <hr />
+      <hr />
 
         <section>
-          <dl class="postlist">
+          <dl>
             {
               books.map((book) => (
                 <dt>
@@ -41,7 +40,6 @@ const books: BookPostType[] = (await getCollection("book"))
                     <FormattedDate date={book.data.finishedDate} />
                 </p>
                   </dd>
-
               ))
             }
           </dl>

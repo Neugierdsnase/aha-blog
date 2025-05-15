@@ -1,0 +1,39 @@
+---
+import { generateUuid } from "../consts";
+const marginNoteId = generateUuid();
+---
+
+<style>
+  @media (max-width: 760px) {
+    span {
+      display: none;
+    }
+
+    input:checked + span {
+      display: block;
+      float: left;
+      left: 1rem;
+      clear: both;
+      width: 95%;
+      margin: 1rem 2.5%;
+      vertical-align: baseline;
+      position: relative;
+    }
+  }
+
+  label:before {
+    content: "*";
+    transform: translateY(-3.5px);
+  }
+</style>
+
+<label
+  for={marginNoteId}
+  class="rounded:full inline-flex justify-center leading-0 items-center size-[19px] bg-background desktop:hidden"
+></label>
+<input type="checkbox" id={marginNoteId} class="hidden" />
+<span
+  class="[&>code]:text-base desktop:block float-right clear-right -mr-[60%] w-1/2 mt-[0.3rem] text-[1.1rem] leading-[1.3] relative"
+>
+  <slot />
+</span>

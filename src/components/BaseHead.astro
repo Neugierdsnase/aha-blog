@@ -1,4 +1,6 @@
 ---
+import { join } from "node:path";
+import { AstroFont } from "astro-font";
 import "../styles/app.css";
 
 interface Props {
@@ -11,6 +13,76 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 ---
+
+<head>
+<!-- Import ET Book styles adapted from https://github.com/edwardtufte/et-book/blob/gh-pages/et-book.css -->
+<!-- Font loading -->
+<AstroFont
+  config={[
+    {
+      name: "et-book",
+      preload: true,
+      display: "swap",
+      selector: "body",
+      fallback: "serif",
+      src: [
+        {
+          path: join(
+            process.cwd(),
+            "public",
+            "et-book",
+            "et-book-roman-line-figures",
+            "et-book-roman-line-figures.ttf",
+          ),
+          style: "normal",
+          weight: "normal",
+        },
+        {
+          path: join(
+            process.cwd(),
+            "public",
+            "et-book",
+            "et-book-display-italic-old-style-figures",
+            "et-book-display-italic-old-style-figures.ttf",
+          ),
+          style: "italic",
+          weight: "normal",
+        },
+        {
+          path: join(
+            process.cwd(),
+            "public",
+            "et-book",
+            "et-book-bold-line-figures",
+            "et-book-bold-line-figures.ttf",
+          ),
+          style: "normal",
+          weight: "bold",
+        },
+      ],
+    },
+    {
+      name: "et-book",
+      preload: true,
+      display: "swap",
+      selector: "body",
+      fallback: "serif",
+      src: [
+        {
+          path: join(
+            process.cwd(),
+            "public",
+            "et-book",
+            "et-book-roman-old-style-figures",
+            "et-book-roman-old-style-figures.ttf",
+          ),
+          style: "normal",
+          weight: "normal",
+        },
+      ],
+    },
+  ]}
+/>
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
@@ -45,3 +117,6 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
   src="https://cdn.counter.dev/script.js"
   data-id="577cfaaf-19ed-4ba3-9a0d-62e8ddcebda3"
   data-utcoffset="2"></script>
+
+  <slot />
+</head>

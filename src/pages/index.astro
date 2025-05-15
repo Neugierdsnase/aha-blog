@@ -4,7 +4,6 @@ import Footer from "../components/Footer.astro";
 import ContentCard from "../components/ContentCard.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
-import FormattedDate from "../components/FormattedDate.astro";
 import type { BlogPostType } from "./blog/[...slug].astro";
 
 const SHOW_N_POSTS = 4;
@@ -19,14 +18,16 @@ const posts: BlogPostType[] = (await getCollection("blog"))
   .slice(0, SHOW_N_POSTS);
 ---
 
-<html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
+<!doctype html>
+<html lang="de-AT">
+  <BaseHead title="Pagina Domestica Konstantini Kovar" description={SITE_DESCRIPTION} />
+
   <body>
     <main class="content-layout">
       <h1>{SITE_TITLE}</h1>
-      <p class="subtitle border-b-1 clear-descenders">{SITE_DESCRIPTION}</p>
+      <p class="subtitle text-foreground-subtle border-b-1 clear-descenders">
+        {SITE_DESCRIPTION}
+      </p>
 
       <section>
         <h2>Blog</h2>
@@ -34,7 +35,7 @@ const posts: BlogPostType[] = (await getCollection("blog"))
           {
             posts.map((blogpost: BlogPostType) => (
               <li>
-                <ContentCard blogpost={blogpost} />
+                <ContentCard path="/blog" blogpost={blogpost} />
               </li>
             ))
           }
@@ -153,11 +154,10 @@ const posts: BlogPostType[] = (await getCollection("blog"))
 
         <p>
           Auch technisch hab ich ein stabiles Fundament unter mir, das ich der
-          Arbeit anderer verdanke, unter anderem<a
+          Arbeit anderer verdanke, unter anderem <a
             rel="noreferrer nofollower"
-            href="https://astro.build/"
-            >Astro,
-          </a><a rel="noreferrer nofollower" href="https://htmx.org/">htmx</a> und
+            href="https://astro.build/">Astro</a
+          >, <a rel="noreferrer nofollower" href="https://htmx.org/">htmx</a> und
           <a
             rel="noreferrer nofollower"
             href="https://edwardtufte.github.io/tufte-css/">tufte-css.</a
