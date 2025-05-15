@@ -1,0 +1,10 @@
+---
+const { title, description } = Astro.props;
+---
+
+<article class="border-2 py-6 px-20 border-red rounded-xs focus-within:outline-1 hover:outline-1 outline-offset-0 hover:outline-offset-4 transition-all">
+  <h2>{title}</h2>
+  <hr />
+  <p class="-mt-4">date</p>
+  <p>{description}</p>
+</article>

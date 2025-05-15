@@ -1,7 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
-import Newthought from "../components/Newthought.astro";
+import ContentCard from "../components/ContentCard.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
@@ -25,67 +25,66 @@ const posts: BlogPostType[] = (await getCollection("blog"))
   </head>
   <body>
     <main>
-      <article>
-        <h1>{SITE_TITLE}</h1>
-        <p class="subtitle">{SITE_DESCRIPTION}</p>
+      <h1>{SITE_TITLE}</h1>
+      <p class="subtitle">{SITE_DESCRIPTION}</p>
 
-        <hr class="slideInFromLeft" />
+      <hr />
 
-        <section>
-          <h2>Blog</h2>
-          <ul class="postlist">
-            {
-              posts.map(({ slug, data }: BlogPostType) => (
-                <li>
-                  <a href={`/blog/${slug}/`}>
-                    <h3 class="title">{data.title}</h3>
-                  </a>
-                  <span>
-                    <FormattedDate date={data.pubDate} />
-                  </span>
-                  <p>{data.description}</p>
-                </li>
-              ))
-            }
-            <li>
-              <a href="/blog">mehr...</a>
-            </li>
-          </ul>
-        </section>
+      <section>
+        <h2>Blog</h2>
+        <ul class="flex flex-col gap-6">
+          {
+            posts.map(({ slug, data }: BlogPostType) => (
+              <li>
+                <!-- <a href={`/blog/${slug}/`}> -->
+                <!--   <h3 class="title">{data.title}</h3> -->
+                <!-- </a> -->
+                <!-- <span> -->
+                <!--   <FormattedDate date={data.pubDate} /> -->
+                <!-- </span> -->
+                <!-- <p>{data.description}</p> -->
+            <ContentCard title={data.title} description={data.description} />
+              </li>
+            ))
+          }
+          <li>
+            <a href="/blog">mehr...</a>
+          </li>
+        </ul>
+      </section>
 
-        <section>
-          <h2>Projekte</h2>
-          <ul class="projectlist">
-            <li class="slideInFromLeft">
-              <a href="https://prompt-dress.com"
-                ><h3>Prompt Dress Browser Extension</h3></a
-              >
-              <p>
-                Eine Browsererweiterung, zum lokalen abspeichern persönlicher KI <em
-                  >Prompts,
-                </em> um sich das ständige neue <em>primen</em> der KI-Modelle durch
-                manuelles Kopieren und Einfügen zu ersparen.
-              </p>
-            </li>
-            <li class="slideInFromLeft">
-              <a
-                href="https://marketplace.visualstudio.com/items?itemName=KonstantinKovar.classnames-rainbow"
-                ><h3>
-                  ClassNames Rainbow VSCode Erweiterung <em>[deprecated]</em>
-                </h3></a
-              >
-              <p>
-                Eine Erweiterung für Visual Studio Code, die <code>class</code
-                >-names durch Regenbogenoptik leichter identifizierbar macht,
-                was vor allem für
-                <a rel="noreferrer noopener" href="https://tailwindcss.com/"
-                  >Tailwind CSS</a
-                > Nutzer hilfreich sein kann.
-              </p>
-            </li>
-          </ul>
-        </section>
-      </article>
+      <section>
+        <h2>Projekte</h2>
+        <ul class="projectlist">
+          <li class="slideInFromLeft">
+            <a href="https://prompt-dress.com"
+              ><h3>Prompt Dress Browser Extension</h3></a
+            >
+            <p>
+              Eine Browsererweiterung, zum lokalen abspeichern persönlicher KI <em
+                >Prompts,
+              </em> um sich das ständige neue <em>primen</em> der KI-Modelle durch
+              manuelles Kopieren und Einfügen zu ersparen.
+            </p>
+          </li>
+          <li class="slideInFromLeft">
+            <a
+              href="https://marketplace.visualstudio.com/items?itemName=KonstantinKovar.classnames-rainbow"
+              ><h3>
+                ClassNames Rainbow VSCode Erweiterung <em>[deprecated]</em>
+              </h3></a
+            >
+            <p>
+              Eine Erweiterung für Visual Studio Code, die <code>class</code
+              >-names durch Regenbogenoptik leichter identifizierbar macht, was
+              vor allem für
+              <a rel="noreferrer noopener" href="https://tailwindcss.com/"
+                >Tailwind CSS</a
+              > Nutzer hilfreich sein kann.
+            </p>
+          </li>
+        </ul>
+      </section>
     </main>
 
     <article class="slideInFromLeft">
@@ -137,7 +136,7 @@ const posts: BlogPostType[] = (await getCollection("blog"))
         </div>
 
         <p>
-          <Newthought>Mein Name ist Konstantin,</Newthought> ich selbstgelernter
+          <span class="newthought">Mein Name ist Konstantin,</span> ich selbstgelernter
           Softwareentwickler bei Österreich's meist besuchtem Internetportal und
           mache mir Gedanken über ein erfolgreiches Zusammenspiel von Maschine und
           Mensch. Für mich ist klar, dass wir die Technologien, zu denen wir Zugang
