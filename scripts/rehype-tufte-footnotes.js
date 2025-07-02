@@ -19,6 +19,8 @@ export default function rehypeInlineFootnotes() {
               ?.replace("user-content-fn-", "")
               .trim();
 
+            // TODO: Create an extra case for startsWith("mn-") to handle margin notes
+
             if (id && li.children) {
               const childrenWithoutBackRef = li.children[1].children // first child is just a new line, second is the actual content
                 .filter(
@@ -49,6 +51,9 @@ export default function rehypeInlineFootnotes() {
                 {
                   type: "element",
                   tagName: "span",
+                  properties: {
+                    className: ["sidenote"],
+                  },
                   children: childrenWithoutBackRef,
                 },
               ];
