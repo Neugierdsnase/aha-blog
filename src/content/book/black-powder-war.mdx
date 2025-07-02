@@ -8,12 +8,13 @@ finishedDate: 2024-01-26
 
 import BookHeading from "../../components/BookHeading.astro";
 import Sidenote from "../../components/Sidenote.astro";
+import Marginnote from "../../components/Marginnote.astro";
 
 <BookHeading frontmatter={frontmatter} />
 
 Der dritte Teil der Temeraire-Serie,
 
-<span class="marginnote">
+<Marginnote>
   <img src="/img/black-powder-war-fanart.png" />
   Drachen über Istanbul, Bildrechte:
   <a
@@ -22,7 +23,8 @@ Der dritte Teil der Temeraire-Serie,
   >
     atomicola
   </a>
-</span>
+</Marginnote>
+
 die ich im Jänner begonnen habe. Kapitän William Lawrence trifft mit seinem
 Drachen und dessen Besatzung unter Zeitdruck die Heimreise von China über den
 Landweg an. Nach einer diplomatischen Auseinandersetzung am und mit dem
