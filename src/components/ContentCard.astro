@@ -14,7 +14,7 @@ const { title, description, pubDate } = data;
 ---
 
 <article
-  class={"grid grid-cols-1 grid-rows-[2rem,1rem,2rem] h-full border-2 px-6 pb-6 desktop:px-12 rounded-xs border-foreground-subtle ring-background inset-ring-4 hover:inset-ring-foreground hover:inset-ring-2 focus-within:inset-ring-2 hover:text-neutral focus-within:text-neutral hover:text-neutral focus-within:outline-4 hover:-outline-4 outline-offset-4  transition-all" +
+  class={"grid grid-cols-1 grid-rows-[2rem_1rem_2rem] h-full border-2 px-6 pb-6 desktop:px-12 rounded-xs border-foreground-subtle ring-background inset-ring-4 hover:inset-ring-foreground hover:inset-ring-2 focus-within:inset-ring-2 hover:text-neutral focus-within:text-neutral hover:text-neutral focus-within:outline-4 hover:-outline-4 outline-offset-4  transition-all" +
     className}
 >
   <h2 class="mb-0 z-10 clear-descenders line-clamp-2 overflow-visible">
@@ -23,8 +23,8 @@ const { title, description, pubDate } = data;
     </a>
   </h2>
   <FormattedDate
-    className="text-foreground-subtle text-xs border-t-1 pt-1 -mt-1 border-neutral"
+    className="text-foreground-subtle text-xs border-t pt-1 -mt-1 border-neutral"
     date={pubDate}
   />
-  <p class="mt-4 overflow-ellipsis line-clamp-2 h-12">{description}</p>
+  <p class="mt-4 text-ellipsis line-clamp-2 h-12">{description}</p>
 </article>

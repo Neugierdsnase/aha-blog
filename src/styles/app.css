@@ -1,48 +1,49 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-	--breakpoint-desktop: 760px;
+  --breakpoint-desktop: 760px;
 
-	--font-serif: "et-book", Palatino, "Palatino Linotype", "Palatino LT STD",
-		"Book Antiqua", Georgia, serif;
-	--font-old: et-book-roman-old-style;
+  --font-serif:
+    'et-book', Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua',
+    Georgia, serif;
+  --font-old: et-book-roman-old-style;
 
-	--text-xs: 0.8rem;
-	--text-sm: 0.9rem;
-	--text-base: 15px;
-	--text-lg: 1.1rem;
-	--text-xl: 1.2rem;
-	--text-2xl: 1.3rem;
-	--text-3xl: 1.4rem;
+  --text-xs: 0.8rem;
+  --text-sm: 0.9rem;
+  --text-base: 15px;
+  --text-lg: 1.1rem;
+  --text-xl: 1.2rem;
+  --text-2xl: 1.3rem;
+  --text-3xl: 1.4rem;
 
-	--leading-1: 1;
-	--leading-2: 2;
+  --leading-1: 1;
+  --leading-2: 2;
 
-	--color-foreground: light-dark(#111, #ddd);
-	--color-background: light-dark(#fffff8, #151515);
-	--color-foreground-subtle: light-dark(#3a3b3b, #bdbbbb);
+  --color-foreground: light-dark(#111, #ddd);
+  --color-background: light-dark(#fffff8, #151515);
+  --color-foreground-subtle: light-dark(#3a3b3b, #bdbbbb);
 
-	--spacing-paragraph: 100%;
-	--spacing-paragraph-desktop: 55%;
-	--spacing-sidebar: 40px;
+  --spacing-paragraph: 100%;
+  --spacing-paragraph-desktop: 55%;
+  --spacing-sidebar: 40px;
 
-	--font-weight-heading: 400;
+  --font-weight-heading: 400;
 }
 
 @utility clear-descenders {
-	text-shadow:
-		var(--color-background) 0px -1px 0.5px,
-		var(--color-background) 0px -1.25px 0.5px,
-		var(--color-background) 0px -1.75px 0.5px,
-		var(--color-background) 0px -2px 0.5px,
-		var(--color-background) -4px 0px,
-		var(--color-background) -3px 0px,
-		var(--color-background) -2px 0px,
-		var(--color-background) -1px 0px,
-		var(--color-background) 1px 0px,
-		var(--color-background) 2px 0px,
-		var(--color-background) 3px 0px,
-		var(--color-background) 4.5px 0px;
+  text-shadow:
+    var(--color-background) 0px -1px 0.5px,
+    var(--color-background) 0px -1.25px 0.5px,
+    var(--color-background) 0px -1.75px 0.5px,
+    var(--color-background) 0px -2px 0.5px,
+    var(--color-background) -4px 0px,
+    var(--color-background) -3px 0px,
+    var(--color-background) -2px 0px,
+    var(--color-background) -1px 0px,
+    var(--color-background) 1px 0px,
+    var(--color-background) 2px 0px,
+    var(--color-background) 3px 0px,
+    var(--color-background) 4.5px 0px;
 }
 
 :root {
@@ -64,7 +65,7 @@
 	}
 
 	hr {
-		@apply block h-[1px] border-0 border-t-[1px] border-solid border-foreground-subtle my-4 p-0 w-paragraph desktop:w-paragraph-desktop;
+		@apply block h-px border-0 border-t border-solid border-foreground-subtle my-4 p-0 w-paragraph desktop:w-paragraph-desktop;
 	}
 
 	p.subtitle {
@@ -95,7 +96,7 @@
 		dl,
 		ol,
 		ul {
-			@apply text-3xl leading-[2rem];
+			@apply text-3xl leading-8;
 		}
 
 		p {
@@ -202,7 +203,7 @@
 		.sidenote-number {
 			counter-increment: sidenote-counter;
 			&:after {
-				@apply content-[counter(sidenote-counter)] font-old relative align-baseline -top-[0.5rem] left-[0.1rem] text-base;
+				@apply content-[counter(sidenote-counter)] font-old relative align-baseline -top-2 left-[0.1rem] text-base;
 			}
 		}
 
