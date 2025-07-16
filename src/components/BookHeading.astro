@@ -23,7 +23,7 @@ const { title, authors, releaseDate } = Astro.props.frontmatter;
 <h2>{title}</h2>
 
 <p>
-  <span class="authors"
+  <span class="authors -mt-4"
     >{
       authors.map((author: string) => <span class="author">{author}</span>)
     }</span

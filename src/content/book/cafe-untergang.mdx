@@ -7,20 +7,10 @@ finishedDate: 2024-01-19
 ---
 
 import BookHeading from "../../components/BookHeading.astro";
-import Marginnote from "../../components/Marginnote.astro";
 
 <BookHeading frontmatter={frontmatter} />
 
-<Marginnote>
-<span class="marginnote">
-  <img
-    src="/img/cafecentral.jpg"
-    alt="Schwarz-Weiß-Foto um die Jahrhundertwende vom inneren des Wiener Café Central"
-  />
-  Das Wiener Café Central, ca. 1900, Bildrechte: Café Central im Palais Ferstel
-</span>
-</Marginnote>
-Am Salzburger Bahnhof entdeckte ich dieses Schmuckstück an der Spitze des Bestsellerregals
+[^mn-central]Am Salzburger Bahnhof entdeckte ich dieses Schmuckstück an der Spitze des Bestsellerregals
 im „Press&Books“ – und das vollkommen zurecht! Freilich muss ich zugeben, dass Wien
 in meinem Herzen einen ganz besonderen Platz einnimmt und ich deshalb nur schwer
 ein objektiver Zeuge dieses Werks sein kann.
@@ -46,3 +36,5 @@ bekannter Umstände, die im letzten Drittel drohen, das Buch zu einem
 Pflichtschulgeschichtsbuch zu deklassieren. Zum Glück gelingt ihnen das nicht
 ganz, und Haller schafft zuletzt einen bravourösen Abschluss mit herzerwärmenden
 Anekdoten.
+
+[^mn-central]: <span class="marginnote"> <img src="/img/cafecentral.jpg" alt="Schwarz-Weiß-Foto um die Jahrhundertwende vom inneren des Wiener Café Central" />Das Wiener Café Central, ca. 1900, Bildrechte: Café Central im Palais Ferstel</span>

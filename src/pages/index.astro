@@ -20,53 +20,68 @@ const posts: BlogPostType[] = (await getCollection("blog"))
 
 <!doctype html>
 <html lang="de-AT">
-  <BaseHead title="Pagina Domestica Konstantini Kovar" description={SITE_DESCRIPTION} />
+  <BaseHead
+    title="De Konstantini Pagina Domestica"
+    description={SITE_DESCRIPTION}
+  />
 
   <body>
-    <main class="content-layout">
-      <h1>{SITE_TITLE}</h1>
-      <p class="subtitle text-foreground-subtle border-b clear-descenders">
+    <main class="mx-auto max-w-11/12 desktop:max-w-3/4">
+      <h1 class="text-8xl mt-[50svh]">{SITE_TITLE}</h1>
+      <p
+        class="text-6xl italic text-foreground-subtle border-b clear-descenders"
+      >
         {SITE_DESCRIPTION}
       </p>
+      <p
+        class="hidden desktop:block text-right text-lg italic text-foreground-subtle mb-[30svh]"
+      >
+        Was gibt uns den schönsten Frieden, als frei am eig'nen Glück zu
+        schmieden?
+      </p>
 
-      <section>
-        <h2>Blog</h2>
-        <ul class="grid desktop:grid-cols-2 gap-6">
+      <section class="bg-[green]">
+        <h2
+          class="text-5xl clear-descenders z-10 relative mb-2"
+        >
+          Logbuch
+        </h2>
+        <ul
+          class="grid grid-cols-1 bg-[red] desktop:grid-cols-4 grid-rows-[2rem_1rem_2rem] gap-6"
+        >
           {
             posts.map((blogpost: BlogPostType) => (
-              <li>
+              <li class="size-fit">
                 <ContentCard path="/blog" blogpost={blogpost} />
               </li>
             ))
           }
-          <li>
-            <a href="/blog">mehr...</a>
-          </li>
         </ul>
+        <a href="/blog">mehr...</a>
       </section>
 
       <section>
-        <h2>Projekte</h2>
+        <h2 class="text-5xl mt-28 clear-descenders">Projekte</h2>
         <ul>
-          <li>
+          <li class="mb-6 border-foreground border p-6">
             <a href="https://prompt-dress.com"
-              ><h3>Prompt Dress Browser Extension</h3></a
+              ><h3 class="text-xl">Prompt Dress Browser Extension</h3></a
             >
-            <p>
+            <p class="text-sm">
               Eine Browsererweiterung, zum lokalen abspeichern persönlicher KI <em
                 >Prompts,
               </em> um sich das ständige neue <em>primen</em> der KI-Modelle durch
               manuelles Kopieren und Einfügen zu ersparen.
             </p>
           </li>
-          <li>
+          <li class="mb-6 border-foreground border p-6">
             <a
               href="https://marketplace.visualstudio.com/items?itemName=KonstantinKovar.classnames-rainbow"
-              ><h3>
+              ><h3 class="text-xl">
                 ClassNames Rainbow VSCode Erweiterung <em>[deprecated]</em>
               </h3></a
             >
-            <p>
+            <p class="text-sm">
               Eine Erweiterung für Visual Studio Code, die <code>class</code
               >-names durch Regenbogenoptik leichter identifizierbar macht, was
               vor allem für
@@ -78,103 +93,6 @@ const posts: BlogPostType[] = (await getCollection("blog"))
         </ul>
       </section>
     </main>
-
-    <article class="article">
-      <section>
-        <h2>Wo bin ich hier?</h2>
-
-        <p>
-          Alles, was ich hier gemacht habe, ist falsch. Einen Blog kann man so
-          nicht gestalten. Keine Bilder, keine grellen Farben, nichts, was Ihnen
-          ungefragt ins Sichtfeld springt. Es schiebt sich Ihnen auch keine
-          Warnung vor gemeingefährlichen <em>Cookies</em> in die Fresse und ich habe
-          Sie auch noch nicht gefragt, ob Sie mir nicht auch auf Facebook, Instagram,
-          TikTok oder
-          <em>the platform formerly known as Twitter</em> folgen wollen. Nach Ihrer
-          E-Mailadresse habe ich Sie auch noch nicht gefragt, sehr schleißig von
-          mir.
-        </p>
-
-        <p>
-          Im ersten Absatz sind außerdem keine wichtigen Schlagworte
-          vorgekommen, komplett antithetisch zu den Regeln der
-          Suchmaschinenoptimierung. Die Sprache ist nicht übersimplifiziert, ich
-          erwarte von Ihnen also ein Leseverständnis über dem Volkschulniveau.
-          Schwerer Fehler, wäre dies hier ein Werbetext. Wie ein Verrückter
-          traue ich meinen Lesern mehr als einen Nebensatz zu.
-        </p>
-
-        <p>
-          Ich sieze meine Leser, ein bisschen lächerlich, wenn wir uns ehrlich
-          sind, aber irgendwie fühle ich mich so wohler. Es fühlt sich dann so
-          an, als würde ich tatsächlich für mündige, respektable Menschen
-          schreiben, nicht nur für Konsumenten.
-        </p>
-      </section>
-
-      <section>
-        <div>
-          <blockquote>
-            <p>
-              Das Verlangen Twitter zu checken oder Reddit zu refreshen wird zu
-              einem nervösen Zwang, der ungestörte Zeit in Scherben zerschlägt,
-              die zu klein sind, um ein bewusstes Leben mit Intention zu führen.
-            </p>
-            <footer>
-              <cite>- Cal Newport, <em>Digital Minimalism</em></cite>
-              (frei übersetzt)
-            </footer>
-          </blockquote>
-        </div>
-
-        <p>
-          <span class="newthought">Mein Name ist Konstantin,</span> ich selbstgelernter
-          Softwareentwickler bei Österreich's meist besuchtem Internetportal und
-          mache mir Gedanken über ein erfolgreiches Zusammenspiel von Maschine und
-          Mensch. Für mich ist klar, dass wir die Technologien, zu denen wir Zugang
-          haben, nicht optimal nutzen. Ich unterstelle, dass das tägliche, mehrstündige
-          Scrollen von Instagram-, TikTok, Twitter oder Facebook nicht zu Ihrer Vision
-          eines gut gelebten Lebens gehört. Warum bestehen Sie also so vehement darauf?
-        </p>
-
-        <p>
-          Das ist gar nicht so einfach zu beantworten, aber auf dieser Seite
-          will ich das versuchen. Dafür stelle ich mich auf die Schultern
-          moderner Denker wie Cal Newport, Adam Alter, Neil Postman, Jaron
-          Lanier, Tristan Harris und vieler anderer.
-        </p>
-
-        <p>
-          Wenn Sie interessiert sind, dann sollten Sie deren Bücher lesen, oder
-          wenn Sie es vorverdaut (oder auf Deutsch) bevorzugen, dann eben meine
-          Gedanken hier auf dieser Seite, der Sie <a href="./rss.xml"
-            >via RSS folgen können.</a
-          >
-        </p>
-
-        <p>
-          Auch technisch hab ich ein stabiles Fundament unter mir, das ich der
-          Arbeit anderer verdanke, unter anderem <a
-            rel="noreferrer nofollower"
-            href="https://astro.build/">Astro</a
-          >, <a rel="noreferrer nofollower" href="https://htmx.org/">htmx</a> und
-          <a
-            rel="noreferrer nofollower"
-            href="https://edwardtufte.github.io/tufte-css/">tufte-css.</a
-          >
-        </p>
-      </section>
-    </article>
     <Footer />
-    <script>
-      document
-        .querySelectorAll(".slideInFromLeft")
-        .forEach((elem, index) =>
-          setTimeout(
-            () => elem.classList.add("transitioned"),
-            (index + 2) * 80,
-          ),
-        );
-    </script>
   </body>
 </html>
