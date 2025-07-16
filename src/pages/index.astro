@@ -1,12 +1,10 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import ContentCard from "../components/ContentCard.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
 import type { BlogPostType } from "./blog/[...slug].astro";
+import FormattedDate from "../components/FormattedDate.astro";
 
-const SHOW_N_POSTS = 4;
 
 const posts: BlogPostType[] = (await getCollection("blog"))
   .filter(({ data }: BlogPostType) => !data.draft)
@@ -14,8 +12,7 @@ const posts: BlogPostType[] = (await getCollection("blog"))
     (a: BlogPostType, b: BlogPostType) =>
       a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
   )
-  .reverse()
-  .slice(0, SHOW_N_POSTS);
+.reverse();
 ---
 
 <!doctype html>
@@ -27,37 +24,35 @@ const posts: BlogPostType[] = (await getCollection("blog"))
 
   <body>
     <main class="mx-auto max-w-11/12 desktop:max-w-3/4">
-      <h1 class="text-8xl mt-[50svh]">{SITE_TITLE}</h1>
+      <h1 class="text-8xl mt-[5svh]">{SITE_TITLE}</h1>
       <p
         class="text-6xl italic text-foreground-subtle border-b clear-descenders"
       >
         {SITE_DESCRIPTION}
       </p>
       <p
-        class="hidden desktop:block text-right text-lg italic text-foreground-subtle mb-[30svh]"
+        class="hidden desktop:block text-right text-lg italic text-foreground-subtle mb-[3svh]"
       >
         Was gibt uns den schönsten Frieden, als frei am eig'nen Glück zu
         schmieden?
       </p>
 
-      <section class="bg-[green]">
-        <h2
-          class="text-5xl clear-descenders z-10 relative mb-2"
-        >
-          Logbuch
-        </h2>
-        <ul
-          class="grid grid-cols-1 bg-[red] desktop:grid-cols-4 grid-rows-[2rem_1rem_2rem] gap-6"
-        >
+      <section>
+        <h2 class="text-5xl clear-descenders z-10 mb-2">Blog</h2>
+        <dl>
           {
-            posts.map((blogpost: BlogPostType) => (
-              <li class="size-fit">
-                <ContentCard path="/blog" blogpost={blogpost} />
-              </li>
+            posts.map(({ data, slug }: BlogPostType) => (
+              <dt class="pt-4">
+                <a href={"/" + slug} class="text-lg font-bold">{data.title}</a>
+                  <FormattedDate
+                    className="text-foreground-subtle text-xs"
+                    date={data.pubDate}
+                  />
+</dt>
+                  <dd>{data.description}</dd>
             ))
           }
-        </ul>
-        <a href="/blog">mehr...</a>
+        </dl>
       </section>
 
       <section>
@@ -93,6 +88,5 @@ const posts: BlogPostType[] = (await getCollection("blog"))
         </ul>
       </section>
     </main>
-    <Footer />
   </body>
 </html>

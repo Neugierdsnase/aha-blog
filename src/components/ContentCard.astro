@@ -14,14 +14,14 @@ const { title, description, pubDate } = data;
 ---
 
 <article
-  class="size-fit p-1 outline outline-foreground flex items-center justify-center focus-within:rounded focus-within:outline-0 transition-all"
+  class="size-fit p-1 outline outline-foreground flex items-center justify-center hover:rounded focus-within:rounded hover:outline-0 focus-within:outline-0 transition-all"
 >
   <div
-    class={"grid grid-cols-1 grid-rows-subgrid h-full p-6 desktop:px-12 outline-foreground outline focus-within:rounded-xs focus-within:outline-6 transition-all" +
+    class={"grid grid-cols-1 grid-rows-[2rem_1rem_2rem] h-full p-6 desktop:px-12 outline-foreground outline hover:rounded-xs focus-within:rounded-xs hover:outline-6 focus-within:outline-6 transition-all" +
       className}
   >
     <h2
-      class="mb-0 z-10 clear-descenders line-clamp-2 overflow-visible text-2xl cursor-pointer" 
+      class="mb-0 z-10 clear-descenders line-clamp-2 overflow-visible text-2xl"
     >
       <a href={path + "/" + slug} class="focus-visible:outline-0">
         {title}
