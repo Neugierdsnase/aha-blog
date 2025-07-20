@@ -6,7 +6,7 @@ export type BookPostType = CollectionEntry<"book">;
 
 export async function getStaticPaths() {
   const books: BookPostType[] = await getCollection("book");
-  const bookIsPublished = (post: BookPostType) => !post.data.draft;
+  const bookIsPublished = (book: BookPostType) => !book.data.draft;
   return books.filter(bookIsPublished).map((book) => ({
     params: { slug: book.slug },
     props: book,

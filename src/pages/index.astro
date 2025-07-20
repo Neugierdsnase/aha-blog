@@ -4,6 +4,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
 import type { BlogPostType } from "./blog/[...slug].astro";
 import FormattedDate from "../components/FormattedDate.astro";
+import type { BookPostType } from "./book/[...slug].astro";
 
 
 const posts: BlogPostType[] = (await getCollection("blog"))
@@ -11,6 +12,14 @@ const posts: BlogPostType[] = (await getCollection("blog"))
   .sort(
     (a: BlogPostType, b: BlogPostType) =>
       a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
+  )
+.reverse();
+
+const books: BookPostType[] = (await getCollection("book"))
+  .filter(({ data }: BookPostType) => !data.draft)
+  .sort(
+    (a: BookPostType, b: BookPostType) =>
+      a.data.finishedDate.valueOf() - b.data.finishedDate.valueOf(),
   )
 .reverse();
 ---
@@ -24,19 +33,22 @@ const posts: BlogPostType[] = (await getCollection("blog"))
 
   <body>
     <main class="mx-auto max-w-11/12 desktop:max-w-3/4">
-      <h1 class="text-8xl mt-[5svh]">{SITE_TITLE}</h1>
+      <h1 class="text-[clamp(3rem,7svw,7rem)] mt-[5svh]">{SITE_TITLE}</h1>
       <p
-        class="text-6xl italic text-foreground-subtle border-b clear-descenders"
+        class="text-6xl italic text-foreground-subtle border-b text-[clamp(2rem,4svw,4rem)] clear-descenders"
       >
         {SITE_DESCRIPTION}
       </p>
       <p
-        class="hidden desktop:block text-right text-lg italic text-foreground-subtle mb-[3svh]"
+        class="hidden desktop:block text-right text-md italic text-foreground-subtle"
       >
         Was gibt uns den schönsten Frieden, als frei am eig'nen Glück zu
         schmieden?
       </p>
 
+      <div class="h-[3svh] desktop:h-[5svh]" />
+
+      <div class="grid grid-cols-1 desktop:grid-cols-2">
       <section>
         <h2 class="text-5xl clear-descenders z-10 mb-2">Blog</h2>
         <dl>
@@ -48,12 +60,31 @@ const posts: BlogPostType[] = (await getCollection("blog"))
                     className="text-foreground-subtle text-xs"
                     date={data.pubDate}
                   />
-</dt>
-                  <dd>{data.description}</dd>
+              </dt>
+              <dd>{data.description}</dd>
             ))
           }
         </dl>
       </section>
+
+        <section>
+        <h2 class="text-5xl clear-descenders z-10 mb-2">Bücher</h2>
+        <dl>
+          {
+            books.map(({ data, slug }: BookPostType) => (
+              <dt class="pt-4">
+                <a href={"/" + slug} class="text-lg font-bold">{data.title}</a>
+                  <FormattedDate
+                    className="text-foreground-subtle text-xs"
+                    date={data.finishedDate}
+                  />
+              </dt>
+              <dd>{data.description}</dd>
+            ))
+          }
+        </dl>
+      </section>
+</div>
 
       <section>
         <h2 class="text-5xl mt-28 clear-descenders">Projekte</h2>
