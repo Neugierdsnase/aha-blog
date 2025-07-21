@@ -27,7 +27,7 @@ const books: BookPostType[] = (await getCollection("book"))
 <!doctype html>
 <html lang="de-AT">
   <BaseHead
-    title="De Konstantini Pagina Domestica"
+    title="Konstantini Pagina Domestica"
     description={SITE_DESCRIPTION}
   />
 
@@ -55,7 +55,7 @@ const books: BookPostType[] = (await getCollection("book"))
           {
             posts.map(({ data, slug }: BlogPostType) => (
               <dt class="pt-4">
-                <a href={"/" + slug} class="text-lg font-bold">{data.title}</a>
+              <a href={"/blog/" + slug} class="text-lg font-bold">{data.title}</a>
                   <FormattedDate
                     className="text-foreground-subtle text-xs"
                     date={data.pubDate}
@@ -73,7 +73,7 @@ const books: BookPostType[] = (await getCollection("book"))
           {
             books.map(({ data, slug }: BookPostType) => (
               <dt class="pt-4">
-                <a href={"/" + slug} class="text-lg font-bold">{data.title}</a>
+              <a href={"/book/" + slug} class="text-lg font-bold">{data.title}</a>
                   <FormattedDate
                     className="text-foreground-subtle text-xs"
                     date={data.finishedDate}
