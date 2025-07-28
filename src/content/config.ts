@@ -19,6 +19,7 @@ const book = defineCollection({
   // Type-check frontmatter using a schema
   schema: z.object({
     title: z.string(),
+    subtitle: z.string().optional(),
     description: z.string().optional(),
     authors: z.array(z.string()),
     // Transform string to Date object

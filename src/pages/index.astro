@@ -50,7 +50,7 @@ const books: BookPostType[] = (await getCollection("book"))
 
       <div class="grid gap-18 grid-cols-1 desktop:grid-cols-2">
       <section>
-        <h2 class="text-5xl clear-descenders z-10 mb-2">Blog</h2>
+        <h2 class="text-[clamp(2.2rem,4.2svw,3.4rem)] underline underline-offset-2 clear-descenders z-10 mb-2">Blog</h2>
         <dl>
           {
             posts.map(({ data, slug }: BlogPostType) => (
@@ -68,7 +68,7 @@ const books: BookPostType[] = (await getCollection("book"))
       </section>
 
         <section>
-        <h2 class="text-5xl clear-descenders z-10 mb-2">Bücher</h2>
+        <h2 class="text-[clamp(2rem,4svw,4rem)] underline underline-offset-2 clear-descenders z-10 mb-2">Jüngst gelesen</h2>
         <dl>
           {
             books.map(({ data, slug }: BookPostType) => (

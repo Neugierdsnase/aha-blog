@@ -4,7 +4,7 @@ import ContentBase from "./ContentBase.astro";
 
 type Props = CollectionEntry<"book">["data"];
 
-const { title, description } = Astro.props;
+const { title, subtitle, description } = Astro.props;
 ---
 
-<ContentBase title={title} description={description}><slot /></ContentBase>
+<ContentBase title={title} subtitle={subtitle} description={description}><slot /></ContentBase>
