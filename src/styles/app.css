@@ -2,53 +2,67 @@
 @import "./tufte.css";
 
 @theme {
-	--breakpoint-desktop: 760px;
+  --breakpoint-desktop: 760px;
 
-	--font-serif: "et-book", Palatino, "Palatino Linotype", "Palatino LT STD",
-		"Book Antiqua", Georgia, serif;
-	--font-old: et-book-roman-old-style;
+  --font-serif:
+    "et-book", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua",
+    Georgia, serif;
+  --font-old: et-book-roman-old-style;
 
-	--leading-1: 1;
-	--leading-2: 2;
+  --night: #121417ff;
+  --raisin-black: #2c262cff;
+  --lavender-blush: #ffebf0ff;
+  --misty-rose: #fbdedaff;
+  --antiflash-white: #e8eaedff;
+  --black-bean: #29000aff;
+  --tea-green: #c1d4b0ff;
+  --cherry-blossom-pink: #ffadbcff;
+  --dark-green: #1e2815ff;
+  --fire-brick: #b80022ff;
 
-	--color-foreground: light-dark(#111, #ddd);
-	--color-background: light-dark(#fffff8, #151515);
-	--color-foreground-subtle: light-dark(#3a3b3b, #bdbbbb);
+  --leading-1: 1;
+  --leading-2: 2;
 
-	--spacing-paragraph: 100%;
-	--spacing-paragraph-desktop: 55%;
-	--spacing-sidebar: 40px;
+  --color-background: light-dark(var(--lavender-blush), var(--night));
+  --color-surface: light-dark(var(--misty-rose), var(--raisin-black));
+  --color-foreground: light-dark(var(--black-bean), var(--lavender-blush));
+  --color-foreground-subtle: light-dark(#3a3b3b, #bdbbbb);
+  --color-error: light-dark(var(--fire-brick), var(--cherry-blossom-pink));
+  --color-success: light-dark(var(--dark-green), var(--tea-green));
 
-	--font-weight-heading: 400;
+  --spacing-paragraph: 100%;
+  --spacing-paragraph-desktop: 55%;
+  --spacing-sidebar: 40px;
 
-	--text-xs: 1rem; /* 15px */
-	--text-sm: 1.125rem; /* 17.5px */
-	--text-md: 1.25rem; /* 20px */
-	--text-lg: 1.5rem; /* 22.5px */
-	--text-xl: 2rem; /* 30px */
+  --font-weight-heading: 400;
 
-	--text-body: var(--text-md);
+  --text-xs: 1rem; /* 15px */
+  --text-sm: 1.125rem; /* 17.5px */
+  --text-md: 1.25rem; /* 20px */
+  --text-lg: 1.5rem; /* 22.5px */
+  --text-xl: 2rem; /* 30px */
+
+  --text-body: var(--text-md);
 }
 
 @utility clear-descenders {
-	text-shadow:
-		var(--color-background) 0px -1px 0.5px,
-		var(--color-background) 0px -1.25px 0.5px,
-		var(--color-background) 0px -1.75px 0.5px,
-		var(--color-background) 0px -2px 0.5px,
-		var(--color-background) -4px 0px,
-		var(--color-background) -3px 0px,
-		var(--color-background) -2px 0px,
-		var(--color-background) -1px 0px,
-		var(--color-background) 1px 0px,
-		var(--color-background) 2px 0px,
-		var(--color-background) 3px 0px,
-		var(--color-background) 4.5px 0px;
+  text-shadow:
+    var(--color-background) 0px -1px 0.5px,
+    var(--color-background) 0px -1.25px 0.5px,
+    var(--color-background) 0px -1.75px 0.5px,
+    var(--color-background) 0px -2px 0.5px,
+    var(--color-background) -4px 0px,
+    var(--color-background) -3px 0px,
+    var(--color-background) -2px 0px,
+    var(--color-background) -1px 0px,
+    var(--color-background) 1px 0px,
+    var(--color-background) 2px 0px,
+    var(--color-background) 3px 0px,
+    var(--color-background) 4.5px 0px;
 }
 
 :root {
-	font-size: 15px;
-	color-scheme: light dark;
-	@apply font-serif bg-background;
+  font-size: 15px;
+  color-scheme: light dark;
+  @apply font-serif bg-background;
 }
-

@@ -61,7 +61,7 @@ article.article {
 	}
 
 	.danger {
-		color: red;
+		color: var(--color-error);
 	}
 
 	article {
