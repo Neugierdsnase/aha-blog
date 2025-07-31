@@ -15,108 +15,108 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 ---
 
 <head>
-<!-- Import ET Book styles adapted from https://github.com/edwardtufte/et-book/blob/gh-pages/et-book.css -->
-<!-- Font loading -->
-<AstroFont
-  config={[
-    {
-      name: "et-book",
-      preload: true,
-      display: "swap",
-      selector: "body",
-      fallback: "serif",
-      src: [
-        {
-          path: join(
-            process.cwd(),
-            "public",
-            "et-book",
-            "et-book-roman-line-figures",
-            "et-book-roman-line-figures.ttf",
-          ),
-          style: "normal",
-          weight: "normal",
-        },
-        {
-          path: join(
-            process.cwd(),
-            "public",
-            "et-book",
-            "et-book-display-italic-old-style-figures",
-            "et-book-display-italic-old-style-figures.ttf",
-          ),
-          style: "italic",
-          weight: "normal",
-        },
-        {
-          path: join(
-            process.cwd(),
-            "public",
-            "et-book",
-            "et-book-bold-line-figures",
-            "et-book-bold-line-figures.ttf",
-          ),
-          style: "normal",
-          weight: "bold",
-        },
-      ],
-    },
-    {
-      name: "et-book",
-      preload: true,
-      display: "swap",
-      selector: "body",
-      fallback: "serif",
-      src: [
-        {
-          path: join(
-            process.cwd(),
-            "public",
-            "et-book",
-            "et-book-roman-old-style-figures",
-            "et-book-roman-old-style-figures.ttf",
-          ),
-          style: "normal",
-          weight: "normal",
-        },
-      ],
-    },
-  ]}
-/>
+  <!-- Import ET Book styles adapted from https://github.com/edwardtufte/et-book/blob/gh-pages/et-book.css -->
+  <!-- Font loading -->
+  <AstroFont
+    config={[
+      {
+        name: "et-book",
+        preload: true,
+        display: "swap",
+        selector: "body",
+        fallback: "serif",
+        src: [
+          {
+            path: join(
+              process.cwd(),
+              "public",
+              "et-book",
+              "et-book-roman-line-figures",
+              "et-book-roman-line-figures.ttf",
+            ),
+            style: "normal",
+            weight: "normal",
+          },
+          {
+            path: join(
+              process.cwd(),
+              "public",
+              "et-book",
+              "et-book-display-italic-old-style-figures",
+              "et-book-display-italic-old-style-figures.ttf",
+            ),
+            style: "italic",
+            weight: "normal",
+          },
+          {
+            path: join(
+              process.cwd(),
+              "public",
+              "et-book",
+              "et-book-bold-line-figures",
+              "et-book-bold-line-figures.ttf",
+            ),
+            style: "normal",
+            weight: "bold",
+          },
+        ],
+      },
+      {
+        name: "et-book",
+        preload: true,
+        display: "swap",
+        selector: "body",
+        fallback: "serif",
+        src: [
+          {
+            path: join(
+              process.cwd(),
+              "public",
+              "et-book",
+              "et-book-roman-old-style-figures",
+              "et-book-roman-old-style-figures.ttf",
+            ),
+            style: "normal",
+            weight: "normal",
+          },
+        ],
+      },
+    ]}
+  />
 
-<!-- Global Metadata -->
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<meta name="generator" content={Astro.generator} />
+  <!-- Global Metadata -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="generator" content={Astro.generator} />
 
-<!-- Canonical URL -->
-<link rel="canonical" href={canonicalURL} />
+  <!-- Canonical URL -->
+  <link rel="canonical" href={canonicalURL} />
 
-<!-- Primary Meta Tags -->
-<title>{title}</title>
-<meta name="title" content={title} />
-<meta name="description" content={description} />
+  <!-- Primary Meta Tags -->
+  <title>{title}</title>
+  <meta name="title" content={title} />
+  <meta name="description" content={description} />
 
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={Astro.url} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={new URL(image, Astro.url)} />
 
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content={Astro.url} />
+  <meta property="twitter:title" content={title} />
+  <meta property="twitter:description" content={description} />
+  <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-<script
-  is:inline
-  src="https://cdn.counter.dev/script.js"
-  data-id="577cfaaf-19ed-4ba3-9a0d-62e8ddcebda3"
-  data-utcoffset="2"></script>
+  <script
+    is:inline
+    src="https://cdn.counter.dev/script.js"
+    data-id="577cfaaf-19ed-4ba3-9a0d-62e8ddcebda3"
+    data-utcoffset="2"></script>
 
   <slot />
 </head>

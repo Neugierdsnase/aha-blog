@@ -7,12 +7,15 @@ interface Props {
 const { date, className } = Astro.props;
 ---
 
-<time class={className} datetime={date.toISOString()}>
-  {
-    date.toLocaleDateString("de-AT", {
+<time
+  class={className}
+  datetime={date.toISOString()}
+  set:html={date
+    .toLocaleDateString("de-AT", {
       year: "numeric",
       month: "long",
       day: "numeric",
     })
+    .replaceAll(" ", "&nbsp;")}
   }
-</time>
+/>

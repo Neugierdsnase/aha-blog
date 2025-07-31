@@ -23,8 +23,8 @@
   --leading-1: 1;
   --leading-2: 2;
 
-  --color-background: light-dark(var(--lavender-blush), var(--night));
-  --color-surface: light-dark(var(--misty-rose), var(--raisin-black));
+  --color-surface: light-dark(var(--lavender-blush), var(--night));
+  --color-background: light-dark(var(--misty-rose), var(--raisin-black));
   --color-foreground: light-dark(var(--black-bean), var(--lavender-blush));
   --color-foreground-subtle: light-dark(#3a3b3b, #bdbbbb);
   --color-error: light-dark(var(--fire-brick), var(--cherry-blossom-pink));

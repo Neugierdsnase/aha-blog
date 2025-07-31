@@ -6,7 +6,6 @@ import type { BlogPostType } from "./blog/[...slug].astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import type { BookPostType } from "./book/[...slug].astro";
 
-
 const posts: BlogPostType[] = (await getCollection("blog"))
   .filter(({ data }: BlogPostType) => !data.draft)
   .sort(
@@ -31,6 +30,12 @@ const books: BookPostType[] = (await getCollection("book"))
     description={SITE_DESCRIPTION}
   />
 
+<head>
+  <script>
+    import "../web-components/post-card";
+  </script>
+</head>
+
   <body>
     <main class="mx-auto max-w-11/12 desktop:max-w-3/4">
       <h1 class="text-[clamp(3rem,7svw,7rem)] mt-[5svh]">{SITE_TITLE}</h1>
@@ -51,20 +56,20 @@ const books: BookPostType[] = (await getCollection("book"))
       <div class="grid gap-18 grid-cols-1 desktop:grid-cols-2">
       <section>
         <h2 class="text-[clamp(2.2rem,4.2svw,3.4rem)] underline underline-offset-2 clear-descenders z-10 mb-2">Blog</h2>
-        <dl>
+        <ul>
           {
             posts.map(({ data, slug }: BlogPostType) => (
-              <dt class="pt-4">
-              <a href={"/blog/" + slug} class="text-lg font-bold">{data.title}</a>
-                  <FormattedDate
-                    className="text-foreground-subtle text-xs"
-                    date={data.pubDate}
-                  />
-              </dt>
-              <dd>{data.description}</dd>
+            <post-card style="--card-bg: var(--color-surface); --card-fg: var(--color-foreground);">
+                <a slot="header" href={"/blog/" + slug} class="text-lg font-bold">{data.title}</a>
+                    <FormattedDate
+                      className="text-foreground-subtle text-xs"
+                      date={data.pubDate}
+                    />
+  <span>{data.description}</span>
+              </post-card>
             ))
           }
-        </dl>
+        </ul>
       </section>
 
         <section>
