@@ -1,0 +1,49 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+---
+
+<!doctype html>
+<html lang="de-AT">
+  <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+
+  <body>
+    <Header />
+
+    <main>
+      <section>
+        <h2 class="text-5xl mt-28 clear-descenders">Projekte</h2>
+        <ul>
+          <li class="mb-6 border-foreground border p-6">
+            <a href="https://prompt-dress.com"
+              ><h3 class="text-xl">Prompt Dress Browser Extension</h3></a
+            >
+            <p class="text-sm">
+              Eine Browsererweiterung, zum lokalen abspeichern persönlicher KI <em
+                >Prompts,
+              </em> um sich das ständige neue <em>primen</em> der KI-Modelle durch
+              manuelles Kopieren und Einfügen zu ersparen.
+            </p>
+          </li>
+          <li class="mb-6 border-foreground border p-6">
+            <a
+              href="https://marketplace.visualstudio.com/items?itemName=KonstantinKovar.classnames-rainbow"
+              ><h3 class="text-xl">
+                ClassNames Rainbow VSCode Erweiterung <em>[deprecated]</em>
+              </h3></a
+            >
+            <p class="text-sm">
+              Eine Erweiterung für Visual Studio Code, die <code>class</code
+              >-names durch Regenbogenoptik leichter identifizierbar macht, was
+              vor allem für
+              <a rel="noreferrer noopener" href="https://tailwindcss.com/"
+                >Tailwind CSS</a
+              > Nutzer hilfreich sein kann.
+            </p>
+          </li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

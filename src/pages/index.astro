@@ -3,24 +3,18 @@ import BaseHead from "../components/BaseHead.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
 import type { BlogPostType } from "./blog/[...slug].astro";
-import FormattedDate from "../components/FormattedDate.astro";
-import type { BookPostType } from "./book/[...slug].astro";
+import BlogPost from "../layouts/BlogPost.astro";
 
-const posts: BlogPostType[] = (await getCollection("blog"))
-  .filter(({ data }: BlogPostType) => !data.draft)
+const FEATURED_POST_TITLE = "Wckltsch";
+
+const featuredPost: BlogPostType = (await getCollection("blog"))
+  .filter(({ data }: BlogPostType) => data.title === FEATURED_POST_TITLE)
   .sort(
     (a: BlogPostType, b: BlogPostType) =>
       a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
-  )
-.reverse();
+  )[0];
 
-const books: BookPostType[] = (await getCollection("book"))
-  .filter(({ data }: BookPostType) => !data.draft)
-  .sort(
-    (a: BookPostType, b: BookPostType) =>
-      a.data.finishedDate.valueOf() - b.data.finishedDate.valueOf(),
-  )
-.reverse();
+const { Content } = await featuredPost.render();
 ---
 
 <!doctype html>
@@ -30,99 +24,31 @@ const books: BookPostType[] = (await getCollection("book"))
     description={SITE_DESCRIPTION}
   />
 
-<head>
-  <script>
-    import "../web-components/post-card";
-  </script>
-</head>
-
   <body>
-    <main class="mx-auto max-w-11/12 desktop:max-w-3/4">
-      <h1 class="text-[clamp(3rem,7svw,7rem)] mt-[5svh]">{SITE_TITLE}</h1>
-      <p
-        class="text-6xl italic text-foreground-subtle border-b text-[clamp(2rem,4svw,4rem)] clear-descenders"
+    <div
+      id="body"
+      class="h-screen grid grid-cols-1 desktop:grid-cols-[480px_120px_1fr]"
+    >
+      <aside
+        class="row-start-2 desktop:row-start-1 desktop:bg-cherry-blossom-pink desktop:text-raisin-black bg-desktop:row-start-1 text-[clamp(2rem,7svw,3.4rem)] h-screen p-8 flex justify-center items-center"
       >
-        {SITE_DESCRIPTION}
-      </p>
-      <p
-        class="hidden desktop:block text-right text-md italic text-foreground-subtle"
-      >
-        Was gibt uns den schönsten Frieden, als frei am eig'nen Glück zu
-        schmieden?
-      </p>
+        <div class="w-fit">
+          <p>{SITE_TITLE}</p>
+          <p
+            class="italic text-raisin-black-bean desktop:border-b text-[0.94ch]"
+          >
+            {SITE_DESCRIPTION}
+          </p>
+        </div>
+      </aside>
 
-      <div class="h-[3svh] desktop:h-[5svh]" />
+      <div class="hidden desktop:block size-full home-screen-gradient"></div>
 
-      <div class="grid gap-18 grid-cols-1 desktop:grid-cols-2">
-      <section>
-        <h2 class="text-[clamp(2.2rem,4.2svw,3.4rem)] underline underline-offset-2 clear-descenders z-10 mb-2">Blog</h2>
-        <ul>
-          {
-            posts.map(({ data, slug }: BlogPostType) => (
-            <post-card style="--card-bg: var(--color-surface); --card-fg: var(--color-foreground);">
-                <a slot="header" href={"/blog/" + slug} class="text-lg font-bold">{data.title}</a>
-                    <FormattedDate
-                      className="text-foreground-subtle text-xs"
-                      date={data.pubDate}
-                    />
-  <span>{data.description}</span>
-              </post-card>
-            ))
-          }
-        </ul>
-      </section>
-
-        <section>
-        <h2 class="text-[clamp(2rem,4svw,4rem)] underline underline-offset-2 clear-descenders z-10 mb-2">Jüngst gelesen</h2>
-        <dl>
-          {
-            books.map(({ data, slug }: BookPostType) => (
-              <dt class="pt-4">
-              <a href={"/book/" + slug} class="text-lg font-bold">{data.title}</a>
-                  <FormattedDate
-                    className="text-foreground-subtle text-xs"
-                    date={data.finishedDate}
-                  />
-              </dt>
-              <dd>{data.description}</dd>
-            ))
-          }
-        </dl>
-      </section>
-</div>
-
-      <section>
-        <h2 class="text-5xl mt-28 clear-descenders">Projekte</h2>
-        <ul>
-          <li class="mb-6 border-foreground border p-6">
-            <a href="https://prompt-dress.com"
-              ><h3 class="text-xl">Prompt Dress Browser Extension</h3></a
-            >
-            <p class="text-sm">
-              Eine Browsererweiterung, zum lokalen abspeichern persönlicher KI <em
-                >Prompts,
-              </em> um sich das ständige neue <em>primen</em> der KI-Modelle durch
-              manuelles Kopieren und Einfügen zu ersparen.
-            </p>
-          </li>
-          <li class="mb-6 border-foreground border p-6">
-            <a
-              href="https://marketplace.visualstudio.com/items?itemName=KonstantinKovar.classnames-rainbow"
-              ><h3 class="text-xl">
-                ClassNames Rainbow VSCode Erweiterung <em>[deprecated]</em>
-              </h3></a
-            >
-            <p class="text-sm">
-              Eine Erweiterung für Visual Studio Code, die <code>class</code
-              >-names durch Regenbogenoptik leichter identifizierbar macht, was
-              vor allem für
-              <a rel="noreferrer noopener" href="https://tailwindcss.com/"
-                >Tailwind CSS</a
-              > Nutzer hilfreich sein kann.
-            </p>
-          </li>
-        </ul>
-      </section>
-    </main>
+      <main class="flex justify-center items-center desktop:col-start-3 desktop:bg-background">
+        <article class="article !bg-transparent">
+          <Content />
+        </article>
+      </main>
+    </div>
   </body>
 </html>

@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import BaseHead from "../../components/BaseHead.astro";
-import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
@@ -21,31 +20,23 @@ const books: BookPostType[] = (await getCollection("book"))
     <Header />
 
     <main>
-    <article class="article">
-      <h1>Alle Bücher</h1>
-
-      <hr />
-
         <section>
-          <dl>
-            {
-              books.map((book) => (
-                <dt>
-                  <a href={`/book/${book.slug}/`}>
-                    <h3 class="title">{book.data.title}</h3>
-                  </a>
-                </dt>
-                  <dd>
-                    <p><span style="opacity: 0.8; font-style: italic;"> zu Ende gelesen am </span>
-                    <FormattedDate date={book.data.finishedDate} />
-                </p>
-                  </dd>
-              ))
-            }
-          </dl>
-        </section>
-      </article>
+        <h2 class="text-[clamp(2rem,4svw,4rem)] underline underline-offset-2 clear-descenders z-10 mb-2">Jüngst gelesen</h2>
+        <dl>
+          {
+            books.map(({ data, slug }: BookPostType) => (
+              <dt class="pt-4">
+              <a href={"/book/" + slug} class="text-lg font-bold">{data.title}</a>
+                  <FormattedDate
+                    className="text-foreground-subtle text-xs"
+                    date={data.finishedDate}
+                  />
+              </dt>
+              <dd>{data.description}</dd>
+            ))
+          }
+        </dl>
+      </section>
     </main>
-    <Footer />
   </body>
 </html>
