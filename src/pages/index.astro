@@ -2,19 +2,16 @@
 import BaseHead from "../components/BaseHead.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
-import type { BlogPostType } from "./blog/[...slug].astro";
-import BlogPost from "../layouts/BlogPost.astro";
 
 const FEATURED_POST_TITLE = "Wckltsch";
 
-const featuredPost: BlogPostType = (await getCollection("blog"))
-  .filter(({ data }: BlogPostType) => data.title === FEATURED_POST_TITLE)
-  .sort(
-    (a: BlogPostType, b: BlogPostType) =>
-      a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
-  )[0];
+const featuredPost = (await getCollection("blog")).find(
+  ({ data }) => data.title === FEATURED_POST_TITLE,
+);
 
-const { Content } = await featuredPost.render();
+const { Content } = featuredPost
+  ? await featuredPost.render()
+  : { Content: null };
 ---
 
 <!doctype html>
@@ -27,27 +24,31 @@ const { Content } = await featuredPost.render();
   <body>
     <div
       id="body"
-      class="h-screen grid grid-cols-1 desktop:grid-cols-[480px_120px_1fr]"
+      class="h-[111svh] desktop:h-full grid grid-rows-[1fr_120px_22svh] grid-cols-1 desktop:grid-cols-[480px_120px_1fr]"
     >
       <aside
-        class="row-start-2 desktop:row-start-1 desktop:bg-cherry-blossom-pink desktop:text-raisin-black bg-desktop:row-start-1 text-[clamp(2rem,7svw,3.4rem)] h-screen p-8 flex justify-center items-center"
+        class="relative bottom-0 row-start-3 desktop:row-start-auto bg-cherry-blossom-pink desktop:text-raisin-black bg-desktop:row-start-1 text-[clamp(2rem,7svw,3.4rem)] h-[22svh] desktop:h-screen p-8 flex justify-center items-center"
       >
         <div class="w-fit">
           <p>{SITE_TITLE}</p>
-          <p
-            class="italic text-raisin-black-bean desktop:border-b text-[0.94ch]"
-          >
+          <p class="italic desktop:border-b text-[max(2rem,0.94ch)]">
             {SITE_DESCRIPTION}
           </p>
         </div>
       </aside>
 
-      <div class="hidden desktop:block size-full home-screen-gradient"></div>
+      <div
+        class="row-start-2 desktop:row-start-auto desktop:block size-full home-screen-gradient"
+      >
+      </div>
 
-      <main class="flex justify-center items-center desktop:col-start-3 desktop:bg-background">
+      <main
+        class="row-start-1 desktop:row-start-auto flex justify-center items-center flex-col desktop:col-start-3 desktop:bg-background h-full overflow-hidden"
+      >
         <article class="article !bg-transparent">
-          <Content />
+          {Content && <Content />}
         </article>
+        <button class="block">weiterlesen...</button>
       </main>
     </div>
   </body>
