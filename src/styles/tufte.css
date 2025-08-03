@@ -10,11 +10,12 @@ article.article {
 	color: var(--color-foreground, #111);
 	max-width: 1400px;
 	counter-reset: sidenote-counter;
+	container-type: size;
 
 	h1 {
 		font-weight: 400;
 		margin-top: 4rem;
-		margin-bottom: 1.5rem;
+		margin-bottom: 11svw;
 		font-size: 3.2rem;
 		line-height: 1;
 	}
@@ -82,10 +83,13 @@ article.article {
 	}
 
 	p {
-		margin-top: 1.4rem;
-		margin-bottom: 1.4rem;
 		padding-right: 0;
+		text-align: justify;
 		vertical-align: baseline;
+		&:before {
+			content: "\0000a0";
+			margin-right: 2ch;
+		}
 	}
 
 	/* Chapter Epigraphs */
@@ -177,7 +181,7 @@ article.article {
 	a,
 	a:link,
 	a:visited {
-	    text-decoration: underline;
+		text-decoration: underline;
 		color: inherit;
 		text-underline-offset: 0.1em;
 		text-decoration-thickness: 0.05em;
@@ -320,13 +324,12 @@ article.article {
 		width: 100%;
 		height: 100%;
 	}
+}
 
-	@media (max-width: 760px) {
-		body {
-			width: 84%;
-			padding-left: 8%;
-			padding-right: 8%;
-		}
+@media (width < 760px) {
+	article.article {
+		width: 84%;
+		padding: 1svw 4svw;
 
 		hr,
 		section > p,
