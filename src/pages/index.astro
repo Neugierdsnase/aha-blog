@@ -3,7 +3,7 @@ import BaseHead from "../components/BaseHead.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
 
-const FEATURED_POST_TITLE = "Wckltsch";
+const FEATURED_POST_TITLE = "Cluburlaub, Türkei";
 
 const featuredPost = (await getCollection("blog")).find(
   ({ data }) => data.title === FEATURED_POST_TITLE,
@@ -11,7 +11,7 @@ const featuredPost = (await getCollection("blog")).find(
 
 const { Content } = featuredPost
   ? await featuredPost.render()
-  : { Content: null };
+  : { Content: () => null };
 ---
 
 <!doctype html>
@@ -24,10 +24,10 @@ const { Content } = featuredPost
   <body>
     <div
       id="body"
-      class="h-[111svh] desktop:h-full grid grid-rows-[1fr_120px_22svh] grid-cols-1 desktop:grid-cols-[480px_120px_1fr]"
+      class="h-[111svh] desktop:h-screen desktop:pr-14 desktop:max-h-screen grid grid-rows-[1fr_120px_22svh] grid-cols-1 desktop:grid-cols-[480px_120px_1fr]"
     >
       <aside
-        class="relative bottom-0 row-start-3 desktop:row-start-auto bg-cherry-blossom-pink desktop:text-raisin-black bg-desktop:row-start-1 text-[clamp(2rem,7svw,3.4rem)] h-[22svh] desktop:h-screen p-8 flex justify-center items-center"
+        class="relative bottom-0 row-start-3 desktop:row-start-auto bg-cherry-blossom-pink text-raisin-black text-[clamp(2rem,7svw,3.4rem)] h-[22svh] desktop:h-screen p-8 flex justify-center items-center"
       >
         <div class="w-fit">
           <p>{SITE_TITLE}</p>
@@ -43,12 +43,20 @@ const { Content } = featuredPost
       </div>
 
       <main
-        class="row-start-1 desktop:row-start-auto flex justify-center items-center flex-col desktop:col-start-3 desktop:bg-background h-full overflow-hidden"
+        class="row-start-1 desktop:row-start-auto mx-auto desktop:col-start-3 bg-background h-full desktop:max-h-screen overflow-hidden"
       >
-        <article class="article !bg-transparent">
-          {Content && <Content />}
-        </article>
-        <button class="block">weiterlesen...</button>
+        <div
+          class="max-w-[var(--breakpoint-tablet)] max-h-2/3 overflow-hidden mask-b-from-0.5"
+        >
+          <article class="article !bg-red-400 !contents">
+            <Content />
+          </article>
+        </div>
+        <a
+          href={"/blog/" + featuredPost?.slug}
+          class="block mt-20 text-center text-md w-fit mx-auto border-foreground border-1 rounded py-2 px-8 cursor-pointer"
+          >weiterlesen...</a
+        >
       </main>
     </div>
   </body>
