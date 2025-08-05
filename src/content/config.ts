@@ -24,6 +24,7 @@ const book = defineCollection({
     authors: z.array(z.string()),
     // Transform string to Date object
     finishedDate: z.coerce.date(),
+    publisher: z.string().optional(),
     draft: z.boolean().optional(),
   }),
 });
