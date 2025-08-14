@@ -19,9 +19,9 @@ export default function rehypeInlineFootnotes() {
               ?.replace("user-content-fn-", "")
               .trim();
 
-            // TODO: Create an extra case for startsWith("mn-") to handle margin notes
-
             if (id && li.children) {
+              const isMarginNote = id.startsWith("mn-");
+
               const childrenWithoutBackRef = li.children[1].children // first child is just a new line, second is the actual content
                 .filter(
                   (child) =>
@@ -36,23 +36,26 @@ export default function rehypeInlineFootnotes() {
                   tagName: "label",
                   properties: {
                     for: id,
-                    className: ["margin-toggle sidenote-number"],
+                    className: isMarginNote
+                      ? ["margin-toggle"]
+                      : ["margin-toggle sidenote-number"],
                   },
                 },
                 {
                   type: "element",
                   tagName: "input",
-                  id,
                   properties: {
                     type: "checkbox",
                     className: ["margin-toggle"],
+                    name: id,
+                    id,
                   },
                 },
                 {
                   type: "element",
                   tagName: "span",
                   properties: {
-                    className: ["sidenote"],
+                    className: isMarginNote ? ["marginnote"] : ["sidenote"],
                   },
                   children: childrenWithoutBackRef,
                 },
@@ -77,11 +80,7 @@ export default function rehypeInlineFootnotes() {
           ?.replace("#user-content-fn-", "")
           .trim();
 
-        parent.children.splice(
-          index,
-          1,
-          ...footnoteMap.get(id),
-        );
+        parent.children.splice(index, 1, ...footnoteMap.get(id));
       }
     });
   };

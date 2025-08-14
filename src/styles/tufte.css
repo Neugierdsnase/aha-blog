@@ -8,7 +8,7 @@ article.article {
   margin-right: auto;
   padding-left: 12.5%;
   padding-top: clamp(2rem, 2svh, 5rem);
-  background-color: var(--color-background, #fffff8);
+  background-color: var(--color-surface, #fffff8);
   color: var(--color-foreground, #111);
   max-width: 1400px;
   border-radius: 1rem;
@@ -378,6 +378,11 @@ article.article {
 
     label.margin-toggle:not(.sidenote-number) {
       display: inline;
+      &:before {
+        transform: rotate(90deg);
+        display: inline-block;
+        content: "\261E";
+      }
     }
 
     .sidenote,
@@ -393,7 +398,6 @@ article.article {
       clear: both;
       width: 95%;
       margin: 1rem 2.5%;
-      vertical-align: baseline;
       position: relative;
     }
 
