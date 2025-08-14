@@ -334,10 +334,17 @@ article.article {
   }
 }
 
+@media (width < 1240px) {
+  article.article {
+    width: 90%;
+    padding: 1svw 3svw;
+  }
+}
+
 @media (width < 760px) {
   article.article {
-    width: 84%;
-    padding: 1svw 4svw;
+    width: 94%;
+    padding: 1svw 2svw;
 
     hr,
     section > p,
