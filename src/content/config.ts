@@ -62,7 +62,6 @@ const book = defineCollection({
     subtitle: z.string().optional(),
     authors: z.array(z.string()),
     description: z.string().optional(),
-    epigraph: z.string().optional(),
 
     // Publication details
     publisher: z.string().optional(),

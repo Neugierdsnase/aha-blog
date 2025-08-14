@@ -24,23 +24,25 @@ const posts: BlogPostType[] = (await getCollection("blog"))
 
     <section>
       <h2
-        class="text-[clamp(2.2rem,4.2svw,3.4rem)] underline underline-offset-2 clear-descenders z-10 mb-2"
+        class="text-[clamp(2.2rem,4.2svw,3.4rem)] pl-[2vw] underline underline-offset-2 clear-descenders z-10 mb-2"
       >
         Blog
       </h2>
-      <ul>
+      <ul class="px-[2vw]">
         {
           posts.map(({ data, slug }: BlogPostType) => (
-            <post-card>
-              <a slot="header" href={"/blog/" + slug} class="text-lg font-bold">
+            <li class=" p-[0.2vw] odd:bg-surface odd:p-[0.6vw]  border-foreground-subtle">
+              <a href={"/blog/" + slug} class="text-lg font-bold">
                 {data.title}
               </a>
-              <FormattedDate
-                className="text-foreground-subtle text-xs"
-                date={data.pubDate}
-              />
               <span>{data.description}</span>
-            </post-card>
+              <p class="leading-0">
+                <FormattedDate
+                  className="text-foreground-subtle text-xs"
+                  date={data.pubDate}
+                />
+              </p>
+            </li>
           ))
         }
       </ul>

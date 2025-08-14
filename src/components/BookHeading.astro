@@ -1,0 +1,75 @@
+---
+import type { collections } from "../content/config";
+
+type Props = (typeof collections)["book"]["schema"];
+
+const { title, subtitle, authors, releaseDate } = Astro.props;
+
+const hasAuthors = Boolean(authors && authors.length);
+---
+
+<div class="book-heading">
+  <h1 class="text-balance">{title}</h1>
+  {subtitle && <p class="subtitle">{subtitle}</p>}
+  {
+    (hasAuthors || releaseDate) && (
+      <div class="authors">
+        {" "}
+        {hasAuthors && (
+          <ul>
+            {authors.map((author: string) => (
+              <li set:html={author.trim()} />))}</ul>)}{hasAuthors && releaseDate && ", "}
+        {releaseDate && <span>{releaseDate}</span>}
+      </div>
+    )
+  }
+</div>
+
+<style>
+  h1 {
+    font-weight: 400;
+    margin-top: 4rem;
+    margin-bottom: min(2.5cqw, 1rem);
+    font-size: 3.2rem;
+    line-height: 1;
+  }
+
+  .book-heading {
+    margin-bottom: min(10cqw, 4rem);
+  }
+
+  div.authors {
+    display: inline;
+    margin-top: calc(var(--heading-margin-bottom) * -1.01);
+    margin-bottom: calc(var(--heading-margin-bottom) - 1ch);
+    padding: 0px;
+    color: var(--color-foreground-subtle);
+    font-size: 1.1rem;
+
+    & > span {
+      font-style: italic;
+    }
+
+    & > ul {
+      font-size: inherit;
+      display: inline;
+      & > li {
+        display: inline;
+
+        & > li {
+          &:not(:last-child):after {
+            content: ", ";
+          }
+
+          &:nth-last-child(2):after {
+            content: " und ";
+          }
+
+          &:last-child:after {
+            content: "";
+          }
+        }
+      }
+    }
+  }
+</style>

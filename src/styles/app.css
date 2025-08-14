@@ -1,6 +1,4 @@
 @import "tailwindcss";
-@plugin "daisyui";
-@import "./tufte.css";
 
 @theme {
   --breakpoint-tablet: 760px;
@@ -101,7 +99,7 @@
   body {
     @apply font-serif bg-background;
   }
-
+  
   .home-screen-gradient {
     background-image: linear-gradient(
       90deg,
