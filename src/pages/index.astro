@@ -36,8 +36,8 @@ const { Content } = featuredPost
             {SITE_DESCRIPTION}
           </p>
           <nav class="flex flex-row desktop:flex-col justify-between gap-8 mt-12 w-full">
-            <a class="block text-center w-full text-md mx-auto border-foreground-inverted border-1 rounded py-2 px-8 cursor-pointer hover:bg-foreground-inverted hover:text-background-inverted transition-colors duration-300" href="/blog">Jüngst geschrieben</a>
-            <a class="block text-center w-full text-md mx-auto border-foreground-inverted border-1 rounded py-2 px-8 cursor-pointer hover:bg-foreground-inverted hover:text-background-inverted transition-colors duration-300" href="/book">Jüngst gelesen</a>
+            <a class="block text-center w-full text-md mx-auto border-raisin-black border-1 rounded py-2 px-8 cursor-pointer hover:bg-raisin-black hover:text-lavender-blush transition-colors duration-300" href="/blog">Jüngst geschrieben</a>
+            <a class="block text-center w-full text-md mx-auto border-raisin-black border-1 rounded py-2 px-8 cursor-pointer hover:bg-raisin-black hover:text-lavender-blush transition-colors duration-300" href="/book">Jüngst gelesen</a>
           </nav>
         </div>
       </aside>
@@ -48,10 +48,10 @@ const { Content } = featuredPost
       </div>
 
       <main
-        class="row-start-1 desktop:row-start-auto mx-auto desktop:col-start-3 bg-background h-full desktop:max-h-screen overflow-hidden"
+        class="row-start-1 w-full desktop:row-start-auto mx-auto desktop:col-start-3 bg-background h-full desktop:max-h-screen overflow-hidden"
       >
         <div
-          class="max-w-[var(--breakpoint-tablet)] max-h-2/3 overflow-hidden mask-b-from-0.5"
+          class="mx-auto max-h-2/3 overflow-hidden mask-b-from-0.5"
         >
           <Article title={featuredPost?.data.title ?? ""}>
             <Content />
