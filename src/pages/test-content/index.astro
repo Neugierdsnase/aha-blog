@@ -1,0 +1,51 @@
+---
+import { getCollection } from "astro:content";
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+import type { BlogPostType } from "./[...slug].astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+
+const posts: BlogPostType[] = (await getCollection("blog"))
+  .filter(({ data }: BlogPostType) => !data.draft)
+  .sort(
+    (a: BlogPostType, b: BlogPostType) =>
+      a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
+  )
+  .reverse();
+---
+
+<!doctype html>
+<html lang="de-AT">
+  <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+
+  <body>
+    <Header />
+
+    <section>
+      <h2
+        class="text-[clamp(2.2rem,4.2svw,3.4rem)] pl-[2vw] underline underline-offset-2 clear-descenders z-10 mb-2"
+      >
+        Blog
+      </h2>
+      <ul class="px-[2vw]">
+        {
+          posts.map(({ data, slug }: BlogPostType) => (
+            <li class=" p-[0.2vw] odd:bg-surface odd:p-[0.6vw]  border-foreground-subtle">
+              <a href={"/blog/" + slug} class="text-lg font-bold">
+                {data.title}
+              </a>
+              <span>{data.description}</span>
+              <p class="leading-0">
+                <FormattedDate
+                  className="text-foreground-subtle text-xs"
+                  date={data.pubDate}
+                />
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </body>
+</html>
