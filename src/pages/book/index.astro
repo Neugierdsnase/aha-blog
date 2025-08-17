@@ -5,6 +5,7 @@ import Header from "../../components/Header.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 import type { BookPostType } from "./[...slug].astro";
+import { sanitizeContentId } from '../../utils/sanitizeContentId.ts'
 
 const books: BookPostType[] = (await getCollection("book"))
   .filter(({ data }: BookPostType) => !data.draft)
@@ -24,9 +25,9 @@ const books: BookPostType[] = (await getCollection("book"))
         <h2 class="text-[clamp(2rem,4svw,4rem)] underline underline-offset-2 clear-descenders z-10 mb-2">Jüngst gelesen</h2>
         <dl>
           {
-            books.map(({ data, slug }: BookPostType) => (
+            books.map(({ data, id }: BookPostType) => (
               <dt class="pt-4">
-              <a href={"/book/" + slug} class="text-lg font-bold">{data.title}</a>
+              <a href={"/book/" + sanitizeContentId(id)} class="text-lg font-bold">{data.title}</a>
                   <FormattedDate
                     className="text-foreground-subtle text-xs"
                     date={data.finishedDate}

@@ -81,6 +81,33 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
           },
         ],
       },
+      {
+        name: "Galnoy",
+        preload: true,
+        display: "swap",
+        selector: "h1",
+        fallback: "serif",
+        src: [
+          {
+            path: join(process.cwd(), "public", "Galnoy.ttf"),
+            style: "normal",
+            weight: "bold",
+          },
+        ],
+      },{
+        name: "Soria",
+        preload: true,
+        display: "swap",
+        selector: "h1",
+        fallback: "serif",
+        src: [
+          {
+            path: join(process.cwd(), "public", "Soria.ttf"),
+            style: "normal",
+            weight: "bold",
+          },
+        ],
+      },
     ]}
   />
 

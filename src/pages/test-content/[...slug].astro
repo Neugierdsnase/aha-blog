@@ -6,9 +6,8 @@ export type TestPostType = CollectionEntry<"test">;
 
 export async function getStaticPaths() {
   const posts: TestPostType[] = await getCollection("test");
-  const postIsPublished = (post: TestPostType) => post.data.pubDate <= new Date() && !post.data.draft;
-  return posts.filter(postIsPublished).map((post) => ({
-    params: { slug: post.slug },
+  return posts.map((post) => ({
+    params: { slug: post.id },
     props: post,
   }));
 }

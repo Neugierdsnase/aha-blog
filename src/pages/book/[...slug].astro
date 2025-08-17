@@ -1,14 +1,14 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
 import BookPost from "../../layouts/BookPost.astro";
+import { sanitizeContentId } from "../../utils/sanitizeContentId";
 
 export type BookPostType = CollectionEntry<"book">;
 
 export async function getStaticPaths() {
   const books: BookPostType[] = await getCollection("book");
-  const bookIsPublished = (book: BookPostType) => !book.data.draft;
-  return books.filter(bookIsPublished).map((book) => ({
-    params: { slug: book.slug },
+  return books.map((book) => ({
+    params: { slug: sanitizeContentId(book.id) },
     props: book,
   }));
 }

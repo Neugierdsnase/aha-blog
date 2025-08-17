@@ -3,13 +3,13 @@ import { getCollection } from "astro:content";
 import BaseHead from "../../components/BaseHead.astro";
 import Header from "../../components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
-import type { BlogPostType } from "./[...slug].astro";
+import type { TestPostType } from "./[...slug].astro";
 import FormattedDate from "../../components/FormattedDate.astro";
+import { sanitizeContentId } from "../../utils/sanitizeContentId";
 
-const posts: BlogPostType[] = (await getCollection("blog"))
-  .filter(({ data }: BlogPostType) => !data.draft)
+const posts: TestPostType[] = (await getCollection("test"))
   .sort(
-    (a: BlogPostType, b: BlogPostType) =>
+    (a: TestPostType, b: TestPostType) =>
       a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
   )
   .reverse();
@@ -30,20 +30,25 @@ const posts: BlogPostType[] = (await getCollection("blog"))
       </h2>
       <ul class="px-[2vw]">
         {
-          posts.map(({ data, slug }: BlogPostType) => (
-            <li class=" p-[0.2vw] odd:bg-surface odd:p-[0.6vw]  border-foreground-subtle">
-              <a href={"/blog/" + slug} class="text-lg font-bold">
-                {data.title}
-              </a>
-              <span>{data.description}</span>
-              <p class="leading-0">
-                <FormattedDate
-                  className="text-foreground-subtle text-xs"
-                  date={data.pubDate}
-                />
-              </p>
-            </li>
-          ))
+          posts.map(
+            ({ data, id }: TestPostType) => (
+                <li class=" p-[0.2vw] odd:bg-surface odd:p-[0.6vw]  border-foreground-subtle">
+                  <a
+                    href={"/blog/" + sanitizeContentId(id)}
+                    class="text-lg font-bold"
+                  >
+                    {data.title}
+                  </a>
+                  <span>{data.description}</span>
+                  <p class="leading-0">
+                    <FormattedDate
+                      className="text-foreground-subtle text-xs"
+                      date={data.pubDate}
+                    />
+                  </p>
+                </li>
+              ),
+          )
         }
       </ul>
     </section>
