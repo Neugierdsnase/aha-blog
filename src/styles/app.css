@@ -54,12 +54,12 @@
   --color-foreground-subtle: light-dark(#3a3b3b, #bdbbbb);
   --color-foreground-subtle-inverted: light-dark(#3a3b3b, #bdbbbb);
 
-  --color-error: light-dark(var(--fire-brick), var(--cherry-blossom-pink));
+  --color-error: light-dark(var(--color-fire-brick), var(--color-cherry-blossom-pink));
   --color-error-inverted: light-dark(
-    var(--fire-brick),
-    var(--cherry-blossom-pink)
+    var(--color-cherry-blossom-pink),
+    var(--color-fire-brick)
   );
-  --color-success: light-dark(var(--dark-green), var(--tea-green));
+  --color-success: light-dark(var(--color-dark-green), var(--color-tea-green));
 
   --spacing-paragraph: 100%;
   --spacing-paragraph-desktop: 55%;
@@ -67,7 +67,7 @@
 
   --font-weight-heading: 400;
 
-  --text-xxs: 0.825rem; 
+  --text-xxs: 0.825rem;
   --text-xs: 1rem; /* 15px */
   --text-sm: 1.125rem; /* 17.5px */
   --text-md: 1.25rem; /* 20px */
@@ -100,9 +100,9 @@
 
 @layer base {
   body {
-    @apply font-["et-book"] bg-background;
+    @apply font-serif bg-background;
   }
-  
+
   .home-screen-gradient {
     background-image: linear-gradient(
       90deg,
@@ -131,24 +131,12 @@
     .home-screen-gradient {
       background-image: linear-gradient(
         90deg,
-        hsl(349deg 100% 84%) 1%,
-        hsl(347deg 73% 79%) 35%,
-        hsl(345deg 56% 75%) 44%,
-        hsl(343deg 44% 71%) 48%,
-        hsl(341deg 35% 66%) 50%,
-        hsl(339deg 28% 62%) 51%,
-        hsl(337deg 23% 58%) 51%,
-        hsl(334deg 19% 53%) 51%,
-        hsl(332deg 16% 49%) 50%,
-        hsl(329deg 15% 45%) 50%,
-        hsl(327deg 15% 41%) 49%,
-        hsl(324deg 14% 37%) 49%,
-        hsl(321deg 13% 34%) 49%,
-        hsl(317deg 12% 30%) 50%,
-        hsl(314deg 11% 26%) 52%,
-        hsl(310deg 10% 23%) 56%,
-        hsl(305deg 9% 19%) 65%,
-        hsl(300deg 7% 16%) 99%
+    hsl(349deg 100% 84%) 0%,
+    hsl(342deg 40% 69%) 40%,
+    hsl(335deg 20% 54%) 50%,
+    hsl(326deg 14% 41%) 51%,
+    hsl(315deg 11% 28%) 66%,
+    hsl(300deg 7% 16%) 100%
       );
     }
   }
@@ -182,24 +170,12 @@
       .home-screen-gradient {
         background-image: linear-gradient(
           0deg,
-          hsl(349deg 100% 84%) 1%,
-          hsl(347deg 73% 79%) 35%,
-          hsl(345deg 56% 75%) 44%,
-          hsl(343deg 44% 71%) 48%,
-          hsl(341deg 35% 66%) 50%,
-          hsl(339deg 28% 62%) 51%,
-          hsl(337deg 23% 58%) 51%,
-          hsl(334deg 19% 53%) 51%,
-          hsl(332deg 16% 49%) 50%,
-          hsl(329deg 15% 45%) 50%,
-          hsl(327deg 15% 41%) 49%,
-          hsl(324deg 14% 37%) 49%,
-          hsl(321deg 13% 34%) 49%,
-          hsl(317deg 12% 30%) 50%,
-          hsl(314deg 11% 26%) 52%,
-          hsl(310deg 10% 23%) 56%,
-          hsl(305deg 9% 19%) 65%,
-          hsl(300deg 7% 16%) 99%
+          hsl(349deg 100% 84%) 23%,
+          hsl(342deg 40% 69%) 50%,
+          hsl(335deg 20% 54%) 50%,
+          hsl(326deg 14% 41%) 54%,
+          hsl(315deg 11% 28%) 69%,
+          hsl(300deg 7% 16%) 100%
         );
       }
     }

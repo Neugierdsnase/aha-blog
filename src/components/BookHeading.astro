@@ -19,7 +19,7 @@ const hasAuthors = Boolean(authors && authors.length);
           <ul>
             {authors.map((author: string) => (
               <li set:html={author.trim()} />))}</ul>)}{hasAuthors && releaseDate && ", "}
-        {releaseDate && <span class="font-display text-xxs">{releaseDate}</span>}
+        {releaseDate && <span>{releaseDate}</span>}
       </div>
     )
   }
