@@ -29,7 +29,6 @@ const bookGenres: [string, ...string[]] = [
   "art",
   "art-history",
   "biography",
-  "biography",
   "craft",
   "cultural-studies",
   "drama",
@@ -38,10 +37,8 @@ const bookGenres: [string, ...string[]] = [
   "fiction",
   "historical-fiction",
   "history",
-  "history",
   "humor",
   "literary-fiction",
-  "memoir",
   "memoir",
   "mystery",
   "mythology",
@@ -50,11 +47,11 @@ const bookGenres: [string, ...string[]] = [
   "novella",
   "personal-development",
   "philosophy",
-  "philosophy",
   "poetry",
   "politics",
   "productivity",
   "psychology",
+  "religion",
   "romance",
   "science",
   "self-help",
@@ -116,4 +113,4 @@ const book = defineCollection({
   }),
 });
 
-export const collections = { blog, book };
+export const collections = { blog, book, test };

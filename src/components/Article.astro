@@ -36,10 +36,9 @@ type Props = {
       &:not(:has(.margin-toggle)) {
         padding-left: 0;
       }
-      padding-top: clamp(2rem, 2svh, 5rem);
+      padding: 2rem 0;
       color: var(--color-foreground, #111);
       max-width: 1400px;
-      border-radius: 1rem;
       counter-reset: sidenote-counter;
 
       h2 {
@@ -239,7 +238,6 @@ type Props = {
 
       .sidenote-number:after,
       .sidenote:before {
-        font-family: et-book-roman-old-style;
         position: relative;
         vertical-align: baseline;
       }

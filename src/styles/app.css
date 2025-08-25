@@ -100,7 +100,7 @@
 
 @layer base {
   body {
-    @apply font-serif bg-background;
+    @apply bg-background;
   }
 
   .home-screen-gradient {
