@@ -1,10 +1,8 @@
 ---
+import type { collections } from "../content/config";
 import BookHeading from "./BookHeading.astro";
-type Props = {
-  title: string;
-  subtitle?: string;
-  authors?: string[];
-};
+
+type Props = (typeof collections)["book"];
 ---
 
 <div class="container">

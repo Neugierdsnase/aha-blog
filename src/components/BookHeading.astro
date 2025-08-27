@@ -1,9 +1,11 @@
 ---
 import type { collections } from "../content/config";
+import Details from "./Details.astro";
+import BookDataList from "./BookDataList.astro";
 
-type Props = (typeof collections)["book"]["schema"];
+type Props = (typeof collections)["book"];
 
-const { title, subtitle, authors, releaseDate } = Astro.props;
+const { title, subtitle, authors, releaseDate, ...rest } = Astro.props;
 
 const hasAuthors = Boolean(authors && authors.length);
 ---
@@ -18,11 +20,18 @@ const hasAuthors = Boolean(authors && authors.length);
         {hasAuthors && (
           <ul>
             {authors.map((author: string) => (
-              <li set:html={author.trim()} />))}</ul>)}{hasAuthors && releaseDate && ", "}
+              <li set:html={author.trim()} />
+            ))}
+          </ul>
+        )}
+        {hasAuthors && releaseDate && ", "}
         {releaseDate && <span>{releaseDate}</span>}
       </div>
     )
   }
+  <Details>
+    <BookDataList {...rest} />
+  </Details>
 </div>
 
 <style>
