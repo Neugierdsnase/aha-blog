@@ -111,8 +111,7 @@ type Props = {
       }
 
       div.epigraph > blockquote {
-        margin-top: 3em;
-        margin-bottom: 3em;
+        margin: 3em 0;
       }
 
       div.epigraph > blockquote,
@@ -130,7 +129,10 @@ type Props = {
       /* end chapter epigraphs styles */
 
       blockquote {
+        margin: 2rem 1rem;
+        padding-left: 1rem;
         font-size: 1.4rem;
+        border-left: 2px solid var(--color-foreground-subtle);
       }
 
       blockquote p {
