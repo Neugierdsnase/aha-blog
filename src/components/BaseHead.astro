@@ -2,6 +2,7 @@
 import { join } from "node:path";
 import { AstroFont } from "astro-font";
 import "../styles/app.css";
+import SpeedInsights from "@vercel/speed-insights/astro";
 
 interface Props {
   title: string;
@@ -15,6 +16,7 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 ---
 
 <head>
+  <SpeedInsights />
   <!-- Import ET Book styles adapted from https://github.com/edwardtufte/et-book/blob/gh-pages/et-book.css -->
   <!-- Font loading -->
   <AstroFont
@@ -94,7 +96,8 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
             weight: "bold",
           },
         ],
-      },{
+      },
+      {
         name: "Soria",
         preload: true,
         display: "swap",
