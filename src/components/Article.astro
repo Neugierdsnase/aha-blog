@@ -2,7 +2,7 @@
 import type { collections } from "../content/config";
 import BookHeading from "./BookHeading.astro";
 
-type Props = (typeof collections)["book"] & {isBook: boolean};
+type Props = (typeof collections)["book"] & { isBook: boolean };
 ---
 
 <div class="container">
@@ -13,6 +13,18 @@ type Props = (typeof collections)["book"] & {isBook: boolean};
     </section>
   </article>
 </div>
+
+<script>
+  import { animate, stagger } from "animejs";
+
+  animate([".sidenote", ".marginnote"], {
+    opacity: 1,
+    delay: stagger(200),
+    duration: 400,
+    ease: "inOut",
+    transform: {from: "translateX(20px)"}
+  });
+</script>
 
 <style>
   .container {
@@ -227,6 +239,9 @@ type Props = (typeof collections)["book"] & {isBook: boolean};
         vertical-align: baseline;
         position: relative;
 
+        /* for a smooth animation fadein */
+        opacity: 0;
+
         & img {
           margin-top: 0;
         }
@@ -440,4 +455,5 @@ type Props = (typeof collections)["book"] & {isBook: boolean};
       }
     }
   }
+
 </style>

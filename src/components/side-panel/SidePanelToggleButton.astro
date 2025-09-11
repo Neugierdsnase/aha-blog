@@ -1,16 +1,14 @@
 ---
 interface Props {
   htmlId: string;
-  className: string;
 }
 
-const { htmlId, className } = Astro.props;
+const { htmlId } = Astro.props;
 ---
 
 <button
   id={htmlId}
-  class={className +
-    " rounded-full p-0.5 translate-x-[calc(33vw+80px)] bg-surface desktop:bg-transparent desktop:translate-x-20"}
+  class="size-12 rounded-full p-0.5 translate-x-full desktop:bg-transparent"
 >
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -61,14 +59,15 @@ const { htmlId, className } = Astro.props;
       });
 
       animate("button", {
-        transform: "translateX(-80px)",
+        transform: "translateX(-100%)",
+        backgroundColor: "#00000000",
         duration: 200,
         delay: 100,
         ease: "inOutBack(1)",
       });
 
-      document.querySelector("svg").classList.add("!stroke-foreground-inverted");
-      document.querySelector("svg").classList.add("!fill-foreground-inverted");
+      document?.querySelector("svg")?.classList.add("!stroke-foreground-inverted");
+      document?.querySelector("svg")?.classList.add("!fill-foreground-inverted");
     } else {
       animate("#side-panel-toggle-top-path", {
         d: "M 5,5 L 35,25",
@@ -92,18 +91,18 @@ const { htmlId, className } = Astro.props;
       });
 
       animate("button", {
-        transform: "translateX(0px)",
+        transform: "translateX(0%)",
         duration: 200,
         ease: "inOutBack(1)",
       });
 
-      document.querySelector("svg").classList.remove("!stroke-foreground-inverted");
-      document.querySelector("svg").classList.remove("!fill-foreground-inverted");
+      document?.querySelector("svg")?.classList.remove("!stroke-foreground-inverted");
+      document?.querySelector("svg")?.classList.remove("!fill-foreground-inverted");
     }
 
     isOpen = !isOpen;
   }
 
   const buttonElement = document.querySelector("button");
-  buttonElement.addEventListener("click", animateTheThingy);
+  buttonElement?.addEventListener("click", animateTheThingy);
 </script>
