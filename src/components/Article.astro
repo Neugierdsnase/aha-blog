@@ -2,7 +2,7 @@
 import type { collections } from "../content/config";
 import BookHeading from "./BookHeading.astro";
 
-type Props = (typeof collections)["book"];
+type Props = (typeof collections)["book"] & {isBook: boolean};
 ---
 
 <div class="container">

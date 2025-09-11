@@ -1,104 +1,90 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import { SITE_DESCRIPTION } from "../consts";
+import Article from "../components/Article.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<!doctype html>
-<html lang="de-AT">
-  <BaseHead
-    title="De Konstantino"
-    description={SITE_DESCRIPTION}
-  />
+<BaseLayout
+  lang="de"
+  title="Über mich - Konstantin"
+  description="Die Beschreibung meiner Webseite"
+>
+  <Article>
+    <h1>Über Mich</h1>
+    <p>
+      Alles, was ich hier gemacht habe, ist falsch. Einen Blog kann man so nicht
+      gestalten. Keine Bilder, keine grellen Farben, nichts, was Ihnen ungefragt
+      ins Sichtfeld springt. Es schiebt sich Ihnen auch keine Warnung vor
+      gemeingefährlichen <em>Cookies</em> in die Fresse und ich habe Sie auch noch
+      nicht gefragt, ob Sie mir nicht auch auf Facebook, Instagram, TikTok oder
+      <em>the platform formerly known as Twitter</em> folgen wollen. Nach Ihrer E-Mailadresse
+      habe ich Sie auch noch nicht gefragt, sehr schleißig von mir.
+    </p>
 
-  <body>
-    <section>
-      <article class="article">
-        <h1>Über Mich</h1>
+    <p>
+      Im ersten Absatz sind außerdem keine wichtigen Schlagworte vorgekommen,
+      komplett antithetisch zu den Regeln der Suchmaschinenoptimierung. Die
+      Sprache ist nicht übersimplifiziert, ich erwarte von Ihnen also ein
+      Leseverständnis über dem Volkschulniveau. Schwerer Fehler, wäre dies hier
+      ein Werbetext. Wie ein Verrückter traue ich meinen Lesern mehr als einen
+      Nebensatz zu.
+    </p>
+
+    <p>
+      Ich sieze meine Leser, ein bisschen lächerlich, wenn wir uns ehrlich sind,
+      aber irgendwie fühle ich mich so wohler. Es fühlt sich dann so an, als
+      würde ich tatsächlich für mündige, respektable Menschen schreiben, nicht
+      nur für Konsumenten.
+    </p>
+
+    <div>
+      <blockquote>
         <p>
-          Alles, was ich hier gemacht habe, ist falsch. Einen Blog kann man so
-          nicht gestalten. Keine Bilder, keine grellen Farben, nichts, was Ihnen
-          ungefragt ins Sichtfeld springt. Es schiebt sich Ihnen auch keine
-          Warnung vor gemeingefährlichen <em>Cookies</em> in die Fresse und ich habe
-          Sie auch noch nicht gefragt, ob Sie mir nicht auch auf Facebook, Instagram,
-          TikTok oder
-          <em>the platform formerly known as Twitter</em> folgen wollen. Nach Ihrer
-          E-Mailadresse habe ich Sie auch noch nicht gefragt, sehr schleißig von
-          mir.
+          Das Verlangen Twitter zu checken oder Reddit zu refreshen wird zu
+          einem nervösen Zwang, der ungestörte Zeit in Scherben zerschlägt, die
+          zu klein sind, um ein bewusstes Leben mit Intention zu führen.
         </p>
+        <footer>
+          <cite>- Cal Newport, <em>Digital Minimalism</em></cite>
+          (frei übersetzt)
+        </footer>
+      </blockquote>
+    </div>
 
-        <p>
-          Im ersten Absatz sind außerdem keine wichtigen Schlagworte
-          vorgekommen, komplett antithetisch zu den Regeln der
-          Suchmaschinenoptimierung. Die Sprache ist nicht übersimplifiziert, ich
-          erwarte von Ihnen also ein Leseverständnis über dem Volkschulniveau.
-          Schwerer Fehler, wäre dies hier ein Werbetext. Wie ein Verrückter
-          traue ich meinen Lesern mehr als einen Nebensatz zu.
-        </p>
+    <p>
+      <span class="newthought">Mein Name ist Konstantin,</span> ich selbstgelernter
+      Softwareentwickler bei Österreich's meist besuchtem Internetportal und mache
+      mir Gedanken über ein erfolgreiches Zusammenspiel von Maschine und Mensch.
+      Für mich ist klar, dass wir die Technologien, zu denen wir Zugang haben, nicht
+      optimal nutzen. Ich unterstelle, dass das tägliche, mehrstündige Scrollen von
+      Instagram-, TikTok, Twitter oder Facebook nicht zu Ihrer Vision eines gut gelebten
+      Lebens gehört. Warum bestehen Sie also so vehement darauf?
+    </p>
 
-        <p>
-          Ich sieze meine Leser, ein bisschen lächerlich, wenn wir uns ehrlich
-          sind, aber irgendwie fühle ich mich so wohler. Es fühlt sich dann so
-          an, als würde ich tatsächlich für mündige, respektable Menschen
-          schreiben, nicht nur für Konsumenten.
-        </p>
+    <p>
+      Das ist gar nicht so einfach zu beantworten, aber auf dieser Seite will
+      ich das versuchen. Dafür stelle ich mich auf die Schultern moderner Denker
+      wie Cal Newport, Adam Alter, Neil Postman, Jaron Lanier, Tristan Harris
+      und vieler anderer.
+    </p>
 
-        <section>
-          <div>
-            <blockquote>
-              <p>
-                Das Verlangen Twitter zu checken oder Reddit zu refreshen wird
-                zu einem nervösen Zwang, der ungestörte Zeit in Scherben
-                zerschlägt, die zu klein sind, um ein bewusstes Leben mit
-                Intention zu führen.
-              </p>
-              <footer>
-                <cite>- Cal Newport, <em>Digital Minimalism</em></cite>
-                (frei übersetzt)
-              </footer>
-            </blockquote>
-          </div>
+    <p>
+      Wenn Sie interessiert sind, dann sollten Sie deren Bücher lesen, oder wenn
+      Sie es vorverdaut (oder auf Deutsch) bevorzugen, dann eben meine Gedanken
+      hier auf dieser Seite, der Sie <a href="./rss.xml"
+        >via RSS folgen können.</a
+      >
+    </p>
 
-          <p>
-            <span class="newthought">Mein Name ist Konstantin,</span> ich selbstgelernter
-            Softwareentwickler bei Österreich's meist besuchtem Internetportal und
-            mache mir Gedanken über ein erfolgreiches Zusammenspiel von Maschine
-            und Mensch. Für mich ist klar, dass wir die Technologien, zu denen wir
-            Zugang haben, nicht optimal nutzen. Ich unterstelle, dass das tägliche,
-            mehrstündige Scrollen von Instagram-, TikTok, Twitter oder Facebook nicht
-            zu Ihrer Vision eines gut gelebten Lebens gehört. Warum bestehen Sie
-            also so vehement darauf?
-          </p>
-
-          <p>
-            Das ist gar nicht so einfach zu beantworten, aber auf dieser Seite
-            will ich das versuchen. Dafür stelle ich mich auf die Schultern
-            moderner Denker wie Cal Newport, Adam Alter, Neil Postman, Jaron
-            Lanier, Tristan Harris und vieler anderer.
-          </p>
-
-          <p>
-            Wenn Sie interessiert sind, dann sollten Sie deren Bücher lesen,
-            oder wenn Sie es vorverdaut (oder auf Deutsch) bevorzugen, dann eben
-            meine Gedanken hier auf dieser Seite, der Sie <a href="./rss.xml"
-              >via RSS folgen können.</a
-            >
-          </p>
-
-          <p>
-            Auch technisch hab ich ein stabiles Fundament unter mir, das ich der
-            Arbeit anderer verdanke, unter anderem <a
-              rel="noreferrer nofollower"
-              href="https://astro.build/">Astro</a
-            >, <a rel="noreferrer nofollower" href="https://htmx.org/">htmx</a> und
-            <a
-              rel="noreferrer nofollower"
-              href="https://edwardtufte.github.io/tufte-css/">tufte-css.</a
-            >
-          </p>
-        </section>
-      </article>
-    </section>
-    <Footer />
-  </body>
-</html>
+    <p>
+      Auch technisch hab ich ein stabiles Fundament unter mir, das ich der
+      Arbeit anderer verdanke, unter anderem <a
+        rel="noreferrer nofollower"
+        href="https://astro.build/">Astro</a
+      >, <a rel="noreferrer nofollower" href="https://htmx.org/">htmx</a> und
+      <a
+        rel="noreferrer nofollower"
+        href="https://edwardtufte.github.io/tufte-css/">tufte-css.</a
+      >
+    </p>
+  </Article>
+</BaseLayout>

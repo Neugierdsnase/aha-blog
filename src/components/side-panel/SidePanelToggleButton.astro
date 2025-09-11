@@ -1,0 +1,109 @@
+---
+interface Props {
+  htmlId: string;
+  className: string;
+}
+
+const { htmlId, className } = Astro.props;
+---
+
+<button
+  id={htmlId}
+  class={className +
+    " rounded-full p-0.5 translate-x-[calc(33vw+80px)] bg-surface desktop:bg-transparent desktop:translate-x-20"}
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    xml:space="preserve"
+    viewBox="0 0 40 50"
+    class="size-full stroke-foreground fill-foreground transition-[stroke,fill] duration-500"
+  >
+    <path
+      id="side-panel-toggle-top-path"
+      d="M 5,5 L 35,25"
+      style="stroke-linecap: round;"
+      class="stroke-3"></path>
+    <path
+      id="side-panel-toggle-bottom-path"
+      d="M 5,45 L 35,25"
+      style="stroke-linecap: round;"
+      class="stroke-3"></path>
+    <circle cx="25" cy="25" r="1.5"></circle>
+  </svg>
+</button>
+
+<script>
+  import { animate } from "animejs";
+
+  let isOpen = false;
+
+  function animateTheThingy() {
+    if (!isOpen) {
+      animate("#side-panel-toggle-top-path", {
+        d: "M 35,5 L 5,25",
+        duration: 400,
+        ease: "inOutBack(2)",
+        delay: 270,
+      });
+
+      animate("#side-panel-toggle-bottom-path", {
+        d: "M 35,45 L 5,25",
+        duration: 400,
+        ease: "inOutBack(2)",
+        delay: 270,
+      });
+
+      animate("circle", {
+        cx: 15,
+        duration: 450,
+        delay: 300,
+        ease: "inOutBack(5)",
+      });
+
+      animate("button", {
+        transform: "translateX(-80px)",
+        duration: 200,
+        delay: 100,
+        ease: "inOutBack(1)",
+      });
+
+      document.querySelector("svg").classList.add("!stroke-foreground-inverted");
+      document.querySelector("svg").classList.add("!fill-foreground-inverted");
+    } else {
+      animate("#side-panel-toggle-top-path", {
+        d: "M 5,5 L 35,25",
+        duration: 400,
+        ease: "inOutBack(2)",
+        delay: 270,
+      });
+
+      animate("#side-panel-toggle-bottom-path", {
+        d: "M 5,45 L 35,25",
+        duration: 400,
+        ease: "inOutBack(2)",
+        delay: 270,
+      });
+
+      animate("circle", {
+        cx: 25,
+        duration: 450,
+        delay: 300,
+        ease: "inOutBack(5)",
+      });
+
+      animate("button", {
+        transform: "translateX(0px)",
+        duration: 200,
+        ease: "inOutBack(1)",
+      });
+
+      document.querySelector("svg").classList.remove("!stroke-foreground-inverted");
+      document.querySelector("svg").classList.remove("!fill-foreground-inverted");
+    }
+
+    isOpen = !isOpen;
+  }
+
+  const buttonElement = document.querySelector("button");
+  buttonElement.addEventListener("click", animateTheThingy);
+</script>

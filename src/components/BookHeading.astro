@@ -3,9 +3,9 @@ import type { collections } from "../content/config";
 import Details from "./Details.astro";
 import BookDataList from "./BookDataList.astro";
 
-type Props = (typeof collections)["book"];
+type Props = (typeof collections)["book"] & {isBook: boolean};
 
-const { title, subtitle, authors, releaseDate, ...rest } = Astro.props;
+const { title, subtitle, authors, releaseDate, isBook, ...rest } = Astro.props;
 
 const hasAuthors = Boolean(authors && authors.length);
 ---
@@ -29,9 +29,9 @@ const hasAuthors = Boolean(authors && authors.length);
       </div>
     )
   }
-  <Details>
+  {isBook && <Details>
     <BookDataList {...rest} />
-  </Details>
+  </Details>}
 </div>
 
 <style>

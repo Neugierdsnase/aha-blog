@@ -1,8 +1,8 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
 import Article from "../components/Article.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const FEATURED_POST_TITLE = "Cluburlaub, Türkei, 2025";
 
@@ -15,60 +15,50 @@ const { Content } = featuredPost
   : { Content: () => null };
 ---
 
-<!doctype html>
-<html lang="de-AT">
-  <BaseHead
-    title="Konstantini Pagina Domestica"
-    description={SITE_DESCRIPTION}
-  />
-
-  <body>
-    <div
-      id="body"
-      class="grid-cols-1 desktop:size-screen max-w-full overflow-hidden desktop:min-h-screen desktop:overflow-hidden grid grid-rows-[95vh_1fr)] desktop:grid-cols-[480px_1fr]"
-    >
-      <aside
-        class="h-full row-start-2 px-8 py-22 desktop:row-start-auto bg-cherry-blossom-pink text-raisin-black desktop:h-screen flex justify-center items-center"
+<BaseLayout
+  title={SITE_TITLE}
+  description={SITE_DESCRIPTION}
+  lang="de"
+>
+  <div
+    slot="aside"
+    class="h-full max-w-full bg-cherry-blossom-pink text-raisin-black flex justify-center items-center @container contain-content"
+  >
+    <div class="relative cursor-default p-12">
+      <p class="text-[10cqw] font-decorative">Konstantin Kovar</p>
+      <p class="italic border-b text-[7cqw]">
+        Softwareentwickler und Freizeitnostalgiker
+      </p>
+      <nav
+        class="flex flex-col-reverse justify-between gap-2 mt-8 w-full"
       >
-        <div class="relative cursor-default px-8">
-          <p class="text-5xl font-decorative">
-            {SITE_TITLE}
-          </p>
-          <p class="italic border-b text-[max(1.6rem,1svh)]">
-            {SITE_DESCRIPTION}
-          </p>
-          <nav
-            class="flex flex-col-reverse tablet:flex-row justify-between gap-2 desktop:gap-8 mt-8 desktop:mt-12 w-full"
-          >
-            <a
-              class="block w-full text-center text-sm desktop:text-md mx-auto desktop:border-raisin-black border-1 rounded py-2 px-8 cursor-pointer hover:bg-raisin-black hover:text-lavender-blush transition-colors duration-300"
-              href="/blog">Jüngst&nbsp;geschrieben</a
-            >
-            <a
-              class="block w-full text-center text-sm desktop:text-md mx-auto desktop:border-raisin-black border-1 rounded py-2 px-8 cursor-pointer hover:bg-raisin-black hover:text-lavender-blush transition-colors duration-300"
-              href="/book">Jüngst&nbsp;gelesen</a
-            >
-          </nav>
-        </div>
-      </aside>
-
-      <main
-        class="w-full max-w-full max-h-[110svh] mx-auto bg-background desktop:h-screen"
-      >
-        <div class="mx-auto max-h-5/6 mask-b-from-45">
-          <!-- @ts-expect-error-->
-          <Article title={featuredPost?.data.title ?? ""}>
-            <Content />
-          </Article>
-        </div>
-        <div class="h-1/6">
-          <a
-            href={"/blog/" + featuredPost?.slug}
-            class="block mt-8 text-center text-md w-fit mx-auto border-foreground border-1 rounded py-2 px-8 cursor-pointer hover:bg-foreground hover:text-background transition-colors duration-300"
-            >weiterlesen...</a
-          >
-        </div>
-      </main>
+        <a
+          class="block w-full text-center text-sm desktop:text-md mx-auto desktop:border-raisin-black border-1 rounded py-2 px-8 cursor-pointer hover:bg-raisin-black hover:text-lavender-blush transition-colors duration-300"
+          href="/blog">Jüngst&nbsp;geschrieben</a
+        >
+        <a
+          class="block w-full text-center text-sm desktop:text-md mx-auto desktop:border-raisin-black border-1 rounded py-2 px-8 cursor-pointer hover:bg-raisin-black hover:text-lavender-blush transition-colors duration-300"
+          href="/book">Jüngst&nbsp;gelesen</a
+        >
+      </nav>
     </div>
-  </body>
-</html>
+  </div>
+
+  <div
+    class="w-full max-w-full max-h-[110svh] mx-auto bg-background desktop:h-screen"
+  >
+    <div class="mx-auto max-h-5/6 mask-b-from-45">
+      <!-- @ts-expect-error-->
+      <Article title={featuredPost?.data.title ?? ""}>
+        <Content />
+      </Article>
+    </div>
+    <div class="h-1/6">
+      <a
+        href={"/blog/" + featuredPost?.slug}
+        class="block mt-8 text-center text-md w-fit mx-auto border-foreground border-1 rounded py-2 px-8 cursor-pointer hover:bg-foreground hover:text-background transition-colors duration-300"
+        >weiterlesen...</a
+      >
+    </div>
+  </div>
+</BaseLayout>
