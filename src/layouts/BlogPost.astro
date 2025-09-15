@@ -1,25 +1,15 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 import Article from "../components/Article.astro";
 import type { collections } from "../content/config";
 
 type Props = (typeof collections)["blog"];
 
-const props = Astro.props;
+const { title, description, lang } = Astro.props;
 ---
 
-<!doctype html>
-<html lang="de-AT">
-  <BaseHead title={props.title} description={props.description} />
-
-  <body>
-    <Header />
-    <main>
-      <Article {...props}>
-        <slot />
-      </Article>
-      <!-- <Footer /> -->
-    </main>
-  </body>
-</html>
+<BaseLayout title={title} description={description} lang={lang}>
+  <Article {...Astro.props}>
+    <slot />
+  </Article>
+</BaseLayout>

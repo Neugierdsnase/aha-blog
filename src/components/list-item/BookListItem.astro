@@ -1,0 +1,24 @@
+---
+import type { collections } from "../../content/config";
+import { sanitizeContentId } from "../../utils/sanitizeContentId.ts";
+
+type Props = (typeof collections)["book"] & { id: string };
+
+const { title, subtitle, authors, releaseDate, genre, id } = Astro.props;
+---
+
+<li class="relative max-w-[520px] h-20 text-md bg-gradient-to-r to-foreground from-cherry-blossom-pink from-5% hover:from-75%">
+  <a
+    href={"/book" + sanitizeContentId(id)}
+    class="grid grid-cols-4 grid-rows-2 absolute gap-1 p-1 pl-1.5 inset-0.5 hover:left-1 hover:pl-1 focus-within:left-1 focus-within:pl-1 focus-visible:left-1 focus-visible:pl-1 bg-background overflow-hidden"
+  >
+    <!-- row 1 -->
+    <span class="col-start-1 col-span-2 line-clamp-1">{title}</span>
+    <span class="col-start-3 col-span-2 line-clamp-1">{authors.join(' ')}</span>
+
+    <!-- row 2 -->
+    <span class="col-start-1 col-span-2 line-clamp-1 self-baseline text-foreground-subtle text-sm">{subtitle}</span>
+    <span class="col-start-3 line-clamp-1">{releaseDate}</span>
+    <span class="col-start-4 line-clamp-1">{genre.primary}</span>
+  </a>
+</li>

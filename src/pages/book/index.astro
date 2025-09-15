@@ -1,43 +1,38 @@
 ---
 import { getCollection } from "astro:content";
-import BaseHead from "../../components/BaseHead.astro";
-import Header from "../../components/Header.astro";
-import FormattedDate from "../../components/FormattedDate.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 import type { BookPostType } from "./[...slug].astro";
-import { sanitizeContentId } from '../../utils/sanitizeContentId.ts'
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BookListItem from "../../components/list-item/BookListItem.astro";
 
 const books: BookPostType[] = (await getCollection("book"))
   .filter(({ data }: BookPostType) => !data.draft)
-  .sort((a: BookPostType, b: BookPostType) => a.data.finishedDate.valueOf() - b.data.finishedDate.valueOf())
+  .sort(
+    (a: BookPostType, b: BookPostType) =>
+      a.data.finishedDate.valueOf() - b.data.finishedDate.valueOf(),
+  )
   .reverse();
 ---
 
-<!doctype html>
-<html lang="de-AT">
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-
-  <body>
-    <Header />
-
-    <main>
-        <section>
-        <h2 class="text-[clamp(2rem,4svw,4rem)] underline underline-offset-2 clear-descenders z-10 mb-2">Jüngst gelesen</h2>
-        <dl>
-          {
-            books.map(({ data, id }: BookPostType) => (
-              <dt class="pt-4">
-              <a href={"/book/" + sanitizeContentId(id)} class="text-lg font-bold">{data.title}</a>
-                  <FormattedDate
-                    className="text-foreground-subtle text-xs"
-                    date={data.finishedDate}
-                  />
-              </dt>
-              <dd>{data.description}</dd>
-            ))
-          }
-        </dl>
-      </section>
-    </main>
-  </body>
-</html>
+<BaseLayout
+  lang="de"
+  title="Jüngst gelesen"
+  description="Die Bücher, die ich zuletzt gelesen habe."
+>
+  <h2 class="text-xl underline underline-offset-2 clear-descenders z-10 mb-2">
+    Jüngst gelesen
+  </h2>
+  <ul class="grid gap-4">
+    {
+      books.map(({ data, id }: BookPostType) => (
+        <BookListItem
+          id={id}
+          title={data.title}
+          subtitle={data.subtitle}
+          authors={data.authors}
+          genre={data.genre}
+          releaseDate={data.releaseDate}
+        />
+      ))
+    }
+  </ul>
+</BaseLayout>
