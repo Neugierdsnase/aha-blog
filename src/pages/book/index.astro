@@ -22,17 +22,6 @@ const books: BookPostType[] = (await getCollection("book"))
     Jüngst gelesen
   </h2>
   <ul class="grid gap-4">
-    {
-      books.map(({ data, id }: BookPostType) => (
-        <BookListItem
-          id={id}
-          title={data.title}
-          subtitle={data.subtitle}
-          authors={data.authors}
-          genre={data.genre}
-          releaseDate={data.releaseDate}
-        />
-      ))
-    }
+    {books.map((book: BookPostType) => <BookListItem {...book} />)}
   </ul>
 </BaseLayout>

@@ -1,24 +1,33 @@
 ---
-import type { collections } from "../../content/config";
+import type { BookPostType } from "../../pages/book/[...slug].astro";
 import { sanitizeContentId } from "../../utils/sanitizeContentId.ts";
 
-type Props = (typeof collections)["book"] & { id: string };
+type Props = BookPostType;
 
-const { title, subtitle, authors, releaseDate, genre, id } = Astro.props;
+const { id, data } = Astro.props;
+const { title, subtitle, authors, releaseDate, genre } = data;
 ---
 
-<li class="relative max-w-[520px] h-20 text-md bg-gradient-to-r to-foreground from-cherry-blossom-pink from-5% hover:from-75%">
+<li
+  class="relative max-w-[720px] h-24 text-md bg-gradient-to-r to-foreground-subtle/40 from-foreground/80 from-15% to-55% bg-size-[166%] bg-position-[center_right] focus-within:bg-position-[center_left] focus-visible:bg-position-[center_left] hover:bg-position-[center_left] duration-700 transition-all"
+>
   <a
-    href={"/book" + sanitizeContentId(id)}
-    class="grid grid-cols-4 grid-rows-2 absolute gap-1 p-1 pl-1.5 inset-0.5 hover:left-1 hover:pl-1 focus-within:left-1 focus-within:pl-1 focus-visible:left-1 focus-visible:pl-1 bg-background overflow-hidden"
+    href={"/book/" + sanitizeContentId(id)}
+    class="grid grid-cols-2 grid-rows-4 absolute gap-4 p-2 pl-3.5 inset-0.5 bg-gradient-to-r from-foreground/10 to-background/30 from-5% to-65% bg-size-[166%] bg-position-[center_right] focus-within:bg-position-[center_left] focus-visible:bg-position-[center_left] hover:bg-position-[center_left] duration-700 transition-all hover:left-2 hover:pl-2 focus-within:left-2 focus-within:pl-2 focus-visible:left-2 focus-visible:pl-2 bg-background overflow-hidden -outline-offset-4"
   >
-    <!-- row 1 -->
-    <span class="col-start-1 col-span-2 line-clamp-1">{title}</span>
-    <span class="col-start-3 col-span-2 line-clamp-1">{authors.join(' ')}</span>
-
-    <!-- row 2 -->
-    <span class="col-start-1 col-span-2 line-clamp-1 self-baseline text-foreground-subtle text-sm">{subtitle}</span>
-    <span class="col-start-3 line-clamp-1">{releaseDate}</span>
-    <span class="col-start-4 line-clamp-1">{genre.primary}</span>
+    <span class="col-start-1 col-span-2 line-clamp-1 font-bold self-baseline"
+      >{title}</span
+    >
+    <span
+      class="col-start-1 col-span-2 line-clamp-1 self-baseline text-foreground-subtle text-sm"
+      >{subtitle}</span
+    >
+    <span class="col-start-1 col-span-1 line-clamp-1 text-sm self-baseline"
+      >{authors.join(" ")}, {releaseDate}</span
+    >
+    <span
+      class="col-start-2 col-span-1 line-clamp-1 text-xs text-right self-baseline"
+      >{genre.primary}</span
+    >
   </a>
 </li>
