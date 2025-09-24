@@ -1,12 +1,17 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
 
 type Props = {
   lang: "de" | "en";
   title: string;
   description: string;
 };
+
+const pages: { label: string; href: string }[] = [
+  { label: "Über mich", href: "/about" },
+  { label: "Jüngst gelesen", href: "/book" },
+  { label: "Jüngst geschrieben", href: "/blog" },
+];
 
 const { lang, title, description } = Astro.props;
 ---
@@ -16,20 +21,71 @@ const { lang, title, description } = Astro.props;
   <BaseHead title={title} description={description} />
 
   <body>
-    <div id="body" class="grid grid-cols-12 gap-2 lg:gap-8">
-      <Header />
+    <div id="body" class="grid grid-cols-12 gap-2 lg:gap-8 w-full">
+      <header class="grid h-24 col-span-12 grid-cols-subgrid">
+        <span
+          class="font-decorative hidden desktop:flex col-span-4 justify-center items-center"
+          >Konstantin Kovar</span
+        >
+        <button class="h-24 col-span-12">
+          <svg class="size-24">
+            <path
+              id="firstPath"
+              d="M 14,48 L 80,48"
+              class="stroke-foreground origin-center stroke-2 rotate-45"></path>
+            <path
+              id="secondPath"
+              d="M 14,48 L 80,48"
+              class="stroke-foreground origin-center stroke-2"></path>
+            <path
+              id="thirdPath"
+              d="M 14,48 L 80,48"
+              class="stroke-foreground origin-center stroke-2 -rotate-45"></path>
+          </svg>
+        </button>
+        <nav
+          class="col-span-12 desktop:col-start-5 grid desktop:grid-cols-subgrid desktop:col-span-4"
+        >
+          <ul
+            class="col-span-12 bg-background flex-col desktop:flex-row flex justify-between items-center desktop:col-span-3"
+          >
+            {
+              pages.map(({ label, href }) => (
+                <li class="desktop:w-auto flex justify-center bg-background w-full items-center border-foreground-subtle border-b-[0.5px] z-10 h-0 desktop:h-auto overflow-clip desktop:overflow-ellipsis foldable">
+                  <a href={href}>{label}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+        <ul
+          class="col-span-12 flex justify-center items-center gap-2 desktop:col-span-3 h-0 border-foreground-subtle border-b-[0.5px] z-10 bg-background desktop:h-auto overflow-clip desktop:overflow-ellipsis foldable"
+        >
+          <li class="underline underline-offset-8">RSS</li>
+          <li class="underline underline-offset-8">E-Mail</li>
+        </ul>
+      </header>
       <aside><slot name="aside" /></aside>
-      <main
-        class="relative origin-top col-start-2 col-span-12 desktop:col-start-4"
-      >
+      <main class="col-span-12 desktop:col-start-4 desktop:col-span-8">
         <slot />
       </main>
     </div>
+  </body><script>
+    import { animate, stagger } from "animejs";
 
-    <script
-      is:inline
-      data-goatcounter="https://konstantin.goatcounter.com/count"
-      async
-      src="//gc.zgo.at/count.js"></script>
-  </body>
+    animate(".foldable", {
+      translateY: { from: -stagger(24), to: 0 },
+      height: "48px",
+      alternate: true,
+      delay: stagger(100),
+      ease: "outQuad",
+      duration: 230,
+    });
+  </script>
+
+  <script
+    is:inline
+    data-goatcounter="https://konstantin.goatcounter.com/count"
+    async
+    src="//gc.zgo.at/count.js"></script>
 </html>
