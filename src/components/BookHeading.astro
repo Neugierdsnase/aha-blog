@@ -43,7 +43,6 @@ const hasAuthors = Boolean(authors && authors.length);
 
   const tl = createTimeline({
     autoplay: true,
-    loop:true,
     duration: "ease",
   });
 
@@ -83,10 +82,8 @@ const hasAuthors = Boolean(authors && authors.length);
   tl.add(
     chars,
     {
-      transform: {
-        from: "rotateY(25deg) translate(40px, 0px)",
-        to: "rotateY(0deg) translate(0px, 0px)",
-      },
+      rotateY: {from: '25deg', to: 0},
+      translateX: {from: 40, to: 0},
       delay: stagger(20, { start: 30 }),
       duration: 500,
       ease: "outQuint",

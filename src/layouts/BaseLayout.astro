@@ -27,20 +27,26 @@ const { lang, title, description } = Astro.props;
           class="font-decorative hidden desktop:flex col-span-4 justify-center items-center"
           >Konstantin Kovar</span
         >
-        <button class="h-24 col-span-12">
-          <svg class="size-24">
+        <button
+          id="mobile-menu-toggle-button"
+          class="desktop:hidden p-4 flex justify-center items-center col-start-6 col-span-2"
+        >
+          <svg class="size-[66px]">
             <path
-              id="firstPath"
-              d="M 14,48 L 80,48"
-              class="stroke-foreground origin-center stroke-2 rotate-45"></path>
+              id="path1"
+              d="M 3,3 L 63,3"
+              stroke-linecap="round"
+              class="stroke-foreground stroke-6"></path>
             <path
-              id="secondPath"
-              d="M 14,48 L 80,48"
-              class="stroke-foreground origin-center stroke-2"></path>
+              id="path2"
+              d="M 3,33 L 63,33"
+              stroke-linecap="round"
+              class="stroke-foreground stroke-6"></path>
             <path
-              id="thirdPath"
-              d="M 14,48 L 80,48"
-              class="stroke-foreground origin-center stroke-2 -rotate-45"></path>
+              id="path3"
+              d="M 3,63 L 63,63"
+              stroke-linecap="round"
+              class="stroke-foreground stroke-6"></path>
           </svg>
         </button>
         <nav
@@ -51,7 +57,7 @@ const { lang, title, description } = Astro.props;
           >
             {
               pages.map(({ label, href }) => (
-                <li class="desktop:w-auto flex justify-center bg-background w-full items-center border-foreground-subtle border-b-[0.5px] z-10 h-0 desktop:h-auto overflow-clip desktop:overflow-ellipsis foldable">
+                <li class="desktop:w-auto flex justify-center bg-background w-full items-center border-foreground-subtle border-b-[0.5px] z-10 h-0 desktop:h-auto overflow-clip desktop:overflow-ellipsis opacity-0 desktop:opacity-100 foldable">
                   <a href={href}>{label}</a>
                 </li>
               ))
@@ -59,10 +65,10 @@ const { lang, title, description } = Astro.props;
           </ul>
         </nav>
         <ul
-          class="col-span-12 flex justify-center items-center gap-2 desktop:col-span-3 h-0 border-foreground-subtle border-b-[0.5px] z-10 bg-background desktop:h-auto overflow-clip desktop:overflow-ellipsis foldable"
+          class="col-span-12 flex justify-center items-center gap-2 desktop:col-span-3 h-0 border-foreground-subtle border-b-[0.5px] desktop:border-0 z-10 bg-background desktop:h-auto overflow-clip desktop:overflow-ellipsis opacity-0 desktop:opacity-100 foldable"
         >
-          <li class="underline underline-offset-8">RSS</li>
-          <li class="underline underline-offset-8">E-Mail</li>
+          <li>RSS</li>
+          <li>E-Mail</li>
         </ul>
       </header>
       <aside><slot name="aside" /></aside>
@@ -70,17 +76,84 @@ const { lang, title, description } = Astro.props;
         <slot />
       </main>
     </div>
-  </body><script>
-    import { animate, stagger } from "animejs";
+  </body>
 
-    animate(".foldable", {
-      translateY: { from: -stagger(24), to: 0 },
-      height: "48px",
+  <script>
+    import { stagger, createTimeline } from "animejs";
+
+    const foldables = document.querySelectorAll(".foldable");
+    const amountOfFoldables = foldables.length;
+
+    const timeline = createTimeline({
       alternate: true,
-      delay: stagger(100),
-      ease: "outQuad",
-      duration: 230,
+      autoplay: false,
+      playbackEase: "out",
     });
+
+    timeline.add(
+      foldables,
+      {
+        translateY: { from: -stagger(24), to: 0 },
+        opacity: 1,
+        height: "48px",
+        delay: stagger(500 / amountOfFoldables),
+        duration: 500 / amountOfFoldables,
+      },
+      70,
+    );
+
+    timeline.add(
+      "#path3",
+      {
+        d: "M 33,3 L 33,63",
+        strokeWidth: 3,
+        duration: 500,
+      },
+      0,
+    );
+
+    timeline.add(
+      "#path1",
+      {
+        d: "M 33,63 L 3,33",
+        strokeWidth: 3,
+        duration: 500,
+      },
+      0,
+    );
+
+    timeline.add(
+      "#path2",
+      {
+        d: "M 33,63 L 63,33",
+        strokeWidth: 3,
+        duration: 500,
+      },
+      0,
+    );
+
+    timeline.add(
+      "button",
+      {
+        rotate: "-180deg",
+        duration: 400,
+        ease: "out",
+      },
+      200,
+    );
+
+    let isMobileMenuOpen = false;
+
+    document
+      .querySelector("#mobile-menu-toggle-button")
+      ?.addEventListener("click", () => {
+        if (isMobileMenuOpen) {
+          timeline.reverse();
+        } else {
+          timeline.play();
+        }
+        isMobileMenuOpen = !isMobileMenuOpen;
+      });
   </script>
 
   <script
