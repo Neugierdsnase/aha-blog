@@ -5,10 +5,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import BookListItem from "../../components/list-item/BookListItem.astro";
 
 const books: BookPostType[] = (await getCollection("book"))
-  .filter(({ data }: BookPostType) => !data.draft)
+  .filter(({ data }: BookPostType) => !data.draft && data.finishedDate)
   .sort(
     (a: BookPostType, b: BookPostType) =>
-      a.data.finishedDate.valueOf() - b.data.finishedDate.valueOf(),
+      a.data.finishedDate!.valueOf() - b.data.finishedDate!.valueOf(),
   )
   .reverse();
 ---

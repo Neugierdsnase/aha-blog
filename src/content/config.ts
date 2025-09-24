@@ -98,7 +98,7 @@ const book = defineCollection({
     themes: z.array(z.string()).optional(),
 
     // Reading experience
-    finishedDate: z.coerce.date(),
+    finishedDate: z.coerce.date().optional(),
     readInLang: z.enum(["de", "en"]),
     modeOfConsumption: z.enum(["hardcover", "softcover", "ebook", "audio"]),
 
