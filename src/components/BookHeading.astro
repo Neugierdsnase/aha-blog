@@ -3,7 +3,7 @@ import type { collections } from "../content/config";
 import Details from "./Details.astro";
 import BookDataList from "./BookDataList.astro";
 
-type Props = (typeof collections)["book"] & {isBook: boolean};
+type Props = (typeof collections)["book"] & { isBook: boolean };
 
 const { title, subtitle, authors, releaseDate, isBook, ...rest } = Astro.props;
 
@@ -29,10 +29,71 @@ const hasAuthors = Boolean(authors && authors.length);
       </div>
     )
   }
-  {isBook && <Details>
-    <BookDataList {...rest} />
-  </Details>}
+  {
+    isBook && (
+      <Details>
+        <BookDataList {...rest} />
+      </Details>
+    )
+  }
 </div>
+
+<script>
+  import { createTimeline, stagger, text } from "animejs";
+
+  const tl = createTimeline({
+    autoplay: true,
+    loop:true,
+    duration: "ease",
+  });
+
+  const { chars } = text.split("h1", {
+    chars: { wrap: false },
+  });
+
+  tl.add(
+    "h1",
+    {
+      opacity: 1,
+      duration: 80,
+    },
+    0,
+  );
+
+  tl.add(
+    chars,
+    {
+      opacity: 0,
+      duration: 0,
+    },
+    0,
+  );
+
+  tl.add(
+    chars,
+    {
+      opacity: { from: 0, to: 1 },
+      delay: stagger(20),
+      duration: 400,
+      ease: "outCubic",
+    },
+    0,
+  );
+
+  tl.add(
+    chars,
+    {
+      transform: {
+        from: "rotateY(25deg) translate(40px, 0px)",
+        to: "rotateY(0deg) translate(0px, 0px)",
+      },
+      delay: stagger(20, { start: 30 }),
+      duration: 500,
+      ease: "outQuint",
+    },
+    0,
+  );
+</script>
 
 <style>
   h1 {
