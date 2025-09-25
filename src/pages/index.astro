@@ -23,20 +23,19 @@ const { Content } = featuredPost
   </div>
 
   <div
-    class="w-full max-w-full max-h-[110svh] mx-auto bg-background desktop:h-screen"
+    id="article"
+    class="flex justify-center items-baseline h-fit col-start-1 col-span-8 max-h-[40vh] mask-b-from-45"
   >
-    <div class="mx-auto max-h-5/6 mask-b-from-45">
-      <!-- @ts-expect-error-->
-      <Article title={featuredPost?.data.title ?? ""}>
-        <Content />
-      </Article>
-    </div>
-    <div class="h-1/6">
-      <a
-        href={"/blog/" + featuredPost?.slug}
-        class="block mt-8 text-center text-md w-fit mx-auto border-foreground border-1 rounded py-2 px-8 cursor-pointer hover:bg-foreground hover:text-background transition-colors duration-300"
-        >weiterlesen...</a
-      >
-    </div>
+    <!-- @ts-expect-error-->
+    <Article title={featuredPost?.data.title ?? ""}>
+      <Content />
+    </Article>
+  <a
+    id="further"
+    href={"/blog/" + featuredPost?.slug}
+    class="h-12 mt-8 text-center text-md w-fit mx-auto border-foreground border-1 rounded py-2 px-8 cursor-pointer hover:bg-foreground hover:text-background transition-colors duration-300"
+    >weiterlesen...</a
+  >
   </div>
 </BaseLayout>
+

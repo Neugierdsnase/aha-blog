@@ -1,0 +1,51 @@
+<div class="relative col-start-4 col-span-2 overflow-hidden h-36">
+  <span id="chars1" class="absolute font-mono opacity-0 top-4 text-lg"
+    >Konstantin Kovar</span
+  >
+  <p id="chars2" class="font-decorative opacity-0 text-3xl">Konstantin Kovar</p>
+  <p id="developer" class="font-mono text-lg top-6 opacity-0">
+    Softwareentwickler
+  </p>
+</div>
+
+<script>
+  import { stagger, text, createTimeline } from "animejs";
+
+  const { chars: chars1 } = text.split("#chars1", { chars: { wrap: true } });
+  const { chars: developerChars } = text.split("#developer", {
+    chars: { wrap: true },
+  });
+  const { chars: chars2 } = text.split("#chars2", { chars: { wrap: true } });
+
+  const tl = createTimeline();
+
+  tl.set(chars1, { translateY: "-100%" });
+  tl.set("#chars1", { opacity: 1 });
+  tl.set(developerChars, { translateY: "100%" });
+  tl.set('#developer', { opacity: 1 });
+  tl.set(chars2, { translateY: "100%" });
+
+  tl.add(chars1, { translateY: 0, delay: stagger(30), duration: 140 });
+  tl.set("#chars2", { opacity: 1 });
+  tl.add(
+    developerChars,
+    { translateY: 0, delay: stagger(30), duration: 140 },
+    240,
+  );
+  tl.add(chars1, { translateY: "-100%", delay: stagger(30), duration: 140 });
+  tl.add(developerChars, {
+    translateY: "-100%",
+    delay: stagger(30),
+    duration: 140,
+  });
+
+  tl.add(
+    chars2,
+    {
+      translateY: 22,
+      delay: stagger(30),
+      duration: 140,
+    },
+    "<<-=440",
+  );
+</script>

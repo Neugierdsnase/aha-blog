@@ -1,5 +1,6 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
+import NameAnimation from "../components/NameAnimation.astro";
 
 type Props = {
   lang: "de" | "en";
@@ -23,9 +24,9 @@ const { lang, title, description } = Astro.props;
   <body>
     <div id="body" class="grid grid-cols-12 gap-2 lg:gap-8 w-full">
       <header class="grid h-24 col-span-12 grid-cols-subgrid">
-        <span
-          class="font-decorative hidden desktop:flex col-span-4 justify-center items-center"
-          >Konstantin Kovar</span
+        <div
+          class="hidden relative desktop:block w-72 h-24 col-start-2 pt-6 col-span-3 justify-center items-center"
+        ><NameAnimation /></div
         >
         <button
           id="mobile-menu-toggle-button"
@@ -72,7 +73,7 @@ const { lang, title, description } = Astro.props;
         </ul>
       </header>
       <aside><slot name="aside" /></aside>
-      <main class="col-span-12 desktop:col-start-4 desktop:col-span-8">
+      <main class="grid grid-cols-subgrid grid-rows-subgrid col-span-12 desktop:col-start-4 desktop:col-span-8">
         <slot />
       </main>
     </div>
