@@ -15,7 +15,12 @@ const { Content } = featuredPost
   : { Content: () => null };
 ---
 
-<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION} animateName lang="de">
+<BaseLayout
+  title={SITE_TITLE}
+  description={SITE_DESCRIPTION}
+  animateName
+  lang="de"
+>
   <div
     id="article"
     class="row-start-1 col-start-1 -col-end-1 max-h-[69vh] mask-b-from-45 overflow-clip"
@@ -32,4 +37,3 @@ const { Content } = featuredPost
     >weiterlesen...</a
   >
 </BaseLayout>
-

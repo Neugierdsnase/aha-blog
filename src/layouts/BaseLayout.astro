@@ -23,17 +23,17 @@ const { lang, title, description, animateName = false } = Astro.props;
 <html lang={lang}>
   <BaseHead title={title} description={description} />
 
-  <body>
+  <body class="text-foreground">
     <div id="body" class="grid grid-cols-12 gap-2 lg:gap-8 w-full">
       <header
-        class="flex h-24 col-start-1 -col-end-1 grid-cols-sub gap-8 justify-between items-center w-full px-18"
+        class="flex h-16 desktop:h-24 col-start-1 -col-end-1 grid-cols-sub gap-8 justify-between items-center w-full pl-4 desktop:px-18"
       >
         <div
           class="h-24 w-full col-start-1 -col-end-1 pt-6 flex justify-between items-center grow"
         >
           <NameAnimation animateName={animateName} />
-          <button id="mobile-menu-toggle-button" class="desktop:hidden p-4">
-            <svg class="size-[66px] scale-50">
+          <button id="mobile-menu-toggle-button" class="desktop:hidden scale-25 desktop:scale-50">
+            <svg class="size-[66px]">
               <path
                 id="path1"
                 d="M 3,3 L 63,3"

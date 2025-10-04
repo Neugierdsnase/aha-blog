@@ -11,18 +11,18 @@ const shouldBeAnimated = Astro.props.animateName;
 <a href="/" class="relative col-start-4 col-span-2 overflow-hidden text-foreground">
   <span
     id={shouldBeAnimated ? "chars1" : "nope1"}
-    class="absolute font-mono opacity-0 text-lg">Konstantin Kovar</span
+    class="absolute font-mono opacity-0 desktop:text-lg whitespace-nowrap">Konstantin Kovar</span
   >
   <p
     id={shouldBeAnimated ? "chars2" : "nope2"}
-    class="absolute opacity-0 text-3xl"
+    class="absolute opacity-0 desktop:text-3xl whitespace-nowrap"
   >
     Konstantin Kovar
   </p>
   <p
     id={shouldBeAnimated ? "chars3" : "nope3"}
     class={cx(
-      "font-galnoy font-bold text-3xl",
+      "font-galnoy font-bold desktop:text-3xl whitespace-nowrap",
       shouldBeAnimated && "opacity-0",
     )}
   >
