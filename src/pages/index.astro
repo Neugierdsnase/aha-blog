@@ -15,13 +15,7 @@ const { Content } = featuredPost
   : { Content: () => null };
 ---
 
-<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION} lang="de">
-  <div
-    slot="aside"
-    class="h-full max-w-full flex justify-center items-center @container contain-content"
-  >
-  </div>
-
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION} animateName lang="de">
   <div
     id="article"
     class="flex justify-center items-baseline h-fit col-start-1 col-span-8 max-h-[40vh] mask-b-from-45"

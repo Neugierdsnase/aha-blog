@@ -22,13 +22,15 @@ export default function rehypeInlineFootnotes() {
             if (id && li.children) {
               const isMarginNote = id.startsWith("mn-");
 
-              const childrenWithoutBackRef = li.children[1].children // first child is just a new line, second is the actual content
-                .filter(
-                  (child) =>
-                    !child.properties?.className?.includes(
-                      "data-footnote-backref",
-                    ),
-                );
+              const childrenElements = li.children.filter((
+                { type, value },
+                // filter empty newlines
+              ) => !(type === "text" && value === "\n")).filter(
+                // filter backref
+                (child) =>
+                  !child.properties?.className?.includes(
+                    "data-footnote-backref",
+                  ));
 
               const replacement = [
                 {
@@ -57,7 +59,7 @@ export default function rehypeInlineFootnotes() {
                   properties: {
                     className: isMarginNote ? ["marginnote"] : ["sidenote"],
                   },
-                  children: childrenWithoutBackRef,
+                  children: childrenElements,
                 },
               ];
 
@@ -80,7 +82,9 @@ export default function rehypeInlineFootnotes() {
           ?.replace("#user-content-fn-", "")
           .trim();
 
-        parent.children.splice(index, 1, ...footnoteMap.get(id));
+        const [label, input, content] = footnoteMap.get(id)
+
+        parent.children.splice(index, 1, label, input, content);
       }
     });
   };

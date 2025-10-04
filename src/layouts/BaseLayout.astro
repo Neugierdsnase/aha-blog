@@ -6,6 +6,7 @@ type Props = {
   lang: "de" | "en";
   title: string;
   description: string;
+  animateName?: boolean;
 };
 
 const pages: { label: string; href: string }[] = [
@@ -14,7 +15,7 @@ const pages: { label: string; href: string }[] = [
   { label: "Jüngst geschrieben", href: "/blog" },
 ];
 
-const { lang, title, description } = Astro.props;
+const { lang, title, description, animateName = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -23,38 +24,39 @@ const { lang, title, description } = Astro.props;
 
   <body>
     <div id="body" class="grid grid-cols-12 gap-2 lg:gap-8 w-full">
-      <header class="grid h-24 col-span-12 grid-cols-subgrid">
+      <header
+        class="flex h-24 col-span-12 justify-between items-center w-full px-12"
+      >
         <div
-          class="hidden relative desktop:block w-72 h-24 col-start-2 pt-6 col-span-3 justify-center items-center"
-        ><NameAnimation /></div
+          class="hidden relative desktop:block w-72 h-24 col-start-2 pt-6 col-span-3 justify-center items-center grow"
         >
-        <button
-          id="mobile-menu-toggle-button"
-          class="desktop:hidden p-4 flex justify-center items-center col-start-6 col-span-2"
-        >
-          <svg class="size-[66px]">
-            <path
-              id="path1"
-              d="M 3,3 L 63,3"
-              stroke-linecap="round"
-              class="stroke-foreground stroke-6"></path>
-            <path
-              id="path2"
-              d="M 3,33 L 63,33"
-              stroke-linecap="round"
-              class="stroke-foreground stroke-6"></path>
-            <path
-              id="path3"
-              d="M 3,63 L 63,63"
-              stroke-linecap="round"
-              class="stroke-foreground stroke-6"></path>
-          </svg>
-        </button>
-        <nav
-          class="col-span-12 desktop:col-start-5 grid desktop:grid-cols-subgrid desktop:col-span-4"
-        >
+          <NameAnimation animateName={animateName} />
+          <button
+            id="mobile-menu-toggle-button"
+            class="desktop:hidden p-4 flex justify-center items-center col-start-6 col-span-2"
+          >
+            <svg class="size-[66px]">
+              <path
+                id="path1"
+                d="M 3,3 L 63,3"
+                stroke-linecap="round"
+                class="stroke-foreground stroke-6"></path>
+              <path
+                id="path2"
+                d="M 3,33 L 63,33"
+                stroke-linecap="round"
+                class="stroke-foreground stroke-6"></path>
+              <path
+                id="path3"
+                d="M 3,63 L 63,63"
+                stroke-linecap="round"
+                class="stroke-foreground stroke-6"></path>
+            </svg>
+          </button>
+        </div>
+        <nav class="grow">
           <ul
-            class="col-span-12 bg-background flex-col desktop:flex-row flex justify-between items-center desktop:col-span-3"
+            class="flex gap-8 justify-center items-center flex-col desktop:flex-row"
           >
             {
               pages.map(({ label, href }) => (
@@ -66,100 +68,102 @@ const { lang, title, description } = Astro.props;
           </ul>
         </nav>
         <ul
-          class="col-span-12 flex justify-center items-center gap-2 desktop:col-span-3 h-0 border-foreground-subtle border-b-[0.5px] desktop:border-0 z-10 bg-background desktop:h-auto overflow-clip desktop:overflow-ellipsis opacity-0 desktop:opacity-100 foldable"
+          class="flex grow justify-center items-center gap-8 h-0 border-foreground-subtle border-b-[0.5px] desktop:border-0 z-10 bg-background desktop:h-auto overflow-clip desktop:overflow-ellipsis opacity-0 desktop:opacity-100 desktop:justify-end foldable"
         >
           <li>RSS</li>
           <li>E-Mail</li>
         </ul>
       </header>
       <aside><slot name="aside" /></aside>
-      <main class="grid grid-cols-subgrid grid-rows-subgrid col-span-12 desktop:col-start-4 desktop:col-span-8">
+      <main
+        class="grid grid-cols-subgrid grid-rows-subgrid col-span-12 desktop:col-start-4 desktop:col-span-8"
+      >
         <slot />
       </main>
     </div>
-  </body>
 
-  <script>
-    import { stagger, createTimeline } from "animejs";
+    <script>
+      import { stagger, createTimeline } from "animejs";
 
-    const foldables = document.querySelectorAll(".foldable");
-    const amountOfFoldables = foldables.length;
+      const foldables = document.querySelectorAll(".foldable");
+      const amountOfFoldables = foldables.length;
 
-    const timeline = createTimeline({
-      alternate: true,
-      autoplay: false,
-      playbackEase: "out",
-    });
-
-    timeline.add(
-      foldables,
-      {
-        translateY: { from: -stagger(24), to: 0 },
-        opacity: 1,
-        height: "48px",
-        delay: stagger(500 / amountOfFoldables),
-        duration: 500 / amountOfFoldables,
-      },
-      70,
-    );
-
-    timeline.add(
-      "#path3",
-      {
-        d: "M 33,3 L 33,63",
-        strokeWidth: 3,
-        duration: 500,
-      },
-      0,
-    );
-
-    timeline.add(
-      "#path1",
-      {
-        d: "M 33,63 L 3,33",
-        strokeWidth: 3,
-        duration: 500,
-      },
-      0,
-    );
-
-    timeline.add(
-      "#path2",
-      {
-        d: "M 33,63 L 63,33",
-        strokeWidth: 3,
-        duration: 500,
-      },
-      0,
-    );
-
-    timeline.add(
-      "button",
-      {
-        rotate: "-180deg",
-        duration: 400,
-        ease: "out",
-      },
-      200,
-    );
-
-    let isMobileMenuOpen = false;
-
-    document
-      .querySelector("#mobile-menu-toggle-button")
-      ?.addEventListener("click", () => {
-        if (isMobileMenuOpen) {
-          timeline.reverse();
-        } else {
-          timeline.play();
-        }
-        isMobileMenuOpen = !isMobileMenuOpen;
+      const timeline = createTimeline({
+        alternate: true,
+        autoplay: false,
+        playbackEase: "out",
       });
-  </script>
 
-  <script
-    is:inline
-    data-goatcounter="https://konstantin.goatcounter.com/count"
-    async
-    src="//gc.zgo.at/count.js"></script>
+      timeline.add(
+        foldables,
+        {
+          translateY: { from: -stagger(24), to: 0 },
+          opacity: 1,
+          height: "48px",
+          delay: stagger(500 / amountOfFoldables),
+          duration: 500 / amountOfFoldables,
+        },
+        70,
+      );
+
+      timeline.add(
+        "#path3",
+        {
+          d: "M 33,3 L 33,63",
+          strokeWidth: 3,
+          duration: 500,
+        },
+        0,
+      );
+
+      timeline.add(
+        "#path1",
+        {
+          d: "M 33,63 L 3,33",
+          strokeWidth: 3,
+          duration: 500,
+        },
+        0,
+      );
+
+      timeline.add(
+        "#path2",
+        {
+          d: "M 33,63 L 63,33",
+          strokeWidth: 3,
+          duration: 500,
+        },
+        0,
+      );
+
+      timeline.add(
+        "button",
+        {
+          rotate: "-180deg",
+          duration: 400,
+          ease: "out",
+        },
+        200,
+      );
+
+      let isMobileMenuOpen = false;
+
+      document
+        .querySelector("#mobile-menu-toggle-button")
+        ?.addEventListener("click", () => {
+          if (isMobileMenuOpen) {
+            timeline.reverse();
+          } else {
+            timeline.play();
+          }
+          isMobileMenuOpen = !isMobileMenuOpen;
+        });
+    </script>
+
+    <script
+      is:inline
+      data-goatcounter="https://konstantin.goatcounter.com/count"
+      async
+      src="//gc.zgo.at/count.js"></script>
+  </body>
 </html>

@@ -5,7 +5,7 @@ import BookHeading from "./BookHeading.astro";
 type Props = (typeof collections)["book"] & { isBook: boolean };
 ---
 
-<div class="container">
+<div class="container col-start-1 -col-end-1">
   <article>
     <section>
       <BookHeading {...Astro.props} />
@@ -15,15 +15,28 @@ type Props = (typeof collections)["book"] & { isBook: boolean };
 </div>
 
 <script>
-  import { animate, stagger } from "animejs";
+  import { stagger, createTimeline } from "animejs";
 
-  animate([".sidenote", ".marginnote"], {
+  const tl = createTimeline();
+
+  const notes = document.querySelectorAll('.sidenote,.marginnote')
+  tl.set(notes, { translateX: 50 });
+  tl.add(notes, {
     opacity: 1,
-    delay: stagger(200),
-    duration: 400,
-    ease: "inOut",
-    transform: "translateX(20px)",
+    delay: stagger(200, { start: 400 }),
+    duration: 200,
   });
+  tl.add(
+    notes,
+    {
+      opacity: 1,
+      delay: stagger(200, { start: 400 }),
+      duration: 500,
+      ease: "outQuad",
+      translateX: 0,
+    },
+    0,
+  );
 </script>
 
 <style>
@@ -241,7 +254,6 @@ type Props = (typeof collections)["book"] & { isBook: boolean };
 
         /* for a smooth animation fadein */
         opacity: 0;
-        transform: translateX(33px);
 
         & img {
           margin-top: 0;
@@ -385,6 +397,13 @@ type Props = (typeof collections)["book"] & { isBook: boolean };
       section > footer,
       section > table {
         width: 100%;
+      }
+      &:has(.margin-toggle) {
+        section > p,
+        section > footer,
+        section > table {
+          width: 100%;
+        }
       }
 
       pre > code {
