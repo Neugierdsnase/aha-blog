@@ -29,7 +29,7 @@ const { lang, title, description, animateName = false } = Astro.props;
         class="flex h-16 desktop:h-24 col-start-1 -col-end-1 grid-cols-sub gap-8 justify-between items-center w-full pl-4 desktop:px-18"
       >
         <div
-          class="h-24 w-full col-start-1 -col-end-1 pt-6 flex justify-between items-center grow"
+          class="w-full col-start-1 -col-end-1 pt-6 flex justify-between items-center grow"
         >
           <NameAnimation animateName={animateName} />
           <button id="mobile-menu-toggle-button" class="desktop:hidden scale-25 desktop:scale-50">
@@ -52,7 +52,7 @@ const { lang, title, description, animateName = false } = Astro.props;
             </svg>
           </button>
         </div>
-        <nav class="grow absolute desktop:static inset-0 top-24">
+        <nav class="grow absolute desktop:static inset-0 top-16 desktop:top-24">
           <ul
             class="flex justify-center items-center flex-col desktop:gap-8 desktop:flex-row"
           >
@@ -68,7 +68,7 @@ const { lang, title, description, animateName = false } = Astro.props;
       </header>
       <aside><slot name="aside" /></aside>
       <main
-        class="grid grid-cols-subgrid grid-rows-auto col-span-12 desktop:col-start-4 desktop:col-span-8"
+        class="grid grid-cols-subgrid grid-rows-auto col-start-1 desktop:col-start-4 -col-end-1"
       >
         <slot />
       </main>
