@@ -8,21 +8,17 @@ const { id, data } = Astro.props;
 const { title, subtitle, authors, releaseDate, genre } = data;
 ---
 
-<li
-  class="relative max-w-[720px] h-24 text-md bg-gradient-to-r to-foreground-subtle/40 from-foreground/80 from-15% to-55% bg-size-[166%] bg-position-[center_right] focus-within:bg-position-[center_left] focus-visible:bg-position-[center_left] hover:bg-position-[center_left] duration-700 transition-all"
->
-  <a
-    href={"/book/" + sanitizeContentId(id)}
-    class="grid grid-cols-2 grid-rows-4 absolute gap-4 p-2 pl-3.5 inset-0.5 bg-gradient-to-r from-foreground/10 to-background/30 from-5% to-65% bg-size-[166%] bg-position-[center_right] focus-within:bg-position-[center_left] focus-visible:bg-position-[center_left] hover:bg-position-[center_left] duration-700 transition-all hover:left-2 hover:pl-2 focus-within:left-2 focus-within:pl-2 focus-visible:left-2 focus-visible:pl-2 bg-background overflow-hidden -outline-offset-4"
-  >
-    <span class="col-start-1 col-span-2 line-clamp-1 font-bold self-baseline"
+<li>
+  <a href={"/book/" + sanitizeContentId(id)}>
+    <span
+      class="col-start-1 col-span-2 line-clamp-1 font-galnoy font-bold self-baseline"
       >{title}</span
     >
     <span
-      class="col-start-1 col-span-2 line-clamp-1 self-baseline text-foreground-subtle text-sm"
+      class="col-start-1 col-span-2 line-clamp-1 font-galnoy italic self-baseline text-foreground-subtle text-sm"
       >{subtitle}</span
     >
-    <span class="col-start-1 col-span-1 line-clamp-1 text-sm self-baseline"
+    <span class="col-start-1 col-span-1 line-clamp-1 text-sm self-baseline leading-2"
       >{authors.join(" ")}, {releaseDate}</span
     >
     <span
@@ -31,3 +27,31 @@ const { title, subtitle, authors, releaseDate, genre } = data;
     >
   </a>
 </li>
+
+<style>
+  @reference "../../styles/app.css";
+
+  li {
+    @apply relative h-24 text-md to-foreground-subtle/40 from-foreground/80 from-15% to-55% bg-size-[166%] duration-700 transition-all;
+
+    & > a {
+      @apply grid grid-cols-2 grid-rows-4 absolute gap-4 p-2 inset-0.5 from-foreground/10 to-background/30 from-5% to-65% bg-size-[166%] duration-700 transition-all bg-background overflow-hidden -outline-offset-4;
+    }
+
+    &:nth-child(odd) {
+      @apply col-start-2 tablet:col-start-3 -col-end-1 bg-gradient-to-r bg-position-[center_right] focus-within:bg-position-[center_left] focus-visible:bg-position-[center_left] hover:bg-position-[center_left];
+
+      & > a {
+        @apply bg-gradient-to-r bg-position-[center_right] pl-3.5 focus-within:bg-position-[center_left] focus-visible:bg-position-[center_left] hover:bg-position-[center_left] hover:left-2 hover:pl-2 focus-within:left-2 focus-within:pl-2 focus-visible:left-2 focus-visible:pl-2;
+      }
+    }
+
+    &:nth-child(even) {
+      @apply col-start-1 -col-end-2 tablet:-col-end-3 bg-gradient-to-l bg-position-[center_left] focus-within:bg-position-[center_right] focus-visible:bg-position-[center_right] hover:bg-position-[center_right];
+
+      & > a {
+        @apply bg-gradient-to-l bg-position-[center_left] pr-3.5 focus-within:bg-position-[center_right] focus-visible:bg-position-[center_right] hover:bg-position-[center_right] hover:right-2 hover:pr-2 focus-within:right-2 focus-within:pr-2 focus-visible:right-2 focus-visible:pr-2;
+      }
+    }
+  }
+</style>

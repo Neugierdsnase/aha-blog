@@ -8,7 +8,7 @@ type Props = {
 const shouldBeAnimated = Astro.props.animateName;
 ---
 
-<div class="relative col-start-4 col-span-2 overflow-hidden h-36">
+<a href="/" class="relative col-start-4 col-span-2 overflow-hidden text-foreground">
   <span
     id={shouldBeAnimated ? "chars1" : "nope1"}
     class="absolute font-mono opacity-0 text-lg">Konstantin Kovar</span
@@ -21,11 +21,14 @@ const shouldBeAnimated = Astro.props.animateName;
   </p>
   <p
     id={shouldBeAnimated ? "chars3" : "nope3"}
-    class={cx("font-decorative text-3xl", shouldBeAnimated && "opacity-0")}
+    class={cx(
+      "font-galnoy font-bold text-3xl",
+      shouldBeAnimated && "opacity-0",
+    )}
   >
     Konstantin Kovar
   </p>
-</div>
+</a>
 
 <script>
   import { stagger, text, createTimeline } from "animejs";
@@ -50,7 +53,11 @@ const shouldBeAnimated = Astro.props.animateName;
     tl.set(chars2, { translateY: "-100%" });
     tl.set(text2, { opacity: 1 });
 
-    tl.set(chars3, { translateY: "100%" });
+    tl.set([chars3[1], chars3[11]], {
+      rotate: "20deg",
+    });
+
+    tl.set(chars3, { translateY: "110%" });
     tl.set(text3, { opacity: 1 });
 
     tl.add(chars1, { translateY: 0, delay: baseStagger, duration: 150 });
@@ -75,6 +82,15 @@ const shouldBeAnimated = Astro.props.animateName;
         duration: stagger(20, { start: 100 }),
       },
       "<-=750",
+    );
+
+    tl.add(
+      [chars3[1], chars3[11]],
+      {
+        rotate: "0deg",
+        ease: "outBounce",
+      },
+      "<+=800",
     );
   } else {
     // for visual consistency on non-animated pages

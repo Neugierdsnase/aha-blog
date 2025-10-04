@@ -63,36 +63,25 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
         ],
       },
       {
-        name: "et-book",
-        preload: true,
-        display: "swap",
-        selector: "body",
-        fallback: "serif",
-        src: [
-          {
-            path: join(
-              process.cwd(),
-              "public",
-              "et-book",
-              "et-book-roman-old-style-figures",
-              "et-book-roman-old-style-figures.ttf",
-            ),
-            style: "normal",
-            weight: "normal",
-          },
-        ],
-      },
-      {
         name: "Galnoy",
         preload: true,
         display: "swap",
-        selector: "h1",
         fallback: "serif",
         src: [
           {
-            path: join(process.cwd(), "public", "Galnoy.otf"),
+            path: join(process.cwd(), "public", "Galnoy-MediumText.otf"),
+            style: "normal",
+            weight: "normal",
+          },
+          {
+            path: join(process.cwd(), "public", "Galnoy-BoldHeadline.otf"),
             style: "normal",
             weight: "bold",
+          },
+          {
+            path: join(process.cwd(), "public", "Galnoy-LightHeadline.otf"),
+            style: "normal",
+            weight: "light",
           },
         ],
       },

@@ -18,18 +18,18 @@ const { Content } = featuredPost
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION} animateName lang="de">
   <div
     id="article"
-    class="flex justify-center items-baseline h-fit col-start-1 col-span-8 max-h-[40vh] mask-b-from-45"
+    class="row-start-1 col-start-1 -col-end-1 max-h-[69vh] mask-b-from-45 overflow-clip"
   >
     <!-- @ts-expect-error-->
     <Article title={featuredPost?.data.title ?? ""}>
       <Content />
     </Article>
+  </div>
   <a
     id="further"
     href={"/blog/" + featuredPost?.slug}
-    class="h-12 mt-8 text-center text-md w-fit mx-auto border-foreground border-1 rounded py-2 px-8 cursor-pointer hover:bg-foreground hover:text-background transition-colors duration-300"
+    class="block row-start-2 col-start-1 -col-end-1 h-12 mt-8 text-center text-md w-fit mx-auto border-foreground border-1 rounded py-2 px-8 cursor-pointer hover:bg-foreground hover:text-background transition-colors duration-300"
     >weiterlesen...</a
   >
-  </div>
 </BaseLayout>
 

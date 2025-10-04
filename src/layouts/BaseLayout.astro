@@ -13,6 +13,7 @@ const pages: { label: string; href: string }[] = [
   { label: "Über mich", href: "/about" },
   { label: "Jüngst gelesen", href: "/book" },
   { label: "Jüngst geschrieben", href: "/blog" },
+  { label: "RSS", href: "/rss" },
 ];
 
 const { lang, title, description, animateName = false } = Astro.props;
@@ -25,17 +26,14 @@ const { lang, title, description, animateName = false } = Astro.props;
   <body>
     <div id="body" class="grid grid-cols-12 gap-2 lg:gap-8 w-full">
       <header
-        class="flex h-24 col-span-12 justify-between items-center w-full px-12"
+        class="flex h-24 col-start-1 -col-end-1 grid-cols-sub gap-8 justify-between items-center w-full px-18"
       >
         <div
-          class="hidden relative desktop:block w-72 h-24 col-start-2 pt-6 col-span-3 justify-center items-center grow"
+          class="h-24 w-full col-start-1 -col-end-1 pt-6 flex justify-between items-center grow"
         >
           <NameAnimation animateName={animateName} />
-          <button
-            id="mobile-menu-toggle-button"
-            class="desktop:hidden p-4 flex justify-center items-center col-start-6 col-span-2"
-          >
-            <svg class="size-[66px]">
+          <button id="mobile-menu-toggle-button" class="desktop:hidden p-4">
+            <svg class="size-[66px] scale-50">
               <path
                 id="path1"
                 d="M 3,3 L 63,3"
@@ -54,29 +52,23 @@ const { lang, title, description, animateName = false } = Astro.props;
             </svg>
           </button>
         </div>
-        <nav class="grow">
+        <nav class="grow absolute desktop:static inset-0 top-24">
           <ul
-            class="flex gap-8 justify-center items-center flex-col desktop:flex-row"
+            class="flex justify-center items-center flex-col desktop:gap-8 desktop:flex-row"
           >
             {
               pages.map(({ label, href }) => (
-                <li class="desktop:w-auto flex justify-center bg-background w-full items-center border-foreground-subtle border-b-[0.5px] z-10 h-0 desktop:h-auto overflow-clip desktop:overflow-ellipsis opacity-0 desktop:opacity-100 foldable">
+                <li class="desktop:w-auto whitespace-nowrap py-4 desktop:p-0 flex justify-center bg-background w-full items-center border-foreground-subtle border-b-[0.5px] z-10 h-0 desktop:h-auto overflow-clip desktop:overflow-ellipsis opacity-0 desktop:opacity-100 foldable">
                   <a href={href}>{label}</a>
                 </li>
               ))
             }
           </ul>
         </nav>
-        <ul
-          class="flex grow justify-center items-center gap-8 h-0 border-foreground-subtle border-b-[0.5px] desktop:border-0 z-10 bg-background desktop:h-auto overflow-clip desktop:overflow-ellipsis opacity-0 desktop:opacity-100 desktop:justify-end foldable"
-        >
-          <li>RSS</li>
-          <li>E-Mail</li>
-        </ul>
       </header>
       <aside><slot name="aside" /></aside>
       <main
-        class="grid grid-cols-subgrid grid-rows-subgrid col-span-12 desktop:col-start-4 desktop:col-span-8"
+        class="grid grid-cols-subgrid grid-rows-auto col-span-12 desktop:col-start-4 desktop:col-span-8"
       >
         <slot />
       </main>
@@ -110,30 +102,27 @@ const { lang, title, description, animateName = false } = Astro.props;
         "#path3",
         {
           d: "M 33,3 L 33,63",
-          strokeWidth: 3,
           duration: 500,
         },
-        0,
+        100,
       );
 
       timeline.add(
         "#path1",
         {
           d: "M 33,63 L 3,33",
-          strokeWidth: 3,
           duration: 500,
         },
-        0,
+        100,
       );
 
       timeline.add(
         "#path2",
         {
           d: "M 33,63 L 63,33",
-          strokeWidth: 3,
           duration: 500,
         },
-        0,
+        200,
       );
 
       timeline.add(
@@ -143,7 +132,7 @@ const { lang, title, description, animateName = false } = Astro.props;
           duration: 400,
           ease: "out",
         },
-        200,
+        0,
       );
 
       let isMobileMenuOpen = false;

@@ -44,7 +44,7 @@ type Props = (typeof collections)["book"] & { isBook: boolean };
     container-type: inline-size;
     contain: width;
     &:not(:has(.margin-toggle)) {
-      margin: 0 auto;
+      margin: 0 auto 2em;
     }
   }
 
@@ -90,16 +90,6 @@ type Props = (typeof collections)["book"] & { isBook: boolean };
         border-top: 1px solid #ccc;
         margin: 1em 0;
         padding: 0;
-      }
-
-      p.subtitle {
-        font-style: italic;
-        font-size: 1.8rem;
-        display: block;
-        line-height: 1;
-        &:before {
-          display: none;
-        }
       }
 
       .numeral {

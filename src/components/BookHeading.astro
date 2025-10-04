@@ -82,8 +82,8 @@ const hasAuthors = Boolean(authors && authors.length);
   tl.add(
     chars,
     {
-      rotateY: {from: '25deg', to: 0},
-      translateX: {from: 40, to: 0},
+      rotateY: { from: "25deg", to: 0 },
+      translateX: { from: 40, to: 0 },
       delay: stagger(20, { start: 30 }),
       duration: 500,
       ease: "outQuint",
@@ -99,6 +99,16 @@ const hasAuthors = Boolean(authors && authors.length);
     margin-bottom: min(2.5cqw, 1rem);
     font-size: 3.2rem;
     line-height: 1;
+  }
+
+  .subtitle {
+    font-style: italic;
+    font-size: 1.8rem;
+    display: block;
+    line-height: 1;
+    &:before {
+      display: none;
+    }
   }
 
   .book-heading {
