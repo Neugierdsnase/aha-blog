@@ -15,7 +15,7 @@ const shouldBeAnimated = Astro.props.animateName;
   >
   <p
     id={shouldBeAnimated ? "chars2" : "nope2"}
-    class="absolute opacity-0 desktop:text-3xl whitespace-nowrap"
+    class="absolute opacity-0 text-xl desktop:text-3xl whitespace-nowrap"
   >
     Konstantin Kovar
   </p>
@@ -45,7 +45,7 @@ const shouldBeAnimated = Astro.props.animateName;
 
     const baseStagger = stagger(50);
 
-    const tl = createTimeline({ playbackEase: "out" });
+    const tl = createTimeline({ delay: 2200, playbackEase: "out" });
 
     tl.set(chars1, { translateY: "100%" });
     tl.set(text1, { opacity: 1 });

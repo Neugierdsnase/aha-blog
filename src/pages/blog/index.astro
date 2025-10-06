@@ -24,14 +24,19 @@ const posts: BlogPostType[] = (await getCollection("blog"))
     <Header />
 
     <section>
-  <h2 class="px-4 desktop:p-0 col-start-1 -col-end-1 font-display text-5xl underline underline-offset-2 clear-descenders mb-8">
-    Jüngst geschrieben
-  </h2>
+      <h2
+        class="px-4 desktop:p-0 col-start-1 -col-end-1 font-display text-5xl underline underline-offset-2 clear-descenders mb-8"
+      >
+        Jüngst geschrieben
+      </h2>
       <ul class="px-[2vw]">
         {
           posts.map(({ data, id }: BlogPostType) => (
             <li class=" p-[0.2vw] odd:bg-surface odd:p-[0.6vw]  border-foreground-subtle">
-              <a href={"/blog/" + sanitizeContentId(id)} class="text-lg font-bold">
+              <a
+                href={"/blog/" + sanitizeContentId(id)}
+                class="text-lg font-bold"
+              >
                 {data.title}
               </a>
               <span>{data.description}</span>
