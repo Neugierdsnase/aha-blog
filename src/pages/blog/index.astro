@@ -42,7 +42,7 @@ const posts: BlogPostType[] = (await getCollection("blog"))
               <span>{data.description}</span>
               <p class="leading-0">
                 <FormattedDate
-                  className="text-foreground-subtle text-xs"
+                  className="text-foreground-subtle text-xs whitespace-nowrap"
                   date={data.pubDate}
                 />
               </p>

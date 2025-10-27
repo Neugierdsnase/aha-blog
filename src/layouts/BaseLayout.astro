@@ -1,6 +1,5 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import NameAnimation from "../components/NameAnimation.astro";
 
 type Props = {
   lang: "de" | "en";
@@ -16,7 +15,7 @@ const pages: { label: string; href: string }[] = [
   { label: "RSS", href: "/rss" },
 ];
 
-const { lang, title, description, animateName = false } = Astro.props;
+const { lang, title, description } = Astro.props;
 ---
 
 <!doctype html>
@@ -31,8 +30,18 @@ const { lang, title, description, animateName = false } = Astro.props;
         <div
           class="w-full col-start-1 -col-end-1 pt-6 flex justify-between items-center grow"
         >
-          <NameAnimation animateName={animateName} />
-          <button id="mobile-menu-toggle-button" class="desktop:hidden scale-25 desktop:scale-50">
+          <a
+            href="/"
+            class="relative col-start-4 col-span-2 overflow-hidden text-foreground"
+          >
+            <p class="font-galnoy font-bold desktop:text-3xl whitespace-nowrap">
+              Konstantin Kovar
+            </p>
+          </a>
+          <button
+            id="mobile-menu-toggle-button"
+            class="desktop:hidden scale-25 desktop:scale-50"
+          >
             <svg class="size-[66px]">
               <path
                 id="path1"
