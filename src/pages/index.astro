@@ -1,18 +1,18 @@
 ---
-import Article from "../components/Article.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
+import Article from "../components/Article.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const FEATURED_POST_TITLE = "Cluburlaub, Türkei, 2025";
 
 const featuredPost = (await getCollection("blog")).find(
-  ({ data }) => data.title === FEATURED_POST_TITLE,
+	({ data }) => data.title === FEATURED_POST_TITLE,
 );
 
 const { Content } = featuredPost
-  ? await featuredPost.render()
-  : { Content: () => null };
+	? await featuredPost.render()
+	: { Content: () => null };
 ---
 
 <BaseLayout

@@ -5,11 +5,11 @@ import BlogPost from "../../layouts/BlogPost.astro";
 export type TestPostType = CollectionEntry<"test">;
 
 export async function getStaticPaths() {
-  const posts: TestPostType[] = await getCollection("test");
-  return posts.map((post) => ({
-    params: { slug: post.id },
-    props: post,
-  }));
+	const posts: TestPostType[] = await getCollection("test");
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: post,
+	}));
 }
 
 const post = Astro.props;

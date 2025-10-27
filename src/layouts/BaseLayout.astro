@@ -2,17 +2,17 @@
 import BaseHead from "../components/BaseHead.astro";
 
 type Props = {
-  lang: "de" | "en";
-  title: string;
-  description: string;
-  animateName?: boolean;
+	lang: "de" | "en";
+	title: string;
+	description: string;
+	animateName?: boolean;
 };
 
 const pages: { label: string; href: string }[] = [
-  { label: "Über mich", href: "/about" },
-  { label: "Jüngst gelesen", href: "/book" },
-  { label: "Jüngst geschrieben", href: "/blog" },
-  { label: "RSS", href: "/rss" },
+	{ label: "Über mich", href: "/about" },
+	{ label: "Jüngst gelesen", href: "/book" },
+	{ label: "Jüngst geschrieben", href: "/blog" },
+	{ label: "RSS", href: "/rss" },
 ];
 
 const { lang, title, description } = Astro.props;

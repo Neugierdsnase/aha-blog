@@ -6,11 +6,11 @@ import { sanitizeContentId } from "../../utils/sanitizeContentId";
 export type BookPostType = CollectionEntry<"book">;
 
 export async function getStaticPaths() {
-  const books: BookPostType[] = await getCollection("book");
-  return books.map((book) => ({
-    params: { slug: sanitizeContentId(book.id) },
-    props: book,
-  }));
+	const books: BookPostType[] = await getCollection("book");
+	return books.map((book) => ({
+		params: { slug: sanitizeContentId(book.id) },
+		props: book,
+	}));
 }
 
 const book = Astro.props;

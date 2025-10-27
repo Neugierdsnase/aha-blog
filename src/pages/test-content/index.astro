@@ -1,18 +1,18 @@
 ---
 import { getCollection } from "astro:content";
 import BaseHead from "../../components/BaseHead.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
 import Header from "../../components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
-import type { TestPostType } from "./[...slug].astro";
-import FormattedDate from "../../components/FormattedDate.astro";
 import { sanitizeContentId } from "../../utils/sanitizeContentId";
+import type { TestPostType } from "./[...slug].astro";
 
 const posts: TestPostType[] = (await getCollection("test"))
-  .sort(
-    (a: TestPostType, b: TestPostType) =>
-      a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
-  )
-  .reverse();
+	.sort(
+		(a: TestPostType, b: TestPostType) =>
+			a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
+	)
+	.reverse();
 ---
 
 <!doctype html>

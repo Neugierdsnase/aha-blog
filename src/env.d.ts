@@ -2,7 +2,7 @@
 /// <reference types="astro/client" />
 
 declare module "astro" {
-  interface HTMLAttributes {
-    "epub:type"?: string;
-  }
+	interface HTMLAttributes {
+		"epub:type"?: string;
+	}
 }

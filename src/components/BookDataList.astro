@@ -2,17 +2,17 @@
 import type { collections } from "../content/config";
 
 type Props = Omit<
-  (typeof collections)["book"]["schema"],
-  "title" | "subtitle" | "releaseDate"
+	(typeof collections)["book"]["schema"],
+	"title" | "subtitle" | "releaseDate"
 >;
 
 const dataPoints = [
-  ['isbn', 'ISBN'],
-  ['pages', 'Seiten'],
-  ['publisher', 'Verlag']
-]
+	["isbn", "ISBN"],
+	["pages", "Seiten"],
+	["publisher", "Verlag"],
+];
 
-const {props} = Astro;
+const { props } = Astro;
 ---
 
 <dl class="grid grid-cols-[max-content_auto]">

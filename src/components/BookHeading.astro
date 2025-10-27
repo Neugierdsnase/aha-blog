@@ -1,13 +1,13 @@
 ---
 import type { collections } from "../content/config";
-import Details from "./Details.astro";
 import BookDataList from "./BookDataList.astro";
+import Details from "./Details.astro";
 
 type Props = (typeof collections)["book"] & { isBook: boolean };
 
 const { title, subtitle, authors, releaseDate, isBook, ...rest } = Astro.props;
 
-const hasAuthors = Boolean(authors && authors.length);
+const hasAuthors = Boolean(authors?.length);
 ---
 
 <div class="book-heading">

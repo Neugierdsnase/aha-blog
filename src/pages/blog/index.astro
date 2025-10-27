@@ -1,19 +1,19 @@
 ---
 import { getCollection } from "astro:content";
 import BaseHead from "../../components/BaseHead.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
 import Header from "../../components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
-import type { BlogPostType } from "./[...slug].astro";
-import FormattedDate from "../../components/FormattedDate.astro";
 import { sanitizeContentId } from "../../utils/sanitizeContentId";
+import type { BlogPostType } from "./[...slug].astro";
 
 const posts: BlogPostType[] = (await getCollection("blog"))
-  .filter(({ data }: BlogPostType) => !data.draft)
-  .sort(
-    (a: BlogPostType, b: BlogPostType) =>
-      a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
-  )
-  .reverse();
+	.filter(({ data }: BlogPostType) => !data.draft)
+	.sort(
+		(a: BlogPostType, b: BlogPostType) =>
+			a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
+	)
+	.reverse();
 ---
 
 <!doctype html>

@@ -1,19 +1,19 @@
 /** @type {import("prettier").Config} */
 export default {
-  proseWrap: "always",
-  plugins: ["prettier-plugin-astro"],
-  overrides: [
-    {
-      files: "*.astro",
-      options: {
-        parser: "astro",
-      },
-    },
-    {
-      files: "*.mdx",
-      options: {
-        parser: "mdx",
-      },
-    },
-  ],
+	proseWrap: "always",
+	plugins: ["prettier-plugin-astro"],
+	overrides: [
+		{
+			files: "*.astro",
+			options: {
+				parser: "astro",
+			},
+		},
+		{
+			files: "*.mdx",
+			options: {
+				parser: "mdx",
+			},
+		},
+	],
 };

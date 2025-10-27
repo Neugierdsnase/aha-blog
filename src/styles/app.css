@@ -1,114 +1,114 @@
 @import "tailwindcss";
 
 @theme {
-  --breakpoint-tablet: 760px;
-  --breakpoint-desktop: calc(760px + 480px);
+	--breakpoint-tablet: 760px;
+	--breakpoint-desktop: calc(760px + 480px);
 
-  --font-serif:
-    "et-book", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua",
-    Georgia, serif;
-  --font-old: et-book-roman-old-style;
-  --font-display: Soria, "et-book", serif;
-  --font-galnoy: Galnoy, "et-book", serif;
+	--font-serif:
+		"et-book", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua",
+		Georgia, serif;
+	--font-old: et-book-roman-old-style;
+	--font-display: Soria, "et-book", serif;
+	--font-galnoy: Galnoy, "et-book", serif;
 
-  --color-night: #121417ff;
-  --color-raisin-black: #2c262cff;
-  --color-lavender-blush: #ffebf0ff;
-  --color-misty-rose: #fbdedaff;
-  --color-antiflash-white: #e8eaedff;
-  --color-black-bean: #29000aff;
-  --color-tea-green: #c1d4b0ff;
-  --color-cherry-blossom-pink: #ffadbcff;
-  --color-dark-green: #1e2815ff;
-  --color-fire-brick: #b80022ff;
+	--color-night: #121417ff;
+	--color-raisin-black: #2c262cff;
+	--color-lavender-blush: #ffebf0ff;
+	--color-misty-rose: #fbdedaff;
+	--color-antiflash-white: #e8eaedff;
+	--color-black-bean: #29000aff;
+	--color-tea-green: #c1d4b0ff;
+	--color-cherry-blossom-pink: #ffadbcff;
+	--color-dark-green: #1e2815ff;
+	--color-fire-brick: #b80022ff;
 
-  --leading-1: 1;
-  --leading-2: 2;
+	--leading-1: 1;
+	--leading-2: 2;
 
-  --color-surface: light-dark(var(--color-lavender-blush), var(--color-night));
-  --color-surface-inverted: light-dark(
-    var(--color-night),
-    var(--color-lavender-blush)
-  );
+	--color-surface: light-dark(var(--color-lavender-blush), var(--color-night));
+	--color-surface-inverted: light-dark(
+		var(--color-night),
+		var(--color-lavender-blush)
+	);
 
-  --color-surface-high: var(--color-cherry-blossom-pink);
+	--color-surface-high: var(--color-cherry-blossom-pink);
 
-  --color-background: light-dark(
-    var(--color-misty-rose),
-    var(--color-raisin-black)
-  );
-  --color-background-inverted: light-dark(
-    var(--color-raisin-black),
-    var(--color-misty-rose)
-  );
+	--color-background: light-dark(
+		var(--color-misty-rose),
+		var(--color-raisin-black)
+	);
+	--color-background-inverted: light-dark(
+		var(--color-raisin-black),
+		var(--color-misty-rose)
+	);
 
-  --color-foreground: light-dark(
-    var(--color-black-bean),
-    var(--color-lavender-blush)
-  );
-  --color-foreground-inverted: light-dark(
-    var(--color-lavender-blush),
-    var(--color-black-bean)
-  );
+	--color-foreground: light-dark(
+		var(--color-black-bean),
+		var(--color-lavender-blush)
+	);
+	--color-foreground-inverted: light-dark(
+		var(--color-lavender-blush),
+		var(--color-black-bean)
+	);
 
-  --color-foreground-subtle: light-dark(#3a3b3b, #bdbbbb);
-  --color-foreground-subtle-inverted: light-dark(#3a3b3b, #bdbbbb);
+	--color-foreground-subtle: light-dark(#3a3b3b, #bdbbbb);
+	--color-foreground-subtle-inverted: light-dark(#3a3b3b, #bdbbbb);
 
-  --color-error: light-dark(
-    var(--color-fire-brick),
-    var(--color-cherry-blossom-pink)
-  );
-  --color-error-inverted: light-dark(
-    var(--color-cherry-blossom-pink),
-    var(--color-fire-brick)
-  );
-  --color-success: light-dark(var(--color-dark-green), var(--color-tea-green));
+	--color-error: light-dark(
+		var(--color-fire-brick),
+		var(--color-cherry-blossom-pink)
+	);
+	--color-error-inverted: light-dark(
+		var(--color-cherry-blossom-pink),
+		var(--color-fire-brick)
+	);
+	--color-success: light-dark(var(--color-dark-green), var(--color-tea-green));
 
-  --spacing-paragraph: 100%;
-  --spacing-paragraph-desktop: 55%;
-  --spacing-sidebar: 40px;
+	--spacing-paragraph: 100%;
+	--spacing-paragraph-desktop: 55%;
+	--spacing-sidebar: 40px;
 
-  --font-weight-heading: 400;
+	--font-weight-heading: 400;
 
-  --text-xxs: 0.825rem;
-  --text-xs: 1rem; /* 15px */
-  --text-sm: 1.125rem; /* 17.5px */
-  --text-md: 1.25rem; /* 20px */
-  --text-lg: 1.5rem; /* 22.5px */
-  --text-xl: 2rem; /* 30px */
+	--text-xxs: 0.825rem;
+	--text-xs: 1rem; /* 15px */
+	--text-sm: 1.125rem; /* 17.5px */
+	--text-md: 1.25rem; /* 20px */
+	--text-lg: 1.5rem; /* 22.5px */
+	--text-xl: 2rem; /* 30px */
 
-  --text-body: var(--text-md);
+	--text-body: var(--text-md);
 }
 
 @utility clear-descenders {
-  text-shadow:
-    var(--color-background) 0px -1px 0.5px,
-    var(--color-background) 0px -1.25px 0.5px,
-    var(--color-background) 0px -1.75px 0.5px,
-    var(--color-background) 0px -2px 0.5px,
-    var(--color-background) -4px 0px,
-    var(--color-background) -3px 0px,
-    var(--color-background) -2px 0px,
-    var(--color-background) -1px 0px,
-    var(--color-background) 1px 0px,
-    var(--color-background) 2px 0px,
-    var(--color-background) 3px 0px,
-    var(--color-background) 4.5px 0px;
+	text-shadow:
+		var(--color-background) 0px -1px 0.5px,
+		var(--color-background) 0px -1.25px 0.5px,
+		var(--color-background) 0px -1.75px 0.5px,
+		var(--color-background) 0px -2px 0.5px,
+		var(--color-background) -4px 0px,
+		var(--color-background) -3px 0px,
+		var(--color-background) -2px 0px,
+		var(--color-background) -1px 0px,
+		var(--color-background) 1px 0px,
+		var(--color-background) 2px 0px,
+		var(--color-background) 3px 0px,
+		var(--color-background) 4.5px 0px;
 }
 
 :root {
-  font-size: 15px;
-  color-scheme: light dark;
+	font-size: 15px;
+	color-scheme: light dark;
 
-  accent-color: var(--color-cherry-blossom-pink)
+	accent-color: var(--color-cherry-blossom-pink);
 }
 
 @view-transition {
-  navigation: auto;
+	navigation: auto;
 }
 
 @layer base {
-  body {
-    @apply bg-background;
-  }
+	body {
+		@apply bg-background;
+	}
 }

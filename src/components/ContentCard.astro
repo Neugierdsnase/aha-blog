@@ -3,9 +3,9 @@ import type { BlogPostType } from "../pages/blog/[...slug].astro";
 import FormattedDate from "./FormattedDate.astro";
 
 interface Props {
-  blogpost: BlogPostType;
-  path?: string;
-  className?: string;
+	blogpost: BlogPostType;
+	path?: string;
+	className?: string;
 }
 
 const { blogpost, path = "", className = "" } = Astro.props;
