@@ -6,6 +6,7 @@
     "node": "22.x"
   },
   "scripts": {
+    "lint": "npx @biomejs/biome .",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
