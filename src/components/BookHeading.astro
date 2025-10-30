@@ -11,7 +11,7 @@ const hasAuthors = Boolean(authors?.length);
 ---
 
 <div class="book-heading">
-  <h1 class="text-pretty opacity-0">{title}</h1>
+  <h1 class="text-pretty opacity-0" data-testid="heading-book">{title}</h1>
   {subtitle && <p class="subtitle">{subtitle}</p>}
   {
     (hasAuthors || releaseDate) && (
