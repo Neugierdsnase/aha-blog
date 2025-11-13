@@ -3,12 +3,14 @@ import type { collections } from "../content/config";
 import BookHeading from "./BookHeading.astro";
 
 type Props = (typeof collections)["book"] & { isBook: boolean };
+const { props } = Astro
+const testId = String(props.title + props.releaseDate).replaceAll(' ', '')
 ---
 
-<div class="container col-start-1 -col-end-1">
+<div class="container col-start-1 -col-end-1" data-testid={testId}>
   <article>
     <section>
-      <BookHeading {...Astro.props} />
+      <BookHeading {...props} />
       <slot />
     </section>
   </article>

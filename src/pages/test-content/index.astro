@@ -34,7 +34,7 @@ const posts: TestPostType[] = (await getCollection("test"))
             ({ data, id }: TestPostType) => (
                 <li class=" p-[0.2vw] odd:bg-surface odd:p-[0.6vw]  border-foreground-subtle">
                   <a
-                    href={"/blog/" + sanitizeContentId(id)}
+                    href={"/test-content/" + sanitizeContentId(id)}
                     class="text-lg font-bold"
                   >
                     {data.title}

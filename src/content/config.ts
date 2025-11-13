@@ -115,4 +115,4 @@ const book = defineCollection({
 	}),
 });
 
-export const collections = { blog, book, test };
+export const collections = { blog, book, 'test-content': test };

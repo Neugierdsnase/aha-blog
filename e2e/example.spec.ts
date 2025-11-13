@@ -16,14 +16,11 @@ test("'continue reading' link screenshot", async ({ page }) => {
 });
 
 test("'continue reading' link", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/test-content/sidenotes-test");
 
   // Get the continue reading button
-  const continueReadingButton = page.getByTestId("btn-continue-reading");
-
-  // Click the get started link.
-  await continueReadingButton.click();
+  const sidenotesTestArticle = page.getByTestId("SidenotesTestundefined");
 
   // Expects page to have a heading with the name of Installation.
-  await expect(page.getByTestId("heading-book")).toBeVisible();
+  await expect(sidenotesTestArticle).toHaveScreenshot()
 });
