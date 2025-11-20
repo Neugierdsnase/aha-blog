@@ -1,13 +1,14 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
 import BlogPost from "../../layouts/BlogPost.astro";
+import { sanitizeContentId } from "../../utils/sanitizeContentId";
 
-export type TestPostType = CollectionEntry<"test">;
+export type TestPostType = CollectionEntry<"test-content">;
 
 export async function getStaticPaths() {
-	const posts: TestPostType[] = await getCollection("test");
+	const posts: TestPostType[] = await getCollection("test-content");
 	return posts.map((post) => ({
-		params: { slug: post.id },
+		params: { slug: sanitizeContentId(post.id) },
 		props: post,
 	}));
 }

@@ -1,14 +1,14 @@
 import { expect, test } from "@playwright/test";
 
 test("has title", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/test-content");
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Konstantin/);
 });
 
 test("'continue reading' link screenshot", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/test-content");
 
   // Get the continue reading button
   const continueReadingButton = page.getByTestId("btn-continue-reading");

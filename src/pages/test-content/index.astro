@@ -7,7 +7,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 import { sanitizeContentId } from "../../utils/sanitizeContentId";
 import type { TestPostType } from "./[...slug].astro";
 
-const posts: TestPostType[] = (await getCollection("test"))
+const posts: TestPostType[] = (await getCollection("test-content"))
 	.sort(
 		(a: TestPostType, b: TestPostType) =>
 			a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
@@ -26,7 +26,7 @@ const posts: TestPostType[] = (await getCollection("test"))
       <h2
         class="text-[clamp(2.2rem,4.2svw,3.4rem)] pl-[2vw] underline underline-offset-2 clear-descenders z-10 mb-2"
       >
-        Blog
+        Test Content
       </h2>
       <ul class="px-[2vw]">
         {
@@ -34,7 +34,7 @@ const posts: TestPostType[] = (await getCollection("test"))
             ({ data, id }: TestPostType) => (
                 <li class=" p-[0.2vw] odd:bg-surface odd:p-[0.6vw]  border-foreground-subtle">
                   <a
-                    href={"/blog/" + sanitizeContentId(id)}
+                    href={"/test-content/" + sanitizeContentId(id)}
                     class="text-lg font-bold"
                   >
                     {data.title}

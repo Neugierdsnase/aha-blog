@@ -1,20 +1,22 @@
 import { visit } from "unist-util-visit";
 
+const footnoteMap = new Map();
+
 /** @type {import('unified').Plugin<[], import('hast').Root>} */
 export default function rehypeInlineFootnotes() {
 	return (tree) => {
-		const footnoteMap = new Map();
+		visit(tree, 'element', (node, index, parent) => {
+			if (node.tagName === 'section' && node.properties.className.includes('footnotes') && node.children) {
 
-		// 1. Extract footnote definitions
-		visit(tree, "element", (node, index, parent) => {
-			if (
-				node.tagName === "section" &&
-				node.properties?.className?.includes("footnotes")
-			) {
+				// Get all ordered lists
 				const ol = node.children.find((child) => child.tagName === "ol");
 
-				if (ol?.children) {
-					for (const li of ol.children) {
+				// If an ordered list with children exists
+				if (ol && ol.children) {
+					// get a flat map of its li children
+					const footnoteListItems = ol.children.flatMap((child) => { if (child.tagName === 'li') return child }).filter(Boolean)
+
+					for (const li of footnoteListItems) {
 						const id = li.properties?.id
 							?.replace("user-content-fn-", "")
 							.trim();
@@ -78,12 +80,12 @@ export default function rehypeInlineFootnotes() {
 					parent.children.splice(index, 1);
 				}
 			}
-		});
+		})
 
-		// 2. Replace footnote references with inline elements
 		visit(tree, "element", (node, index, parent) => {
-			if (node.tagName === "sup" && node.children?.[0]?.tagName === "a") {
-				const id = node.children[0].properties?.href
+			const { tagName, children } = node
+			if (tagName === "sup" && children?.[0]?.tagName === "a") {
+				const id = children[0].properties?.href
 					?.replace("#user-content-fn-", "")
 					.trim();
 
@@ -92,5 +94,5 @@ export default function rehypeInlineFootnotes() {
 				parent.children.splice(index, 1, label, input, content);
 			}
 		});
-	};
+	}
 }
