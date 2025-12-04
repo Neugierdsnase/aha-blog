@@ -1,8 +1,8 @@
 ---
-import type { collections } from "../content/config";
+import type { CollectionEntry } from "astro:content";
 import BookHeading from "./BookHeading.astro";
 
-type Props = (typeof collections)["book"] & { isBook: boolean };
+type Props = CollectionEntry<"book" | "blog">['data'];
 ---
 
 <div class="container col-start-1 -col-end-1">

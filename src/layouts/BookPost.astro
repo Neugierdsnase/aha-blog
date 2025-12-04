@@ -1,9 +1,9 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import Article from "../components/Article.astro";
-import type { collections } from "../content/config";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-type Props = (typeof collections)["book"];
+type Props = CollectionEntry<"book">['data'];
 
 const { title, description } = Astro.props;
 ---

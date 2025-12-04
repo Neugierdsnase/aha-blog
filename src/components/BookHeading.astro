@@ -1,11 +1,18 @@
 ---
-import type { collections } from "../content/config";
-import BookDataList from "./BookDataList.astro";
-import Details from "./Details.astro";
+import type { CollectionEntry } from "astro:content";
 
-type Props = (typeof collections)["book"] & { isBook: boolean };
+type Props = CollectionEntry<"book" | "blog">['data'];
 
-const { title, subtitle, authors, releaseDate, isBook, ...rest } = Astro.props;
+const isBookPostGuard = (props: Props): props is CollectionEntry<'book'>['data'] => {
+  return (props as CollectionEntry<'book'>['data']).subtitle !== undefined
+}
+
+const isBookPost = isBookPostGuard(Astro.props)
+
+const title = Astro.props.title;
+const subtitle = isBookPost ? Astro.props.subtitle : undefined;
+const authors = isBookPost ? Astro.props.authors : undefined;
+const releaseDate = isBookPost ? Astro.props.releaseDate : undefined
 
 const hasAuthors = Boolean(authors?.length);
 ---
@@ -19,7 +26,7 @@ const hasAuthors = Boolean(authors?.length);
         {" "}
         {hasAuthors && (
           <ul>
-            {authors.map((author: string) => (
+            {(authors || []).map((author: string) => (
               <li set:html={author.trim()} />
             ))}
           </ul>
@@ -27,13 +34,6 @@ const hasAuthors = Boolean(authors?.length);
         {hasAuthors && releaseDate && ", "}
         {releaseDate && <span>{releaseDate}</span>}
       </div>
-    )
-  }
-  {
-    isBook && (
-      <Details>
-        <BookDataList {...rest} />
-      </Details>
     )
   }
 </div>
