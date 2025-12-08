@@ -6,19 +6,23 @@ type Props = BookPostType;
 
 const { id, data } = Astro.props;
 const { title, subtitle, authors, releaseDate, genre } = data;
+
+const titleWithoutWhiteSpace = title.replaceAll(" ", "").toLowerCase();
 ---
 
 <li>
   <a href={"/book/" + sanitizeContentId(id)}>
     <span
       class="col-start-1 col-span-2 line-clamp-1 font-galnoy font-bold self-baseline"
+      style=`view-transition-name: --header-${titleWithoutWhiteSpace};`
       >{title}</span
     >
     <span
       class="col-start-1 col-span-2 line-clamp-1 font-galnoy italic self-baseline text-foreground-subtle text-sm"
       >{subtitle}</span
     >
-    <span class="col-start-1 col-span-1 line-clamp-1 text-sm self-baseline leading-2"
+    <span
+      class="col-start-1 col-span-1 line-clamp-1 text-sm self-baseline leading-2"
       >{authors.join(" ")}, {releaseDate}</span
     >
     <span

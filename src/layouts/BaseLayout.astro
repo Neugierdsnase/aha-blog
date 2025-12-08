@@ -2,17 +2,16 @@
 import BaseHead from "../components/BaseHead.astro";
 
 type Props = {
-	lang: "de" | "en";
-	title: string;
-	description?: string;
-	animateName?: boolean;
+  lang: "de" | "en";
+  title: string;
+  description?: string;
 };
 
 const pages: { label: string; href: string }[] = [
-	{ label: "Über mich", href: "/about" },
-	{ label: "Jüngst gelesen", href: "/book" },
-	{ label: "Jüngst geschrieben", href: "/blog" },
-	{ label: "RSS", href: "/rss" },
+  { label: "Über mich", href: "/about" },
+  { label: "Jüngst gelesen", href: "/book" },
+  { label: "Jüngst geschrieben", href: "/blog" },
+  { label: "RSS", href: "/rss" },
 ];
 
 const { lang, title, description } = Astro.props;
@@ -61,7 +60,9 @@ const { lang, title, description } = Astro.props;
             </svg>
           </button>
         </div>
-        <nav class="grow absolute desktop:static inset-x-0 top-16 h-fit desktop:top-24">
+        <nav
+          class="grow absolute desktop:static inset-x-0 top-16 h-fit desktop:top-24"
+        >
           <ul
             class="flex justify-center items-center flex-col desktop:gap-8 desktop:flex-row"
           >
@@ -82,81 +83,6 @@ const { lang, title, description } = Astro.props;
         <slot />
       </main>
     </div>
-
-    <script>
-      import { stagger, createTimeline } from "animejs";
-
-      const foldables = document.querySelectorAll(".foldable");
-      const amountOfFoldables = foldables.length;
-
-      const timeline = createTimeline({
-        alternate: true,
-        autoplay: false,
-        playbackEase: "out",
-      });
-
-      timeline.add(
-        foldables,
-        {
-          translateY: { from: -stagger(24), to: 0 },
-          opacity: 1,
-          height: "48px",
-          delay: stagger(500 / amountOfFoldables),
-          duration: 500 / amountOfFoldables,
-        },
-        70,
-      );
-
-      timeline.add(
-        "#path3",
-        {
-          d: "M 33,3 L 33,63",
-          duration: 500,
-        },
-        100,
-      );
-
-      timeline.add(
-        "#path1",
-        {
-          d: "M 33,63 L 3,33",
-          duration: 500,
-        },
-        100,
-      );
-
-      timeline.add(
-        "#path2",
-        {
-          d: "M 33,63 L 63,33",
-          duration: 500,
-        },
-        200,
-      );
-
-      timeline.add(
-        "button",
-        {
-          rotate: "-180deg",
-          duration: 400,
-          ease: "out",
-        },
-        0,
-      );
-
-      let isMobileMenuOpen = false;
-
-      document
-        .querySelector("#mobile-menu-toggle-button")
-        ?.addEventListener("click", () => {
-          if (isMobileMenuOpen) {
-            timeline.reverse();
-          } else {
-            timeline.play();
-          }
-          isMobileMenuOpen = !isMobileMenuOpen;
-        });
-    </script>
 
     <script
       is:inline
