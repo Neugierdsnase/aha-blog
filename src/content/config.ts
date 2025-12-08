@@ -32,6 +32,7 @@ const bookGenres: [string, ...string[]] = [
 	"biography",
 	"business",
 	"craft",
+	"crime",
 	"cultural-studies",
 	"drama",
 	"economics",
