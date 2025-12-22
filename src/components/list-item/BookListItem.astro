@@ -19,6 +19,7 @@ const titleWithoutWhiteSpace = title.replaceAll(" ", "").toLowerCase();
     >
     <span
       class="col-start-1 col-span-2 line-clamp-1 font-galnoy italic self-baseline text-foreground-subtle text-sm"
+      style=`view-transition-name: --subheader-${titleWithoutWhiteSpace};`
       >{subtitle}</span
     >
     <span
@@ -43,18 +44,18 @@ const titleWithoutWhiteSpace = title.replaceAll(" ", "").toLowerCase();
     }
 
     &:nth-child(odd) {
-      @apply col-start-2 tablet:col-start-2 -col-end-1 tablet:-col-end-2 bg-gradient-to-r bg-position-[center_right] focus-within:bg-position-[center_left] focus-visible:bg-position-[center_left] hover:bg-position-[center_left];
+      @apply col-start-2 tablet:col-start-2 -col-end-1 tablet:-col-end-2 bg-linear-to-r bg-position-[center_right] focus-within:bg-position-[center_left] focus-visible:bg-position-[center_left] hover:bg-position-[center_left];
 
       & > a {
-        @apply bg-gradient-to-r bg-position-[center_right] pl-3.5 focus-within:bg-position-[center_left] focus-visible:bg-position-[center_left] hover:bg-position-[center_left] hover:left-2 hover:pl-2 focus-within:left-2 focus-within:pl-2 focus-visible:left-2 focus-visible:pl-2;
+        @apply bg-linear-to-r bg-position-[center_right] pl-3.5 focus-within:bg-position-[center_left] focus-visible:bg-position-[center_left] hover:bg-position-[center_left] hover:left-2 hover:pl-2 focus-within:left-2 focus-within:pl-2 focus-visible:left-2 focus-visible:pl-2;
       }
     }
 
     &:nth-child(even) {
-      @apply col-start-1 -col-end-2 tablet:-col-end-3 bg-gradient-to-l bg-position-[center_left] focus-within:bg-position-[center_right] focus-visible:bg-position-[center_right] hover:bg-position-[center_right];
+      @apply col-start-1 -col-end-2 tablet:-col-end-3 bg-linear-to-l bg-position-[center_left] focus-within:bg-position-[center_right] focus-visible:bg-position-[center_right] hover:bg-position-[center_right];
 
       & > a {
-        @apply bg-gradient-to-l bg-position-[center_left] pr-3.5 focus-within:bg-position-[center_right] focus-visible:bg-position-[center_right] hover:bg-position-[center_right] hover:right-2 hover:pr-2 focus-within:right-2 focus-within:pr-2 focus-visible:right-2 focus-visible:pr-2;
+        @apply bg-linear-to-l bg-position-[center_left] pr-3.5 focus-within:bg-position-[center_right] focus-visible:bg-position-[center_right] hover:bg-position-[center_right] hover:right-2 hover:pr-2 focus-within:right-2 focus-within:pr-2 focus-visible:right-2 focus-visible:pr-2;
       }
     }
   }

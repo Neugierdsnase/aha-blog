@@ -29,7 +29,9 @@ const titleWithoutWhiteSpace = title.replaceAll(" ", "").toLowerCase();
   >
     {title}
   </h1>
-  {subtitle && <p class="subtitle">{subtitle}</p>}
+  {subtitle && <p class="subtitle"
+    style=`view-transition-name: --subheader-${titleWithoutWhiteSpace};`
+  >{subtitle}</p>}
   {
     (hasAuthors || releaseDate) && (
       <div class="authors">
