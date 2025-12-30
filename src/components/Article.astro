@@ -5,7 +5,7 @@ import BookHeading from "./BookHeading.astro";
 type Props = CollectionEntry<"book" | "blog">['data'];
 ---
 
-<div class="container col-start-1 -col-end-1">
+<div class="container col-start-1 -col-end-1" data-testid="article-container">
   <article>
     <section>
       <BookHeading {...Astro.props} />

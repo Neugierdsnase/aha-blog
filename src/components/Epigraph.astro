@@ -3,7 +3,7 @@ const { quote, footer } = Astro.props;
 ---
 
 <div class="epigraph">
-  <blockquote>
+  <blockquote style="border-left: none;">
     <p set:html={quote} />
     <footer set:html={footer} />
   </blockquote>
