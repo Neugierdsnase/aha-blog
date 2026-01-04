@@ -18,10 +18,7 @@ const books: BookPostType[] = (await getCollection("book"))
   title="Jüngst gelesen"
   description="Die Bücher, die ich zuletzt gelesen habe."
 >
-  <h2 class="px-4 desktop:p-0 col-start-1 -col-end-1 font-display text-5xl underline underline-offset-2 clear-descenders mb-8">
-    Jüngst gelesen
-  </h2>
-  <ul class="p-4 desktop:p-0 grid grid-cols-subgrid col-start-1 -col-end-1 gap-4">
+  <ul class="p-4 desktop:p-0 grid grid-cols-subgrid col-span-2 gap-4">
     {books.map((book: BookPostType) => <BookListItem {...book} />)}
   </ul>
 </BaseLayout>

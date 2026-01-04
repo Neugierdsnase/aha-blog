@@ -37,14 +37,14 @@ const titleWithoutWhiteSpace = title.replaceAll(" ", "").toLowerCase();
   @reference "../../styles/app.css";
 
   li {
-    @apply relative h-24 text-md to-foreground-subtle/40 from-foreground/80 from-15% to-55% bg-size-[166%] duration-700 transition-all;
+    @apply relative col-span-full h-24 text-md to-foreground-subtle/40 from-foreground/80 from-15% to-55% bg-size-[166%] duration-700 transition-all;
 
     & > a {
-      @apply grid grid-cols-2 grid-rows-4 absolute gap-4 p-2 inset-0.5 from-foreground/10 to-background/30 from-5% to-65% bg-size-[166%] duration-700 transition-all bg-background overflow-hidden -outline-offset-4;
+      @apply grid grid-rows-4 absolute gap-4 p-2 inset-0.5 from-foreground/10 to-background/30 from-5% to-65% bg-size-[166%] duration-700 transition-all bg-background overflow-hidden -outline-offset-4;
     }
 
     &:nth-child(odd) {
-      @apply col-start-2 tablet:col-start-2 -col-end-1 tablet:-col-end-2 bg-linear-to-r bg-position-[center_right] focus-within:bg-position-[center_left] focus-visible:bg-position-[center_left] hover:bg-position-[center_left];
+      @apply bg-linear-to-r bg-position-[center_right] focus-within:bg-position-[center_left] focus-visible:bg-position-[center_left] hover:bg-position-[center_left];
 
       & > a {
         @apply bg-linear-to-r bg-position-[center_right] pl-3.5 focus-within:bg-position-[center_left] focus-visible:bg-position-[center_left] hover:bg-position-[center_left] hover:left-2 hover:pl-2 focus-within:left-2 focus-within:pl-2 focus-visible:left-2 focus-visible:pl-2;
@@ -52,7 +52,7 @@ const titleWithoutWhiteSpace = title.replaceAll(" ", "").toLowerCase();
     }
 
     &:nth-child(even) {
-      @apply col-start-1 -col-end-2 tablet:-col-end-3 bg-linear-to-l bg-position-[center_left] focus-within:bg-position-[center_right] focus-visible:bg-position-[center_right] hover:bg-position-[center_right];
+      @apply bg-linear-to-l bg-position-[center_left] focus-within:bg-position-[center_right] focus-visible:bg-position-[center_right] hover:bg-position-[center_right];
 
       & > a {
         @apply bg-linear-to-l bg-position-[center_left] pr-3.5 focus-within:bg-position-[center_right] focus-visible:bg-position-[center_right] hover:bg-position-[center_right] hover:right-2 hover:pr-2 focus-within:right-2 focus-within:pr-2 focus-visible:right-2 focus-visible:pr-2;
