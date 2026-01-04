@@ -5,7 +5,7 @@ import BookHeading from "./BookHeading.astro";
 type Props = CollectionEntry<"book" | "blog">['data'];
 ---
 
-<div class="container col-start-1 -col-end-1" data-testid="article-container">
+<div class="container col-span-full desktop:col-span-3" data-testid="article-container">
   <article>
     <section>
       <BookHeading {...Astro.props} />
@@ -71,11 +71,9 @@ type Props = CollectionEntry<"book" | "blog">['data'];
   @container (min-width: 0px) {
     article {
       display: block;
-      width: 87.5%;
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: 12.5%;
+      width: 100%;
       &:not(:has(.margin-toggle)) {
+        margin: auto;
         padding-left: 0;
       }
       padding: 2rem 0;
@@ -182,12 +180,11 @@ type Props = CollectionEntry<"book" | "blog">['data'];
       }
 
       blockquote p {
-        width: 55%;
-        margin-right: 40px;
+        width: 86%;
       }
 
       blockquote footer {
-        width: 55%;
+        width: 86%;
         font-size: 1.1rem;
         text-align: right;
       }
@@ -202,7 +199,7 @@ type Props = CollectionEntry<"book" | "blog">['data'];
         section > p,
         section > footer,
         section > table {
-          width: 55%;
+          width: 75%;
         }
       }
 
@@ -210,7 +207,7 @@ type Props = CollectionEntry<"book" | "blog">['data'];
       section > dl,
       section > ol,
       section > ul {
-        width: 50%;
+        width: 70%;
         -webkit-padding-start: 5%;
       }
 
@@ -266,8 +263,8 @@ type Props = CollectionEntry<"book" | "blog">['data'];
       .marginnote {
         float: right;
         clear: right;
-        margin-right: -60%;
-        width: 50%;
+        margin-right: -34%;
+        width: 28%;
         margin-top: 0.3rem;
         margin-bottom: 0;
         font-size: 1.1rem;
@@ -454,7 +451,7 @@ type Props = CollectionEntry<"book" | "blog">['data'];
 
       blockquote p,
       blockquote footer {
-        width: 100%;
+        width: 90%;
       }
 
       label.margin-toggle:not(.sidenote-number) {
