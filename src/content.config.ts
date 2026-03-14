@@ -1,29 +1,27 @@
 import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
 
 export const testContent = defineCollection({
-	type: "content",
-	// Type-check frontmatter using a schema
+	loader: glob({ pattern: "**/*.mdx", base: "./src/content/test-content" }),
 	schema: z.object({
 		title: z.string(),
 		description: z.string().optional(),
-		// Transform string to Date object
 		pubDate: z.coerce.date(),
 	}),
 });
 
 const blog = defineCollection({
-	type: "content",
-	// Type-check frontmatter using a schema
+	loader: glob({ pattern: "**/*.mdx", base: "./src/content/blog" }),
 	schema: z.object({
 		title: z.string(),
 		subtitle: z.string().optional(),
 		description: z.string().optional(),
-		// Transform string to Date object
 		pubDate: z.coerce.date(),
 		updatedDate: z.coerce.date().optional(),
 		heroImage: z.string().optional(),
 		lang: z.enum(['en', 'de']),
 		draft: z.boolean().optional(),
+		featured: z.boolean().optional(),
 	}),
 });
 
@@ -68,8 +66,7 @@ const bookGenres: [string, ...string[]] = [
 ];
 
 const book = defineCollection({
-	type: "content",
-	// Type-check frontmatter using a schema
+	loader: glob({ pattern: "**/*.mdx", base: "./src/content/book" }),
 	schema: z.object({
 		// Core book information
 		title: z.string(),

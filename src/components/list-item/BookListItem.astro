@@ -1,25 +1,25 @@
 ---
 import type { BookPostType } from "../../pages/book/[...slug].astro";
-import { sanitizeContentId } from "../../utils/sanitizeContentId.ts";
+import { sanitizeViewTransitionName } from "../../utils/sanitizeViewTransitionName";
 
 type Props = BookPostType;
 
 const { id, data } = Astro.props;
 const { title, subtitle, authors, releaseDate, genre } = data;
 
-const titleWithoutWhiteSpace = title.replaceAll(" ", "").toLowerCase();
+const transitionName = sanitizeViewTransitionName(title);
 ---
 
 <li>
-  <a href={"/book/" + sanitizeContentId(id)}>
+  <a href={"/book/" + id}>
     <span
       class="col-start-1 col-span-2 line-clamp-1 font-galnoy font-bold self-baseline"
-      style=`view-transition-name: --header-${titleWithoutWhiteSpace};`
+      style=`view-transition-name: --header-${transitionName};`
       >{title}</span
     >
     <span
       class="col-start-1 col-span-2 line-clamp-1 font-galnoy italic self-baseline text-foreground-subtle text-sm"
-      style=`view-transition-name: --subheader-${titleWithoutWhiteSpace};`
+      style=`view-transition-name: --subheader-${transitionName};`
       >{subtitle}</span
     >
     <span

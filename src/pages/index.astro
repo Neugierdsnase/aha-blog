@@ -1,17 +1,15 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import Article from "../components/Article.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const FEATURED_POST_TITLE = "Cluburlaub, Türkei, 2025";
-
 const featuredPost = (await getCollection("blog")).find(
-	({ data }) => data.title === FEATURED_POST_TITLE,
+	({ data }) => data.featured,
 );
 
 const { Content } = featuredPost
-	? await featuredPost.render()
+	? await render(featuredPost)
 	: { Content: () => null };
 ---
 
@@ -24,14 +22,15 @@ const { Content } = featuredPost
     id="article"
     class="row-start-1 col-start-1 -col-end-1 max-h-[69vh] mask-b-from-45 overflow-clip"
   >
-    <!-- @ts-expect-error-->
-    <Article title={featuredPost?.data.title ?? ""}>
-      <Content />
-    </Article>
+    {featuredPost && (
+      <Article {...featuredPost.data}>
+        <Content />
+      </Article>
+    )}
   </div>
   <a
     id="further"
-    href={"/blog/" + featuredPost?.slug}
+    href={"/blog/" + featuredPost?.id}
     class="block row-start-2 col-start-1 z-10 -col-end-1 h-12 mt-8 text-center text-md w-fit mx-auto border-foreground border-1 rounded py-2 px-8 cursor-pointer hover:bg-foreground hover:text-background transition-colors duration-300"
     data-testid='btn-continue-reading'
     >weiterlesen...</a

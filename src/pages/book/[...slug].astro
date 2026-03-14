@@ -1,21 +1,19 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
+import { type CollectionEntry, getCollection, render } from "astro:content";
 import BookPost from "../../layouts/BookPost.astro";
-import { sanitizeContentId } from "../../utils/sanitizeContentId";
 
 export type BookPostType = CollectionEntry<"book">;
 
 export async function getStaticPaths() {
 	const books: BookPostType[] = await getCollection("book");
 	return books.map((book) => ({
-		params: { slug: sanitizeContentId(book.id) },
+		params: { slug: book.id },
 		props: book,
 	}));
 }
 
 const book = Astro.props;
-const rendered = await book.render();
-const { Content } = rendered;
+const { Content } = await render(book);
 ---
 
 <BookPost {...book.data}>

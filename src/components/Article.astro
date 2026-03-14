@@ -58,14 +58,13 @@ type Props = CollectionEntry<"book" | "blog">['data'];
   }
 </script>
 
-<style>
+<style is:global>
   .container {
     container-type: inline-size;
     contain: width;
     &:not(:has(.margin-toggle)) {
       margin: 0 auto 2em;
     }
-  }
 
   /* Tufte CSS styles */
   @container (min-width: 0px) {
@@ -491,5 +490,6 @@ type Props = CollectionEntry<"book" | "blog">['data'];
         width: 100%;
       }
     }
+  }
   }
 </style>

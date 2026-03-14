@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { sanitizeViewTransitionName } from "../utils/sanitizeViewTransitionName";
 
 type Props = CollectionEntry<"book" | "blog">["data"];
 
@@ -18,19 +19,19 @@ const releaseDate = isBookPost ? Astro.props.releaseDate : undefined;
 
 const hasAuthors = Boolean(authors?.length);
 
-const titleWithoutWhiteSpace = title.replaceAll(" ", "").toLowerCase();
+const transitionName = sanitizeViewTransitionName(title);
 ---
 
 <div class="book-heading">
   <h1
     class="text-pretty"
-    style=`view-transition-name: --header-${titleWithoutWhiteSpace};`
+    style=`view-transition-name: --header-${transitionName};`
     data-testid="heading-book"
   >
     {title}
   </h1>
   {subtitle && <p class="subtitle"
-    style=`view-transition-name: --subheader-${titleWithoutWhiteSpace};`
+    style=`view-transition-name: --subheader-${transitionName};`
   >{subtitle}</p>}
   {
     (hasAuthors || releaseDate) && (
@@ -87,18 +88,16 @@ const titleWithoutWhiteSpace = title.replaceAll(" ", "").toLowerCase();
       & > li {
         display: inline;
 
-        & > li {
-          &:not(:last-child):after {
-            content: ", ";
-          }
+        &:not(:last-child):after {
+          content: ", ";
+        }
 
-          &:nth-last-child(2):after {
-            content: " und ";
-          }
+        &:nth-last-child(2):after {
+          content: " und ";
+        }
 
-          &:last-child:after {
-            content: "";
-          }
+        &:last-child:after {
+          content: "";
         }
       }
     }
