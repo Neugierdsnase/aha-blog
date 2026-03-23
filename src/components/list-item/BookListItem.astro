@@ -1,62 +1,94 @@
 ---
 import type { BookPostType } from "../../pages/book/[...slug].astro";
+import { genreLabels } from "../../utils/genreLabels";
 import { sanitizeViewTransitionName } from "../../utils/sanitizeViewTransitionName";
 
 type Props = BookPostType;
 
 const { id, data } = Astro.props;
-const { title, subtitle, authors, releaseDate, genre } = data;
+const { title, subtitle, authors, releaseDate, genre, rating } = data;
 
 const transitionName = sanitizeViewTransitionName(title);
 ---
 
-<li>
-  <a href={"/book/" + id}>
+<li class="list-none">
+  <a href={"/book/" + id} class="link">
+    <span class="ornament" aria-hidden="true"></span>
     <span
-      class="col-start-1 col-span-2 line-clamp-1 font-galnoy font-bold self-baseline"
+      class="font-display text-lg line-clamp-1 col-span-2"
       style=`view-transition-name: --header-${transitionName};`
       >{title}</span
     >
-    <span
-      class="col-start-1 col-span-2 line-clamp-1 font-galnoy italic self-baseline text-foreground-subtle text-sm"
-      style=`view-transition-name: --subheader-${transitionName};`
-      >{subtitle}</span
-    >
-    <span
-      class="col-start-1 col-span-1 line-clamp-1 text-sm self-baseline leading-2"
-      >{authors.join(" ")}, {releaseDate}</span
-    >
-    <span
-      class="col-start-2 col-span-1 line-clamp-1 text-xs text-right self-baseline"
-      >{genre.primary}</span
-    >
+    {subtitle && (
+      <span
+        class="font-galnoy italic text-sm text-foreground-subtle line-clamp-1 col-span-2 mt-0.5"
+        style=`view-transition-name: --subheader-${transitionName};`
+        >{subtitle}</span
+      >
+    )}
+    <span class="text-xs text-foreground-subtle mt-2 flex items-center gap-2 overflow-hidden whitespace-nowrap text-ellipsis col-span-2">
+      <span class="font-serif">{authors.join(", ")}</span>
+      <span class="text-surface-high" aria-hidden="true">&middot;</span>
+      <span>{releaseDate}</span>
+      {rating != null && (
+        <>
+          <span class="text-surface-high" aria-hidden="true">&middot;</span>
+          <span class="font-old tabular-nums">{rating}/10</span>
+        </>
+      )}
+    </span>
+    <span class="genre">{genreLabels[genre.primary] ?? genre.primary.replace("-", " ")}</span>
   </a>
 </li>
 
 <style>
   @reference "../../styles/app.css";
 
-  li {
-    @apply relative col-span-full h-24 text-md to-foreground-subtle/40 from-foreground/80 from-15% to-55% bg-size-[166%] duration-700 transition-all;
+  .link {
+    @apply relative block px-6 py-5 bg-background text-foreground no-underline border-foreground/10 border
+      overflow-hidden transition-all duration-500;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto auto auto;
+    gap: 0;
 
-    & > a {
-      @apply grid grid-rows-4 absolute gap-4 p-2 inset-0.5 from-foreground/10 to-background/30 from-5% to-65% bg-size-[166%] duration-700 transition-all bg-background overflow-hidden -outline-offset-4;
+    &::before {
+      content: "";
+      @apply absolute inset-0 bg-linear-to-r from-surface-high/0 via-surface-high/10 to-surface-high/0
+        opacity-0 transition-opacity duration-500;
     }
 
-    &:nth-child(odd) {
-      @apply bg-linear-to-r bg-position-[center_right] focus-within:bg-position-[center_left] focus-visible:bg-position-[center_left] hover:bg-position-[center_left];
+    &:hover::before,
+    &:focus-visible::before {
+      @apply opacity-100;
+    }
 
-      & > a {
-        @apply bg-linear-to-r bg-position-[center_right] pl-3.5 focus-within:bg-position-[center_left] focus-visible:bg-position-[center_left] hover:bg-position-[center_left] hover:left-2 hover:pl-2 focus-within:left-2 focus-within:pl-2 focus-visible:left-2 focus-visible:pl-2;
+    &:hover,
+    &:focus-visible {
+      @apply pl-8;
+
+      & .ornament {
+        @apply opacity-100 left-2;
       }
     }
 
-    &:nth-child(even) {
-      @apply bg-linear-to-l bg-position-[center_left] focus-within:bg-position-[center_right] focus-visible:bg-position-[center_right] hover:bg-position-[center_right];
-
-      & > a {
-        @apply bg-linear-to-l bg-position-[center_left] pr-3.5 focus-within:bg-position-[center_right] focus-visible:bg-position-[center_right] hover:bg-position-[center_right] hover:right-2 hover:pr-2 focus-within:right-2 focus-within:pr-2 focus-visible:right-2 focus-visible:pr-2;
-      }
+    &:focus-visible {
+      @apply outline-2 -outline-offset-2 outline-foreground/30;
     }
+  }
+
+  .ornament {
+    @apply absolute left-0 top-1/2 -translate-y-1/2 opacity-0
+      transition-all duration-500 text-surface-high text-sm;
+
+    &::before {
+      content: "✦";
+    }
+  }
+
+  .genre {
+    @apply text-xxs text-foreground-subtle/70 uppercase tracking-widest
+      row-start-4 col-start-2 mt-1 self-end text-right;
+    font-variant: small-caps;
   }
 </style>

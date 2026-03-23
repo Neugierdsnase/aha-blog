@@ -1,5 +1,5 @@
 ---
-import FormattedDate from "./FormattedDate.astro";
+import PostListItem from "./list-item/PostListItem.astro";
 
 interface PostData {
   title: string;
@@ -21,30 +21,16 @@ interface Props {
 const { posts, basePath, heading } = Astro.props;
 ---
 
-<section>
+<section class="grid grid-cols-subgrid col-span-2">
   <h2
     class="px-4 desktop:p-0 col-start-1 -col-end-1 font-display text-5xl underline underline-offset-2 clear-descenders mb-8"
   >
     {heading}
   </h2>
-  <ul class="px-[2vw]">
+  <ul class="col-span-2 grid grid-cols-1 gap-8 list-none p-0">
     {
-      posts.map(({ data, id }) => (
-        <li class=" p-[0.2vw] odd:bg-surface odd:p-[0.6vw]  border-foreground-subtle">
-          <a
-            href={basePath + id}
-            class="text-lg font-bold"
-          >
-            {data.title}
-          </a>
-          <span>{data.description}</span>
-          <p class="leading-0">
-            <FormattedDate
-              className="text-foreground-subtle text-xs whitespace-nowrap"
-              date={data.pubDate}
-            />
-          </p>
-        </li>
+      posts.map((post) => (
+        <PostListItem id={post.id} data={post.data} basePath={basePath} />
       ))
     }
   </ul>

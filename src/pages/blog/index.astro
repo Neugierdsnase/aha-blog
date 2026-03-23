@@ -1,10 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import BaseHead from "../../components/BaseHead.astro";
-import FormattedDate from "../../components/FormattedDate.astro";
-import Header from "../../components/Header.astro";
+import PostList from "../../components/PostList.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
-import { sanitizeContentId } from "../../utils/sanitizeContentId";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import type { BlogPostType } from "./[...slug].astro";
 
 const posts: BlogPostType[] = (await getCollection("blog"))
@@ -16,40 +14,6 @@ const posts: BlogPostType[] = (await getCollection("blog"))
 	.reverse();
 ---
 
-<!doctype html>
-<html lang="de-AT">
-  <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-
-  <body>
-    <Header />
-
-    <section>
-      <h2
-        class="px-4 desktop:p-0 col-start-1 -col-end-1 font-display text-5xl underline underline-offset-2 clear-descenders mb-8"
-      >
-        Jüngst geschrieben
-      </h2>
-      <ul class="px-[2vw]">
-        {
-          posts.map(({ data, id }: BlogPostType) => (
-            <li class=" p-[0.2vw] odd:bg-surface odd:p-[0.6vw]  border-foreground-subtle">
-              <a
-                href={"/blog/" + sanitizeContentId(id)}
-                class="text-lg font-bold"
-              >
-                {data.title}
-              </a>
-              <span>{data.description}</span>
-              <p class="leading-0">
-                <FormattedDate
-                  className="text-foreground-subtle text-xs whitespace-nowrap"
-                  date={data.pubDate}
-                />
-              </p>
-            </li>
-          ))
-        }
-      </ul>
-    </section>
-  </body>
-</html>
+<BaseLayout lang="de" title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <PostList posts={posts} basePath="/blog/" heading="Jüngst geschrieben" />
+</BaseLayout>
