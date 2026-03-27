@@ -2,15 +2,10 @@
 import { getCollection } from "astro:content";
 import BookListItem from "../../components/list-item/BookListItem.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import type { BookPostType } from "./[...slug].astro";
 
-const books: BookPostType[] = (await getCollection("book"))
-	.filter(({ data }: BookPostType) => !data.draft && data.finishedDate)
-	.sort(
-		(a: BookPostType, b: BookPostType) =>
-			a.data.finishedDate!.valueOf() - b.data.finishedDate!.valueOf(),
-	)
-	.reverse();
+const books = (await getCollection("book"))
+	.filter(({ data }) => !data.draft && data.finishedDate)
+	.sort((a, b) => b.data.finishedDate!.valueOf() - a.data.finishedDate!.valueOf());
 ---
 
 <BaseLayout
@@ -19,6 +14,6 @@ const books: BookPostType[] = (await getCollection("book"))
   description="Die Bücher, die ich zuletzt gelesen habe."
 >
   <ul class="p-4 desktop:p-0 grid grid-cols-subgrid col-span-2 gap-8">
-    {books.map((book: BookPostType) => <BookListItem {...book} />)}
+    {books.map((book) => <BookListItem {...book} />)}
   </ul>
 </BaseLayout>

@@ -1,24 +1,15 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import { sanitizeViewTransitionName } from "../utils/sanitizeViewTransitionName";
 
-type Props = CollectionEntry<"book" | "blog">["data"];
+interface Props {
+  title: string;
+  subtitle?: string;
+  authors?: string[];
+  releaseDate?: number | string;
+}
 
-const isBookPostGuard = (
-  props: Props,
-): props is CollectionEntry<"book">["data"] => {
-  return (props as CollectionEntry<"book">["data"]).subtitle !== undefined;
-};
-
-const isBookPost = isBookPostGuard(Astro.props);
-
-const title = Astro.props.title;
-const subtitle = Astro.props?.subtitle ?? undefined;
-const authors = isBookPost ? Astro.props.authors : undefined;
-const releaseDate = isBookPost ? Astro.props.releaseDate : undefined;
-
+const { title, subtitle, authors, releaseDate } = Astro.props;
 const hasAuthors = Boolean(authors?.length);
-
 const transitionName = sanitizeViewTransitionName(title);
 ---
 

@@ -3,12 +3,12 @@ import type { CollectionEntry } from "astro:content";
 import Article from "../components/Article.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-type Props = CollectionEntry<"book">['data'];
+type Props = CollectionEntry<"book" | "blog">["data"] & { lang?: "de" | "en" };
 
-const { title, description } = Astro.props;
+const { title, description, lang = "de" } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} lang='de'>
+<BaseLayout title={title} description={description} lang={lang}>
   <Article {...Astro.props}>
     <slot />
   </Article>

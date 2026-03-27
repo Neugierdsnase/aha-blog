@@ -16,8 +16,8 @@ const { title, description, pubDate } = data;
 ---
 
 <li class="list-none">
-  <a href={basePath + id} class="link">
-    <span class="ornament" aria-hidden="true"></span>
+  <a href={basePath + id} class="list-card h-36 grid-cols-[1fr_auto] grid-rows-[auto_auto_auto]">
+    <span class="list-card-ornament" aria-hidden="true"></span>
     <span class="font-display text-lg line-clamp-1 col-span-2">{title}</span>
     {description && (
       <span class="font-serif text-sm text-foreground-subtle line-clamp-1 col-span-2 mt-0.5">
@@ -29,49 +29,3 @@ const { title, description, pubDate } = data;
     </span>
   </a>
 </li>
-
-<style>
-  @reference "../../styles/app.css";
-
-  .link {
-    @apply relative px-6 py-5 h-36 bg-background text-foreground no-underline
-      border border-foreground/10 overflow-hidden transition-all duration-500;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    grid-template-rows: auto auto auto;
-    gap: 0;
-
-    &::before {
-      content: "";
-      @apply absolute inset-0 bg-linear-to-r from-surface-high/0 via-surface-high/10 to-surface-high/0
-        opacity-0 transition-opacity duration-500;
-    }
-
-    &:hover::before,
-    &:focus-visible::before {
-      @apply opacity-100;
-    }
-
-    &:hover,
-    &:focus-visible {
-      @apply pl-8;
-
-      & .ornament {
-        @apply opacity-100 left-2;
-      }
-    }
-
-    &:focus-visible {
-      @apply outline-2 -outline-offset-2 outline-foreground/30;
-    }
-  }
-
-  .ornament {
-    @apply absolute left-0 top-1/2 -translate-y-1/2 opacity-0
-      transition-all duration-500 text-surface-high text-sm;
-
-    &::before {
-      content: "✦";
-    }
-  }
-</style>

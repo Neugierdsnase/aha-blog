@@ -4,15 +4,9 @@ import BaseHead from "../../components/BaseHead.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
 import Header from "../../components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
-import { sanitizeContentId } from "../../utils/sanitizeContentId";
-import type { TestPostType } from "./[...slug].astro";
 
-const posts: TestPostType[] = (await getCollection("test-content"))
-	.sort(
-		(a: TestPostType, b: TestPostType) =>
-			a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
-	)
-	.reverse();
+const posts = (await getCollection("test-content"))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <!doctype html>
@@ -31,10 +25,10 @@ const posts: TestPostType[] = (await getCollection("test-content"))
       <ul class="px-[2vw]">
         {
           posts.map(
-            ({ data, id }: TestPostType) => (
-                <li class=" p-[0.2vw] odd:bg-surface odd:p-[0.6vw]  border-foreground-subtle">
+            ({ data, id }) => (
+                <li class="p-[0.2vw] odd:bg-surface odd:p-[0.6vw] border-foreground-subtle">
                   <a
-                    href={"/test-content/" + sanitizeContentId(id)}
+                    href={"/test-content/" + id}
                     class="text-lg font-bold"
                   >
                     {data.title}

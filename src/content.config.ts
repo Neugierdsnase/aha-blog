@@ -1,6 +1,7 @@
 import { defineCollection } from "astro:content";
 import { z } from "astro/zod";
 import { glob } from "astro/loaders";
+import { bookGenres } from "./utils/genreLabels";
 
 export const testContent = defineCollection({
 	loader: glob({ pattern: "**/*.mdx", base: "./src/content/test-content" }),
@@ -25,46 +26,6 @@ const blog = defineCollection({
 		featured: z.boolean().optional(),
 	}),
 });
-
-const bookGenres: [string, ...string[]] = [
-	"art",
-	"art-history",
-	"biography",
-	"business",
-	"comedy",
-	"craft",
-	"crime",
-	"cultural-studies",
-	"drama",
-	"economics",
-	"fantasy",
-	"fiction",
-	"historical-fiction",
-	"history",
-	"humor",
-	"journalism",
-	"literary-fiction",
-	"memoir",
-	"mystery",
-	"mythology",
-	"nautical",
-	"non-fiction",
-	"novella",
-	"personal-development",
-	"philosophy",
-	"poetry",
-	"politics",
-	"productivity",
-	"psychology",
-	"religion",
-	"romance",
-	"science",
-	"self-help",
-	"social-criticism",
-	"technology",
-	"thriller",
-	"travel",
-];
 
 const book = defineCollection({
 	loader: glob({ pattern: "**/*.mdx", base: "./src/content/book" }),

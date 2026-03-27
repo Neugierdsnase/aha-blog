@@ -128,3 +128,46 @@
 		@apply bg-background;
 	}
 }
+
+/* Shared list-item card styles used by PostListItem and BookListItem */
+@layer components {
+	.list-card {
+		@apply relative px-6 py-5 bg-background text-foreground no-underline
+			border border-foreground/10 overflow-hidden transition-all duration-500;
+		display: grid;
+		gap: 0;
+
+		&::before {
+			content: "";
+			@apply absolute inset-0 bg-linear-to-r from-surface-high/0 via-surface-high/10 to-surface-high/0
+				opacity-0 transition-opacity duration-500;
+		}
+
+		&:hover::before,
+		&:focus-visible::before {
+			@apply opacity-100;
+		}
+
+		&:hover,
+		&:focus-visible {
+			@apply pl-8;
+
+			& .list-card-ornament {
+				@apply opacity-100 left-2;
+			}
+		}
+
+		&:focus-visible {
+			@apply outline-2 -outline-offset-2 outline-foreground/30;
+		}
+	}
+
+	.list-card-ornament {
+		@apply absolute left-0 top-1/2 -translate-y-1/2 opacity-0
+			transition-all duration-500 text-surface-high text-sm;
+
+		&::before {
+			content: "✦";
+		}
+	}
+}
