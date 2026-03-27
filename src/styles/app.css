@@ -107,6 +107,22 @@
 	navigation: auto;
 }
 
+@keyframes fade-in-content {
+	from {
+		opacity: 0;
+		translate: 0 0.5rem;
+	}
+}
+
+::view-transition-new(--article-content) {
+	animation: fade-in-content 0.6s ease 0.15s both;
+}
+
+::view-transition-old(--article-content) {
+	animation: none;
+	display: none;
+}
+
 @layer base {
 	body {
 		@apply bg-background;

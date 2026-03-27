@@ -9,7 +9,9 @@ type Props = CollectionEntry<"book" | "blog">['data'];
   <article>
     <section>
       <BookHeading {...Astro.props} />
-      <slot />
+      <div style="view-transition-name: --article-content;">
+        <slot />
+      </div>
     </section>
   </article>
 </div>
