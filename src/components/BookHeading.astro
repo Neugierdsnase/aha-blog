@@ -9,8 +9,20 @@ interface Props {
 }
 
 const { title, subtitle, authors, releaseDate } = Astro.props;
-const hasAuthors = Boolean(authors?.length);
 const transitionName = sanitizeViewTransitionName(title);
+
+const authorParts: string[] = [];
+if (authors?.length) {
+  const last = authors.length - 1;
+  authors.forEach((a, i) => {
+    authorParts.push(a.trim());
+    if (i < last - 1) authorParts.push(", ");
+    else if (i === last - 1) authorParts.push(" und ");
+  });
+}
+if (authorParts.length && releaseDate) authorParts.push(`, ${releaseDate}`);
+else if (releaseDate) authorParts.push(String(releaseDate));
+const authorsLine = authorParts.join("");
 ---
 
 <div class="book-heading">
@@ -24,22 +36,7 @@ const transitionName = sanitizeViewTransitionName(title);
   {subtitle && <p class="subtitle"
     style=`view-transition-name: --subheader-${transitionName};`
   >{subtitle}</p>}
-  {
-    (hasAuthors || releaseDate) && (
-      <div class="authors">
-        {" "}
-        {hasAuthors && (
-          <ul>
-            {(authors || []).map((author: string) => (
-              <li set:html={author.trim()} />
-            ))}
-          </ul>
-        )}
-        {hasAuthors && releaseDate && ", "}
-        {releaseDate && <span>{releaseDate}</span>}
-      </div>
-    )
-  }
+  {authorsLine && <div class="authors" style=`view-transition-name: --author-${transitionName};` set:html={authorsLine} />}
 </div>
 
 <style>
@@ -72,25 +69,5 @@ const transitionName = sanitizeViewTransitionName(title);
     padding: 0px;
     color: var(--color-foreground-subtle);
     font-size: 1.1rem;
-
-    & > ul {
-      font-size: inherit;
-      display: inline;
-      & > li {
-        display: inline;
-
-        &:not(:last-child):after {
-          content: ", ";
-        }
-
-        &:nth-last-child(2):after {
-          content: " und ";
-        }
-
-        &:last-child:after {
-          content: "";
-        }
-      }
-    }
   }
 </style>

@@ -16,12 +16,11 @@ const { title, description, image } = Astro.props;
 ---
 
 <head>
-  <!-- Import ET Book styles adapted from https://github.com/edwardtufte/et-book/blob/gh-pages/et-book.css -->
   <!-- Font loading -->
   <AstroFont
     config={[
       {
-        name: "et-book",
+        name: "Tinos NF",
         preload: true,
         display: "swap",
         selector: "body",
@@ -31,9 +30,8 @@ const { title, description, image } = Astro.props;
             path: join(
               process.cwd(),
               "public",
-              "et-book",
-              "et-book-roman-line-figures",
-              "et-book-roman-line-figures.ttf",
+              "Tinos",
+              "TinosNerdFont-Regular.ttf",
             ),
             style: "normal",
             weight: "normal",
@@ -42,9 +40,8 @@ const { title, description, image } = Astro.props;
             path: join(
               process.cwd(),
               "public",
-              "et-book",
-              "et-book-display-italic-old-style-figures",
-              "et-book-display-italic-old-style-figures.ttf",
+              "Tinos",
+              "TinosNerdFont-Italic.ttf",
             ),
             style: "italic",
             weight: "normal",
@@ -53,11 +50,20 @@ const { title, description, image } = Astro.props;
             path: join(
               process.cwd(),
               "public",
-              "et-book",
-              "et-book-bold-line-figures",
-              "et-book-bold-line-figures.ttf",
+              "Tinos",
+              "TinosNerdFont-Bold.ttf",
             ),
             style: "normal",
+            weight: "bold",
+          },
+          {
+            path: join(
+              process.cwd(),
+              "public",
+              "Tinos",
+              "TinosNerdFont-BoldItalic.ttf",
+            ),
+            style: "italic",
             weight: "bold",
           },
         ],

@@ -5,11 +5,11 @@
 	--breakpoint-desktop: calc(760px + 480px);
 
 	--font-serif:
-		"et-book", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua",
+		"Tinos NF", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua",
 		Georgia, serif;
-	--font-old: et-book-roman-old-style;
-	--font-display: Soria, "et-book", serif;
-	--font-galnoy: Galnoy, "et-book", serif;
+	--font-old: "Tinos NF", serif;
+	--font-display: Soria, "Tinos NF", serif;
+	--font-galnoy: Galnoy, "Tinos NF", serif;
 
 	--color-night: #121417ff;
 	--color-raisin-black: #2c262cff;
