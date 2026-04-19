@@ -102,39 +102,37 @@ const navLineBase =
       </nav>
     </div>
 
-    <div id="body" class="max-w-full p-2 desktop:p-8 gap-2 w-full container-grid">
-      <p class="font-galnoy font-bold desktop:text-3xl hidden desktop:block col-start-2 col-span-1 row-span-2">
-        Konstantin Kovar
-      </p>
-      <nav class="hidden desktop:block col-start-2 col-span-1 row-span-5">
-        <ul class="list-none p-0 m-0 flex flex-col gap-1.5">
-          {
-            pages.map(({ label, href }) => (
-              <li class="group/item relative" data-active={isActive(href) || undefined}>
-                <a
-                  href={href}
-                  class="group/dlink flex items-center gap-0 whitespace-nowrap text-foreground no-underline py-2 px-3 rounded relative overflow-hidden [transition:color_0.4s_ease,background-color_0.4s_ease] before:content-[''] before:absolute before:bottom-0 before:left-3 before:right-3 before:h-px before:bg-foreground before:scale-x-0 before:origin-left before:[transition:transform_0.5s_cubic-bezier(0.22,1,0.36,1)] hover:before:scale-x-100 group-data-[active]/item:before:scale-x-100 after:content-[''] after:absolute after:inset-0 after:bg-foreground after:opacity-0 after:[transition:opacity_0.5s_ease] after:-z-10 after:rounded hover:after:opacity-[0.06] group-data-[active]/item:after:opacity-[0.08]"
-                >
-                  <span
-                    class="inline-block w-0 overflow-hidden opacity-0 -rotate-90 scale-[0.6] [transition:width_0.4s_cubic-bezier(0.34,1.56,0.64,1),opacity_0.3s_ease,transform_0.4s_cubic-bezier(0.34,1.56,0.64,1)] text-cherry-blossom-pink shrink-0 group-hover/dlink:w-5 group-hover/dlink:opacity-100 group-hover/dlink:rotate-0 group-hover/dlink:scale-100 group-data-[active]/item:w-5 group-data-[active]/item:opacity-100 group-data-[active]/item:rotate-0 group-data-[active]/item:scale-100"
-                    aria-hidden="true"
-                  >❧</span>
-                  <span class="[transition:transform_0.4s_cubic-bezier(0.22,1,0.36,1)] group-hover/dlink:translate-x-[2px]">
-                    {label}
-                  </span>
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
-      <div class="h-full row-span-full col-start-3"></div>
-      <main
-        class="grid grid-cols-subgrid col-start-1 desktop:col-start-4 -col-end-1 row-span-full"
-      >
+    <div id="body" class="max-w-full p-2 desktop:p-8 w-full desktop:flex desktop:gap-12">
+      <div class="hidden desktop:block shrink-0 w-[215px]">
+        <p class="font-galnoy font-bold text-3xl mb-6">
+          Konstantin Kovar
+        </p>
+        <nav>
+          <ul class="list-none p-0 m-0 flex flex-col gap-1.5">
+            {
+              pages.map(({ label, href }) => (
+                <li class="group/item relative" data-active={isActive(href) || undefined}>
+                  <a
+                    href={href}
+                    class="group/dlink flex items-center gap-0 whitespace-nowrap text-foreground no-underline py-2 px-3 rounded relative overflow-hidden [transition:color_0.4s_ease,background-color_0.4s_ease] before:content-[''] before:absolute before:bottom-0 before:left-3 before:right-3 before:h-px before:bg-foreground before:scale-x-0 before:origin-left before:[transition:transform_0.5s_cubic-bezier(0.22,1,0.36,1)] hover:before:scale-x-100 group-data-[active]/item:before:scale-x-100 after:content-[''] after:absolute after:inset-0 after:bg-foreground after:opacity-0 after:[transition:opacity_0.5s_ease] after:-z-10 after:rounded hover:after:opacity-[0.06] group-data-[active]/item:after:opacity-[0.08]"
+                  >
+                    <span
+                      class="inline-block w-0 overflow-hidden opacity-0 -rotate-90 scale-[0.6] [transition:width_0.4s_cubic-bezier(0.34,1.56,0.64,1),opacity_0.3s_ease,transform_0.4s_cubic-bezier(0.34,1.56,0.64,1)] text-cherry-blossom-pink shrink-0 group-hover/dlink:w-5 group-hover/dlink:opacity-100 group-hover/dlink:rotate-0 group-hover/dlink:scale-100 group-data-[active]/item:w-5 group-data-[active]/item:opacity-100 group-data-[active]/item:rotate-0 group-data-[active]/item:scale-100"
+                      aria-hidden="true"
+                    >❧</span>
+                    <span class="[transition:transform_0.4s_cubic-bezier(0.22,1,0.36,1)] group-hover/dlink:translate-x-[2px]">
+                      {label}
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+      <main class="min-w-0 flex-1">
         <slot />
       </main>
-      <div class="h-full row-span-full col-start-6"></div>
     </div>
 
     <script is:inline>
@@ -175,12 +173,3 @@ const navLineBase =
   </body>
 </html>
 
-<style>
-  @reference "../styles/app.css";
-
-  .container-grid {
-    @apply grid grid-cols-1 gap-0
-           desktop:grid-cols-[0px_215px_80px_repeat(2,minmax(0px,385px))_80px_195px_0px] desktop:gap-6
-           grid-rows-[4rem_repeat(5,3rem)_auto];
-  }
-</style>
