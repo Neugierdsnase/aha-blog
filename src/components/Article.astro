@@ -5,7 +5,7 @@ import BookHeading from "./BookHeading.astro";
 type Props = CollectionEntry<"book" | "blog">['data'];
 ---
 
-<div class="container col-span-full desktop:col-span-3" data-testid="article-container">
+<div class="container" data-testid="article-container">
   <article>
     <section>
       <BookHeading {...Astro.props} />
@@ -63,9 +63,12 @@ type Props = CollectionEntry<"book" | "blog">['data'];
 <style is:global>
   .container {
     container-type: inline-size;
-    contain: width;
     &:not(:has(.margin-toggle)) {
+      contain: width;
       margin: 0 auto 2em;
+    }
+    &:has(.margin-toggle) {
+      max-width: 900px;
     }
 
   /* Tufte CSS styles */
@@ -194,8 +197,27 @@ type Props = CollectionEntry<"book" | "blog">['data'];
       section > footer,
       section > table {
         width: 100%;
+      }
+
+      &:not(:has(.margin-toggle)) section {
+        columns: 2 35ch;
+        column-gap: 3rem;
+
+        & > * {
+          max-width: 69ch;
+        }
+
+        & > .book-heading {
+          column-span: all;
+        }
+      }
+
+      &:has(.margin-toggle) section > p,
+      &:has(.margin-toggle) section > footer,
+      &:has(.margin-toggle) section > table {
         max-width: 69ch;
       }
+
       &:has(.margin-toggle) {
         section > p,
         section > footer,

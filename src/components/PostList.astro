@@ -21,13 +21,13 @@ interface Props {
 const { posts, basePath, heading } = Astro.props;
 ---
 
-<section class="grid grid-cols-subgrid col-span-2">
+<section>
   <h2
-    class="px-4 desktop:p-0 col-start-1 -col-end-1 font-display text-5xl underline underline-offset-2 clear-descenders mb-8"
+    class="px-4 desktop:p-0 font-display text-5xl underline underline-offset-2 clear-descenders mb-8"
   >
     {heading}
   </h2>
-  <ul class="col-span-2 grid grid-cols-1 gap-8 list-none p-0">
+  <ul class="grid grid-cols-1 gap-8 list-none p-0">
     {
       posts.map((post) => (
         <PostListItem id={post.id} data={post.data} basePath={basePath} />
