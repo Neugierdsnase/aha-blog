@@ -1,7 +1,9 @@
 {
-	"extends": "astro/tsconfigs/strict",
-	"compilerOptions": {
-		"strictNullChecks": true,
-		"experimentalDecorators": true
-	}
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "strictNullChecks": true,
+    "experimentalDecorators": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  }
 }
