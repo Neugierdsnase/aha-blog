@@ -1,9 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import {App} from "../cv/components/App.tsx"
+import { App } from "../cv/components/App.tsx"
 ---
 
 <BaseLayout lang="en" title="CV">
-<App client:load="react" />
+  <App client:only="react" />
 </BaseLayout>
 
