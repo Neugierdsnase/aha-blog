@@ -7,8 +7,17 @@ import { Fragment, type FunctionComponent } from 'react';
   activeLanguage: LanguageType;
   item: CvItemType;
 };
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 
-export const Card: FunctionComponent<CardProps> = ({
+export const CvItemCard: FunctionComponent<CardProps> = ({
   item,
   activeLanguage,
 }) => {
@@ -16,27 +25,24 @@ export const Card: FunctionComponent<CardProps> = ({
   const tagLine = getTranslation(activeLanguage, item.tagLine)
 
   return (
-    <div className="card scrollfade">
-      <Fragment>
-        <header className="flex justify-between">
-          <div className="max-w-3/5">
-            <h2
-              className="text-xl text-balance"
+    <Card className="scrollfade">
+        <CardHeader className="flex justify-between">
+            <CardTitle
+              className="text-balance"
               data-lang="en"
               dangerouslySetInnerHTML={{
                 __html: label,
               }}
             />
             {item.tagLine && (
-              <p
+              <CardDescription
                 className="text-balance"
                 dangerouslySetInnerHTML={{
                   __html: tagLine,
                 }}
               />
             )}
-          </div>
-          <p className="flex flex-nowrap items-center gap-2 whitespace-nowrap">
+          <CardAction className="flex flex-nowrap items-center gap-2 whitespace-nowrap text-sm text-muted-foreground">
             {dayjs(item.time?.from).format('MMMM YYYY')}
             <ArrowRightFromLine size="14" className="inline-block" />
             {item.time?.to && (
@@ -46,9 +52,9 @@ export const Card: FunctionComponent<CardProps> = ({
                 {dayjs(item.time.to).format('MMMM YYYY')}
               </Fragment>
             )}
-          </p>
-        </header>
-        <section>
+          </CardAction>
+        </CardHeader>
+        <CardContent>
           <ul className="list-inside list-disc">
             {item?.list?.map((listItem) => {
               const itemLabel = getTranslation( activeLanguage, listItem.label)
@@ -63,8 +69,8 @@ export const Card: FunctionComponent<CardProps> = ({
               />
             )})}
           </ul>
-        </section>
-        <footer>
+        </CardContent>
+        <CardFooter>
           <ul className="flex flex-wrap gap-1">
             {item.tags?.map((tag) => (
               <span
@@ -74,8 +80,7 @@ export const Card: FunctionComponent<CardProps> = ({
               />
             ))}
           </ul>
-        </footer>
-      </Fragment>
-    </div>
+        </CardFooter>
+    </Card>
   );
 };

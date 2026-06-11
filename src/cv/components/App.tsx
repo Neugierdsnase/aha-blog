@@ -3,7 +3,7 @@ import type { LanguageType, TagType } from '../types';
 import data, { getTranslation } from '../data';
 import { ALL_TAGS } from '../constants';
 import { Header } from './Header';
-import { Card } from './Card';
+import { CvItemCard } from './Card';
 import { Cake, MapPin, Mail, Phone, Globe, UserRound } from 'lucide-react';
 
 export const App = () => {
@@ -99,14 +99,14 @@ export const App = () => {
       <hr className='col-span-full' />
       <main className="gap-4 grid flex-col col-span-full lg:grid-cols-2 lg:[&>.card]:even:translate-y-14">
         {filteredJobItems.map((item) => (
-          <Card
+          <CvItemCard
             key={item.label.en + item.time?.from}
             activeLanguage={activeLanguage}
             item={item}
           />
         ))}
         {filteredEduItems.map((item) => (
-          <Card
+          <CvItemCard
             key={item.label.en + item.time?.from}
             activeLanguage={activeLanguage}
             item={item}
