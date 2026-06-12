@@ -36,6 +36,8 @@
 	--breakpoint-desktop: calc(760px + 480px);
 
 	--font-old: "Tinos NF", serif;
+	--font-serif: "Tinos NF", serif;
+	--font-soria: Soria, "Tinos NF", serif;
 	--font-display: Soria, "Tinos NF", serif;
 	--font-galnoy: Galnoy, "Tinos NF", serif;
 

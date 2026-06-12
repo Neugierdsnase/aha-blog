@@ -25,10 +25,10 @@ export const CvItemCard: FunctionComponent<CardProps> = ({
   const tagLine = getTranslation(activeLanguage, item.tagLine)
 
   return (
-    <Card className="scrollfade">
+    <Card className="card scrollfade">
         <CardHeader className="flex justify-between">
             <CardTitle
-              className="text-balance"
+              className="text-balance font-soria"
               data-lang="en"
               dangerouslySetInnerHTML={{
                 __html: label,
@@ -42,7 +42,7 @@ export const CvItemCard: FunctionComponent<CardProps> = ({
                 }}
               />
             )}
-          <CardAction className="flex flex-nowrap items-center gap-2 whitespace-nowrap text-sm text-muted-foreground">
+          <CardAction className="flex flex-nowrap items-center gap-2 whitespace-nowrap text-xs text-muted-foreground">
             {dayjs(item.time?.from).format('MMMM YYYY')}
             <ArrowRightFromLine size="14" className="inline-block" />
             {item.time?.to && (

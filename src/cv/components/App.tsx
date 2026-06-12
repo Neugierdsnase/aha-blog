@@ -5,6 +5,7 @@ import { ALL_TAGS } from '../constants';
 import { Header } from './Header';
 import { CvItemCard } from './Card';
 import { Cake, MapPin, Mail, Phone, Globe, UserRound } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const App = () => {
   const [activeFilters, setActiveFilters] = useState<TagType[]>([
@@ -42,7 +43,7 @@ export const App = () => {
         </header>
         <section className='flex flex-col gap-4 relative'>
           <hr />
-          <ul className="flex flex-col gap-2 top-34 print:text-sm">
+          <ul className="flex flex-col gap-2 top-34 print:text-sm [&_a]:underline [&_a]:underline-offset-3">
             <li>
               <Cake size={14} className="mr-2 inline-block" />
               <span>16.05.1990</span>
@@ -84,17 +85,17 @@ export const App = () => {
       </aside>
 
       <div className='col-span-full lg:col-start-5 lg:col-span-8 flex flex-col gap-4'>
-        <article className="card scrollfade">
-          <header>
-            <h2 dangerouslySetInnerHTML={{ __html: getTranslation(activeLanguage, { en: 'At a Glance', de: 'Auf einen Blick' }) }} />
-            </header>
-          <section dangerouslySetInnerHTML={{ __html: getTranslation(activeLanguage, data.overviewText) }} /> </article>
-        <article className="card scrollfade lg:col-start-5 lg:col-span-8">
-          <header>
-            <h2 dangerouslySetInnerHTML={{ __html: getTranslation(activeLanguage, { en: 'About Me', de: 'Über mich' }) }} />
-            </header>
-          <section dangerouslySetInnerHTML={{ __html: getTranslation(activeLanguage, data.introText) }} />
-        </article>
+        <Card className="card scrollfade">
+          <CardHeader>
+            <CardTitle className='font-soria' dangerouslySetInnerHTML={{ __html: getTranslation(activeLanguage, { en: 'At a Glance', de: 'Auf einen Blick' }) }} />
+            </CardHeader>
+          <CardContent dangerouslySetInnerHTML={{ __html: getTranslation(activeLanguage, data.overviewText) }} /> </Card>
+        <Card className="card scrollfade lg:col-start-5 lg:col-span-8">
+          <CardHeader>
+            <CardTitle className='font-soria' dangerouslySetInnerHTML={{ __html: getTranslation(activeLanguage, { en: 'About Me', de: 'Über mich' }) }} />
+            </CardHeader>
+          <CardContent dangerouslySetInnerHTML={{ __html: getTranslation(activeLanguage, data.introText) }} />
+        </Card>
       </div>
       <hr className='col-span-full' />
       <main className="gap-4 grid flex-col col-span-full lg:grid-cols-2 lg:[&>.card]:even:translate-y-14">

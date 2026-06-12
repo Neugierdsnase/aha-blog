@@ -4,14 +4,14 @@ import {
   type FunctionComponent,
   type SetStateAction,
 } from 'react';
-import { Check } from 'lucide-react';
+import { Check, Funnel } from 'lucide-react';
 import {
-  Combobox,
-  ComboboxContent,
-  ComboboxInput,
-  ComboboxItem,
-  ComboboxList,
-} from "@/components/ui/combobox"
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Button } from '@/components/ui/button';
 
 type DropdownProps = {
   options: TagType[];
@@ -31,23 +31,23 @@ export const Dropdown: FunctionComponent<DropdownProps> = ({ options, activeFilt
   };
 
   return (
-    <Combobox items={options}>
-      <ComboboxInput placeholder="Filter" />
-      <ComboboxContent>
-        <ComboboxList>
-          {(item) => {
-            const isChecked = activeFilters.includes(item);
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline"><Funnel />Filter</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        {options.map((item) => {
+          const isChecked = activeFilters.includes(item);
 
-            return (
-              <ComboboxItem key={item} value={item} onClick={() => handleFilterClick(item)}>
-                {isChecked && <Check />}
-                {item}
-              </ComboboxItem>
-            )
-          }}
-        </ComboboxList>
-      </ComboboxContent>
-    </Combobox>
+          return (
+            <DropdownMenuItem key={item} onClick={() => handleFilterClick(item)}>
+              {isChecked && <Check />}
+              {item}
+            </DropdownMenuItem>
+          )
+        })}
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
 
