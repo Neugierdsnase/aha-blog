@@ -9,14 +9,14 @@ export type TagType =
   | 'other'
   | 'non-tech';
 
-export type LevelType =
+type LevelType =
   | 'been confronted'
   | 'used before'
   | 'familiar'
   | 'well-versed'
   | 'expert';
 
-export type ModalContentType = {
+type ModalContentType = {
   heading: string;
   list: ListItemType[];
   time: TimeType;
@@ -30,12 +30,12 @@ type MultiLanguageContent<T> = {
 
 export type IntlContentType<T> = MultiLanguageContent<T>;
 
-export type ListItemType = {
+type ListItemType = {
   label: IntlContentType<string>;
   tags?: TagType[];
 };
 
-export type TimeType = {
+type TimeType = {
   from: Dayjs;
   to?: Dayjs;
 };
@@ -54,7 +54,7 @@ export type CvSectionType = {
   items: CvItemType[];
 };
 
-export type SkillSectionType = {
+type SkillSectionType = {
   heading: IntlContentType<string>;
   items: CvSectionType[];
 };

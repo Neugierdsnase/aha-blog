@@ -8,6 +8,7 @@ import { Languages } from 'lucide-react';
 import { Dropdown } from './Dropdown';
 import { Button } from '@/components/ui/button';
 import { Menubar } from '@/components/ui/menubar';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 type HeaderProps = {
   filterOptions: TagType[];
@@ -37,16 +38,22 @@ export const Header: FunctionComponent<HeaderProps> = ({
           setActiveFilters={setActiveFilters}
           options={filterOptions}
         />
-        <Button
-          type="button"
-          variant="outline"
-          aria-label="Toggle between German and English"
-          data-tooltip="Toggle German/English"
-          data-side="bottom"
-          onClick={handleLanguageToggle}
-        >
-          <Languages />
-        </Button>
+        <Tooltip>
+          <TooltipTrigger>
+            <Button
+              type="button"
+              variant="outline"
+              aria-label="Toggle between German and English"
+              data-side="bottom"
+              onClick={handleLanguageToggle}
+            >
+              <Languages />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            Toggle German/English
+          </TooltipContent>
+        </Tooltip>
       </div>
     </Menubar>
   );

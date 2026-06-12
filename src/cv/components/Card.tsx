@@ -16,6 +16,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Badge } from '@/components/ui/badge';
 
 export const CvItemCard: FunctionComponent<CardProps> = ({
   item,
@@ -26,7 +27,7 @@ export const CvItemCard: FunctionComponent<CardProps> = ({
 
   return (
     <Card className="card scrollfade">
-        <CardHeader className="flex justify-between">
+        <CardHeader>
             <CardTitle
               className="text-balance font-soria"
               data-lang="en"
@@ -71,9 +72,9 @@ export const CvItemCard: FunctionComponent<CardProps> = ({
           </ul>
         </CardContent>
         <CardFooter>
-          <ul className="flex flex-wrap gap-1">
+          <ul className="flex flex-wrap gap-4">
             {item.tags?.map((tag) => (
-              <span
+              <Badge 
                 key={tag}
                 className="badge-secondary bg-secondary whitespace-nowrap"
                 dangerouslySetInnerHTML={{ __html: tag }}

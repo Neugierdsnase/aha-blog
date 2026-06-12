@@ -1,7 +1,6 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import { GOATCOUNTER_URL } from "../consts";
-import {ColorModeToggle} from "../components/ColorModeToggle.tsx"
 import {BubbleMenu} from "@/components/BubbleMenu.tsx"
 
 type Props = {
@@ -46,7 +45,6 @@ const { lang, title, description } = Astro.props;
   <body>
   <nav class="flex justify-end items-center p-4">
   <BubbleMenu
-  containerClassName=""
      client:load
      items={pages}
      menuAriaLabel="Toggle navigation"
@@ -58,11 +56,6 @@ const { lang, title, description } = Astro.props;
 </nav>
 
     <div id="body" class="max-w-full p-2 desktop:p-8 w-full desktop:flex desktop:gap-12">
-      <div class="hidden desktop:block shrink-0 w-53.75">
-        <p class="font-galnoy font-bold text-3xl mb-6">
-          Konstantin Kovar
-        </p>
-      </div>
       <main class="min-w-0 flex-1">
       <slot />
       </main>
