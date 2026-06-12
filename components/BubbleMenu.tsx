@@ -226,7 +226,7 @@ export const BubbleMenu = ({
               }}
             />
           </Button>
-          <ColorModeToggle />
+          {/* <ColorModeToggle /> */}
         </ButtonGroup>
       </nav>
 
