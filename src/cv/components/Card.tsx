@@ -25,8 +25,6 @@ export const CvItemCard: FunctionComponent<CardProps> = ({
   const label = getTranslation(activeLanguage, item.label)
   const tagLine = getTranslation(activeLanguage, item.tagLine)
 
-  console.log('time for', label, ': ', dayjs(item.time?.from))
-
   return (
     <Card className="card scrollfade">
       <CardHeader>
