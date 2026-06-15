@@ -6,7 +6,9 @@ import rehypeStringify from 'rehype-stringify';
 import { unified } from 'unified';
 import remarkRehype from 'remark-rehype';
 import remarkGfm from 'remark-gfm';
+import customParseFormat from 'dayjs/plugin/customParseFormat'
 
+dayjs.extend(customParseFormat)
 
 export const getTranslation = (language: LanguageType, translation?: IntlContentType<string>) => {
   if (!translation) { return '' }
@@ -481,8 +483,8 @@ const cvEduItems: CvSectionType = {
         de: 'FH der WKW',
       },
       time: {
-        from: dayjs('09/2015', DATE_FORMAT),
-        to: dayjs('10/2018', DATE_FORMAT),
+        from: dayjs('09/15', DATE_FORMAT),
+        to: dayjs('10/18', DATE_FORMAT),
       },
       tagLine: {
         en: 'Content Production & Digital Media Management, graduated with honors',
@@ -496,8 +498,8 @@ const cvEduItems: CvSectionType = {
         de: 'Magistrat Wien',
       },
       time: {
-        from: dayjs('12/2014', DATE_FORMAT),
-        to: dayjs('12/2014', DATE_FORMAT),
+        from: dayjs('12/14', DATE_FORMAT),
+        to: dayjs('12/14', DATE_FORMAT),
       },
       tagLine: {
         en: 'Service exam of the municipal district of Vienna (mainly public law)',
@@ -511,8 +513,8 @@ const cvEduItems: CvSectionType = {
         de: 'Universität Wien',
       },
       time: {
-        from: dayjs('09/2010', DATE_FORMAT),
-        to: dayjs('06/2011', DATE_FORMAT),
+        from: dayjs('09/10', DATE_FORMAT),
+        to: dayjs('06/11', DATE_FORMAT),
       },
       tagLine: {
         en: 'Catholic Theology and Latin',
@@ -526,8 +528,8 @@ const cvEduItems: CvSectionType = {
         de: 'Wirtschaftsuniversität Wien',
       },
       time: {
-        from: dayjs('09/2009', DATE_FORMAT),
-        to: dayjs('06/2010', DATE_FORMAT),
+        from: dayjs('09/09', DATE_FORMAT),
+        to: dayjs('06/10', DATE_FORMAT),
       },
       tagLine: {
         en: 'Economics',
@@ -541,8 +543,8 @@ const cvEduItems: CvSectionType = {
         de: 'Universität Wien',
       },
       time: {
-        from: dayjs('09/2008', DATE_FORMAT),
-        to: dayjs('06/2009', DATE_FORMAT),
+        from: dayjs('09/08', DATE_FORMAT),
+        to: dayjs('06/09', DATE_FORMAT),
       },
       tagLine: {
         en: 'Catholic Theology',
@@ -556,8 +558,8 @@ const cvEduItems: CvSectionType = {
         de: 'Bundesgymnasium Wien XIX',
       },
       time: {
-        from: dayjs('09/2000', DATE_FORMAT),
-        to: dayjs('06/2008', DATE_FORMAT),
+        from: dayjs('09/00', DATE_FORMAT),
+        to: dayjs('06/08', DATE_FORMAT),
       },
       tagLine: {
         en: 'graduated with Austrian "Matura"',
