@@ -16,13 +16,6 @@ type LevelType =
   | 'well-versed'
   | 'expert';
 
-type ModalContentType = {
-  heading: string;
-  list: ListItemType[];
-  time: TimeType;
-  tags: TagType[];
-};
-
 export type LanguageType = 'en' | 'de';
 type MultiLanguageContent<T> = {
   [key in LanguageType]: T;
@@ -54,7 +47,3 @@ export type CvSectionType = {
   items: CvItemType[];
 };
 
-type SkillSectionType = {
-  heading: IntlContentType<string>;
-  items: CvSectionType[];
-};
