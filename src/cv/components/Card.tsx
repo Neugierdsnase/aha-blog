@@ -1,8 +1,8 @@
-import { getTranslation } from '../data';
-import type { CvItemType, LanguageType } from '../types';
-import dayjs from 'dayjs';
-import { ArrowRightFromLine, ArrowRightToLine } from 'lucide-react';
-import { Fragment, type FunctionComponent } from 'react';
+import { getTranslation } from "../data";
+import type { CvItemType, LanguageType } from "../types";
+import dayjs from "dayjs";
+import { ArrowRightFromLine, ArrowRightToLine } from "lucide-react";
+import { Fragment, type FunctionComponent } from "react";
 type CardProps = {
   activeLanguage: LanguageType;
   item: CvItemType;
@@ -15,15 +15,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Badge } from '@/components/ui/badge';
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 export const CvItemCard: FunctionComponent<CardProps> = ({
   item,
   activeLanguage,
 }) => {
-  const label = getTranslation(activeLanguage, item.label)
-  const tagLine = getTranslation(activeLanguage, item.tagLine)
+  const label = getTranslation(activeLanguage, item.label);
+  const tagLine = getTranslation(activeLanguage, item.tagLine);
 
   return (
     <Card className="card scrollfade">
@@ -44,13 +44,13 @@ export const CvItemCard: FunctionComponent<CardProps> = ({
           />
         )}
         <CardAction className="flex flex-nowrap items-center gap-2 whitespace-nowrap text-xs text-muted-foreground">
-          {dayjs(item.time?.from).format('MMMM YYYY')}
+          {dayjs(item.time?.from).format("MMMM YYYY")}
           <ArrowRightFromLine size="14" className="inline-block" />
           {item.time?.to && (
             <Fragment>
               •
               <ArrowRightToLine size="14" className="inline-block" />
-              {dayjs(item.time.to).format('MMMM YYYY')}
+              {dayjs(item.time.to).format("MMMM YYYY")}
             </Fragment>
           )}
         </CardAction>
@@ -58,17 +58,17 @@ export const CvItemCard: FunctionComponent<CardProps> = ({
       <CardContent>
         <ul className="list-inside list-disc">
           {item?.list?.map((listItem) => {
-            const itemLabel = getTranslation(activeLanguage, listItem.label)
+            const itemLabel = getTranslation(activeLanguage, listItem.label);
 
             return (
               <li
                 key={listItem.label.en}
-                className='[&_p]:inline'
+                className="[&_p]:inline"
                 dangerouslySetInnerHTML={{
                   __html: itemLabel,
                 }}
               />
-            )
+            );
           })}
         </ul>
       </CardContent>
@@ -77,7 +77,7 @@ export const CvItemCard: FunctionComponent<CardProps> = ({
           {item.tags?.map((tag) => (
             <Badge
               key={tag}
-              className="badge-secondary bg-secondary whitespace-nowrap"
+              className="badge bg-secondary whitespace-nowrap p-2"
               dangerouslySetInnerHTML={{ __html: tag }}
             />
           ))}

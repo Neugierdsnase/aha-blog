@@ -1,15 +1,14 @@
-import type { CSSProperties } from 'react';
-import { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
-import { Button } from './ui/button';
-import { ColorModeToggle } from '@/src/components/ColorModeToggle';
-import { ButtonGroup } from './ui/button-group';
+import type { CSSProperties } from "react";
+import { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
+import { Button } from "./ui/button";
+import { ColorModeToggle } from "@/src/components/ColorModeToggle";
+import { ButtonGroup } from "./ui/button-group";
 
 type MenuItem = {
   label: string;
   href: string;
   ariaLabel?: string;
-  rotation?: number;
   hoverStyles?: {
     bgColor?: string;
     textColor?: string;
@@ -34,13 +33,13 @@ export const BubbleMenu = ({
   onMenuClick,
   className,
   style,
-  menuAriaLabel = 'Toggle menu',
-  menuBg = '#fff',
-  menuContentColor = '#111',
+  menuAriaLabel = "Toggle menu",
+  menuBg = "#fff",
+  menuContentColor = "#111",
   items,
-  animationEase = 'back.out(1.5)',
+  animationEase = "back.out(1.5)",
   animationDuration = 0.5,
-  staggerDelay = 0.12
+  staggerDelay = 0.12,
 }: BubbleMenuProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
@@ -52,16 +51,16 @@ export const BubbleMenu = ({
   const menuItems = items?.length ? items : [];
 
   const containerClassName = [
-    'bubble-menu',
-    'left-0 right-0 top-8',
-    'flex items-center justify-between',
-    'gap-4 px-8',
-    'pointer-events-none',
-    'z-[1001]',
-    className
+    "bubble-menu",
+    "left-0 right-0 top-8",
+    "flex items-center justify-between",
+    "gap-4 px-8",
+    "pointer-events-none",
+    "z-[1001]",
+    className,
   ]
     .filter(Boolean)
-    .join(' ');
+    .join(" ");
 
   const handleToggle = () => {
     const nextState = !isMenuOpen;
@@ -77,9 +76,9 @@ export const BubbleMenu = ({
     if (!overlay || !bubbles.length) return;
 
     if (isMenuOpen) {
-      gsap.set(overlay, { display: 'flex' });
+      gsap.set(overlay, { display: "flex" });
       gsap.killTweensOf([...bubbles, ...labels]);
-      gsap.set(bubbles, { scale: 0, transformOrigin: '50% 50%' });
+      gsap.set(bubbles, { scale: 0, transformOrigin: "50% 50%" });
       gsap.set(labels, { y: 24, autoAlpha: 0 });
 
       bubbles.forEach((bubble, i) => {
@@ -88,7 +87,7 @@ export const BubbleMenu = ({
         tl.to(bubble, {
           scale: 1,
           duration: animationDuration,
-          ease: animationEase
+          ease: animationEase,
         });
         if (labels[i]) {
           tl.to(
@@ -97,9 +96,9 @@ export const BubbleMenu = ({
               y: 0,
               autoAlpha: 1,
               duration: animationDuration,
-              ease: 'power3.out'
+              ease: "power3.out",
             },
-            '-=' + animationDuration * 0.9
+            "-=" + animationDuration * 0.9,
           );
         }
       });
@@ -109,37 +108,19 @@ export const BubbleMenu = ({
         y: 24,
         autoAlpha: 0,
         duration: 0.2,
-        ease: 'power3.in'
+        ease: "power3.in",
       });
       gsap.to(bubbles, {
         scale: 0,
         duration: 0.2,
-        ease: 'power3.in',
+        ease: "power3.in",
         onComplete: () => {
-          gsap.set(overlay, { display: 'none' });
+          gsap.set(overlay, { display: "none" });
           setShowOverlay(false);
-        }
+        },
       });
     }
   }, [isMenuOpen, showOverlay, animationEase, animationDuration, staggerDelay]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (isMenuOpen) {
-        const bubbles = bubblesRef.current.filter(Boolean);
-        const isDesktop = window.innerWidth >= 900;
-        bubbles.forEach((bubble, i) => {
-          const item = menuItems[i];
-          if (bubble && item) {
-            const rotation = isDesktop ? (item.rotation ?? 0) : 0;
-            gsap.set(bubble, { rotation });
-          }
-        });
-      }
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [isMenuOpen, menuItems]);
 
   return (
     <>
@@ -148,12 +129,6 @@ export const BubbleMenu = ({
         .bubble-menu .menu-line {
           transition: transform 0.3s ease, opacity 0.3s ease;
           transform-origin: center;
-        }
-        .bubble-menu-items .pill-list .pill-col:nth-child(4):nth-last-child(2) {
-          margin-left: calc(100% / 6);
-        }
-        .bubble-menu-items .pill-list .pill-col:nth-child(4):last-child {
-          margin-left: calc(100% / 3);
         }
         @media (min-width: 900px) {
           .bubble-menu-items .pill-link {
@@ -197,18 +172,22 @@ export const BubbleMenu = ({
         }
       `}</style>
 
-      <nav className={containerClassName} style={style} aria-label="Main navigation">
+      <nav
+        className={containerClassName}
+        style={style}
+        aria-label="Main navigation"
+      >
         <ButtonGroup>
           <Button
-            variant='outline'
+            variant="outline"
             type="button"
             className={[
-              'toggle-bubble menu-btn',
-              isMenuOpen ? 'open' : '',
-              'inline-flex flex-col items-center justify-center',
-              'pointer-events-auto',
-              'will-change-transform'
-            ].join(' ')}
+              "toggle-bubble menu-btn",
+              isMenuOpen ? "open" : "",
+              "inline-flex flex-col items-center justify-center",
+              "pointer-events-auto",
+              "will-change-transform",
+            ].join(" ")}
             onClick={handleToggle}
             aria-label={menuAriaLabel}
             aria-pressed={isMenuOpen}
@@ -216,13 +195,17 @@ export const BubbleMenu = ({
             <span
               className="menu-line block mx-auto rounded-xs w-6.5 h-0.5 bg-foreground"
               style={{
-                transform: isMenuOpen ? 'translateY(7px) rotate(45deg)' : 'none'
+                transform: isMenuOpen
+                  ? "translateY(7px) rotate(45deg)"
+                  : "none",
               }}
             />
             <span
               className="menu-line block mx-auto rounded-xs w-6.5 h-0.5 mt-1.5 bg-foreground"
               style={{
-                transform: isMenuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none'
+                transform: isMenuOpen
+                  ? "translateY(-7px) rotate(-45deg)"
+                  : "none",
               }}
             />
           </Button>
@@ -234,24 +217,24 @@ export const BubbleMenu = ({
         <div
           ref={overlayRef}
           className={[
-            'bubble-menu-items absolute',
-            'inset-0',
-            'flex items-center justify-center',
-            'pointer-events-none',
-            'z-1000',
-            'bg-background/80'
-          ].join(' ')}
+            "bubble-menu-items absolute",
+            "inset-0",
+            "flex items-center justify-center",
+            "pointer-events-none",
+            "z-1000",
+            "bg-background/80",
+          ].join(" ")}
           aria-hidden={!isMenuOpen}
         >
           <ul
             className={[
-              'pill-list',
-              'list-none m-0 px-6',
-              'w-full max-w-400 mx-auto',
-              'flex flex-wrap',
-              'gap-x-0 gap-y-1',
-              'pointer-events-auto'
-            ].join(' ')}
+              "pill-list",
+              "list-none m-0 px-6",
+              "w-full max-w-400 mx-auto",
+              "flex flex-wrap",
+              "gap-4",
+              "pointer-events-auto",
+            ].join(" ")}
             role="menu"
             aria-label="Menu links"
           >
@@ -260,56 +243,55 @@ export const BubbleMenu = ({
                 key={idx}
                 role="none"
                 className={[
-                  'pill-col',
-                  'flex justify-center items-stretch',
-                  'flex-[0_0_calc(100%/3)]',
-                ].join(' ')}
+                  "pill-col",
+                  "flex justify-center w-full",
+                ].join(" ")}
               >
                 <a
                   role="menuitem"
                   href={item.href}
                   aria-label={item.ariaLabel || item.label}
                   className={[
-                    'pill-link',
-                    'w-full',
-                    'no-underline',
-                    'bg-background',
-                    'text-inherit',
-                    'flex items-center justify-center',
-                    'relative',
-                    'transition-[background,color] duration-300 ease-in-out',
-                    'whitespace-nowrap overflow-hidden',
-                    'bg-background text-foreground',
-                    'box-border border-2 border-foreground'
-                  ].join(' ')}
+                    "pill-link",
+                    "w-full",
+                    "no-underline",
+                    "bg-background",
+                    "text-inherit",
+                    "flex items-center justify-center",
+                    "relative",
+                    "transition-[background,color] duration-300 ease-in-out",
+                    "whitespace-nowrap overflow-hidden",
+                    "bg-background text-foreground",
+                    "box-border border-2 border-foreground",
+                  ].join(" ")}
                   style={
                     {
-                      ['--item-rot']: `${item.rotation ?? 0}deg`,
-                      ['--pill-bg']: menuBg,
-                      ['--pill-color']: menuContentColor,
-                      ['--hover-bg']: item.hoverStyles?.bgColor || '#f3f4f6',
-                      ['--hover-color']: item.hoverStyles?.textColor || menuContentColor,
-                      minHeight: 'var(--pill-min-h, 160px)',
-                      padding: 'clamp(1.5rem, 3vw, 8rem) 0',
-                      fontSize: 'clamp(1.5rem, 4vw, 4rem)',
+                      ["--pill-bg"]: menuBg,
+                      ["--pill-color"]: menuContentColor,
+                      ["--hover-bg"]: item.hoverStyles?.bgColor || "#f3f4f6",
+                      ["--hover-color"]:
+                        item.hoverStyles?.textColor || menuContentColor,
+                      minHeight: "var(--pill-min-h, 160px)",
+                      padding: "clamp(1.5rem, 3vw, 8rem) 0",
+                      fontSize: "clamp(1.5rem, 4vw, 4rem)",
                       fontWeight: 400,
                       lineHeight: 0,
-                      willChange: 'transform',
-                      height: 10
+                      willChange: "transform",
+                      height: 10,
                     } as CSSProperties
                   }
-                  ref={el => {
+                  ref={(el) => {
                     if (el) bubblesRef.current[idx] = el;
                   }}
                 >
                   <span
                     className="pill-label inline-block"
                     style={{
-                      willChange: 'transform, opacity',
-                      height: '1.2em',
-                      lineHeight: 1.2
+                      willChange: "transform, opacity",
+                      height: "1.2em",
+                      lineHeight: 1.2,
                     }}
-                    ref={el => {
+                    ref={(el) => {
                       if (el) labelRefs.current[idx] = el;
                     }}
                   >
@@ -323,4 +305,4 @@ export const BubbleMenu = ({
       )}
     </>
   );
-}
+};

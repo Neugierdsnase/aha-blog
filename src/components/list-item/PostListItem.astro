@@ -16,15 +16,22 @@ const { title, description, pubDate } = data;
 ---
 
 <li class="list-none">
-  <a href={basePath + id} class="list-card h-36 grid-cols-[1fr_auto] grid-rows-[auto_auto_auto]">
+  <a
+    href={basePath + id}
+    class="list-card h-36 grid-cols-[1fr_auto] grid-rows-[auto_auto_auto]"
+  >
     <span class="list-card-ornament" aria-hidden="true"></span>
     <span class="font-display text-lg line-clamp-1 col-span-2">{title}</span>
-    {description && (
-      <span class="font-serif text-sm text-foreground-subtle line-clamp-1 col-span-2 mt-0.5">
-        {description}
-      </span>
-    )}
-    <span class="text-xs text-foreground-subtle mt-2 col-start-2 row-start-3 self-end text-right">
+    {
+      description && (
+        <span class="font-serif text-sm text-foreground-subtle line-clamp-1 col-span-2 mt-0.5">
+          {description}
+        </span>
+      )
+    }
+    <span
+      class="text-xs text-foreground-subtle mt-2 col-start-2 row-start-3 self-end text-right"
+    >
       <FormattedDate date={pubDate} />
     </span>
   </a>

@@ -2,7 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import BookHeading from "./BookHeading.astro";
 
-type Props = CollectionEntry<"book" | "blog">['data'];
+type Props = CollectionEntry<"book" | "blog">["data"];
 ---
 
 <div class="container" data-testid="article-container">
@@ -20,9 +20,9 @@ type Props = CollectionEntry<"book" | "blog">['data'];
   const footnotesSection = document.querySelector("section.footnotes");
   const noteEntries = document.querySelectorAll("section.footnotes>ol>li");
 
-    document
-      .querySelectorAll(".data-footnote-backref")
-      .forEach((e) => e.remove());
+  document
+    .querySelectorAll(".data-footnote-backref")
+    .forEach((e) => e.remove());
 
   for (const { id, children } of noteEntries) {
     const isMarginNote = id
@@ -71,449 +71,449 @@ type Props = CollectionEntry<"book" | "blog">['data'];
       max-width: 900px;
     }
 
-  /* Tufte CSS styles */
-  @container (min-width: 0px) {
-    article {
-      display: block;
-      width: 100%;
-      &:not(:has(.margin-toggle)) {
-        margin: auto;
-        padding-left: 0;
-      }
-      padding: 2rem 0;
-      color: var(--color-foreground, #111);
-      max-width: 1400px;
-      counter-reset: sidenote-counter;
-
-      h2 {
-        font-style: italic;
-        font-weight: 400;
-        margin-top: 2.1rem;
-        margin-bottom: 1.4rem;
-        font-size: 2.2rem;
-        line-height: 1;
-      }
-
-      h3 {
-        font-style: italic;
-        font-weight: 400;
-        font-size: 1.7rem;
-        margin-top: 2rem;
-        margin-bottom: 1.4rem;
-        line-height: 1;
-      }
-
-      hr {
+    /* Tufte CSS styles */
+    @container (min-width: 0px) {
+      article {
         display: block;
-        height: 1px;
-        width: 55%;
-        border: 0;
-        border-top: 1px solid #ccc;
-        margin: 1em 0;
-        padding: 0;
-      }
-
-      .numeral {
-        font-family: "Tinos NF", serif;
-      }
-
-      .danger {
-        color: var(--color-error);
-      }
-
-      p,
-      dl,
-      ol,
-      ul {
-        font-size: 1.4rem;
-        line-height: 2rem;
-      }
-
-      ol,
-      ul,
-      dl {
-        margin: 1rem 0;
-      }
-
-      ul {
-        list-style: square;
-      }
-
-      ol {
-        list-style: upper-roman;
-      }
-
-      p {
-        padding-right: 0;
-        text-align: justify;
-        vertical-align: baseline;
-        &:before {
-          content: "\0000a0";
-          margin-right: 2ch;
-        }
-      }
-
-      /* Chapter Epigraphs */
-      div.epigraph {
-        margin: 5em 0;
-      }
-
-      div.epigraph > blockquote {
-        margin: 3em 0;
-      }
-
-      div.epigraph > blockquote,
-      div.epigraph > blockquote > p {
-        font-style: italic;
-      }
-
-      div.epigraph > blockquote > footer {
-        font-style: normal;
-      }
-
-      div.epigraph > blockquote > footer > cite {
-        font-style: italic;
-      }
-      /* end chapter epigraphs styles */
-
-      blockquote {
-        margin: 2rem 1rem;
-        padding-left: 1rem;
-        font-size: 1.4rem;
-        border-left: 2px solid var(--color-foreground-subtle);
-      }
-
-      blockquote p {
-        width: 86%;
-      }
-
-      blockquote footer {
-        width: 86%;
-        font-size: 1.1rem;
-        text-align: right;
-      }
-
-      section > p,
-      section > footer,
-      section > table {
         width: 100%;
-      }
+        &:not(:has(.margin-toggle)) {
+          margin: auto;
+          padding-left: 0;
+        }
+        padding: 2rem 0;
+        color: var(--color-foreground, #111);
+        max-width: 1400px;
+        counter-reset: sidenote-counter;
 
-      &:not(:has(.margin-toggle)) section {
-        columns: 2 35ch;
-        column-gap: 3rem;
-
-        & > * {
-          max-width: 69ch;
+        h2 {
+          font-style: italic;
+          font-weight: 400;
+          margin-top: 2.1rem;
+          margin-bottom: 1.4rem;
+          font-size: 2.2rem;
+          line-height: 1;
         }
 
-        & > .book-heading {
-          column-span: all;
+        h3 {
+          font-style: italic;
+          font-weight: 400;
+          font-size: 1.7rem;
+          margin-top: 2rem;
+          margin-bottom: 1.4rem;
+          line-height: 1;
         }
-      }
 
-      &:has(.margin-toggle) section > p,
-      &:has(.margin-toggle) section > footer,
-      &:has(.margin-toggle) section > table {
-        max-width: 69ch;
-      }
-
-      &:has(.margin-toggle) {
-        section > p,
-        section > footer,
-        section > table {
-          width: 75%;
+        hr {
+          display: block;
+          height: 1px;
+          width: 55%;
+          border: 0;
+          border-top: 1px solid #ccc;
+          margin: 1em 0;
+          padding: 0;
         }
-      }
 
-      /* 50 + 5 == 55, to be the same width as paragraph */
-      section > dl,
-      section > ol,
-      section > ul {
-        width: 70%;
-        -webkit-padding-start: 5%;
-      }
-
-      dt:not(:first-child),
-      li:not(:first-child) {
-        margin-top: 0.25rem;
-      }
-
-      figure {
-        padding: 0;
-        border: 0;
-        font-size: 100%;
-        font: inherit;
-        vertical-align: baseline;
-        max-width: 55%;
-        -webkit-margin-start: 0;
-        -webkit-margin-end: 0;
-        margin: 0 0 3em 0;
-      }
-
-      figcaption {
-        float: right;
-        clear: right;
-        margin-top: 0;
-        margin-bottom: 0;
-        font-size: 1.1rem;
-        line-height: 1.6;
-        vertical-align: baseline;
-        position: relative;
-        max-width: 40%;
-      }
-
-      figure.fullwidth figcaption {
-        margin-right: 24%;
-      }
-
-      a,
-      a:link,
-      a:visited {
-        text-decoration: underline;
-        color: inherit;
-        text-underline-offset: 0.1em;
-        text-decoration-thickness: 0.05em;
-      }
-
-      /* Sidenotes, margin notes, figures, captions */
-      img {
-        margin-top: 48px;
-        max-width: 100%;
-      }
-
-      .sidenote,
-      .marginnote {
-        float: right;
-        clear: right;
-        margin-right: -30%;
-        width: 26%;
-        margin-top: 0.3rem;
-        margin-bottom: 0;
-        font-size: 1.1rem;
-        line-height: 1.3;
-        vertical-align: baseline;
-        text-align: start;
-        position: relative;
-
-        & img {
-          margin-top: 0;
+        .numeral {
+          font-family: "Tinos NF", serif;
         }
-      }
 
-      .sidenote-number {
-        counter-increment: sidenote-counter;
-      }
+        .danger {
+          color: var(--color-error);
+        }
 
-      .sidenote-number:after,
-      .sidenote:before {
-        position: relative;
-        vertical-align: baseline;
-      }
+        p,
+        dl,
+        ol,
+        ul {
+          font-size: 1.4rem;
+          line-height: 2rem;
+        }
 
-      .sidenote-number:after {
-        content: counter(sidenote-counter);
-        font-size: 1rem;
-        top: -0.5rem;
-        left: 0.1rem;
-      }
+        ol,
+        ul,
+        dl {
+          margin: 1rem 0;
+        }
 
-      .sidenote:before {
-        content: counter(sidenote-counter) " ";
-        font-size: 1rem;
-        top: -0.5rem;
-      }
+        ul {
+          list-style: square;
+        }
 
-      blockquote .sidenote,
-      blockquote .marginnote {
-        margin-right: -82%;
-        min-width: 59%;
-        text-align: left;
-      }
+        ol {
+          list-style: upper-roman;
+        }
 
-      div.fullwidth,
-      table.fullwidth {
-        width: 100%;
-      }
+        p {
+          padding-right: 0;
+          text-align: justify;
+          vertical-align: baseline;
+          &:before {
+            content: "\0000a0";
+            margin-right: 2ch;
+          }
+        }
 
-      div.table-wrapper {
-        overflow-x: auto;
-        font-family: "Trebuchet MS", "Gill Sans", "Gill Sans MT", sans-serif;
-      }
+        /* Chapter Epigraphs */
+        div.epigraph {
+          margin: 5em 0;
+        }
 
-      .sans {
-        font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
-        letter-spacing: 0.03em;
-      }
+        div.epigraph > blockquote {
+          margin: 3em 0;
+        }
 
-      code,
-      pre > code {
-        font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-        font-size: 1rem;
-        line-height: 1.42;
-        -webkit-text-size-adjust: 100%; /* Prevent adjustments of font size after orientation changes in iOS. See https://github.com/edwardtufte/tufte-css/issues/81#issuecomment-261953409 */
-      }
+        div.epigraph > blockquote,
+        div.epigraph > blockquote > p {
+          font-style: italic;
+        }
 
-      .sans > code {
-        font-size: 1.2rem;
-      }
+        div.epigraph > blockquote > footer {
+          font-style: normal;
+        }
 
-      h1 > code,
-      h2 > code,
-      h3 > code {
-        font-size: 0.8em;
-      }
+        div.epigraph > blockquote > footer > cite {
+          font-style: italic;
+        }
+        /* end chapter epigraphs styles */
 
-      .marginnote > code,
-      .sidenote > code {
-        font-size: 1rem;
-      }
+        blockquote {
+          margin: 2rem 1rem;
+          padding-left: 1rem;
+          font-size: 1.4rem;
+          border-left: 2px solid var(--color-foreground-subtle);
+        }
 
-      pre > code {
-        font-size: 0.9rem;
-        width: 52.5%;
-        margin-left: 2.5%;
-        overflow-x: auto;
-        display: block;
-      }
+        blockquote p {
+          width: 86%;
+        }
 
-      pre.fullwidth > code {
-        width: 90%;
-      }
+        blockquote footer {
+          width: 86%;
+          font-size: 1.1rem;
+          text-align: right;
+        }
 
-      .fullwidth {
-        max-width: 90%;
-        clear: both;
-      }
-
-      span.newthought {
-        font-variant: small-caps;
-        font-size: 1.2em;
-      }
-
-      input.margin-toggle {
-        display: none;
-      }
-
-      label.sidenote-number {
-        display: inline-block;
-        max-height: 2rem; /* should be less than or equal to paragraph line-height */
-      }
-
-      label.margin-toggle:not(.sidenote-number) {
-        display: none;
-      }
-
-      .iframe-wrapper {
-        position: relative;
-        padding-bottom: 56.25%; /* 16:9 */
-        padding-top: 25px;
-        height: 0;
-      }
-
-      .iframe-wrapper iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
-
-  @container (max-width: 1240px) {
-    article {
-      width: 90%;
-      padding: 1svw 3svw;
-    }
-  }
-
-  @container (max-width: 760px) {
-    article {
-      width: 94%;
-      margin: 0 1vw;
-      padding-right: 0;
-      hr,
-      section > p,
-      section > footer,
-      section > table {
-        width: 100%;
-      }
-      &:has(.margin-toggle) {
         section > p,
         section > footer,
         section > table {
           width: 100%;
         }
-      }
 
-      pre > code {
-        width: 97%;
-      }
+        &:not(:has(.margin-toggle)) section {
+          columns: 2 35ch;
+          column-gap: 3rem;
 
-      section > dl,
-      section > ol,
-      section > ul {
-        width: 90%;
-      }
+          & > * {
+            max-width: 69ch;
+          }
 
-      figure {
-        max-width: 90%;
-      }
+          & > .book-heading {
+            column-span: all;
+          }
+        }
 
-      figcaption,
-      figure.fullwidth figcaption {
-        margin-right: 0%;
-        max-width: none;
-      }
+        &:has(.margin-toggle) section > p,
+        &:has(.margin-toggle) section > footer,
+        &:has(.margin-toggle) section > table {
+          max-width: 69ch;
+        }
 
-      blockquote {
-        margin-left: 1.5em;
-        margin-right: 0em;
-      }
+        &:has(.margin-toggle) {
+          section > p,
+          section > footer,
+          section > table {
+            width: 75%;
+          }
+        }
 
-      blockquote p,
-      blockquote footer {
-        width: 90%;
-      }
+        /* 50 + 5 == 55, to be the same width as paragraph */
+        section > dl,
+        section > ol,
+        section > ul {
+          width: 70%;
+          -webkit-padding-start: 5%;
+        }
 
-      label.margin-toggle:not(.sidenote-number) {
-        display: inline;
-        &:before {
+        dt:not(:first-child),
+        li:not(:first-child) {
+          margin-top: 0.25rem;
+        }
+
+        figure {
+          padding: 0;
+          border: 0;
+          font-size: 100%;
+          font: inherit;
+          vertical-align: baseline;
+          max-width: 55%;
+          -webkit-margin-start: 0;
+          -webkit-margin-end: 0;
+          margin: 0 0 3em 0;
+        }
+
+        figcaption {
+          float: right;
+          clear: right;
+          margin-top: 0;
+          margin-bottom: 0;
+          font-size: 1.1rem;
+          line-height: 1.6;
+          vertical-align: baseline;
+          position: relative;
+          max-width: 40%;
+        }
+
+        figure.fullwidth figcaption {
+          margin-right: 24%;
+        }
+
+        a,
+        a:link,
+        a:visited {
+          text-decoration: underline;
+          color: inherit;
+          text-underline-offset: 0.1em;
+          text-decoration-thickness: 0.05em;
+        }
+
+        /* Sidenotes, margin notes, figures, captions */
+        img {
+          margin-top: 48px;
+          max-width: 100%;
+        }
+
+        .sidenote,
+        .marginnote {
+          float: right;
+          clear: right;
+          margin-right: -30%;
+          width: 26%;
+          margin-top: 0.3rem;
+          margin-bottom: 0;
+          font-size: 1.1rem;
+          line-height: 1.3;
+          vertical-align: baseline;
+          text-align: start;
+          position: relative;
+
+          & img {
+            margin-top: 0;
+          }
+        }
+
+        .sidenote-number {
+          counter-increment: sidenote-counter;
+        }
+
+        .sidenote-number:after,
+        .sidenote:before {
+          position: relative;
+          vertical-align: baseline;
+        }
+
+        .sidenote-number:after {
+          content: counter(sidenote-counter);
+          font-size: 1rem;
+          top: -0.5rem;
+          left: 0.1rem;
+        }
+
+        .sidenote:before {
+          content: counter(sidenote-counter) " ";
+          font-size: 1rem;
+          top: -0.5rem;
+        }
+
+        blockquote .sidenote,
+        blockquote .marginnote {
+          margin-right: -82%;
+          min-width: 59%;
+          text-align: left;
+        }
+
+        div.fullwidth,
+        table.fullwidth {
+          width: 100%;
+        }
+
+        div.table-wrapper {
+          overflow-x: auto;
+          font-family: "Trebuchet MS", "Gill Sans", "Gill Sans MT", sans-serif;
+        }
+
+        .sans {
+          font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+          letter-spacing: 0.03em;
+        }
+
+        code,
+        pre > code {
+          font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+          font-size: 1rem;
+          line-height: 1.42;
+          -webkit-text-size-adjust: 100%; /* Prevent adjustments of font size after orientation changes in iOS. See https://github.com/edwardtufte/tufte-css/issues/81#issuecomment-261953409 */
+        }
+
+        .sans > code {
+          font-size: 1.2rem;
+        }
+
+        h1 > code,
+        h2 > code,
+        h3 > code {
+          font-size: 0.8em;
+        }
+
+        .marginnote > code,
+        .sidenote > code {
+          font-size: 1rem;
+        }
+
+        pre > code {
+          font-size: 0.9rem;
+          width: 52.5%;
+          margin-left: 2.5%;
+          overflow-x: auto;
+          display: block;
+        }
+
+        pre.fullwidth > code {
+          width: 90%;
+        }
+
+        .fullwidth {
+          max-width: 90%;
+          clear: both;
+        }
+
+        span.newthought {
+          font-variant: small-caps;
+          font-size: 1.2em;
+        }
+
+        input.margin-toggle {
+          display: none;
+        }
+
+        label.sidenote-number {
           display: inline-block;
-          content: "\21A9";
+          max-height: 2rem; /* should be less than or equal to paragraph line-height */
+        }
+
+        label.margin-toggle:not(.sidenote-number) {
+          display: none;
+        }
+
+        .iframe-wrapper {
+          position: relative;
+          padding-bottom: 56.25%; /* 16:9 */
+          padding-top: 25px;
+          height: 0;
+        }
+
+        .iframe-wrapper iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
         }
       }
+    }
 
-      .sidenote,
-      .marginnote {
-        display: none;
-      }
-
-      .margin-toggle:checked + .sidenote,
-      .margin-toggle:checked + .marginnote {
-        display: block;
-        float: left;
-        left: 1rem;
-        clear: both;
-        width: 95%;
-        margin: 1rem 2.5%;
-        position: relative;
-      }
-
-      label {
-        cursor: pointer;
-      }
-
-      div.table-wrapper,
-      table {
-        width: 85%;
-      }
-
-      img {
-        width: 100%;
+    @container (max-width: 1240px) {
+      article {
+        width: 90%;
+        padding: 1svw 3svw;
       }
     }
-  }
+
+    @container (max-width: 760px) {
+      article {
+        width: 94%;
+        margin: 0 1vw;
+        padding-right: 0;
+        hr,
+        section > p,
+        section > footer,
+        section > table {
+          width: 100%;
+        }
+        &:has(.margin-toggle) {
+          section > p,
+          section > footer,
+          section > table {
+            width: 100%;
+          }
+        }
+
+        pre > code {
+          width: 97%;
+        }
+
+        section > dl,
+        section > ol,
+        section > ul {
+          width: 90%;
+        }
+
+        figure {
+          max-width: 90%;
+        }
+
+        figcaption,
+        figure.fullwidth figcaption {
+          margin-right: 0%;
+          max-width: none;
+        }
+
+        blockquote {
+          margin-left: 1.5em;
+          margin-right: 0em;
+        }
+
+        blockquote p,
+        blockquote footer {
+          width: 90%;
+        }
+
+        label.margin-toggle:not(.sidenote-number) {
+          display: inline;
+          &:before {
+            display: inline-block;
+            content: "\21A9";
+          }
+        }
+
+        .sidenote,
+        .marginnote {
+          display: none;
+        }
+
+        .margin-toggle:checked + .sidenote,
+        .margin-toggle:checked + .marginnote {
+          display: block;
+          float: left;
+          left: 1rem;
+          clear: both;
+          width: 95%;
+          margin: 1rem 2.5%;
+          position: relative;
+        }
+
+        label {
+          cursor: pointer;
+        }
+
+        div.table-wrapper,
+        table {
+          width: 85%;
+        }
+
+        img {
+          width: 100%;
+        }
+      }
+    }
   }
 </style>

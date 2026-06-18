@@ -1,22 +1,22 @@
-import type { Dayjs } from 'dayjs';
+import type { Dayjs } from "dayjs";
 
 export type TagType =
-  | 'frontend'
-  | 'backend'
-  | 'devops/sre'
-  | 'tech-health'
-  | 'consulting'
-  | 'other'
-  | 'non-tech';
+  | "frontend"
+  | "backend"
+  | "devops/sre"
+  | "tech-health"
+  | "consulting"
+  | "other"
+  | "non-tech";
 
 type LevelType =
-  | 'been confronted'
-  | 'used before'
-  | 'familiar'
-  | 'well-versed'
-  | 'expert';
+  | "been confronted"
+  | "used before"
+  | "familiar"
+  | "well-versed"
+  | "expert";
 
-export type LanguageType = 'en' | 'de';
+export type LanguageType = "en" | "de";
 type MultiLanguageContent<T> = {
   [key in LanguageType]: T;
 };
@@ -46,4 +46,3 @@ export type CvSectionType = {
   heading: IntlContentType<string>;
   items: CvItemType[];
 };
-

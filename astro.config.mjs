@@ -7,17 +7,17 @@ import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
-    site: "https://blog.vomkonstant.in",
-    markdown: {
-        syntaxHighlight: false,
-        gfm: true,
-        rehypePlugins: [],
+  site: "https://blog.vomkonstant.in",
+  markdown: {
+    syntaxHighlight: false,
+    gfm: true,
+    rehypePlugins: [],
+  },
+  integrations: [mdx(), sitemap(), react()],
+  vite: {
+    resolve: {
+      dedupe: ["react", "react-dom"],
     },
-    integrations: [mdx(), sitemap(), react()],
-    vite: {
-        resolve: {
-            dedupe: ['react', 'react-dom']
-        },
-        plugins: [tailwindcss()],
-    },
+    plugins: [tailwindcss()],
+  },
 });

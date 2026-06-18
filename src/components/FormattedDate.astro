@@ -1,7 +1,7 @@
 ---
 interface Props {
-	date: Date;
-	className?: string;
+  date: Date;
+  className?: string;
 }
 
 const { date, className } = Astro.props;
@@ -10,11 +10,9 @@ const { date, className } = Astro.props;
 <time
   class={className}
   datetime={date.toISOString()}
-  set:html={date
-    .toLocaleDateString("de-AT", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    })
-  }
+  set:html={date.toLocaleDateString("de-AT", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  })}
 />

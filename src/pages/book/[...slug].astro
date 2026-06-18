@@ -3,11 +3,11 @@ import { getCollection, render } from "astro:content";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
 
 export async function getStaticPaths() {
-	const books = await getCollection("book");
-	return books.map((book) => ({
-		params: { slug: book.id },
-		props: book,
-	}));
+  const books = await getCollection("book");
+  return books.map((book) => ({
+    params: { slug: book.id },
+    props: book,
+  }));
 }
 
 const book = Astro.props;

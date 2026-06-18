@@ -4,8 +4,10 @@ import BookListItem from "../../components/list-item/BookListItem.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const books = (await getCollection("book"))
-	.filter(({ data }) => !data.draft && data.finishedDate)
-	.sort((a, b) => b.data.finishedDate!.valueOf() - a.data.finishedDate!.valueOf());
+  .filter(({ data }) => !data.draft && data.finishedDate)
+  .sort(
+    (a, b) => b.data.finishedDate!.valueOf() - a.data.finishedDate!.valueOf(),
+  );
 ---
 
 <BaseLayout

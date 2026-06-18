@@ -5,34 +5,28 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const featuredPost = (await getCollection("blog")).find(
-	({ data }) => data.featured,
+  ({ data }) => data.featured,
 );
 
 const { Content } = featuredPost
-	? await render(featuredPost)
-	: { Content: () => null };
+  ? await render(featuredPost)
+  : { Content: () => null };
 ---
 
-<BaseLayout
-  title={SITE_TITLE}
-  description={SITE_DESCRIPTION}
-  lang="de"
->
-  <div
-    id="article"
-    class="max-h-[69vh] mask-b-from-45 overflow-clip"
-  >
-    {featuredPost && (
-      <Article {...featuredPost.data}>
-        <Content />
-      </Article>
-    )}
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION} lang="de">
+  <div id="article" class="max-h-[69vh] mask-b-from-45 overflow-clip">
+    {
+      featuredPost && (
+        <Article {...featuredPost.data}>
+          <Content />
+        </Article>
+      )
+    }
   </div>
   <a
     id="further"
     href={"/blog/" + featuredPost?.id}
     class="block z-10 h-12 mt-8 text-center text-md w-fit mx-auto border-foreground border-1 rounded py-2 px-8 cursor-pointer hover:bg-foreground hover:text-background transition-colors duration-300"
-    data-testid='btn-continue-reading'
-    >weiterlesen...</a
+    data-testid="btn-continue-reading">weiterlesen...</a
   >
 </BaseLayout>

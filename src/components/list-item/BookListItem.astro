@@ -21,20 +21,20 @@ const authorsDisplay = fullAuthors.length > 20 && authors.length > 1
     <span class="list-card-ornament" aria-hidden="true"></span>
     <span
       class="font-display text-lg line-clamp-1 col-span-2"
-      style=`view-transition-name: --header-${transitionName};`
+      style={`view-transition-name: --header-${transitionName};`}
       >{title}</span
     >
     {subtitle && (
       <span
         class="font-galnoy italic text-sm text-foreground-subtle line-clamp-1 col-span-2 mt-0.5"
-        style=`view-transition-name: --subheader-${transitionName};`
+        style={`view-transition-name: --subheader-${transitionName};`}
         >{subtitle}</span
       >
     )}
     <span class="text-xs text-foreground-subtle mt-2 flex items-center gap-2 overflow-hidden whitespace-nowrap text-ellipsis col-span-2">
-      <span class="font-serif" style=`view-transition-name: --author-${transitionName};`>{authorsDisplay}</span>
+      <span class="font-serif" style={`view-transition-name: --author-${transitionName};`}>{authorsDisplay}</span>
       <span class="text-surface-high text-[0.5em]" aria-hidden="true">&#xf0b8a;</span>
-      <span style=`view-transition-name: --release-date-${transitionName};`>{releaseDate}</span>
+      <span style={`view-transition-name: --release-date-${transitionName};`}>{releaseDate}</span>
       {rating != null && (
         <>
           <span class="text-surface-high text-[0.5em]" aria-hidden="true">&#xf0b8a;</span>
