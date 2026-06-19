@@ -6,6 +6,7 @@ import { Header } from "./Header";
 import { CvItemCard } from "./Card";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Hero } from "./Hero";
+import SideRays from "@/components/SideRays";
 
 export const App = () => {
   const [activeFilters, setActiveFilters] = useState<TagType[]>([
@@ -28,6 +29,21 @@ export const App = () => {
   return (
     <TooltipProvider>
       <div className="body mx-auto grid grid-cols-12 gap-4 w-11/12 md:w-5/6 **:print:bg-white **:print:text-black">
+        <div className="inset-0 absolute">
+          <SideRays
+            speed={2.5}
+            rayColor1="#ffadbc"
+            rayColor2="#fbdeda"
+            intensity={1.6}
+            spread={2.2}
+            origin="top-left"
+            tilt={20}
+            saturation={2.2}
+            blend={0.75}
+            falloff={0.8}
+            opacity={1}
+          />
+        </div>
         <div className="col-span-full sticky top-4 z-1 mb-8 print:hidden">
           <Header
             filterOptions={ALL_TAGS}

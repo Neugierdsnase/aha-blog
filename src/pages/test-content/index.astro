@@ -2,7 +2,6 @@
 import { getCollection } from "astro:content";
 import BaseHead from "../../components/BaseHead.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
-import Header from "../../components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 
 const posts = (await getCollection("test-content")).sort(
@@ -15,8 +14,6 @@ const posts = (await getCollection("test-content")).sort(
   <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 
   <body>
-    <Header />
-
     <section>
       <h2
         class="text-[clamp(2.2rem,4.2svw,3.4rem)] pl-[2vw] underline underline-offset-2 clear-descenders z-10 mb-2"

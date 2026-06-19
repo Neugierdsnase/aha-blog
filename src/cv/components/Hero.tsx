@@ -3,6 +3,7 @@ import { Cake, MapPin, Mail, Phone, Globe, UserRound } from "lucide-react";
 import type { FunctionComponent } from "react";
 import data, { getTranslation } from "../data";
 import type { LanguageType } from "../types";
+import BorderGlow from "@/components/BorderGlow";
 
 type HeroProps = {
   activeLanguage: LanguageType;
@@ -18,7 +19,7 @@ export const Hero: FunctionComponent<HeroProps> = ({ activeLanguage }) => {
             Curriculum Vitae
           </p>
         </header>
-          <hr className="my-4" />
+        <hr className="my-4" />
         <section className="flex flex-col gap-4 relative">
           <ul className="flex flex-col gap-2 top-34 print:text-sm [&_a]:underline [&_a]:underline-offset-3">
             <li>
@@ -73,43 +74,57 @@ export const Hero: FunctionComponent<HeroProps> = ({ activeLanguage }) => {
         </section>
       </aside>
 
-      <div className="col-span-full lg:col-start-5 lg:col-span-8 flex flex-col gap-4">
-        <Card className="card scrollfade">
-          <CardHeader>
-            <CardTitle
-              className="font-soria"
-              dangerouslySetInnerHTML={{
-                __html: getTranslation(activeLanguage, {
-                  en: "At a Glance",
-                  de: "Auf einen Blick",
-                }),
-              }}
-            />
-          </CardHeader>
-          <CardContent
-            dangerouslySetInnerHTML={{
-              __html: getTranslation(activeLanguage, data.overviewText),
-            }}
-          />{" "}
-        </Card>
-        <Card className="card scrollfade lg:col-start-5 lg:col-span-8">
-          <CardHeader>
-            <CardTitle
-              className="font-soria"
-              dangerouslySetInnerHTML={{
-                __html: getTranslation(activeLanguage, {
-                  en: "About Me",
-                  de: "Über mich",
-                }),
-              }}
-            />
-          </CardHeader>
-          <CardContent
-            dangerouslySetInnerHTML={{
-              __html: getTranslation(activeLanguage, data.introText),
-            }}
-          />
-        </Card>
+      <div className="scrollfade col-span-full lg:col-start-5 lg:col-span-8">
+        <BorderGlow
+          edgeSensitivity={30}
+          glowColor="40 80 80"
+          backgroundColor="var(--color-card)"
+          borderRadius={0}
+          glowRadius={40}
+          glowIntensity={1}
+          coneSpread={25}
+          animated
+          colors={['#c084fc', '#f472b6', '#38bdf8']}
+        >
+          <div className="flex flex-col gap-4">
+            <Card className="card bg-transparent border-0">
+              <CardHeader>
+                <CardTitle
+                  className="font-soria"
+                  dangerouslySetInnerHTML={{
+                    __html: getTranslation(activeLanguage, {
+                      en: "At a Glance",
+                      de: "Auf einen Blick",
+                    }),
+                  }}
+                />
+              </CardHeader>
+              <CardContent
+                dangerouslySetInnerHTML={{
+                  __html: getTranslation(activeLanguage, data.overviewText),
+                }}
+              />
+            </Card>
+          </div>
+            <Card className="card lg:col-start-5 lg:col-span-8 bg-transparent border-0">
+              <CardHeader>
+                <CardTitle
+                  className="font-soria"
+                  dangerouslySetInnerHTML={{
+                    __html: getTranslation(activeLanguage, {
+                      en: "About Me",
+                      de: "Über mich",
+                    }),
+                  }}
+                />
+              </CardHeader>
+              <CardContent
+                dangerouslySetInnerHTML={{
+                  __html: getTranslation(activeLanguage, data.introText),
+                }}
+              />
+            </Card>
+        </BorderGlow>
       </div>
     </>
   );
