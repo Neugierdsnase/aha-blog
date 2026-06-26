@@ -14,30 +14,20 @@
   --color-fire-brick: #b80022;
 
   --color-surface: light-dark(var(--color-lavender-blush), var(--color-night));
-  --color-surface-inverted: light-dark(
-    var(--color-night),
-    var(--color-lavender-blush)
-  );
+  --color-surface-inverted: light-dark(var(--color-night),
+      var(--color-lavender-blush));
 
   --color-surface-high: var(--color-cherry-blossom-pink);
 
-  --color-background: light-dark(
-    var(--color-misty-rose),
-    var(--color-raisin-black)
-  );
-  --color-background-inverted: light-dark(
-    var(--color-raisin-black),
-    var(--color-misty-rose)
-  );
+  --color-background: light-dark(var(--color-misty-rose),
+      var(--color-raisin-black));
+  --color-background-inverted: light-dark(var(--color-raisin-black),
+      var(--color-misty-rose));
 
-  --color-foreground: light-dark(
-    var(--color-black-bean),
-    var(--color-lavender-blush)
-  );
-  --color-foreground-inverted: light-dark(
-    var(--color-lavender-blush),
-    var(--color-black-bean)
-  );
+  --color-foreground: light-dark(var(--color-black-bean),
+      var(--color-lavender-blush));
+  --color-foreground-inverted: light-dark(var(--color-lavender-blush),
+      var(--color-black-bean));
 
   --color-foreground-subtle: light-dark(#3a3b3b, #bdbbbb);
   --color-foreground-subtle-inverted: light-dark(#3a3b3b, #bdbbbb);
@@ -242,10 +232,6 @@
     font-style: normal;
   }
 
-  p {
-    @apply text-trim-trim-both;
-  }
-
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
@@ -342,7 +328,7 @@
   }
 
   /* Remove staggered card offset */
-  main > .card:nth-child(even) {
+  main>.card:nth-child(even) {
     transform: none !important;
   }
 
@@ -397,7 +383,7 @@
   .card,
   article,
   aside,
-  main > * {
+  main>* {
     break-inside: avoid;
     page-break-inside: avoid;
   }
@@ -422,7 +408,7 @@
     column-gap: 1.5rem;
   }
 
-  main > .card {
+  main>.card {
     break-inside: avoid;
     page-break-inside: avoid;
   }
