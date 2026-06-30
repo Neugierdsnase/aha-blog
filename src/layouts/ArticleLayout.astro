@@ -6,9 +6,26 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 type Props = CollectionEntry<"book" | "blog">["data"] & { lang?: "de" | "en" };
 
 const { title, description, lang = "de" } = Astro.props;
+
+// Determine if this is a blog post or book review and extract appropriate dates
+const isBlog = "pubDate" in Astro.props;
+const contentType = isBlog ? "article" : "book";
+
+// Extract dates and images based on content type
+const pubDate = isBlog ? (Astro.props as any).pubDate : (Astro.props as any).finishedDate;
+const updatedDate = isBlog ? (Astro.props as any).updatedDate : undefined;
+const heroImage = isBlog ? (Astro.props as any).heroImage : undefined;
 ---
 
-<BaseLayout title={title} description={description} lang={lang}>
+<BaseLayout
+  title={title}
+  description={description}
+  lang={lang}
+  type={contentType}
+  pubDate={pubDate}
+  updatedDate={updatedDate}
+  image={heroImage}
+>
   <Article {...Astro.props}>
     <slot />
   </Article>

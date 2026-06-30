@@ -7,6 +7,11 @@ type Props = {
   lang: "de" | "en";
   title: string;
   description?: string;
+  type?: "website" | "article" | "book";
+  pubDate?: Date;
+  updatedDate?: Date;
+  image?: string;
+  author?: string;
 };
 
 const pages: { label: string; href: string }[] = [
@@ -16,7 +21,16 @@ const pages: { label: string; href: string }[] = [
   { label: "RSS", href: "/rss.xml" },
 ];
 
-const { lang, title, description } = Astro.props;
+const {
+  lang,
+  title,
+  description,
+  type,
+  pubDate,
+  updatedDate,
+  image,
+  author,
+} = Astro.props;
 ---
 
 <script is:inline>
@@ -44,7 +58,16 @@ const { lang, title, description } = Astro.props;
 </script>
 
 <html lang={lang}>
-  <BaseHead title={title + " vom Konstantin"} description={description} />
+  <BaseHead
+    title={title + " vom Konstantin"}
+    description={description}
+    type={type}
+    pubDate={pubDate}
+    updatedDate={updatedDate}
+    image={image}
+    author={author}
+    lang={lang}
+  />
   <body>
     <nav class="flex justify-end items-center p-4">
       <BubbleMenu
