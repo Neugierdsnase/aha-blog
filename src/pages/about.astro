@@ -7,7 +7,55 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   description="der eigentlich ganz ok ist."
   lang="de"
 >
-  <p>
-    Über mich habe ich noch nichts geschrieben. Ist ja auch nicht notwendig.
-  </p>
+  <div class="h-card about-page">
+    <h1 class="p-name">Konstantin</h1>
+
+    <div class="p-note">
+      <p>
+        Softwareentwickler und Freizeitnostalgiker aus Deutschland.
+      </p>
+      <p>
+        Über mich habe ich noch nichts geschrieben. Ist ja auch nicht notwendig.
+      </p>
+    </div>
+
+    <div class="contact-info">
+      <a class="u-url u-uid" href="https://blog.vomkonstant.in/">https://blog.vomkonstant.in/</a>
+    </div>
+  </div>
+
+  <style>
+    .about-page {
+      max-width: 65ch;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .about-page h1 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      font-family: "Soria", serif;
+    }
+
+    .about-page .p-note {
+      font-size: 1.4rem;
+      line-height: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .about-page .p-note p {
+      margin-bottom: 1rem;
+    }
+
+    .about-page .contact-info {
+      font-size: 1.2rem;
+      color: var(--color-foreground-subtle);
+    }
+
+    .about-page .contact-info a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+  </style>
 </BaseLayout>

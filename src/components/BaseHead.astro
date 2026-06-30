@@ -151,6 +151,14 @@ const structuredData = {
   <!-- Canonical URL -->
   <link rel="canonical" href={canonicalURL} />
 
+  <!-- Webmention -->
+  <link rel="webmention" href="https://webmention.io/blog.vomkonstant.in/webmention" />
+  <link rel="pingback" href="https://webmention.io/blog.vomkonstant.in/xmlrpc" />
+
+  <!-- IndieAuth -->
+  <link rel="authorization_endpoint" href="https://indieauth.com/auth" />
+  <link rel="token_endpoint" href="https://tokens.indieauth.com/token" />
+
   <!-- Primary Meta Tags -->
   <title>{title}</title>
   <meta name="title" content={title} />
@@ -191,7 +199,7 @@ const structuredData = {
   }
 
   <!-- JSON-LD Structured Data -->
-  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
   <slot />
 </head>

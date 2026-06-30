@@ -15,24 +15,25 @@ const { id, data, basePath } = Astro.props;
 const { title, description, pubDate } = data;
 ---
 
-<li class="list-none">
+<li class="list-none h-entry">
   <a
     href={basePath + id}
-    class="list-card h-36 grid-cols-[1fr_auto] grid-rows-[auto_auto_auto]"
+    class="list-card h-36 grid-cols-[1fr_auto] grid-rows-[auto_auto_auto] u-url"
   >
     <span class="list-card-ornament" aria-hidden="true"></span>
-    <span class="font-display text-lg line-clamp-1 col-span-2">{title}</span>
+    <span class="font-display text-lg line-clamp-1 col-span-2 p-name">{title}</span>
     {
       description && (
-        <span class="font-serif text-sm text-foreground-subtle line-clamp-1 col-span-2 mt-0.5">
+        <span class="font-serif text-sm text-foreground-subtle line-clamp-1 col-span-2 mt-0.5 p-summary">
           {description}
         </span>
       )
     }
-    <span
-      class="text-xs text-foreground-subtle mt-2 col-start-2 row-start-3 self-end text-right"
+    <time
+      class="text-xs text-foreground-subtle mt-2 col-start-2 row-start-3 self-end text-right dt-published"
+      datetime={pubDate.toISOString()}
     >
       <FormattedDate date={pubDate} />
-    </span>
+    </time>
   </a>
 </li>

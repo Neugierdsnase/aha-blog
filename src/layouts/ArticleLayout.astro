@@ -15,6 +15,9 @@ const contentType = isBlog ? "article" : "book";
 const pubDate = isBlog ? (Astro.props as any).pubDate : (Astro.props as any).finishedDate;
 const updatedDate = isBlog ? (Astro.props as any).updatedDate : undefined;
 const heroImage = isBlog ? (Astro.props as any).heroImage : undefined;
+
+// Get canonical URL for h-entry
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <BaseLayout
@@ -26,7 +29,12 @@ const heroImage = isBlog ? (Astro.props as any).heroImage : undefined;
   updatedDate={updatedDate}
   image={heroImage}
 >
-  <Article {...Astro.props}>
+  <Article
+    {...Astro.props}
+    pubDate={pubDate}
+    updatedDate={updatedDate}
+    url={canonicalURL.toString()}
+  >
     <slot />
   </Article>
 </BaseLayout>

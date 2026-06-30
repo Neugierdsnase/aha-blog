@@ -24,6 +24,15 @@ const blog = defineCollection({
     lang: z.enum(["en", "de"]),
     draft: z.boolean().optional(),
     featured: z.boolean().optional(),
+    // POSSE syndication URLs
+    syndication: z
+      .array(
+        z.object({
+          name: z.string(), // e.g., "Mastodon", "Twitter", etc.
+          url: z.string().url(),
+        })
+      )
+      .optional(),
   }),
 });
 

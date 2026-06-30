@@ -1,17 +1,61 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import BookHeading from "./BookHeading.astro";
+import FormattedDate from "./FormattedDate.astro";
+import Webmentions from "./Webmentions";
 
-type Props = CollectionEntry<"book" | "blog">["data"];
+type Props = CollectionEntry<"book" | "blog">["data"] & {
+  pubDate?: Date;
+  updatedDate?: Date;
+  author?: string;
+  url?: string;
+  syndication?: Array<{ name: string; url: string }>;
+};
+
+const { pubDate, updatedDate, author = "Konstantin", url, syndication } = Astro.props;
 ---
 
 <div class="container" data-testid="article-container">
-  <article>
+  <article class="h-entry">
     <section>
       <BookHeading {...Astro.props} />
-      <div style="view-transition-name: --article-content;">
+
+      <!-- Microformat metadata -->
+      <div class="article-meta">
+        {author && (
+          <span class="p-author h-card">
+            <a class="p-name u-url" href="/">{author}</a>
+          </span>
+        )}
+        {pubDate && (
+          <time class="dt-published" datetime={pubDate.toISOString()}>
+            <FormattedDate date={pubDate} />
+          </time>
+        )}
+        {updatedDate && (
+          <time class="dt-updated" datetime={updatedDate.toISOString()}>
+            (updated: <FormattedDate date={updatedDate} />)
+          </time>
+        )}
+        {url && <a class="u-url" href={url} style="display:none;">{url}</a>}
+      </div>
+
+      {syndication && syndication.length > 0 && (
+        <div class="syndication-links">
+          <span>Also on:</span>
+          {syndication.map((link) => (
+            <a href={link.url} class="u-syndication" rel="syndication">
+              {link.name}
+            </a>
+          ))}
+        </div>
+      )}
+
+      <div class="e-content" style="view-transition-name: --article-content;">
         <slot />
       </div>
+
+      {url && <Webmentions url={url} client:load />}
     </section>
   </article>
 </div>
@@ -515,5 +559,135 @@ type Props = CollectionEntry<"book" | "blog">["data"];
         }
       }
     }
+  }
+
+  .article-meta {
+    font-size: 1.1rem;
+    color: var(--color-foreground-subtle);
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .article-meta time,
+  .article-meta .p-author {
+    display: inline;
+  }
+
+  .article-meta .p-author a {
+    text-decoration: none;
+  }
+
+  .syndication-links {
+    font-size: 1.1rem;
+    color: var(--color-foreground-subtle);
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .syndication-links a {
+    text-decoration: underline;
+    color: var(--color-foreground-subtle);
+    text-underline-offset: 0.2em;
+  }
+
+  .syndication-links a:hover {
+    color: var(--color-foreground);
+  }
+
+  /* Webmentions styles */
+  :global(.webmentions) {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-foreground-subtle);
+  }
+
+  :global(.webmentions h3) {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  :global(.webmention-section) {
+    margin-bottom: 2rem;
+  }
+
+  :global(.webmention-section h4) {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--color-foreground-subtle);
+  }
+
+  :global(.webmention-faces) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  :global(.webmention-face) {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-foreground-subtle);
+    color: var(--color-background);
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  :global(.webmention-face img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: 0;
+  }
+
+  :global(.webmention-replies) {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  :global(.webmention-reply) {
+    padding: 1rem;
+    border: 1px solid var(--color-foreground-subtle);
+    border-radius: 0.5rem;
+  }
+
+  :global(.webmention-reply-author) {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  :global(.webmention-reply-author img) {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0;
+  }
+
+  :global(.webmention-reply-author a) {
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  :global(.webmention-reply-author time) {
+    font-size: 0.9rem;
+    color: var(--color-foreground-subtle);
+    display: block;
+  }
+
+  :global(.webmention-reply-content) {
+    font-size: 1.2rem;
+    line-height: 1.6;
   }
 </style>
