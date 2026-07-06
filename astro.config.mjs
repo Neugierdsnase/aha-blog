@@ -10,7 +10,6 @@ export default defineConfig({
   site: "https://blog.vomkonstant.in",
   markdown: {
     syntaxHighlight: false,
-    gfm: true,
     rehypePlugins: [],
   },
   integrations: [mdx(), sitemap(), react()],

@@ -4,7 +4,7 @@ import BookHeading from "./BookHeading.astro";
 import FormattedDate from "./FormattedDate.astro";
 import Webmentions from "./Webmentions";
 
-type Props = CollectionEntry<"book" | "blog">["data"] & {
+type Props = Partial<CollectionEntry<"book" | "blog">["data"]> & {
   pubDate?: Date;
   updatedDate?: Date;
   author?: string;
@@ -18,7 +18,7 @@ const { pubDate, updatedDate, author = "Konstantin", url, syndication } = Astro.
 <div class="container" data-testid="article-container">
   <article class="h-entry">
     <section>
-      <BookHeading {...Astro.props} />
+      {Astro.props.title && <BookHeading {...Astro.props} title={Astro.props.title} />}
 
       <!-- Microformat metadata -->
       <div class="article-meta">
