@@ -1,0 +1,151 @@
+<script>
+  const footnotesSection = document.querySelector("section.footnotes");
+  const noteEntries = document.querySelectorAll("section.footnotes>ol>li");
+
+  document
+    .querySelectorAll(".data-footnote-backref")
+    .forEach((e) => e.remove());
+
+  for (const { id, children } of noteEntries) {
+    const isMarginNote = id
+      .replace("user-content-fn-", "")
+      .trim()
+      .startsWith("mn-");
+
+    const replacementLabel = document.createElement("label");
+    replacementLabel.htmlFor = id;
+    replacementLabel.classList.add("margin-toggle");
+    if (!isMarginNote) {
+      replacementLabel.classList.add("sidenote-number");
+    }
+
+    const replacementCheckbox = document.createElement("input");
+    replacementCheckbox.type = "checkbox";
+    replacementCheckbox.id = id;
+    replacementCheckbox.name = id;
+    replacementCheckbox.classList.add("margin-toggle");
+
+    const replacementEntry = document.createElement("span");
+    replacementEntry.classList.add(isMarginNote ? "marginnote" : "sidenote");
+    replacementEntry.append(...children[0].childNodes);
+
+    const originalNoteReferenceMark = document.querySelector(
+      "sup:has(a[href='#" + id + "'])",
+    );
+    originalNoteReferenceMark?.replaceWith(
+      replacementLabel,
+      replacementCheckbox,
+      replacementEntry,
+    );
+
+    footnotesSection?.remove();
+  }
+</script>
+
+<style is:global>
+  .container {
+    @container (min-width: 0px) {
+      article {
+        /* Sidenotes, margin notes, figures, captions */
+        .sidenote,
+        .marginnote {
+          float: right;
+          clear: right;
+          margin-right: -30%;
+          width: 26%;
+          margin-top: 0.3rem;
+          margin-bottom: 0;
+          font-size: 1.1rem;
+          line-height: 1.3;
+          vertical-align: baseline;
+          text-align: start;
+          position: relative;
+
+          & img {
+            margin-top: 0;
+          }
+        }
+
+        .sidenote-number {
+          counter-increment: sidenote-counter;
+        }
+
+        .sidenote-number:after,
+        .sidenote:before {
+          position: relative;
+          vertical-align: baseline;
+        }
+
+        .sidenote-number:after {
+          content: counter(sidenote-counter);
+          font-size: 1rem;
+          top: -0.5rem;
+          left: 0.1rem;
+        }
+
+        .sidenote:before {
+          content: counter(sidenote-counter) " ";
+          font-size: 1rem;
+          top: -0.5rem;
+        }
+
+        blockquote .sidenote,
+        blockquote .marginnote {
+          margin-right: -82%;
+          min-width: 59%;
+          text-align: left;
+        }
+
+        .marginnote > code,
+        .sidenote > code {
+          font-size: 1rem;
+        }
+
+        input.margin-toggle {
+          display: none;
+        }
+
+        label.sidenote-number {
+          display: inline-block;
+          max-height: 2rem; /* should be less than or equal to paragraph line-height */
+        }
+
+        label.margin-toggle:not(.sidenote-number) {
+          display: none;
+        }
+      }
+    }
+
+    @container (max-width: 760px) {
+      article {
+        label.margin-toggle:not(.sidenote-number) {
+          display: inline;
+          &:before {
+            display: inline-block;
+            content: "\21A9";
+          }
+        }
+
+        .sidenote,
+        .marginnote {
+          display: none;
+        }
+
+        .margin-toggle:checked + .sidenote,
+        .margin-toggle:checked + .marginnote {
+          display: block;
+          float: left;
+          left: 1rem;
+          clear: both;
+          width: 95%;
+          margin: 1rem 2.5%;
+          position: relative;
+        }
+
+        label {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+</style>
