@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./Webmentions.css";
 
 interface WebmentionAuthor {
   name: string;
