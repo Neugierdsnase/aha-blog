@@ -40,79 +40,83 @@
 
     footnotesSection?.remove();
   }
+
+  if (document.querySelector(".margin-toggle")) {
+    // Layout contract: Article.astro switches from the two-column layout
+    // to the wide-margin Tufte layout via this attribute
+    document.querySelector(".container")?.setAttribute("data-sidenotes", "");
+  }
 </script>
 
 <style is:global>
   .container {
-    @container (min-width: 0px) {
-      article {
-        /* Sidenotes, margin notes, figures, captions */
-        .sidenote,
-        .marginnote {
-          float: right;
-          clear: right;
-          margin-right: -30%;
-          width: 26%;
-          margin-top: 0.3rem;
-          margin-bottom: 0;
-          font-size: 1.1rem;
-          line-height: 1.3;
-          vertical-align: baseline;
-          text-align: start;
-          position: relative;
+    article {
+      /* Sidenotes, margin notes, figures, captions */
+      .sidenote,
+      .marginnote {
+        float: right;
+        clear: right;
+        margin-right: -30%;
+        width: 26%;
+        margin-top: 0.3rem;
+        margin-bottom: 0;
+        font-size: 1.1rem;
+        line-height: 1.3;
+        vertical-align: baseline;
+        text-align: start;
+        position: relative;
 
-          & img {
-            margin-top: 0;
-          }
+        & img {
+          margin-top: 0;
         }
+      }
 
-        .sidenote-number {
-          counter-increment: sidenote-counter;
-        }
+      .sidenote-number {
+        counter-increment: sidenote-counter;
+      }
 
-        .sidenote-number:after,
-        .sidenote:before {
-          position: relative;
-          vertical-align: baseline;
-        }
+      .sidenote-number:after,
+      .sidenote:before {
+        position: relative;
+        vertical-align: baseline;
+      }
 
-        .sidenote-number:after {
-          content: counter(sidenote-counter);
-          font-size: 1rem;
-          top: -0.5rem;
-          left: 0.1rem;
-        }
+      .sidenote-number:after {
+        content: counter(sidenote-counter);
+        font-size: 1rem;
+        top: -0.5rem;
+        left: 0.1rem;
+      }
 
-        .sidenote:before {
-          content: counter(sidenote-counter) " ";
-          font-size: 1rem;
-          top: -0.5rem;
-        }
+      .sidenote:before {
+        content: counter(sidenote-counter) " ";
+        font-size: 1rem;
+        top: -0.5rem;
+      }
 
-        blockquote .sidenote,
-        blockquote .marginnote {
-          margin-right: -82%;
-          min-width: 59%;
-          text-align: left;
-        }
+      blockquote .sidenote,
+      blockquote .marginnote {
+        margin-right: -82%;
+        min-width: 59%;
+        text-align: left;
+      }
 
-        .marginnote > code,
-        .sidenote > code {
-          font-size: 1rem;
-        }
+      .marginnote > code,
+      .sidenote > code {
+        font-size: 1rem;
+      }
 
-        input.margin-toggle {
-          display: none;
-        }
+      input.margin-toggle {
+        display: none;
+      }
 
-        label.sidenote-number {
-          display: inline-block;
-          max-height: 2rem; /* should be less than or equal to paragraph line-height */
-        }
+      label.sidenote-number {
+        display: inline-block;
+        max-height: 2rem; /* should be less than or equal to paragraph line-height */
+      }
 
-        label.margin-toggle:not(.sidenote-number) {
-          display: none;
-        }
+      label.margin-toggle:not(.sidenote-number) {
+        display: none;
       }
     }
 

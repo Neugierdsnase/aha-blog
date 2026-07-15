@@ -49,70 +49,66 @@ const {
 </div>
 
 <style is:global>
+  /* The [data-sidenotes] attribute is set by Sidenotes.astro when footnotes
+     exist; it switches the two-column layout to the wide-margin Tufte layout */
   .container {
     container-type: inline-size;
-    &:not(:has(.margin-toggle)) {
+    &:not([data-sidenotes]) {
       contain: width;
       margin: 0 auto 2em;
     }
-    &:has(.margin-toggle) {
+    &[data-sidenotes] {
       max-width: 900px;
     }
 
     /* Tufte CSS styles */
-    @container (min-width: 0px) {
-      article {
-        display: block;
+    article {
+      display: block;
+      width: 100%;
+      padding: 2rem 0;
+      color: var(--color-foreground, #111);
+      max-width: 1400px;
+      counter-reset: sidenote-counter;
+
+      section > p,
+      section > footer,
+      section > table {
         width: 100%;
-        &:not(:has(.margin-toggle)) {
-          margin: auto;
-          padding-left: 0;
-        }
-        padding: 2rem 0;
-        color: var(--color-foreground, #111);
-        max-width: 1400px;
-        counter-reset: sidenote-counter;
+      }
 
-        section > p,
-        section > footer,
-        section > table {
-          width: 100%;
-        }
+      /* 50 + 5 == 55, to be the same width as paragraph */
+      section > dl,
+      section > ol,
+      section > ul {
+        width: 70%;
+        -webkit-padding-start: 5%;
+      }
+    }
 
-        &:not(:has(.margin-toggle)) section {
-          columns: 2 35ch;
-          column-gap: 3rem;
+    &:not([data-sidenotes]) article {
+      margin: auto;
+      padding-left: 0;
 
-          & > * {
-            max-width: 69ch;
-          }
+      section {
+        columns: 2 35ch;
+        column-gap: 3rem;
 
-          & > .book-heading {
-            column-span: all;
-          }
-        }
-
-        &:has(.margin-toggle) section > p,
-        &:has(.margin-toggle) section > footer,
-        &:has(.margin-toggle) section > table {
+        & > * {
           max-width: 69ch;
         }
 
-        &:has(.margin-toggle) {
-          section > p,
-          section > footer,
-          section > table {
-            width: 75%;
-          }
+        & > .book-heading {
+          column-span: all;
         }
+      }
+    }
 
-        /* 50 + 5 == 55, to be the same width as paragraph */
-        section > dl,
-        section > ol,
-        section > ul {
-          width: 70%;
-          -webkit-padding-start: 5%;
-        }
+    &[data-sidenotes] article {
+      section > p,
+      section > footer,
+      section > table {
+        width: 75%;
+        max-width: 69ch;
       }
     }
 
@@ -133,18 +129,19 @@ const {
         section > table {
           width: 100%;
         }
-        &:has(.margin-toggle) {
-          section > p,
-          section > footer,
-          section > table {
-            width: 100%;
-          }
-        }
 
         section > dl,
         section > ol,
         section > ul {
           width: 90%;
+        }
+      }
+
+      &[data-sidenotes] article {
+        section > p,
+        section > footer,
+        section > table {
+          width: 100%;
         }
       }
     }
