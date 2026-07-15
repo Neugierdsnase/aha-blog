@@ -54,7 +54,6 @@ const {
   .container {
     container-type: inline-size;
     &:not([data-sidenotes]) {
-      contain: width;
       margin: 0 auto 2em;
     }
     &[data-sidenotes] {
@@ -65,30 +64,14 @@ const {
     article {
       display: block;
       width: 100%;
-      padding: 2rem 0;
+      margin: auto;
+      padding: 0;
       color: var(--color-foreground, #111);
       max-width: 1400px;
       counter-reset: sidenote-counter;
-
-      section > p,
-      section > footer,
-      section > table {
-        width: 100%;
-      }
-
-      /* 50 + 5 == 55, to be the same width as paragraph */
-      section > dl,
-      section > ol,
-      section > ul {
-        width: 70%;
-        -webkit-padding-start: 5%;
-      }
     }
 
     &:not([data-sidenotes]) article {
-      margin: auto;
-      padding-left: 0;
-
       section {
         columns: 2 35ch;
         column-gap: 3rem;
@@ -100,15 +83,6 @@ const {
         & > .book-heading {
           column-span: all;
         }
-      }
-    }
-
-    &[data-sidenotes] article {
-      section > p,
-      section > footer,
-      section > table {
-        width: 75%;
-        max-width: 69ch;
       }
     }
 
@@ -124,25 +98,6 @@ const {
         width: 94%;
         margin: 0 1vw;
         padding-right: 0;
-        section > p,
-        section > footer,
-        section > table {
-          width: 100%;
-        }
-
-        section > dl,
-        section > ol,
-        section > ul {
-          width: 90%;
-        }
-      }
-
-      &[data-sidenotes] article {
-        section > p,
-        section > footer,
-        section > table {
-          width: 100%;
-        }
       }
     }
   }
