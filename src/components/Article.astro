@@ -12,44 +12,70 @@ type Props = Partial<CollectionEntry<"book" | "blog">["data"]> & {
   syndication?: Array<{ name: string; url: string }>;
 };
 
-const { pubDate, updatedDate, author = "Konstantin", url, syndication } = Astro.props;
+const {
+  pubDate,
+  updatedDate,
+  author = "Konstantin",
+  url,
+  syndication,
+} = Astro.props;
 ---
 
 <div class="container" data-testid="article-container">
   <article class="h-entry">
     <section>
-      {Astro.props.title && <BookHeading {...Astro.props} title={Astro.props.title} />}
+      {
+        Astro.props.title && (
+          <BookHeading {...Astro.props} title={Astro.props.title} />
+        )
+      }
 
       <!-- Microformat metadata -->
       <div class="article-meta">
-        {author && (
-          <span class="p-author h-card">
-            <a class="p-name u-url" href="/">{author}</a>
-          </span>
-        )}
-        {pubDate && (
-          <time class="dt-published" datetime={pubDate.toISOString()}>
-            <FormattedDate date={pubDate} />
-          </time>
-        )}
-        {updatedDate && (
-          <time class="dt-updated" datetime={updatedDate.toISOString()}>
-            (updated: <FormattedDate date={updatedDate} />)
-          </time>
-        )}
-        {url && <a class="u-url" href={url} style="display:none;">{url}</a>}
+        {
+          author && (
+            <span class="p-author h-card">
+              <a class="p-name u-url" href="/">
+                {author}
+              </a>
+            </span>
+          )
+        }
+        {
+          pubDate && (
+            <time class="dt-published" datetime={pubDate.toISOString()}>
+              <FormattedDate date={pubDate} />
+            </time>
+          )
+        }
+        {
+          updatedDate && (
+            <time class="dt-updated" datetime={updatedDate.toISOString()}>
+              (updated: <FormattedDate date={updatedDate} />)
+            </time>
+          )
+        }
+        {
+          url && (
+            <a class="u-url" href={url} style="display:none;">
+              {url}
+            </a>
+          )
+        }
       </div>
 
-      {syndication && syndication.length > 0 && (
-        <div class="syndication-links">
-          <span>Also on:</span>
-          {syndication.map((link) => (
-            <a href={link.url} class="u-syndication" rel="syndication">
-              {link.name}
-            </a>
-          ))}
-        </div>
-      )}
+      {
+        syndication && syndication.length > 0 && (
+          <div class="syndication-links">
+            <span>Also on:</span>
+            {syndication.map((link) => (
+              <a href={link.url} class="u-syndication" rel="syndication">
+                {link.name}
+              </a>
+            ))}
+          </div>
+        )
+      }
 
       <div class="e-content" style="view-transition-name: --article-content;">
         <slot />
@@ -196,29 +222,6 @@ const { pubDate, updatedDate, author = "Konstantin", url, syndication } = Astro.
             margin-right: 2ch;
           }
         }
-
-        /* Chapter Epigraphs */
-        div.epigraph {
-          margin: 5em 0;
-        }
-
-        div.epigraph > blockquote {
-          margin: 3em 0;
-        }
-
-        div.epigraph > blockquote,
-        div.epigraph > blockquote > p {
-          font-style: italic;
-        }
-
-        div.epigraph > blockquote > footer {
-          font-style: normal;
-        }
-
-        div.epigraph > blockquote > footer > cite {
-          font-style: italic;
-        }
-        /* end chapter epigraphs styles */
 
         blockquote {
           margin: 2rem 1rem;
