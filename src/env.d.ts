@@ -6,3 +6,5 @@ declare module "astro" {
     "epub:type"?: string;
   }
 }
+
+declare module "tufte-css" {}

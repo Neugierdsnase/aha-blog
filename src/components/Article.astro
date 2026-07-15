@@ -4,7 +4,6 @@ import ArticleMeta from "./ArticleMeta.astro";
 import BookHeading from "./BookHeading.astro";
 import SyndicationLinks from "./SyndicationLinks.astro";
 import Webmentions from "./Webmentions";
-import Sidenotes from "./Sidenotes.astro";
 import "../styles/tufte-prose.css";
 
 type Props = Partial<CollectionEntry<"book" | "blog">["data"]> & {
@@ -24,7 +23,7 @@ const {
 } = Astro.props;
 ---
 
-<div class="container" data-testid="article-container">
+<tufte-article data-testid="article-container">
   <article class="h-entry">
     <section>
       {
@@ -41,64 +40,23 @@ const {
         <slot />
       </div>
 
-      <Sidenotes />
-
       {url && <Webmentions url={url} client:load />}
     </section>
   </article>
-</div>
+</tufte-article>
 
 <style is:global>
-  /* The [data-sidenotes] attribute is set by Sidenotes.astro when footnotes
-     exist; it switches the two-column layout to the wide-margin Tufte layout */
-  .container {
-    container-type: inline-size;
-    &:not([data-sidenotes]) {
-      margin: 0 auto 2em;
-    }
-    &[data-sidenotes] {
-      max-width: 900px;
-    }
-
-    /* Tufte CSS styles */
-    article {
-      display: block;
-      width: 100%;
-      margin: auto;
-      padding: 0;
-      color: var(--color-foreground, #111);
-      max-width: 1400px;
-      counter-reset: sidenote-counter;
-    }
-
-    &:not([data-sidenotes]) article {
-      section {
-        columns: 2 35ch;
-        column-gap: 3rem;
-
-        & > * {
-          max-width: 69ch;
-        }
-
-        & > .book-heading {
-          column-span: all;
-        }
-      }
-    }
-
-    @container (max-width: 1240px) {
-      article {
-        width: 90%;
-        padding: 1svw 3svw;
-      }
-    }
-
-    @container (max-width: 760px) {
-      article {
-        width: 94%;
-        margin: 0 1vw;
-        padding-right: 0;
-      }
-    }
+  /* Hide components until defined to prevent FOUC */
+  tufte-article:not(:defined),
+  tufte-sidenote:not(:defined),
+  tufte-marginnote:not(:defined),
+  tufte-epigraph:not(:defined),
+  tufte-figure:not(:defined),
+  tufte-newthought:not(:defined) {
+    visibility: hidden;
   }
 </style>
+
+<script>
+  import "tufte-css";
+</script>

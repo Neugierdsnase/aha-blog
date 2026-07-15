@@ -1,0 +1,15 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+  fullwidth?: boolean;
+}
+
+const { src, alt, caption, fullwidth = false } = Astro.props;
+---
+
+<tufte-figure fullwidth={fullwidth ? true : undefined}>
+  <img src={src} alt={alt} />
+  {caption && <span slot="caption" set:html={caption} />}
+</tufte-figure>
