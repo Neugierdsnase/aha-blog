@@ -1,7 +1,8 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import ArticleMeta from "./ArticleMeta.astro";
 import BookHeading from "./BookHeading.astro";
-import FormattedDate from "./FormattedDate.astro";
+import SyndicationLinks from "./SyndicationLinks.astro";
 import Webmentions from "./Webmentions";
 import Sidenotes from "./Sidenotes.astro";
 import "../styles/tufte-prose.css";
@@ -32,52 +33,9 @@ const {
         )
       }
 
-      <!-- Microformat metadata -->
-      <div class="article-meta">
-        {
-          author && (
-            <span class="p-author h-card">
-              <a class="p-name u-url" href="/">
-                {author}
-              </a>
-            </span>
-          )
-        }
-        {
-          pubDate && (
-            <time class="dt-published" datetime={pubDate.toISOString()}>
-              <FormattedDate date={pubDate} />
-            </time>
-          )
-        }
-        {
-          updatedDate && (
-            <time class="dt-updated" datetime={updatedDate.toISOString()}>
-              (updated: <FormattedDate date={updatedDate} />)
-            </time>
-          )
-        }
-        {
-          url && (
-            <a class="u-url" href={url} style="display:none;">
-              {url}
-            </a>
-          )
-        }
-      </div>
+      <ArticleMeta {author} {pubDate} {updatedDate} {url} />
 
-      {
-        syndication && syndication.length > 0 && (
-          <div class="syndication-links">
-            <span>Also on:</span>
-            {syndication.map((link) => (
-              <a href={link.url} class="u-syndication" rel="syndication">
-                {link.name}
-              </a>
-            ))}
-          </div>
-        )
-      }
+      <SyndicationLinks {syndication} />
 
       <div class="e-content" style="view-transition-name: --article-content;">
         <slot />
@@ -191,43 +149,4 @@ const {
       }
     }
   }
-
-  .article-meta {
-    font-size: 1.1rem;
-    color: var(--color-foreground-subtle);
-    margin-bottom: 2rem;
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .article-meta time,
-  .article-meta .p-author {
-    display: inline;
-  }
-
-  .article-meta .p-author a {
-    text-decoration: none;
-  }
-
-  .syndication-links {
-    font-size: 1.1rem;
-    color: var(--color-foreground-subtle);
-    margin-bottom: 2rem;
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
-  .syndication-links a {
-    text-decoration: underline;
-    color: var(--color-foreground-subtle);
-    text-underline-offset: 0.2em;
-  }
-
-  .syndication-links a:hover {
-    color: var(--color-foreground);
-  }
-
 </style>

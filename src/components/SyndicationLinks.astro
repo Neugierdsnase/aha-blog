@@ -1,0 +1,42 @@
+---
+interface Props {
+  syndication?: Array<{ name: string; url: string }>;
+}
+
+const { syndication } = Astro.props;
+---
+
+{
+  syndication && syndication.length > 0 && (
+    <div class="syndication-links">
+      <span>Also on:</span>
+      {syndication.map((link) => (
+        <a href={link.url} class="u-syndication" rel="syndication">
+          {link.name}
+        </a>
+      ))}
+    </div>
+  )
+}
+
+<style>
+  .syndication-links {
+    font-size: 1.1rem;
+    color: var(--color-foreground-subtle);
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .syndication-links a {
+    text-decoration: underline;
+    color: var(--color-foreground-subtle);
+    text-underline-offset: 0.2em;
+  }
+
+  .syndication-links a:hover {
+    color: var(--color-foreground);
+  }
+</style>
