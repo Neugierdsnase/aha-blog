@@ -8,6 +8,9 @@ test.beforeEach(async ({ page }) => {
 test("epigraph visual regression", async ({ page }) => {
   await page.goto("/test-content/epigraph-test");
 
+  // Webmentions island settles to empty once the blocked fetch aborts
+  await expect(page.locator(".webmentions")).toHaveCount(0);
+
   const article = page.getByTestId("article-container");
   await expect(article).toHaveScreenshot("epigraph.png");
 });

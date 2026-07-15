@@ -12,6 +12,9 @@ test("marginnotes visual regression", async ({ page }) => {
   await expect(page.locator(".margin-toggle").first()).toBeAttached();
   await expect(page.locator("section.footnotes")).toHaveCount(0);
 
+  // Webmentions island settles to empty once the blocked fetch aborts
+  await expect(page.locator(".webmentions")).toHaveCount(0);
+
   const article = page.getByTestId("article-container");
   await expect(article).toHaveScreenshot("marginnotes.png");
 });
