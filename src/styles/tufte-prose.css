@@ -1,3 +1,9 @@
+tufte-article {
+  --tufte-text-color: var(--color-foreground);
+  --tufte-background-color: var(--color-background);
+  --tufte-font-family: var(--font-serif);
+}
+
 .container {
   article {
     h2 {
@@ -23,7 +29,7 @@
       height: 1px;
       width: 55%;
       border: 0;
-      border-top: 1px solid #ccc;
+      border-top: 1px solid var(--color-foreground-subtle);
       margin: 1em 0;
       padding: 0;
     }
@@ -33,7 +39,7 @@
     }
 
     .danger {
-      color: var(--color-error);
+      color: var(--color-fire-brick);
     }
 
     p,

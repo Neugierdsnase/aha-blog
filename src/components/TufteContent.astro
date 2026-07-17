@@ -1,0 +1,122 @@
+---
+/**
+ * Wrapper component that transforms GFM footnotes into tufte-css web components.
+ *
+ * Usage:
+ *   <TufteContent>
+ *     <Content />
+ *   </TufteContent>
+ */
+
+import { parse, renderSync } from 'ultrahtml';
+
+// Get slotted content as HTML string
+const html = await Astro.slots.render('default');
+
+// Parse and transform the HTML
+const ast = parse(html);
+
+// Collect footnotes from section.footnotes
+const footnotes = new Map<string, any[]>();
+let footnotesNode: any = null;
+
+function walkCollect(node: any) {
+  if (node.type === 1 && node.name === 'section') {
+    const classes = node.attributes?.class || '';
+    if (classes.includes('footnotes') || node.attributes?.['data-footnotes']) {
+      footnotesNode = node;
+      // Extract footnote content from ol > li
+      const ol = node.children?.find((c: any) => c.type === 1 && c.name === 'ol');
+      if (ol?.children) {
+        for (const li of ol.children) {
+          if (li.type === 1 && li.name === 'li' && li.attributes?.id) {
+            const id = li.attributes.id;
+            // Get content from first <p>, excluding back-references
+            const p = li.children?.find((c: any) => c.type === 1 && c.name === 'p');
+            if (p) {
+              const content = (p.children || []).filter((c: any) => {
+                if (c.type === 1 && c.name === 'a') {
+                  const cls = c.attributes?.class || '';
+                  return !cls.includes('backref') && !c.attributes?.['data-footnote-backref'];
+                }
+                return true;
+              });
+              footnotes.set(id, content);
+            }
+          }
+        }
+      }
+    }
+  }
+  if (node.children) {
+    for (const child of node.children) {
+      walkCollect(child);
+    }
+  }
+}
+
+// Transform elements to tufte components
+function walkTransform(node: any, parent?: any, index?: number): any {
+  // Transform <p> to <tufte-paragraph>
+  if (node.type === 1 && node.name === 'p') {
+    node.name = 'tufte-paragraph';
+  }
+
+  if (node.type === 1 && node.name === 'sup') {
+    // Check if this contains a footnote link
+    const link = node.children?.find((c: any) =>
+      c.type === 1 &&
+      c.name === 'a' &&
+      c.attributes?.href?.startsWith('#user-content-fn-')
+    );
+
+    if (link) {
+      const id = link.attributes.href.slice(1); // Remove '#'
+      const content = footnotes.get(id);
+
+      if (content && parent && typeof index === 'number') {
+        const noteId = id.replace('user-content-fn-', '');
+        const isMarginNote = noteId.startsWith('mn-');
+
+        // Create tufte component
+        const tufteNode = {
+          type: 1,
+          name: isMarginNote ? 'tufte-marginnote' : 'tufte-sidenote',
+          attributes: { 'note-id': id },
+          children: content,
+        };
+
+        // Replace in parent
+        parent.children[index] = tufteNode;
+        return tufteNode;
+      }
+    }
+  }
+
+  // Remove footnotes section
+  if (node === footnotesNode && parent && typeof index === 'number') {
+    parent.children.splice(index, 1);
+    return null;
+  }
+
+  // Recurse
+  if (node.children) {
+    for (let i = node.children.length - 1; i >= 0; i--) {
+      walkTransform(node.children[i], node, i);
+    }
+  }
+
+  return node;
+}
+
+// First pass: collect footnotes
+walkCollect(ast);
+
+// Second pass: transform
+walkTransform(ast);
+
+// Render back to HTML
+const transformedHtml = renderSync(ast);
+---
+
+<Fragment set:html={transformedHtml} />

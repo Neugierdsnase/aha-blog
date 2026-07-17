@@ -48,6 +48,7 @@ const {
 <style is:global>
   /* Hide components until defined to prevent FOUC */
   tufte-article:not(:defined),
+  tufte-paragraph:not(:defined),
   tufte-sidenote:not(:defined),
   tufte-marginnote:not(:defined),
   tufte-epigraph:not(:defined),
@@ -58,5 +59,6 @@ const {
 </style>
 
 <script>
+  // Register tufte-css web components
   import "tufte-css";
 </script>

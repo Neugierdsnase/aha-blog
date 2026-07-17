@@ -8,8 +8,8 @@ test.beforeEach(async ({ page }) => {
 test("marginnotes visual regression", async ({ page }) => {
   await page.goto("/test-content/marginnotes-test");
 
-  // Wait for the footnote-to-sidenote transform to finish
-  await expect(page.locator(".margin-toggle").first()).toBeAttached();
+  // Wait for tufte-marginnote elements to be present
+  await expect(page.locator("tufte-marginnote").first()).toBeAttached();
   await expect(page.locator("section.footnotes")).toHaveCount(0);
 
   // Webmentions island settles to empty once the blocked fetch aborts

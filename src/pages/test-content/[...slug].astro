@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
+import TufteContent from "../../components/TufteContent.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("test-content");
@@ -15,5 +16,7 @@ const { Content } = await render(post);
 ---
 
 <ArticleLayout {...post.data} lang="en">
-  <Content />
+  <TufteContent>
+    <Content />
+  </TufteContent>
 </ArticleLayout>
