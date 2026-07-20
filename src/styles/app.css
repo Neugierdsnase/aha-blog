@@ -139,6 +139,12 @@
       content: "✦";
     }
   }
+
+  /* Shared metadata row used by ArticleMeta and SyndicationLinks */
+  .meta-row {
+    @apply flex flex-wrap gap-4 mb-8 text-foreground-subtle;
+    font-size: 1.1rem;
+  }
 }
 
 @utility text-trim-* {

@@ -12,7 +12,7 @@ const { author, pubDate, updatedDate, url } = Astro.props;
 ---
 
 <!-- Microformat metadata -->
-<div class="article-meta">
+<div class="article-meta meta-row">
   {
     author && (
       <span class="p-author h-card">
@@ -46,15 +46,6 @@ const { author, pubDate, updatedDate, url } = Astro.props;
 </div>
 
 <style>
-  .article-meta {
-    font-size: 1.1rem;
-    color: var(--color-foreground-subtle);
-    margin-bottom: 2rem;
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
   .article-meta time,
   .article-meta .p-author {
     display: inline;

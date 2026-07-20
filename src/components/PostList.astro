@@ -1,19 +1,9 @@
 ---
+import type { PostListEntry } from "../types";
 import PostListItem from "./list-item/PostListItem.astro";
 
-interface PostData {
-  title: string;
-  description?: string;
-  pubDate: Date;
-}
-
-interface Post {
-  id: string;
-  data: PostData;
-}
-
 interface Props {
-  posts: Post[];
+  posts: PostListEntry[];
   basePath: string;
   heading: string;
 }

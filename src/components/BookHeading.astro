@@ -11,18 +11,12 @@ interface Props {
 const { title, subtitle, authors, releaseDate } = Astro.props;
 const transitionName = sanitizeViewTransitionName(title);
 
-const authorParts: string[] = [];
-if (authors?.length) {
-  const last = authors.length - 1;
-  authors.forEach((a, i) => {
-    authorParts.push(a.trim());
-    if (i < last - 1) authorParts.push(", ");
-    else if (i === last - 1) authorParts.push(" und ");
-  });
-}
-if (authorParts.length && releaseDate) authorParts.push(`, ${releaseDate}`);
-else if (releaseDate) authorParts.push(String(releaseDate));
-const authorsLine = authorParts.join("");
+const names = authors?.map((a) => a.trim()) ?? [];
+const authorsText =
+  names.length > 1
+    ? `${names.slice(0, -1).join(", ")} und ${names.at(-1)}`
+    : (names[0] ?? "");
+const authorsLine = [authorsText, releaseDate].filter(Boolean).join(", ");
 ---
 
 <div class="book-heading">

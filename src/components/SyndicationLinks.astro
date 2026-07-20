@@ -8,7 +8,7 @@ const { syndication } = Astro.props;
 
 {
   syndication && syndication.length > 0 && (
-    <div class="syndication-links">
+    <div class="syndication-links meta-row">
       <span>Also on:</span>
       {syndication.map((link) => (
         <a href={link.url} class="u-syndication" rel="syndication">
@@ -21,12 +21,6 @@ const { syndication } = Astro.props;
 
 <style>
   .syndication-links {
-    font-size: 1.1rem;
-    color: var(--color-foreground-subtle);
-    margin-bottom: 2rem;
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
     align-items: center;
   }
 

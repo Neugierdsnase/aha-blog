@@ -1,15 +1,8 @@
 ---
+import type { PostListEntry } from "../../types";
 import FormattedDate from "../FormattedDate.astro";
 
-interface Props {
-  id: string;
-  data: {
-    title: string;
-    description?: string;
-    pubDate: Date;
-  };
-  basePath: string;
-}
+type Props = PostListEntry & { basePath: string };
 
 const { id, data, basePath } = Astro.props;
 const { title, description, pubDate } = data;
