@@ -2,120 +2,112 @@
 /**
  * Wrapper component that transforms GFM footnotes into tufte-css web components.
  *
+ * GFM renders footnotes as inline `<sup><a href="#user-content-fn-…">` refs plus
+ * a trailing `<section data-footnotes>`. We hoist each footnote's body into a
+ * `<tufte-sidenote>` / `<tufte-marginnote>` (margin notes use an `mn-` id prefix)
+ * at the reference site, rename paragraphs to `<tufte-paragraph>`, then drop the
+ * now-empty footnotes section.
+ *
  * Usage:
  *   <TufteContent>
  *     <Content />
  *   </TufteContent>
  */
+import {
+  DOCUMENT_NODE,
+  ELEMENT_NODE,
+  h,
+  parse,
+  renderSync,
+  walkSync,
+} from "ultrahtml";
+import type { DocumentNode, ElementNode, Node } from "ultrahtml";
 
-import { parse, renderSync } from 'ultrahtml';
+type ContainerNode = DocumentNode | ElementNode;
 
-// Get slotted content as HTML string
-const html = await Astro.slots.render('default');
+const isElement = (node: Node): node is ElementNode =>
+  node.type === ELEMENT_NODE;
 
-// Parse and transform the HTML
+const isContainer = (node: Node): node is ContainerNode =>
+  node.type === ELEMENT_NODE || node.type === DOCUMENT_NODE;
+
+const findChild = (node: ElementNode, name: string): ElementNode | undefined =>
+  node.children.find((c): c is ElementNode => isElement(c) && c.name === name);
+
+const isFootnotesSection = (node: ElementNode): boolean =>
+  (node.attributes.class ?? "").includes("footnotes") ||
+  "data-footnotes" in node.attributes;
+
+const isBackref = (node: Node): boolean =>
+  isElement(node) &&
+  node.name === "a" &&
+  ((node.attributes.class ?? "").includes("backref") ||
+    "data-footnote-backref" in node.attributes);
+
+const html = await Astro.slots.render("default");
 const ast = parse(html);
 
-// Collect footnotes from section.footnotes
-const footnotes = new Map<string, any[]>();
-let footnotesNode: any = null;
+// Pass 1: index each footnote's body by its list-item id, and remember the
+// footnotes section (and its parent) so it can be removed after transforming.
+const footnotes = new Map<string, Node[]>();
+let footnotesSection: ElementNode | undefined;
+let footnotesParent: ContainerNode | undefined;
 
-function walkCollect(node: any) {
-  if (node.type === 1 && node.name === 'section') {
-    const classes = node.attributes?.class || '';
-    if (classes.includes('footnotes') || node.attributes?.['data-footnotes']) {
-      footnotesNode = node;
-      // Extract footnote content from ol > li
-      const ol = node.children?.find((c: any) => c.type === 1 && c.name === 'ol');
-      if (ol?.children) {
-        for (const li of ol.children) {
-          if (li.type === 1 && li.name === 'li' && li.attributes?.id) {
-            const id = li.attributes.id;
-            // Get content from first <p>, excluding back-references
-            const p = li.children?.find((c: any) => c.type === 1 && c.name === 'p');
-            if (p) {
-              const content = (p.children || []).filter((c: any) => {
-                if (c.type === 1 && c.name === 'a') {
-                  const cls = c.attributes?.class || '';
-                  return !cls.includes('backref') && !c.attributes?.['data-footnote-backref'];
-                }
-                return true;
-              });
-              footnotes.set(id, content);
-            }
-          }
-        }
-      }
+walkSync(ast, (node, parent) => {
+  if (!isElement(node) || node.name !== "section" || !isFootnotesSection(node))
+    return;
+  footnotesSection = node;
+  footnotesParent = parent && isContainer(parent) ? parent : undefined;
+
+  for (const li of findChild(node, "ol")?.children ?? []) {
+    if (!isElement(li) || li.name !== "li" || !li.attributes.id) continue;
+    const body = findChild(li, "p");
+    if (body) {
+      footnotes.set(
+        li.attributes.id,
+        body.children.filter((c) => !isBackref(c)),
+      );
     }
   }
-  if (node.children) {
-    for (const child of node.children) {
-      walkCollect(child);
-    }
+});
+
+// Pass 2: rename paragraphs and swap each footnote reference for a tufte note.
+walkSync(ast, (node, parent, index) => {
+  if (isElement(node) && node.name === "p") {
+    node.name = "tufte-paragraph";
+    return;
   }
+  if (
+    !isElement(node) ||
+    node.name !== "sup" ||
+    !parent ||
+    typeof index !== "number"
+  )
+    return;
+
+  const ref = node.children.find(
+    (c): c is ElementNode =>
+      isElement(c) &&
+      c.name === "a" &&
+      (c.attributes.href ?? "").startsWith("#user-content-fn-"),
+  );
+  const id = ref?.attributes.href.slice(1);
+  const body = id ? footnotes.get(id) : undefined;
+  if (!id || !body || !isContainer(parent)) return;
+
+  const tag = id.replace("user-content-fn-", "").startsWith("mn-")
+    ? "tufte-marginnote"
+    : "tufte-sidenote";
+  parent.children[index] = h(tag, { "note-id": id }, ...body);
+});
+
+// The referenced footnotes now live inline as tufte notes; drop the section.
+if (footnotesSection && footnotesParent) {
+  footnotesParent.children = footnotesParent.children.filter(
+    (c: Node) => c !== footnotesSection,
+  );
 }
 
-// Transform elements to tufte components
-function walkTransform(node: any, parent?: any, index?: number): any {
-  // Transform <p> to <tufte-paragraph>
-  if (node.type === 1 && node.name === 'p') {
-    node.name = 'tufte-paragraph';
-  }
-
-  if (node.type === 1 && node.name === 'sup') {
-    // Check if this contains a footnote link
-    const link = node.children?.find((c: any) =>
-      c.type === 1 &&
-      c.name === 'a' &&
-      c.attributes?.href?.startsWith('#user-content-fn-')
-    );
-
-    if (link) {
-      const id = link.attributes.href.slice(1); // Remove '#'
-      const content = footnotes.get(id);
-
-      if (content && parent && typeof index === 'number') {
-        const noteId = id.replace('user-content-fn-', '');
-        const isMarginNote = noteId.startsWith('mn-');
-
-        // Create tufte component
-        const tufteNode = {
-          type: 1,
-          name: isMarginNote ? 'tufte-marginnote' : 'tufte-sidenote',
-          attributes: { 'note-id': id },
-          children: content,
-        };
-
-        // Replace in parent
-        parent.children[index] = tufteNode;
-        return tufteNode;
-      }
-    }
-  }
-
-  // Remove footnotes section
-  if (node === footnotesNode && parent && typeof index === 'number') {
-    parent.children.splice(index, 1);
-    return null;
-  }
-
-  // Recurse
-  if (node.children) {
-    for (let i = node.children.length - 1; i >= 0; i--) {
-      walkTransform(node.children[i], node, i);
-    }
-  }
-
-  return node;
-}
-
-// First pass: collect footnotes
-walkCollect(ast);
-
-// Second pass: transform
-walkTransform(ast);
-
-// Render back to HTML
 const transformedHtml = renderSync(ast);
 ---
 
