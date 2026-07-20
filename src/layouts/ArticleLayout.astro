@@ -5,16 +5,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 type Props = CollectionEntry<"book" | "blog">["data"] & { lang?: "de" | "en" };
 
-const { title, description, lang = "de" } = Astro.props;
+const props = Astro.props;
+const { title, description, lang = "de" } = props;
 
-// Determine if this is a blog post or book review and extract appropriate dates
-const isBlog = "pubDate" in Astro.props;
+// Blog posts carry pubDate; book reviews carry finishedDate. Narrow on that.
+const isBlog = "pubDate" in props;
 const contentType = isBlog ? "article" : "book";
 
-// Extract dates and images based on content type
-const pubDate = isBlog ? (Astro.props as any).pubDate : (Astro.props as any).finishedDate;
-const updatedDate = isBlog ? (Astro.props as any).updatedDate : undefined;
-const heroImage = isBlog ? (Astro.props as any).heroImage : undefined;
+const pubDate = isBlog ? props.pubDate : props.finishedDate;
+const updatedDate = isBlog ? props.updatedDate : undefined;
+const heroImage = isBlog ? props.heroImage : undefined;
 
 // Get canonical URL for h-entry
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
