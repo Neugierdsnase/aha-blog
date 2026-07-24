@@ -10,7 +10,7 @@ test("GFM footnotes are transformed to tufte-sidenote components", async ({
 }) => {
   await page.goto("/test-content/sidenotes-test");
 
-  // Wait for tufte-css web components to be defined
+  // Wait for the Tufte web components to be defined
   await page.waitForFunction(
     () => customElements.get("tufte-sidenote") !== undefined
   );

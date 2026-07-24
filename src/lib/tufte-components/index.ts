@@ -1,10 +1,11 @@
 /**
- * Tufte CSS Web Components
+ * Tufte Web Components
  *
- * Web components built with Lit that implement Edward Tufte's design principles.
- * Supports SSR with Declarative Shadow DOM to avoid FOUC/FOUCE.
+ * Web components built with Lit that implement Edward Tufte's design
+ * principles. Inlined from the ../tufte-css fork; registering any of these
+ * defines the corresponding custom element.
  *
- * @module tufte-css
+ * @module tufte-components
  */
 
 export { TufteArticle } from './tufte-article.js';
