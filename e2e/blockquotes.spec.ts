@@ -16,5 +16,11 @@ test("blockquotes visual regression", async ({ page }) => {
   await expect(page.locator(".webmentions")).toHaveCount(0);
 
   const article = page.getByTestId("article-container");
+  // Hide Astro's dev toolbar: a fixed, dev-server-only overlay (absent from
+  // production) that gets stitched into the tall element screenshot at a
+  // nondeterministic position. It is unrelated to the content under test.
+  await page.addStyleTag({
+    content: "astro-dev-toolbar { display: none !important; }",
+  });
   await expect(article).toHaveScreenshot("blockquotes.png");
 });

@@ -25,6 +25,14 @@ export class TufteEpigraph extends LitElement {
     css`
       :host {
         display: block;
+      }
+
+      /* Outer spacing lives on an inner wrapper, not on :host: the host is in
+         the outer document, where a page reset (e.g. Tailwind's preflight
+         *{margin:0}) would beat a :host margin. (The slotted <blockquote>'s own
+         margins remain subject to that reset — it is light DOM — but the 5em
+         wrapper carries the epigraph's separation.) */
+      .epigraph {
         margin: 5em 0;
       }
 
@@ -52,7 +60,7 @@ export class TufteEpigraph extends LitElement {
   ];
 
   render() {
-    return html`<slot></slot>`;
+    return html`<div class="epigraph"><slot></slot></div>`;
   }
 }
 

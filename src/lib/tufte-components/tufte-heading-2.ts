@@ -7,8 +7,8 @@ import { fontFaces, baseStyles, linkStyles } from './styles.js';
  *
  * Encapsulates the heading metrics (size, style and vertical rhythm) in its own
  * shadow DOM so they apply regardless of how deeply the heading is nested,
- * mirroring `<tufte-paragraph>`. This replaces a raw `<h2>`; the host is exposed
- * to assistive tech as a level-2 heading.
+ * mirroring `<tufte-paragraph>`. This replaces a raw `<h2>`; a real `<h2>` in
+ * the shadow tree carries the level-2 heading semantics.
  *
  * @slot - Heading text
  *
@@ -26,6 +26,13 @@ export class TufteHeading2 extends LitElement {
     css`
       :host {
         display: block;
+      }
+
+      /* Box-model and type live on the inner <h2>, not on :host, so a
+         page-level reset (e.g. Tailwind's preflight *{margin:0}) can't override
+         them — outer-document rules beat :host but never reach into the shadow.
+         The real <h2> also carries the heading semantics for free. */
+      h2 {
         font-weight: 400;
         line-height: 1;
         font-style: italic;
@@ -36,13 +43,8 @@ export class TufteHeading2 extends LitElement {
     `,
   ];
 
-  protected willUpdate() {
-    this.setAttribute('role', 'heading');
-    this.setAttribute('aria-level', '2');
-  }
-
   render() {
-    return html`<slot></slot>`;
+    return html`<h2><slot></slot></h2>`;
   }
 }
 

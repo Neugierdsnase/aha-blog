@@ -1,114 +1,18 @@
 ---
 /**
- * Wrapper component that transforms GFM footnotes into Tufte web components.
- *
- * GFM renders footnotes as inline `<sup><a href="#user-content-fn-…">` refs plus
- * a trailing `<section data-footnotes>`. We hoist each footnote's body into a
- * `<tufte-sidenote>` / `<tufte-marginnote>` (margin notes use an `mn-` id prefix)
- * at the reference site, rename paragraphs to `<tufte-paragraph>`, then drop the
- * now-empty footnotes section.
+ * Wrapper component that transforms rendered markdown into Tufte web
+ * components (footnotes → sidenotes/margin notes, and block elements →
+ * `<tufte-*>`). The transformation itself lives in a pure, unit-tested module.
  *
  * Usage:
  *   <TufteContent>
  *     <Content />
  *   </TufteContent>
  */
-import {
-  DOCUMENT_NODE,
-  ELEMENT_NODE,
-  h,
-  parse,
-  renderSync,
-  walkSync,
-} from "ultrahtml";
-import type { DocumentNode, ElementNode, Node } from "ultrahtml";
-
-type ContainerNode = DocumentNode | ElementNode;
-
-const isElement = (node: Node): node is ElementNode =>
-  node.type === ELEMENT_NODE;
-
-const isContainer = (node: Node): node is ContainerNode =>
-  node.type === ELEMENT_NODE || node.type === DOCUMENT_NODE;
-
-const findChild = (node: ElementNode, name: string): ElementNode | undefined =>
-  node.children.find((c): c is ElementNode => isElement(c) && c.name === name);
-
-const isFootnotesSection = (node: ElementNode): boolean =>
-  (node.attributes.class ?? "").includes("footnotes") ||
-  "data-footnotes" in node.attributes;
-
-const isBackref = (node: Node): boolean =>
-  isElement(node) &&
-  node.name === "a" &&
-  ((node.attributes.class ?? "").includes("backref") ||
-    "data-footnote-backref" in node.attributes);
+import { transformTufteContent } from "../lib/tufte-content/transform";
 
 const html = await Astro.slots.render("default");
-const ast = parse(html);
-
-// Pass 1: index each footnote's body by its list-item id, and remember the
-// footnotes section (and its parent) so it can be removed after transforming.
-const footnotes = new Map<string, Node[]>();
-let footnotesSection: ElementNode | undefined;
-let footnotesParent: ContainerNode | undefined;
-
-walkSync(ast, (node, parent) => {
-  if (!isElement(node) || node.name !== "section" || !isFootnotesSection(node))
-    return;
-  footnotesSection = node;
-  footnotesParent = parent && isContainer(parent) ? parent : undefined;
-
-  for (const li of findChild(node, "ol")?.children ?? []) {
-    if (!isElement(li) || li.name !== "li" || !li.attributes.id) continue;
-    const body = findChild(li, "p");
-    if (body) {
-      footnotes.set(
-        li.attributes.id,
-        body.children.filter((c) => !isBackref(c)),
-      );
-    }
-  }
-});
-
-// Pass 2: rename paragraphs and swap each footnote reference for a tufte note.
-walkSync(ast, (node, parent, index) => {
-  if (isElement(node) && node.name === "p") {
-    node.name = "tufte-paragraph";
-    return;
-  }
-  if (
-    !isElement(node) ||
-    node.name !== "sup" ||
-    !parent ||
-    typeof index !== "number"
-  )
-    return;
-
-  const ref = node.children.find(
-    (c): c is ElementNode =>
-      isElement(c) &&
-      c.name === "a" &&
-      (c.attributes.href ?? "").startsWith("#user-content-fn-"),
-  );
-  const id = ref?.attributes.href.slice(1);
-  const body = id ? footnotes.get(id) : undefined;
-  if (!id || !body || !isContainer(parent)) return;
-
-  const tag = id.replace("user-content-fn-", "").startsWith("mn-")
-    ? "tufte-marginnote"
-    : "tufte-sidenote";
-  parent.children[index] = h(tag, { "note-id": id }, ...body);
-});
-
-// The referenced footnotes now live inline as tufte notes; drop the section.
-if (footnotesSection && footnotesParent) {
-  footnotesParent.children = footnotesParent.children.filter(
-    (c: Node) => c !== footnotesSection,
-  );
-}
-
-const transformedHtml = renderSync(ast);
+const transformedHtml = transformTufteContent(html);
 ---
 
 <Fragment set:html={transformedHtml} />

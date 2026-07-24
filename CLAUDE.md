@@ -41,4 +41,4 @@ Run /simplify before presenting code to the user.
 - tufte-css web components (`tufte-sidenote`, `tufte-marginnote`, `tufte-epigraph`)
 
 ### Footnotes/Sidenotes
-GFM footnotes in markdown are automatically transformed to `<tufte-sidenote>` elements by `TufteContent.astro`. Use `[^note]` syntax for sidenotes or `[^!note]` for margin notes (no number).
+GFM footnotes in markdown are automatically transformed to `<tufte-sidenote>` elements by `TufteContent.astro`. Use `[^note]` syntax for sidenotes or an `mn-` prefixed id (`[^mn-note]`) for margin notes (no number). The transform lives in `src/lib/tufte-content/transform.ts` (unit-tested via `npm test`).

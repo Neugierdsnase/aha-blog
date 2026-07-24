@@ -8,40 +8,32 @@ import Epigraph from "../../components/Epigraph.astro";
 
 <Epigraph
   quote="The purpose of visualization is insight, not pictures."
-  footer="<cite> Ben Shneiderman</cite>"
+  footer="<cite> Ben Shneiderman</cite>"
 />
 
 This document demonstrates how all the various Tufte CSS elements work together
-in a cohesive design system^[comprehensive-note: This test combines sidenotes,
-margin notes, blockquotes, and epigraphs to show their integration.].
+in a cohesive design system[^comprehensive-note].
 
 ## Typography and Layout, also this is a really, really, really long heading
 
-The foundation of Tufte CSS is its typography^[mn-typography: Based on Edward
-Tufte's design principles, emphasizing clarity and elegance.]. The system uses
+The foundation of Tufte CSS is its typography[^mn-typography]. The system uses
 ET Book, a font inspired by Bembo, which provides excellent readability at
 various sizes.
 
 > Typography is two-dimensional architecture, based on experience and
-> imagination, and guided by rules and readability.  Hermann Zapf
+> imagination, and guided by rules and readability.  Hermann Zapf
 
 The integration of text and marginal elements creates a reading experience that
-feels both scholarly and accessible^[accessibility-note: Despite its academic
-origins, Tufte CSS remains highly readable on various devices and screen
-sizes.].
+feels both scholarly and accessible[^accessibility-note].
 
 ## Visual Elements and Annotations
 
-When combining different annotation types^[mn-visual: Visual hierarchy becomes
-crucial when multiple element types appear together.], the layout system must
+When combining different annotation types[^mn-visual], the layout system must
 handle spacing intelligently. Consider this passage with multiple marginal
 elements:
 
-The original Tufte CSS was created by Dave Liepmann^[dave-liepmann: Dave
-Liepmann created the original CSS implementation of Tufte's design principles in
-2015.] as a way to bring Edward Tufte's design philosophy to the web^[mn-web:
-The transition from print to web required careful consideration of responsive
-design principles.].
+The original Tufte CSS was created by Dave Liepmann[^dave-liepmann] as a way to
+bring Edward Tufte's design philosophy to the web[^mn-web].
 
 > CSS is a simple design language intended to simplify the process of making web
 > pages presentable. CSS handles the look and feel part of a web page.
@@ -53,34 +45,53 @@ design principles.].
 
 <Epigraph
   quote="Good design is as little design as possible."
-  footer="<cite> Dieter Rams</cite>"
+  footer="<cite> Dieter Rams</cite>"
 />
 
 The epigraph above illustrates how these elements can appear
-mid-document^[mid-document: Epigraphs aren't limited to document beginningsthey
-can introduce new sections effectively.]. This flexibility allows authors to
-structure their content with visual breaks and thematic introductions.
+mid-document[^mid-document]. This flexibility allows authors to structure their
+content with visual breaks and thematic introductions.
 
 ### Nested Structures
 
-Sometimes complex documents require nested annotations^[nested-primary: This is
-the primary annotation for this section.]:
+Sometimes complex documents require nested annotations[^nested-primary]:
 
-- Lists work naturally with the system^[mn-lists: Both ordered and unordered
-  lists maintain proper spacing and alignment.]
-- Margin notes can reference list items^[mn-list-reference: This margin note
-  specifically discusses the list structure.]
-- Multiple annotation types coexist^[coexistence-note: The key is maintaining
-  visual balance and preventing cognitive overload.]
+- Lists work naturally with the system[^mn-lists]
+- Margin notes can reference list items[^mn-list-reference]
+- Multiple annotation types coexist[^coexistence-note]
 
-> The details are not the details. They make the design.  Charles Eames
+> The details are not the details. They make the design.  Charles Eames
 
 ## Conclusion
 
 The power of the Tufte CSS system lies not in any single element, but in how all
-components work together to create a cohesive reading experience^[mn-conclusion:
-This comprehensive test demonstrates the system's flexibility and elegance when
-all features are used together.]. The careful balance between main content and
-marginal annotations allows for rich, layered documents that remain readable and
-visually appealing^[final-note: Edward Tufte's influence on information design
-continues to shape how we think about presenting complex information.].
+components work together to create a cohesive reading experience[^mn-conclusion].
+The careful balance between main content and marginal annotations allows for
+rich, layered documents that remain readable and visually
+appealing[^final-note].
+
+[^comprehensive-note]: This test combines sidenotes, margin notes, blockquotes, and epigraphs to show their integration.
+
+[^mn-typography]: Based on Edward Tufte's design principles, emphasizing clarity and elegance.
+
+[^accessibility-note]: Despite its academic origins, Tufte CSS remains highly readable on various devices and screen sizes.
+
+[^mn-visual]: Visual hierarchy becomes crucial when multiple element types appear together.
+
+[^dave-liepmann]: Dave Liepmann created the original CSS implementation of Tufte's design principles in 2015.
+
+[^mn-web]: The transition from print to web required careful consideration of responsive design principles.
+
+[^mid-document]: Epigraphs aren't limited to document beginnings—they can introduce new sections effectively.
+
+[^nested-primary]: This is the primary annotation for this section.
+
+[^mn-lists]: Both ordered and unordered lists maintain proper spacing and alignment.
+
+[^mn-list-reference]: This margin note specifically discusses the list structure.
+
+[^coexistence-note]: The key is maintaining visual balance and preventing cognitive overload.
+
+[^mn-conclusion]: This comprehensive test demonstrates the system's flexibility and elegance when all features are used together.
+
+[^final-note]: Edward Tufte's influence on information design continues to shape how we think about presenting complex information.

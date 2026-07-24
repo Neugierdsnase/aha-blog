@@ -6,6 +6,9 @@ import { fontFaces, baseStyles } from './styles.js';
  * Tufte Subtitle component - the italic subtitle that follows an article title.
  *
  * Replaces a raw `<p class="subtitle">`, owning its own metrics in shadow DOM.
+ * The box-model lives on an inner `<p>` (not `:host`) so a page-level reset
+ * (e.g. Tailwind's preflight `*{margin:0}`) can't override the margins —
+ * outer-document rules beat `:host` but never reach into the shadow tree.
  *
  * @slot - Subtitle text
  *
@@ -23,6 +26,9 @@ export class TufteSubtitle extends LitElement {
     css`
       :host {
         display: block;
+      }
+
+      p {
         font-style: italic;
         margin-top: 1rem;
         margin-bottom: 1rem;
@@ -33,7 +39,7 @@ export class TufteSubtitle extends LitElement {
   ];
 
   render() {
-    return html`<slot></slot>`;
+    return html`<p><slot></slot></p>`;
   }
 }
 

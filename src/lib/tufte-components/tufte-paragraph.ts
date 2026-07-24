@@ -33,24 +33,31 @@ export class TufteParagraph extends LitElement {
     css`
       :host {
         display: block;
-        font-size: 1.4rem;
-        line-height: 2rem;
+      }
+
+      /* Box-model lives on the inner <p>, not on :host. The host is part of the
+         outer document, so a page-level reset (e.g. Tailwind's preflight
+         *{margin:0;padding:0}) would win over :host declarations; elements
+         inside the shadow tree are out of the outer cascade's reach. Rendering
+         a real <p> also restores the paragraph semantics. */
+      p {
         margin-top: 1.4rem;
         margin-bottom: 1.4rem;
         padding-right: 0;
-        vertical-align: baseline;
+        font-size: 1.4rem;
+        line-height: 2rem;
       }
 
       /* First paragraph after a heading should sit tight against it,
          matching the raw <p> behaviour in tufte.css. */
-      :host(:first-child) {
+      :host(:first-child) p {
         margin-top: 0;
       }
     `,
   ];
 
   render() {
-    return html`<slot></slot>`;
+    return html`<p><slot></slot></p>`;
   }
 }
 

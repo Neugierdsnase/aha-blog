@@ -26,23 +26,34 @@ export class TufteArticle extends LitElement {
     css`
       :host {
         display: block;
+      }
+
+      /* The article's layout box (width, centering, padding, background) lives
+         on an inner <div>, not on :host. The host is part of the outer
+         document, so a page-level reset (e.g. Tailwind's preflight
+         *{margin:0;padding:0}) would zero the host's margin/padding; elements
+         inside the shadow tree are out of the outer cascade's reach. The
+         padding-left is what opens the right-hand gutter that sidenotes and
+         margin notes float into. Content-level typography belongs to the
+         content components (tufte-heading-*, tufte-paragraph, tufte-section,
+         tufte-blockquote, ...). */
+      .page {
+        /* border-box so width 87.5% includes the 12.5% padding — matching the
+           app's global box-sizing, which does not cross the shadow boundary. */
+        box-sizing: border-box;
         width: 87.5%;
+        max-width: 1400px;
         margin-left: auto;
         margin-right: auto;
-        /* Vertical breathing room around the article body. Lives on the host
-           (rather than on a slotted <article>) so the article only styles
-           itself; content-level typography belongs to the content components
-           (tufte-heading-*, tufte-paragraph, tufte-section, tufte-list, ...). */
         padding-top: 5rem;
         padding-bottom: 5rem;
         padding-left: 12.5%;
         background-color: var(--tufte-background-color, #fffff8);
-        max-width: 1400px;
         counter-reset: sidenote-counter;
       }
 
       @media (max-width: 760px) {
-        :host {
+        .page {
           width: 84%;
           padding-left: 8%;
           padding-right: 8%;
@@ -52,7 +63,7 @@ export class TufteArticle extends LitElement {
   ];
 
   render() {
-    return html`<slot></slot>`;
+    return html`<div class="page"><slot></slot></div>`;
   }
 }
 

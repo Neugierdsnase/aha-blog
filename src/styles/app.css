@@ -498,3 +498,32 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 }
+
+/* ── Tufte web components ──────────────────────────────────────────────────
+   Theme wiring + FOUC guard for the inlined Tufte components (src/lib/
+   tufte-components). Moved here from the now-deleted tufte-prose.css.
+   Autonomous elements are hidden until upgraded to avoid a flash of unstyled
+   content; the customized built-in lists (<ul is="tufte-ul">) style themselves
+   with inline metrics on connect, so they need no guard. */
+tufte-article:not(:defined),
+tufte-heading-1:not(:defined),
+tufte-heading-2:not(:defined),
+tufte-heading-3:not(:defined),
+tufte-subtitle:not(:defined),
+tufte-section:not(:defined),
+tufte-paragraph:not(:defined),
+tufte-blockquote:not(:defined),
+tufte-sidenote:not(:defined),
+tufte-marginnote:not(:defined),
+tufte-epigraph:not(:defined),
+tufte-figure:not(:defined),
+tufte-newthought:not(:defined) {
+  visibility: hidden;
+}
+
+tufte-article {
+  --tufte-text-color: var(--color-foreground);
+  --tufte-background-color: var(--color-background);
+  --tufte-font-family: var(--font-serif);
+  --tufte-blockquote-border-color: var(--color-foreground-subtle);
+}

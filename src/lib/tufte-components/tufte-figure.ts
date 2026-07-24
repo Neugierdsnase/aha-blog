@@ -24,16 +24,20 @@ export class TufteFigure extends LitElement {
     css`
       :host {
         display: block;
-        padding: 0;
-        border: 0;
-        font-size: 100%;
-        font: inherit;
-        vertical-align: baseline;
-        max-width: 55%;
-        margin: 0 0 3em 0;
       }
 
-      :host([fullwidth]) {
+      /* Box-model lives on the inner <figure>, not :host, so a page-level reset
+         (e.g. Tailwind's preflight *{margin:0;padding:0}) can't override it —
+         outer-document rules beat :host but never reach into the shadow tree.
+         The real <figure>/<figcaption> also restore the figure semantics. */
+      figure {
+        max-width: 55%;
+        margin: 0 0 3em 0;
+        padding: 0;
+        border: 0;
+      }
+
+      :host([fullwidth]) figure {
         max-width: 100%;
         width: 100%;
       }
@@ -64,7 +68,7 @@ export class TufteFigure extends LitElement {
       }
 
       @media (max-width: 760px) {
-        :host {
+        figure {
           max-width: 90%;
         }
 
@@ -89,10 +93,12 @@ export class TufteFigure extends LitElement {
 
   render() {
     return html`
-      <slot></slot>
-      <div class="caption">
-        <slot name="caption"></slot>
-      </div>
+      <figure>
+        <slot></slot>
+        <figcaption class="caption">
+          <slot name="caption"></slot>
+        </figcaption>
+      </figure>
     `;
   }
 }

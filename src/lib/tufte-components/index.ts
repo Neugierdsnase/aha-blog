@@ -17,6 +17,7 @@ export { TufteSection } from './tufte-section.js';
 export { TufteUnorderedList } from './tufte-ul.js';
 export { TufteOrderedList } from './tufte-ol.js';
 export { TufteParagraph } from './tufte-paragraph.js';
+export { TufteBlockquote } from './tufte-blockquote.js';
 export { TufteSidenote } from './tufte-sidenote.js';
 export { TufteMarginnote } from './tufte-marginnote.js';
 export { TufteEpigraph } from './tufte-epigraph.js';
