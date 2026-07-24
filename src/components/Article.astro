@@ -22,8 +22,7 @@ const {
 } = Astro.props;
 ---
 
-<tufte-article data-testid="article-container">
-  <article class="h-entry">
+<tufte-article data-testid="article-container" class="h-entry">
     <section>
       {
         Astro.props.title && (
@@ -41,7 +40,6 @@ const {
 
       {url && <Webmentions url={url} client:idle />}
     </section>
-  </article>
 </tufte-article>
 
 <script>
