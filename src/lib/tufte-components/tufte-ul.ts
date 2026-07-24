@@ -1,12 +1,9 @@
-import { adoptTufteListStyles } from './list-styles.js';
-
 /**
  * Tufte unordered list - a customized built-in that extends `<ul>` directly.
  *
  * Because it *is* a `<ul>` (used as `<ul is="tufte-ul">`), no wrapper element is
  * needed and native list semantics and markers are preserved for free. The Tufte
- * list metrics are applied through a shared document stylesheet (see
- * {@link adoptTufteListStyles}); font family and colour inherit from the
+ * list metrics are set on connect; font family and colour inherit from the
  * surrounding `<tufte-article>`.
  *
  * @example
@@ -19,7 +16,8 @@ import { adoptTufteListStyles } from './list-styles.js';
  */
 export class TufteUnorderedList extends HTMLUListElement {
   connectedCallback() {
-    adoptTufteListStyles();
+    this.style.fontSize = '1.4rem';
+    this.style.lineHeight = '2rem';
   }
 }
 
