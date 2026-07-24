@@ -20,16 +20,14 @@ const authorsLine = [authorsText, releaseDate].filter(Boolean).join(", ");
 ---
 
 <div class="book-heading">
-  <h1
+  <tufte-h1
     class="text-pretty p-name"
     style=`view-transition-name: --header-${transitionName};`
     data-testid="heading-book"
   >
     {title}
-  </h1>
-  {subtitle && <p class="subtitle"
-    style=`view-transition-name: --subheader-${transitionName};`
-  >{subtitle}</p>}
+  </tufte-h1>
+  {subtitle && <tufte-subtitle style=`view-transition-name: --subheader-${transitionName};`>{subtitle}</tufte-subtitle>}
   {authorsLine && <div class="authors" style=`view-transition-name: --author-${transitionName};` set:html={authorsLine} />}
 </div>
 
