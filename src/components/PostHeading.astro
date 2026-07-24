@@ -1,0 +1,28 @@
+---
+import { sanitizeViewTransitionName } from "../utils/sanitizeViewTransitionName";
+
+interface Props {
+  title: string;
+  subtitle?: string;
+}
+
+const { title, subtitle } = Astro.props;
+const transitionName = sanitizeViewTransitionName(title);
+---
+
+<div class="post-heading">
+  <tufte-h1
+    class="text-pretty p-name"
+    style=`view-transition-name: --header-${transitionName};`
+    data-testid="heading-post"
+  >
+    {title}
+  </tufte-h1>
+  {subtitle && <tufte-subtitle style=`view-transition-name: --subheader-${transitionName};`>{subtitle}</tufte-subtitle>}
+</div>
+
+<style>
+  .post-heading {
+    margin-bottom: min(10cqw, 4rem);
+  }
+</style>

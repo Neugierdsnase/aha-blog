@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import ArticleMeta from "./ArticleMeta.astro";
 import BookHeading from "./BookHeading.astro";
+import PostHeading from "./PostHeading.astro";
 import SyndicationLinks from "./SyndicationLinks.astro";
 import Webmentions from "./Webmentions";
 
@@ -20,14 +21,20 @@ const {
   url,
   syndication,
 } = Astro.props;
+
+// Book reviews carry authors; blog posts (and everything else) don't.
+const isBook = "authors" in Astro.props;
 ---
 
 <tufte-article data-testid="article-container" class="h-entry">
     <section>
       {
-        Astro.props.title && (
-          <BookHeading {...Astro.props} title={Astro.props.title} />
-        )
+        Astro.props.title &&
+          (isBook ? (
+            <BookHeading {...Astro.props} title={Astro.props.title} />
+          ) : (
+            <PostHeading {...Astro.props} title={Astro.props.title} />
+          ))
       }
 
       <ArticleMeta {author} {pubDate} {updatedDate} {url} />
