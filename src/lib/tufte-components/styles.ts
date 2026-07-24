@@ -89,6 +89,21 @@ export const baseStyles = css`
   }
 `;
 
+/**
+ * Link styling for anchors that appear as direct children of a component's
+ * slot (e.g. inside `<tufte-paragraph>` or `<tufte-heading-1>`). Kept here as a
+ * shared token so each component can own the styling of the links it contains,
+ * rather than a wrapper reaching across the tree to style them.
+ */
+export const linkStyles = css`
+  ::slotted(a:link),
+  ::slotted(a:visited) {
+    color: inherit;
+    text-underline-offset: 0.1em;
+    text-decoration-thickness: 0.05em;
+  }
+`;
+
 export const sidenoteStyles = css`
   .sidenote,
   .marginnote {

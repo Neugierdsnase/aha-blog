@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { fontFaces, baseStyles } from './styles.js';
+import { fontFaces, baseStyles, linkStyles } from './styles.js';
 
 /**
  * Tufte Paragraph component - body text with Tufte typography.
@@ -29,6 +29,7 @@ export class TufteParagraph extends LitElement {
   static styles = [
     fontFaces,
     baseStyles,
+    linkStyles,
     css`
       :host {
         display: block;
@@ -41,7 +42,7 @@ export class TufteParagraph extends LitElement {
       }
 
       /* First paragraph after a heading should sit tight against it,
-         matching the raw-<p> behaviour in tufte.css. */
+         matching the raw <p> behaviour in tufte.css. */
       :host(:first-child) {
         margin-top: 0;
       }
