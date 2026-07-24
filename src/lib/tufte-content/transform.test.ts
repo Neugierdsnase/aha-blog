@@ -67,12 +67,12 @@ describe("transformTufteContent", () => {
       expect(out).toContain("<tufte-paragraph>Q</tufte-paragraph>");
     });
 
-    it("upgrades ul/ol to their customized built-ins", () => {
+    it("upgrades ul/ol to their components", () => {
       expect(transformTufteContent("<ul><li>a</li></ul>")).toContain(
-        '<ul is="tufte-ul">',
+        "<tufte-ul><li>a</li></tufte-ul>",
       );
       expect(transformTufteContent("<ol><li>a</li></ol>")).toContain(
-        '<ol is="tufte-ol">',
+        "<tufte-ol><li>a</li></tufte-ol>",
       );
     });
 
@@ -80,13 +80,13 @@ describe("transformTufteContent", () => {
       const out = transformTufteContent(
         "<ul><li>a<ul><li>b</li></ul></li></ul>",
       );
-      expect(out.match(/is="tufte-ul"/g)).toHaveLength(2);
+      expect(out.match(/<tufte-ul>/g)).toHaveLength(2);
     });
 
     it("leaves <dl> alone (no component for it)", () => {
       const out = transformTufteContent("<dl><dt>a</dt><dd>b</dd></dl>");
       expect(out).toContain("<dl>");
-      expect(out).not.toContain("is=");
+      expect(out).not.toContain("tufte-");
     });
   });
 

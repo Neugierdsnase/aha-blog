@@ -1,31 +1,56 @@
+import { LitElement, html, css } from 'lit';
+import { customElement } from 'lit/decorators.js';
+import { fontFaces, baseStyles } from './styles.js';
+
 /**
- * Tufte unordered list - a customized built-in that extends `<ul>` directly.
+ * Tufte unordered list - Tufte typography for bulleted lists.
  *
- * Because it *is* a `<ul>` (used as `<ul is="tufte-ul">`), no wrapper element is
- * needed and native list semantics are preserved for free. The Tufte metrics and
- * marker are applied inline on connect; inline styles also restore the marker,
- * indent and margin that an aggressive page reset (e.g. Tailwind's preflight
- * `ul { list-style: none; margin: 0; padding: 0 }`) would otherwise strip. Font
- * family and colour inherit from the surrounding `<tufte-article>`.
+ * Replaces a raw `<ul>`; its `<li>` children become the slotted content. The
+ * box-model styling (marker, indent, margin, metrics) lives on an inner `<ul>`
+ * in the shadow tree rather than on `:host`. A host is part of the *outer*
+ * document, so an aggressive page reset (e.g. Tailwind's preflight
+ * `ul { list-style: none; margin: 0; padding: 0 }`) would win over `:host`
+ * declarations; elements inside the shadow tree are immune to it. Rendering a
+ * real `<ul>` also keeps the list semantics and marker. Font family and colour
+ * inherit from the surrounding `<tufte-article>`.
+ *
+ * @slot - List items (`<li>`)
  *
  * @example
  * ```html
- * <ul is="tufte-ul">
+ * <tufte-ul>
  *   <li>First</li>
  *   <li>Second</li>
- * </ul>
+ * </tufte-ul>
  * ```
  */
-export class TufteUnorderedList extends HTMLUListElement {
-  connectedCallback() {
-    this.style.fontSize = '1.4rem';
-    this.style.lineHeight = '2rem';
-    this.style.listStyle = 'square';
-    this.style.margin = '1rem 0';
-    this.style.paddingLeft = '1.5em';
+@customElement('tufte-ul')
+export class TufteUnorderedList extends LitElement {
+  static styles = [
+    fontFaces,
+    baseStyles,
+    css`
+      :host {
+        display: block;
+      }
+
+      ul {
+        margin: 1rem 0;
+        padding-left: 1.5em;
+        list-style: square;
+        font-size: 1.4rem;
+        line-height: 2rem;
+      }
+    `,
+  ];
+
+  render() {
+    return html`<ul><slot></slot></ul>`;
   }
 }
 
-if (!customElements.get('tufte-ul')) {
-  customElements.define('tufte-ul', TufteUnorderedList, { extends: 'ul' });
+declare global {
+  interface HTMLElementTagNameMap {
+    'tufte-ul': TufteUnorderedList;
+  }
 }

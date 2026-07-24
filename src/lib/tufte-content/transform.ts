@@ -11,9 +11,9 @@
  *    prefix) at the reference site, and the now-empty section is dropped.
  * 2. **Block elements → components.** Paragraphs become `<tufte-paragraph>`,
  *    `<h1>`–`<h3>` become `<tufte-heading-1|2|3>`, `<blockquote>` becomes
- *    `<tufte-blockquote>`, and `<ul>`/`<ol>` are upgraded to their customized
- *    built-ins (`is="tufte-ul"` / `is="tufte-ol"`), so the Tufte typography
- *    lives in the components rather than in page CSS. Elements already inside a
+ *    `<tufte-blockquote>`, and `<ul>`/`<ol>` become `<tufte-ul>`/`<tufte-ol>`,
+ *    so the Tufte typography lives in the components rather than in page CSS.
+ *    Elements already inside a
  *    `tufte-*` component (e.g. an epigraph's blockquote) are left untouched —
  *    that component owns them.
  *
@@ -109,14 +109,14 @@ export function transformTufteContent(html: string): string {
         return;
       }
 
-      // Upgrade native lists to their customized built-ins, which keeps the
-      // real <ul>/<ol> (and thus list semantics and markers) in place.
+      // Native lists become their matching components, which wrap a real
+      // <ul>/<ol> in their shadow tree to keep list semantics and markers.
       if (!insideComponent && node.name === "ul") {
-        node.attributes.is = "tufte-ul";
+        node.name = "tufte-ul";
         return;
       }
       if (!insideComponent && node.name === "ol") {
-        node.attributes.is = "tufte-ol";
+        node.name = "tufte-ol";
         return;
       }
     }
