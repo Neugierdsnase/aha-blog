@@ -45,12 +45,7 @@ export default function Webmentions({ url }: WebmentionsProps) {
   }, [url]);
 
   if (loading) {
-    return (
-      <div className="webmentions">
-        <h3>Webmentions</h3>
-        <p>Loading mentions...</p>
-      </div>
-    );
+    return null;
   }
 
   if (mentions.length === 0) {
