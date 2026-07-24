@@ -91,7 +91,7 @@ export const baseStyles = css`
 
 /**
  * Link styling for anchors that appear as direct children of a component's
- * slot (e.g. inside `<tufte-paragraph>` or `<tufte-heading-1>`). Kept here as a
+ * slot (e.g. inside `<tufte-paragraph>` or `<tufte-h1>`). Kept here as a
  * shared token so each component can own the styling of the links it contains,
  * rather than a wrapper reaching across the tree to style them.
  */

@@ -30,21 +30,21 @@ describe("transformTufteContent", () => {
 
     it("maps h1/h2/h3 to their numbered heading components", () => {
       const out = transformTufteContent("<h1>A</h1><h2>B</h2><h3>C</h3>");
-      expect(out).toContain("<tufte-heading-1>A</tufte-heading-1>");
-      expect(out).toContain("<tufte-heading-2>B</tufte-heading-2>");
-      expect(out).toContain("<tufte-heading-3>C</tufte-heading-3>");
+      expect(out).toContain("<tufte-h1>A</tufte-h1>");
+      expect(out).toContain("<tufte-h2>B</tufte-h2>");
+      expect(out).toContain("<tufte-h3>C</tufte-h3>");
     });
 
     it("preserves a heading's id so in-page anchors keep working", () => {
       const out = transformTufteContent('<h2 id="my-section">Title</h2>');
-      expect(out).toContain('<tufte-heading-2 id="my-section">');
+      expect(out).toContain('<tufte-h2 id="my-section">');
     });
 
     it("leaves h4–h6 untouched (Tufte only styles three levels)", () => {
       const out = transformTufteContent("<h4>Deep</h4><h6>Deeper</h6>");
       expect(out).toContain("<h4>Deep</h4>");
       expect(out).toContain("<h6>Deeper</h6>");
-      expect(out).not.toContain("tufte-heading-4");
+      expect(out).not.toContain("tufte-h4");
     });
 
     it("renames blockquotes and their inner paragraphs", () => {

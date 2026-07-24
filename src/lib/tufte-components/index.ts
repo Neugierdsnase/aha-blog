@@ -9,9 +9,9 @@
  */
 
 export { TufteArticle } from './tufte-article.js';
-export { TufteHeading1 } from './tufte-heading-1.js';
-export { TufteHeading2 } from './tufte-heading-2.js';
-export { TufteHeading3 } from './tufte-heading-3.js';
+export { TufteHeading1 } from './tufte-h1.js';
+export { TufteHeading2 } from './tufte-h2.js';
+export { TufteHeading3 } from './tufte-h3.js';
 export { TufteSubtitle } from './tufte-subtitle.js';
 export { TufteSection } from './tufte-section.js';
 export { TufteUnorderedList } from './tufte-ul.js';

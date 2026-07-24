@@ -14,7 +14,7 @@ import { fontFaces, baseStyles } from './styles.js';
  *
  * @example
  * ```html
- * <tufte-heading-1>Article Title</tufte-heading-1>
+ * <tufte-h1>Article Title</tufte-h1>
  * <tufte-subtitle>A short, descriptive subtitle</tufte-subtitle>
  * ```
  */

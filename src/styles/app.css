@@ -505,9 +505,9 @@
    Autonomous elements are hidden until upgraded to avoid a flash of unstyled
    content. */
 tufte-article:not(:defined),
-tufte-heading-1:not(:defined),
-tufte-heading-2:not(:defined),
-tufte-heading-3:not(:defined),
+tufte-h1:not(:defined),
+tufte-h2:not(:defined),
+tufte-h3:not(:defined),
 tufte-subtitle:not(:defined),
 tufte-section:not(:defined),
 tufte-paragraph:not(:defined),

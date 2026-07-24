@@ -10,7 +10,7 @@
  *    `<tufte-sidenote>` (or `<tufte-marginnote>` when the id uses an `mn-`
  *    prefix) at the reference site, and the now-empty section is dropped.
  * 2. **Block elements → components.** Paragraphs become `<tufte-paragraph>`,
- *    `<h1>`–`<h3>` become `<tufte-heading-1|2|3>`, `<blockquote>` becomes
+ *    `<h1>`–`<h3>` become `<tufte-h1|h2|h3>`, `<blockquote>` becomes
  *    `<tufte-blockquote>`, and `<ul>`/`<ol>` become `<tufte-ul>`/`<tufte-ol>`,
  *    so the Tufte typography lives in the components rather than in page CSS.
  *    Elements already inside a
@@ -95,7 +95,7 @@ export function transformTufteContent(html: string): string {
       }
       const level = headingLevel(node.name);
       if (level) {
-        node.name = `tufte-heading-${level}`;
+        node.name = `tufte-h${level}`;
         return;
       }
 

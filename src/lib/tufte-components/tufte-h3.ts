@@ -14,10 +14,10 @@ import { fontFaces, baseStyles, linkStyles } from './styles.js';
  *
  * @example
  * ```html
- * <tufte-heading-3>A Subsection</tufte-heading-3>
+ * <tufte-h3>A Subsection</tufte-h3>
  * ```
  */
-@customElement('tufte-heading-3')
+@customElement('tufte-h3')
 export class TufteHeading3 extends LitElement {
   static styles = [
     fontFaces,
@@ -50,6 +50,6 @@ export class TufteHeading3 extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'tufte-heading-3': TufteHeading3;
+    'tufte-h3': TufteHeading3;
   }
 }

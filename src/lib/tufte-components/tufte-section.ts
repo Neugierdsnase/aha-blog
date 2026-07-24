@@ -17,7 +17,7 @@ import { fontFaces, baseStyles } from './styles.js';
  * ```html
  * <tufte-article>
  *   <tufte-section>
- *     <tufte-heading-2>A Section</tufte-heading-2>
+ *     <tufte-h2>A Section</tufte-h2>
  *     <tufte-paragraph>Body text...</tufte-paragraph>
  *   </tufte-section>
  * </tufte-article>

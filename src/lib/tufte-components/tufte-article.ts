@@ -10,7 +10,7 @@ import { fontFaces, baseStyles } from './styles.js';
  * @example
  * ```html
  * <tufte-article>
- *   <tufte-heading-1>Article Title</tufte-heading-1>
+ *   <tufte-h1>Article Title</tufte-h1>
  *   <tufte-subtitle>Subtitle</tufte-subtitle>
  *   <tufte-section>
  *     <tufte-paragraph>Content goes here...</tufte-paragraph>
@@ -35,7 +35,7 @@ export class TufteArticle extends LitElement {
          inside the shadow tree are out of the outer cascade's reach. The
          padding-left is what opens the right-hand gutter that sidenotes and
          margin notes float into. Content-level typography belongs to the
-         content components (tufte-heading-*, tufte-paragraph, tufte-section,
+         content components (tufte-h1/h2/h3, tufte-paragraph, tufte-section,
          tufte-blockquote, ...). */
       .page {
         /* border-box so width 87.5% includes the 12.5% padding — matching the

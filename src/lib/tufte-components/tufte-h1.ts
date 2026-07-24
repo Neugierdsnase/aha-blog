@@ -3,22 +3,22 @@ import { customElement } from 'lit/decorators.js';
 import { fontFaces, baseStyles, linkStyles } from './styles.js';
 
 /**
- * Tufte level-2 heading - a section heading.
+ * Tufte level-1 heading - the article title.
  *
  * Encapsulates the heading metrics (size, style and vertical rhythm) in its own
  * shadow DOM so they apply regardless of how deeply the heading is nested,
- * mirroring `<tufte-paragraph>`. This replaces a raw `<h2>`; a real `<h2>` in
- * the shadow tree carries the level-2 heading semantics.
+ * mirroring `<tufte-paragraph>`. This replaces a raw `<h1>`; a real `<h1>` in
+ * the shadow tree carries the level-1 heading semantics.
  *
  * @slot - Heading text
  *
  * @example
  * ```html
- * <tufte-heading-2>A Section</tufte-heading-2>
+ * <tufte-h1>Article Title</tufte-h1>
  * ```
  */
-@customElement('tufte-heading-2')
-export class TufteHeading2 extends LitElement {
+@customElement('tufte-h1')
+export class TufteHeading1 extends LitElement {
   static styles = [
     fontFaces,
     baseStyles,
@@ -28,28 +28,27 @@ export class TufteHeading2 extends LitElement {
         display: block;
       }
 
-      /* Box-model and type live on the inner <h2>, not on :host, so a
+      /* Box-model and type live on the inner <h1>, not on :host, so a
          page-level reset (e.g. Tailwind's preflight *{margin:0}) can't override
          them — outer-document rules beat :host but never reach into the shadow.
-         The real <h2> also carries the heading semantics for free. */
-      h2 {
+         The real <h1> also carries the heading semantics for free. */
+      h1 {
         font-weight: 400;
+        margin-top: 4rem;
+        margin-bottom: min(2.5cqw, 1rem);
+        font-size: 3.2rem;
         line-height: 1;
-        font-style: italic;
-        margin-top: 2.1rem;
-        margin-bottom: 1.4rem;
-        font-size: 2.2rem;
       }
     `,
   ];
 
   render() {
-    return html`<h2><slot></slot></h2>`;
+    return html`<h1><slot></slot></h1>`;
   }
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'tufte-heading-2': TufteHeading2;
+    'tufte-h1': TufteHeading1;
   }
 }
