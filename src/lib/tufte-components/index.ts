@@ -9,6 +9,13 @@
  */
 
 export { TufteArticle } from './tufte-article.js';
+export { TufteHeading1 } from './tufte-heading-1.js';
+export { TufteHeading2 } from './tufte-heading-2.js';
+export { TufteHeading3 } from './tufte-heading-3.js';
+export { TufteSubtitle } from './tufte-subtitle.js';
+export { TufteSection } from './tufte-section.js';
+export { TufteUnorderedList } from './tufte-ul.js';
+export { TufteOrderedList } from './tufte-ol.js';
 export { TufteParagraph } from './tufte-paragraph.js';
 export { TufteSidenote } from './tufte-sidenote.js';
 export { TufteMarginnote } from './tufte-marginnote.js';
