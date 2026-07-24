@@ -24,14 +24,6 @@ export class TufteHeading2 extends LitElement {
     baseStyles,
     linkStyles,
     css`
-      :host {
-        display: block;
-      }
-
-      /* Box-model and type live on the inner <h2>, not on :host, so a
-         page-level reset (e.g. Tailwind's preflight *{margin:0}) can't override
-         them — outer-document rules beat :host but never reach into the shadow.
-         The real <h2> also carries the heading semantics for free. */
       h2 {
         font-weight: 400;
         line-height: 1;
@@ -39,6 +31,7 @@ export class TufteHeading2 extends LitElement {
         margin-top: 2.1rem;
         margin-bottom: 1.4rem;
         font-size: 2.2rem;
+        font-family: var(--font-display);
       }
     `,
   ];

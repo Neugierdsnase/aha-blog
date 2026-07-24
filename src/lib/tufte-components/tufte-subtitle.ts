@@ -24,16 +24,14 @@ export class TufteSubtitle extends LitElement {
     fontFaces,
     baseStyles,
     css`
-      :host {
-        display: block;
-      }
-
       p {
+        display: block;
         font-style: italic;
         margin-top: 1rem;
         margin-bottom: 1rem;
         font-size: 1.8rem;
         line-height: 1;
+        font-family: var(--font-sans);
       }
     `,
   ];
