@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { fontFaces, baseStyles } from './styles.js';
+import { baseStyles } from './styles.js';
 
 /**
  * Tufte New Thought component - small caps for starting sections.
@@ -17,7 +17,6 @@ import { fontFaces, baseStyles } from './styles.js';
 @customElement('tufte-newthought')
 export class TufteNewthought extends LitElement {
   static styles = [
-    fontFaces,
     baseStyles,
     css`
       :host {

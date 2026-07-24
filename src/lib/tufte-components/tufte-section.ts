@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { fontFaces, baseStyles } from './styles.js';
+import { baseStyles } from './styles.js';
 
 /**
  * Tufte Section component - a content section with Tufte vertical rhythm.
@@ -26,7 +26,6 @@ import { fontFaces, baseStyles } from './styles.js';
 @customElement('tufte-section')
 export class TufteSection extends LitElement {
   static styles = [
-    fontFaces,
     baseStyles,
     css`
       :host {

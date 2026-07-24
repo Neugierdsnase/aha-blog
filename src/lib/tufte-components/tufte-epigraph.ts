@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { fontFaces, baseStyles } from './styles.js';
+import { baseStyles } from './styles.js';
 
 /**
  * Tufte Epigraph component - chapter epigraphs with quotes.
@@ -20,7 +20,6 @@ import { fontFaces, baseStyles } from './styles.js';
 @customElement('tufte-epigraph')
 export class TufteEpigraph extends LitElement {
   static styles = [
-    fontFaces,
     baseStyles,
     css`
       :host {

@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { fontFaces, baseStyles } from './styles.js';
+import { baseStyles } from './styles.js';
 
 /**
  * Tufte unordered list - Tufte typography for bulleted lists.
@@ -27,7 +27,6 @@ import { fontFaces, baseStyles } from './styles.js';
 @customElement('tufte-ul')
 export class TufteUnorderedList extends LitElement {
   static styles = [
-    fontFaces,
     baseStyles,
     css`
       :host {

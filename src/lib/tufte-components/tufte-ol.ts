@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { fontFaces, baseStyles } from './styles.js';
+import { baseStyles } from './styles.js';
 
 /**
  * Tufte ordered list - Tufte typography for numbered lists.
@@ -27,7 +27,6 @@ import { fontFaces, baseStyles } from './styles.js';
 @customElement('tufte-ol')
 export class TufteOrderedList extends LitElement {
   static styles = [
-    fontFaces,
     baseStyles,
     css`
       :host {

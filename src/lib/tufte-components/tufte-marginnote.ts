@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { fontFaces, baseStyles, sidenoteStyles } from './styles.js';
+import { baseStyles, sidenoteStyles } from './styles.js';
 
 /**
  * Tufte Margin Note component - unnumbered notes in the margin.
@@ -17,7 +17,6 @@ import { fontFaces, baseStyles, sidenoteStyles } from './styles.js';
 @customElement('tufte-marginnote')
 export class TufteMarginnote extends LitElement {
   static styles = [
-    fontFaces,
     baseStyles,
     sidenoteStyles,
     css`

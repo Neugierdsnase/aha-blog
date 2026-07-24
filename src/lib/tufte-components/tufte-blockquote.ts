@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { fontFaces, baseStyles } from './styles.js';
+import { baseStyles } from './styles.js';
 
 /**
  * Tufte Blockquote component - quoted passages with Tufte typography.
@@ -33,7 +33,6 @@ import { fontFaces, baseStyles } from './styles.js';
 @customElement('tufte-blockquote')
 export class TufteBlockquote extends LitElement {
   static styles = [
-    fontFaces,
     baseStyles,
     css`
       :host {

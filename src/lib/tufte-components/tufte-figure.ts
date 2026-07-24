@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { fontFaces, baseStyles } from './styles.js';
+import { baseStyles } from './styles.js';
 
 /**
  * Tufte Figure component - figures with optional fullwidth and captions.
@@ -19,7 +19,6 @@ import { fontFaces, baseStyles } from './styles.js';
 @customElement('tufte-figure')
 export class TufteFigure extends LitElement {
   static styles = [
-    fontFaces,
     baseStyles,
     css`
       :host {

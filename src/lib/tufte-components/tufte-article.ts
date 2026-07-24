@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { fontFaces, baseStyles } from './styles.js';
+import { baseStyles } from './styles.js';
 
 /**
  * Tufte Article component - main wrapper for Tufte-styled content.
@@ -21,7 +21,6 @@ import { fontFaces, baseStyles } from './styles.js';
 @customElement('tufte-article')
 export class TufteArticle extends LitElement {
   static styles = [
-    fontFaces,
     baseStyles,
     css`
       :host {

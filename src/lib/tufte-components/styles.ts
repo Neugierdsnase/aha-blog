@@ -5,56 +5,6 @@ import { css } from 'lit';
  * These styles are encapsulated within shadow DOM to avoid FOUC.
  */
 
-export const fontFaces = css`
-  @font-face {
-    font-family: "et-book";
-    src: url("et-book/et-book-roman-line-figures/et-book-roman-line-figures.eot");
-    src: url("et-book/et-book-roman-line-figures/et-book-roman-line-figures.eot?#iefix") format("embedded-opentype"),
-         url("et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff") format("woff"),
-         url("et-book/et-book-roman-line-figures/et-book-roman-line-figures.ttf") format("truetype"),
-         url("et-book/et-book-roman-line-figures/et-book-roman-line-figures.svg#etbookromanosf") format("svg");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "et-book";
-    src: url("et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.eot");
-    src: url("et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.eot?#iefix") format("embedded-opentype"),
-         url("et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff") format("woff"),
-         url("et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.ttf") format("truetype"),
-         url("et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.svg#etbookromanosf") format("svg");
-    font-weight: normal;
-    font-style: italic;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "et-book";
-    src: url("et-book/et-book-bold-line-figures/et-book-bold-line-figures.eot");
-    src: url("et-book/et-book-bold-line-figures/et-book-bold-line-figures.eot?#iefix") format("embedded-opentype"),
-         url("et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff") format("woff"),
-         url("et-book/et-book-bold-line-figures/et-book-bold-line-figures.ttf") format("truetype"),
-         url("et-book/et-book-bold-line-figures/et-book-bold-line-figures.svg#etbookromanosf") format("svg");
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "et-book-roman-old-style";
-    src: url("et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.eot");
-    src: url("et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.eot?#iefix") format("embedded-opentype"),
-         url("et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff") format("woff"),
-         url("et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.ttf") format("truetype"),
-         url("et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.svg#etbookromanosf") format("svg");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-`;
-
 /**
  * Base styles shared by every component.
  *
@@ -82,7 +32,7 @@ export const baseStyles = css`
   :host {
     font-family: var(
       --tufte-font-family,
-      et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif
+      Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif
     );
     font-size: var(--tufte-font-size, 15px);
     color: var(--tufte-text-color, #111);
@@ -125,7 +75,7 @@ export const sidenoteStyles = css`
 
   .sidenote-number::after,
   .sidenote::before {
-    font-family: var(--tufte-numerals-font-family, et-book-roman-old-style);
+    font-family: var(--tufte-numerals-font-family, serif);
     position: relative;
     vertical-align: baseline;
   }

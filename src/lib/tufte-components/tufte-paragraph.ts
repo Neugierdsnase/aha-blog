@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { fontFaces, baseStyles, linkStyles } from './styles.js';
+import { baseStyles, linkStyles } from './styles.js';
 
 /**
  * Tufte Paragraph component - body text with Tufte typography.
@@ -27,7 +27,6 @@ import { fontFaces, baseStyles, linkStyles } from './styles.js';
 @customElement('tufte-paragraph')
 export class TufteParagraph extends LitElement {
   static styles = [
-    fontFaces,
     baseStyles,
     linkStyles,
     css`
