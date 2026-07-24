@@ -1,3 +1,14 @@
+/* Hide components until defined to prevent FOUC */
+tufte-article:not(:defined),
+tufte-paragraph:not(:defined),
+tufte-sidenote:not(:defined),
+tufte-marginnote:not(:defined),
+tufte-epigraph:not(:defined),
+tufte-figure:not(:defined),
+tufte-newthought:not(:defined) {
+  visibility: hidden;
+}
+
 tufte-article {
   --tufte-text-color: var(--color-foreground);
   --tufte-background-color: var(--color-background);

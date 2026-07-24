@@ -3,6 +3,7 @@
   "compilerOptions": {
     "strictNullChecks": true,
     "experimentalDecorators": true,
+    "useDefineForClassFields": false,
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "baseUrl": ".",
