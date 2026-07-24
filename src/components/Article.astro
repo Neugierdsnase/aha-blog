@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import ArticleMeta from "./ArticleMeta.astro";
 import BookHeading from "./BookHeading.astro";
+import FormattedDate from "./FormattedDate.astro";
 import PostHeading from "./PostHeading.astro";
 import SyndicationLinks from "./SyndicationLinks.astro";
 import Webmentions from "./Webmentions";
@@ -37,7 +38,7 @@ const isBook = "authors" in Astro.props;
           ))
       }
 
-      <ArticleMeta {author} {pubDate} {updatedDate} {url} />
+      <ArticleMeta {updatedDate} {url} />
 
       <SyndicationLinks {syndication} />
 
@@ -46,8 +47,45 @@ const isBook = "authors" in Astro.props;
       </div>
 
       {url && <Webmentions url={url} client:idle />}
+
+      {
+        (author || pubDate) && (
+          <p class="article-byline">
+            {
+              author && (
+                <span class="p-author h-card">
+                  <a class="p-name u-url" href="/">
+                    {author}
+                  </a>
+                </span>
+              )
+            }
+            {
+              pubDate && (
+                <time class="dt-published" datetime={pubDate.toISOString()}>
+                  <FormattedDate date={pubDate} />
+                </time>
+              )
+            }
+          </p>
+        )
+      }
     </section>
 </tufte-article>
+
+<style>
+  .article-byline {
+    color: var(--color-foreground-subtle);
+  }
+
+  .article-byline .p-author a {
+    text-decoration: none;
+  }
+
+  .article-byline .p-author + time::before {
+    content: ", ";
+  }
+</style>
 
 <script>
   // Register the Tufte web components (inlined at src/lib/tufte-components)

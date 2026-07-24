@@ -2,33 +2,15 @@
 import FormattedDate from "./FormattedDate.astro";
 
 interface Props {
-  author?: string;
-  pubDate?: Date;
   updatedDate?: Date;
   url?: string;
 }
 
-const { author, pubDate, updatedDate, url } = Astro.props;
+const { updatedDate, url } = Astro.props;
 ---
 
 <!-- Microformat metadata -->
 <div class="article-meta meta-row">
-  {
-    author && (
-      <span class="p-author h-card">
-        <a class="p-name u-url" href="/">
-          {author}
-        </a>
-      </span>
-    )
-  }
-  {
-    pubDate && (
-      <time class="dt-published" datetime={pubDate.toISOString()}>
-        <FormattedDate date={pubDate} />
-      </time>
-    )
-  }
   {
     updatedDate && (
       <time class="dt-updated" datetime={updatedDate.toISOString()}>
@@ -46,12 +28,7 @@ const { author, pubDate, updatedDate, url } = Astro.props;
 </div>
 
 <style>
-  .article-meta time,
-  .article-meta .p-author {
+  .article-meta time {
     display: inline;
-  }
-
-  .article-meta .p-author a {
-    text-decoration: none;
   }
 </style>
