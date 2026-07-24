@@ -39,7 +39,7 @@ const {
         <slot />
       </div>
 
-      {url && <Webmentions url={url} client:load />}
+      {url && <Webmentions url={url} client:idle />}
     </section>
   </article>
 </tufte-article>
