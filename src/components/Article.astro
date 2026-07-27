@@ -46,11 +46,9 @@ const isBook = "authors" in Astro.props;
         <slot />
       </div>
 
-      {url && <Webmentions url={url} client:idle />}
-
       {
         (author || pubDate) && (
-          <p class="article-byline">
+          <p class="text-foreground-subtle">
             {
               author && (
                 <span class="p-author h-card">
@@ -63,21 +61,19 @@ const isBook = "authors" in Astro.props;
             {
               pubDate && (
                 <time class="dt-published" datetime={pubDate.toISOString()}>
-                  <FormattedDate date={pubDate} />
+                  {', '}<FormattedDate date={pubDate} />
                 </time>
               )
             }
           </p>
         )
       }
+
+      {url && <Webmentions url={url} client:idle />}
     </section>
 </tufte-article>
 
 <style>
-  .article-byline {
-    color: var(--color-foreground-subtle);
-  }
-
   .article-byline .p-author a {
     text-decoration: none;
   }

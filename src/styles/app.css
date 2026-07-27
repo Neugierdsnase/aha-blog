@@ -6,48 +6,20 @@
   --color-raisin-black: #2c262c;
   --color-lavender-blush: #ffebf0;
   --color-misty-rose: #fbdeda;
-  --color-antiflash-white: #e8eaed;
   --color-black-bean: #29000a;
-  --color-tea-green: #c1d4b0;
   --color-cherry-blossom-pink: #ffadbc;
-  --color-dark-green: #1e2815;
-  --color-fire-brick: #b80022;
-
-  --color-surface: light-dark(var(--color-lavender-blush), var(--color-night));
-  --color-surface-inverted: light-dark(var(--color-night),
-      var(--color-lavender-blush));
 
   --color-surface-high: var(--color-cherry-blossom-pink);
 
-  --color-background: light-dark(var(--color-misty-rose),
-      var(--color-raisin-black));
-  --color-background-inverted: light-dark(var(--color-raisin-black),
-      var(--color-misty-rose));
-
-  --color-foreground: light-dark(var(--color-black-bean),
-      var(--color-lavender-blush));
-  --color-foreground-inverted: light-dark(var(--color-lavender-blush),
-      var(--color-black-bean));
-
-  --color-foreground-subtle: light-dark(#3a3b3b, #bdbbbb);
-  --color-foreground-subtle-inverted: light-dark(#3a3b3b, #bdbbbb);
-
-  --breakpoint-tablet: 760px;
   --breakpoint-desktop: calc(760px + 480px);
 
   --font-old: "Tinos NF", serif;
   --font-soria: Soria, "Tinos NF", serif;
   --font-display: Soria, "Tinos NF", serif;
   --font-galnoy: Galnoy, "Tinos NF", serif;
-
-  --leading-1: 1;
-  --leading-2: 2;
-
-  --spacing-paragraph: 100%;
-  --spacing-paragraph-desktop: 55%;
-  --spacing-sidebar: 40px;
-
-  --font-weight-heading: 400;
+  --font-serif:
+    "Tinos NF", Palatino, "Palatino Linotype", "Palatino LT STD",
+    "Book Antiqua", Georgia, serif;
 
   --text-xxs: 0.825rem;
   --text-xs: 1rem;
@@ -60,8 +32,6 @@
   /* 22.5px */
   --text-xl: 2rem;
   /* 30px */
-
-  --text-body: var(--text-md);
 }
 
 @utility clear-descenders {
@@ -453,11 +423,28 @@
   --sidebar-ring: oklch(0.553 0.013 58.071);
 }
 
+/* Blog's own palette, kept under names distinct from shadcn's --background/
+   --foreground so there's no cascade contest between the two. Theme
+   switching is done by toggling the .dark class on <html> (see
+   BaseLayout.astro), not prefers-color-scheme, so light-dark() doesn't
+   apply here. */
+:root {
+  --surface: var(--color-lavender-blush);
+  --page-background: var(--color-misty-rose);
+  --page-foreground: var(--color-black-bean);
+  --foreground-subtle: #3a3b3b;
+}
+
+.dark {
+  --surface: var(--color-night);
+  --page-background: var(--color-raisin-black);
+  --page-foreground: var(--color-lavender-blush);
+  --foreground-subtle: #bdbbbb;
+}
+
 @theme inline {
-  --font-sans: Soria, Montserrat, sans-serif;
-  --font-serif:
-    "Tinos NF", Palatino, "Palatino Linotype", "Palatino LT STD",
-    "Book Antiqua", Georgia, serif;
+  --color-surface: var(--surface);
+  --color-foreground-subtle: var(--foreground-subtle);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -487,8 +474,8 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --color-foreground: var(--foreground);
-  --color-background: var(--background);
+  --color-foreground: var(--page-foreground);
+  --color-background: var(--page-background);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
