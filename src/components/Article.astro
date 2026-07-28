@@ -1,42 +1,32 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import ArticleMeta from "./ArticleMeta.astro";
-import BookHeading from "./BookHeading.astro";
 import FormattedDate from "./FormattedDate.astro";
-import PostHeading from "./PostHeading.astro";
 import SyndicationLinks from "./SyndicationLinks.astro";
 import Webmentions from "./Webmentions";
 
-type Props = Partial<CollectionEntry<"book" | "blog">["data"]> & {
-  pubDate?: Date;
-  updatedDate?: Date;
+export type ArticleLinkProps = {
   author?: string;
   url?: string;
-  syndication?: Array<{ name: string; url: string }>;
 };
 
+interface Props extends ArticleLinkProps {
+  date?: Date;
+  updatedDate?: Date;
+  syndication?: Array<{ name: string; url: string }>;
+}
+
 const {
-  pubDate,
+  date,
   updatedDate,
   author = "Konstantin",
   url,
   syndication,
 } = Astro.props;
-
-// Book reviews carry authors; blog posts (and everything else) don't.
-const isBook = "authors" in Astro.props;
 ---
 
 <tufte-article data-testid="article-container" class="h-entry">
     <section>
-      {
-        Astro.props.title &&
-          (isBook ? (
-            <BookHeading {...Astro.props} title={Astro.props.title} />
-          ) : (
-            <PostHeading {...Astro.props} title={Astro.props.title} />
-          ))
-      }
+      <slot name="heading" />
 
       <ArticleMeta {updatedDate} {url} />
 
@@ -47,7 +37,7 @@ const isBook = "authors" in Astro.props;
       </div>
 
       {
-        (author || pubDate) && (
+        (author || date) && (
           <p class="text-foreground-subtle">
             {
               author && (
@@ -59,9 +49,9 @@ const isBook = "authors" in Astro.props;
               )
             }
             {
-              pubDate && (
-                <time class="dt-published" datetime={pubDate.toISOString()}>
-                  {', '}<FormattedDate date={pubDate} />
+              date && (
+                <time class="dt-published" datetime={date.toISOString()}>
+                  {', '}<FormattedDate date={date} />
                 </time>
               )
             }

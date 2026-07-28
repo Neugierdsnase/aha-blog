@@ -1,0 +1,22 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Article, { type ArticleLinkProps } from "./Article.astro";
+import PostHeading from "./PostHeading.astro";
+
+type Props = CollectionEntry<"blog">["data"] & ArticleLinkProps;
+
+const {
+  title,
+  subtitle,
+  pubDate,
+  updatedDate,
+  syndication,
+  author,
+  url,
+} = Astro.props;
+---
+
+<Article date={pubDate} {updatedDate} {author} {url} {syndication}>
+  <PostHeading slot="heading" {title} {subtitle} />
+  <slot />
+</Article>
