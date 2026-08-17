@@ -1,0 +1,21 @@
+FILES=$(git diff --cached --name-only --diff-filter=ACMR)
+
+if ! printf '%s\n' "$FILES" | grep -qE \
+  '^(src/lib/tufte-components/|src/lib/tufte-content/|src/components/(Article|TufteContent)\.astro|src/layouts/ArticleLayout\.astro|e2e/|playwright\.config\.ts)'
+then
+  exit 0
+fi
+
+echo "Tufte component/content files changed — running visual regression suite (npm run test:e2e)..."
+npm run test:e2e
+status=$?
+
+if [ $status -ne 0 ]; then
+  echo ""
+  echo "Visual regression check failed."
+  echo "If this diff is intentional, review the diff images under test-results/, then run:"
+  echo "  npm run test:e2e:update"
+  echo "and re-stage the updated e2e/*-snapshots/*.png baselines."
+fi
+
+exit $status
