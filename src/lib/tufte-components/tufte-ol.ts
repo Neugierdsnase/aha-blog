@@ -31,6 +31,8 @@ export class TufteOrderedList extends LitElement {
     css`
       :host {
         display: block;
+        /* Matches tufte.css's "section > ol { width: 50% }". */
+        width: 50%;
       }
 
       ol {
@@ -39,6 +41,12 @@ export class TufteOrderedList extends LitElement {
         list-style: upper-roman;
         font-size: 1.4rem;
         line-height: 2rem;
+      }
+
+      @media (max-width: 760px) {
+        :host {
+          width: 90%;
+        }
       }
     `,
   ];

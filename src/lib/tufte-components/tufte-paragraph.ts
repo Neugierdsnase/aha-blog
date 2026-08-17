@@ -32,6 +32,13 @@ export class TufteParagraph extends LitElement {
     css`
       :host {
         display: block;
+        /* Matches tufte.css's "section > p { width: 55% }" — this is the
+           containing block width for floated .sidenote/.marginnote
+           descendants (the float's containing block is the nearest block
+           ancestor, which is this component's own <p>, not the wider page).
+           Without it the paragraph — and therefore the float — spans the
+           full page width and sidenotes overflow past the viewport. */
+        width: 55%;
       }
 
       /* Box-model lives on the inner <p>, not on :host. The host is part of the
@@ -51,6 +58,12 @@ export class TufteParagraph extends LitElement {
          matching the raw <p> behaviour in tufte.css. */
       :host(:first-child) p {
         margin-top: 0;
+      }
+
+      @media (max-width: 760px) {
+        :host {
+          width: 100%;
+        }
       }
     `,
   ];
