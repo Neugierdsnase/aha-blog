@@ -76,13 +76,16 @@ export function transformTufteContent(html: string): string {
 
     for (const li of findChild(node, "ol")?.children ?? []) {
       if (!isElement(li) || li.name !== "li" || !li.attributes.id) continue;
-      const body = findChild(li, "p");
-      if (body) {
-        footnotes.set(
-          li.attributes.id,
-          body.children.filter((c) => !isBackref(c)),
-        );
-      }
+      // remark-gfm wraps a plain-text footnote body in a <p>. MDX instead
+      // renders a body that *starts* with raw HTML (e.g. `[^id]: <span>…`)
+      // as a block-level child of the <li> directly, with no <p> wrapper —
+      // fall back to the <li>'s own children in that case.
+      const wrapper = findChild(li, "p");
+      const children = wrapper ? wrapper.children : li.children;
+      footnotes.set(
+        li.attributes.id,
+        children.filter((c) => !isBackref(c)),
+      );
     }
   });
 

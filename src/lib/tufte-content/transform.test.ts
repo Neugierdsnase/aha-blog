@@ -128,6 +128,25 @@ describe("transformTufteContent", () => {
       expect(out).not.toContain("data-footnotes");
     });
 
+    it("hoists a footnote body that MDX renders without a <p> wrapper", () => {
+      // MDX renders a footnote definition that *starts* with raw HTML
+      // (e.g. `[^id]: <span>…`) as a block-level child of the <li> rather
+      // than wrapping it in a <p> the way remark-gfm does for plain text.
+      const input =
+        `<p>Text with a note<sup><a href="#user-content-fn-html-body" data-footnote-ref>1</a></sup>.</p>` +
+        `<section data-footnotes class="footnotes"><ol>` +
+        `<li id="user-content-fn-html-body">` +
+        `<span>Raw HTML body</span>` +
+        `<a href="#user-content-fnref-html-body" data-footnote-backref class="data-footnote-backref">↩</a>` +
+        `</li></ol></section>`;
+      const out = transformTufteContent(input);
+      expect(out).toContain('<tufte-sidenote note-id="user-content-fn-html-body">');
+      expect(out).toContain("<span>Raw HTML body</span>");
+      expect(out).not.toContain("data-footnotes");
+      expect(out).not.toContain("↩");
+      expect(out).not.toContain("<sup");
+    });
+
     it("leaves a plain <sup> that is not a footnote reference alone", () => {
       const out = transformTufteContent("<tufte-paragraph>x<sup>2</sup></tufte-paragraph>");
       expect(out).toContain("<sup>2</sup>");
