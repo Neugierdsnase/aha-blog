@@ -1,32 +1,242 @@
 ---
-import { getCollection, render } from "astro:content";
-import BlogPostArticle from "../components/BlogPostArticle.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const featuredPost = (await getCollection("blog")).find(
-  ({ data }) => data.featured,
-);
-
-const { Content } = featuredPost
-  ? await render(featuredPost)
-  : { Content: () => null };
+const backgroundQuotes = [
+  {
+    text: "Ihr nennt mich Menschenfeind, weil ich Gesellschaft meide. Ihr irrt euch, ich liebe sie. Doch um die Menschen nicht zu hassen, muss ich den Umgang unterlassen.",
+    author: "Caspar David Friedrich",
+  },
+  {
+    text: "Die Erde wird durch Liebe frei, durch Taten wird sie groß.",
+    author: "Johann Wolfgang v. Goethe",
+  },
+  {
+    text: "Was gibt uns den schönsten Frieden, als frei am eig'nen Glück zu schmieden?",
+    author: "Johann Wolfgang v. Goethe",
+  },
+  {
+    text: "Orden sind mir wurscht, aber haben will ich sie.",
+    author: "Johannes Brahms",
+  },
+  {
+    text: "Show me the incentive and I'll show you the outcome.",
+    author: "Charles T. Munger",
+  },
+  {
+    text: "… daß etwas schwer ist, muss uns ein Grund mehr sein, es zu tun.",
+    author: "Rainer Maria Rilke",
+  },
+  {
+    text: "Gesetze sind wie Würste, man sollte besser nicht dabei sein, wenn sie gemacht werden.",
+    author: "Otto von Bismarck",
+  },
+  {
+    text: "I did not have sexual relations with that woman.",
+    author: "Bill Clinton",
+  },
+  {
+    text: "Niemand hat die Absicht, eine Mauer zu errichten.",
+    author: "Walter Ulbricht",
+  },
+  {
+    text: "Da sind ein paar Hurenkinder dabei.",
+    author: "Herbert Prohaska",
+  },
+  {
+    text: "... there's some good in this world, Mr. Frodo, and it's worth fighting for.",
+    author: "Samwise Gamgee",
+  },
+] as const;
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION} lang="de">
-  <div id="article" class="max-h-[69vh] mask-b-from-45 overflow-clip">
-    {
-      featuredPost && (
-        <BlogPostArticle {...featuredPost.data}>
-          <Content />
-        </BlogPostArticle>
-      )
-    }
-  </div>
-  <a
-    id="further"
-    href={"/blog/" + featuredPost?.id}
-    class="block z-10 h-12 mt-8 text-center text-md w-fit mx-auto border-foreground border-1 rounded py-2 px-8 cursor-pointer hover:bg-foreground hover:text-background transition-colors duration-300"
-    data-testid="btn-continue-reading">weiterlesen...</a
-  >
+<div class="absolute inset-0 flex justify-center items-center overflow-clip">
+
+<div
+  id="quote-field"
+  class="absolute inset-0 z-0 pointer-events-none"
+  aria-hidden="true"
+>
+</div>
+
+<h1 class="relative z-10 text-5xl">Konstantin Kovar</h1>
+
+</div>
 </BaseLayout>
+
+<style is:global>
+  @reference "../styles/app.css";
+
+  .reveal {
+    background-image: linear-gradient(to right, var(--color-background) 0%, var(--color-background) 37%, transparent 41%, transparent 66%, var(--color-background) 69%);
+    background-size: 300%;
+  }
+
+  .quote-bg {
+    transform: translateY(-50%);
+  }
+  </style>
+
+<script define:vars={{ quotesData: backgroundQuotes }}>
+  const FONTS = ["font-old", "font-soria", "font-galnoy", "font-serif"];
+  const MIN_SIZE_REM = 0.75;
+  const MAX_SIZE_REM = 1.6;
+  const REVEAL_DURATION_S = 9;
+  const LANE_COUNT = 6;
+  const TOP_MIN = 14;
+  const TOP_MAX = 92;
+  // Vertical band around the centered h1 (50%) that stays lane-free.
+  const CENTER_GAP = 20;
+  const FIELD_MARGIN_PX = 12;
+  const REVEAL_KEYFRAMES = [
+    { backgroundPosition: "100%" },
+    { backgroundPosition: "0%" },
+  ];
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  const randomBetween = (min, max) => Math.random() * (max - min) + min;
+
+  function shuffled(list) {
+    const copy = list.slice();
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  }
+
+  // Shared across every lane so two lanes never show the same quote
+  // at the same time, and quotes cycle through evenly over time.
+  function createQuoteQueue(quotes) {
+    let queue = shuffled(quotes);
+    const active = new Set();
+
+    return {
+      next(previous) {
+        if (previous) active.delete(previous.text);
+        // At most 2 attempts: first uses the existing queue (reshuffling
+        // only if it's empty), the retry always reshuffles from scratch.
+        let pick;
+        for (let attempt = 0; attempt < 2 && !pick; attempt++) {
+          if (attempt > 0 || queue.length === 0) queue = shuffled(quotes);
+          pick = queue.find((q) => !active.has(q.text));
+        }
+        pick ??= queue[0];
+        queue = queue.filter((q) => q !== pick);
+        active.add(pick.text);
+        return pick;
+      },
+    };
+  }
+
+  // Builds one fixed vertical lane: only one quote ever occupies this
+  // band, so lanes can never overlap each other regardless of rotation.
+  function createLane(field, queue, top) {
+    const lane = document.createElement("div");
+    lane.className = "quote-bg absolute w-fit";
+    lane.style.top = `${top}%`;
+
+    const p = document.createElement("p");
+    p.className = "relative whitespace-nowrap text-foreground-subtle/25";
+    const text = document.createTextNode("");
+    const cite = document.createElement("cite");
+    cite.className = "not-italic text-[0.7em] opacity-70";
+    p.append(text, cite);
+
+    // Skipped under reduced motion: no hide/reveal mask, quote stays
+    // plainly visible and only the text swaps on a plain interval below.
+    const overlay = prefersReducedMotion ? null : document.createElement("div");
+    if (overlay) overlay.className = "absolute inset-0 z-10 reveal";
+
+    lane.append(p);
+    if (overlay) lane.append(overlay);
+    field.appendChild(lane);
+
+    let current = null;
+    const applyQuote = () => {
+      current = queue.next(current);
+      text.textContent = current.text;
+      cite.textContent = ` — ${current.author}`;
+      lane.classList.remove(...FONTS);
+      lane.classList.add(FONTS[Math.floor(Math.random() * FONTS.length)]);
+      lane.style.fontSize = `${randomBetween(MIN_SIZE_REM, MAX_SIZE_REM).toFixed(2)}rem`;
+
+      // Measure the rendered line (font/size/text already applied) so
+      // placement always keeps both edges inside the viewport — never
+      // just centered on a random point that could push it off-screen.
+      const fieldWidth = field.clientWidth;
+      const textWidth = lane.getBoundingClientRect().width;
+      const maxLeftPx = Math.max(
+        FIELD_MARGIN_PX,
+        fieldWidth - textWidth - FIELD_MARGIN_PX,
+      );
+      const leftPx = randomBetween(FIELD_MARGIN_PX, maxLeftPx);
+      lane.style.left = `${((leftPx / fieldWidth) * 100).toFixed(2)}%`;
+    };
+
+    applyQuote();
+
+    const initialDelayMs = randomBetween(0, REVEAL_DURATION_S) * 1000;
+
+    if (overlay) {
+      // One-shot hidden→visible→hidden animation per cycle. Swapping the
+      // quote only in `onfinish` ties the JS rotation to the exact same
+      // clock as the visible mask, so a swap can never land mid-reveal.
+      const cycle = (delayMs) => {
+        const animation = overlay.animate(REVEAL_KEYFRAMES, {
+          duration: REVEAL_DURATION_S * 1000,
+          delay: delayMs,
+          easing: "ease-in-out",
+          fill: "forwards",
+        });
+        animation.onfinish = () => {
+          applyQuote();
+          cycle(0);
+        };
+      };
+      cycle(initialDelayMs);
+    } else {
+      const tick = () => {
+        applyQuote();
+        setTimeout(tick, REVEAL_DURATION_S * 1000);
+      };
+      setTimeout(tick, initialDelayMs);
+    }
+  }
+
+  // Evenly distributes lane positions across the space above and below
+  // the centered h1, treating the excluded center band as a gap in the
+  // range so no lane ever falls behind the heading.
+  function laneTops(count) {
+    if (count === 1) return [TOP_MIN];
+
+    const gapStart = 50 - CENTER_GAP / 2;
+    const gapEnd = 50 + CENTER_GAP / 2;
+    const aboveLen = gapStart - TOP_MIN;
+    const belowLen = TOP_MAX - gapEnd;
+    const totalLen = aboveLen + belowLen;
+
+    return Array.from({ length: count }, (_, i) => {
+      const t = (i * totalLen) / (count - 1);
+      return t <= aboveLen ? TOP_MIN + t : gapEnd + (t - aboveLen);
+    });
+  }
+
+  function scatterQuotes() {
+    const field = document.getElementById("quote-field");
+    if (!field || quotesData.length === 0) return;
+
+    const laneCount = Math.min(LANE_COUNT, quotesData.length);
+    const queue = createQuoteQueue(quotesData);
+    const tops = laneTops(laneCount);
+
+    for (let i = 0; i < laneCount; i++) {
+      createLane(field, queue, tops[i]);
+    }
+  }
+
+  scatterQuotes();
+</script>
