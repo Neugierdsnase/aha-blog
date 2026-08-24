@@ -36,6 +36,7 @@ export const BubbleMenu = ({
   menuAriaLabel = "Toggle menu",
   menuBg = "#fff",
   menuContentColor = "#111",
+  useFixedPosition = true,
   items,
   animationEase = "back.out(1.5)",
   animationDuration = 0.5,
@@ -50,10 +51,16 @@ export const BubbleMenu = ({
 
   const menuItems = items?.length ? items : [];
 
+  // `fixed` pins the trigger + overlay to the viewport so the menu stays
+  // reachable and correctly covers the screen regardless of scroll
+  // position; `absolute` scrolls away with the page (opt-in only).
+  const positionClass = useFixedPosition ? "fixed" : "absolute";
+
   const containerClassName = [
     "bubble-menu",
+    positionClass,
     "left-0 right-0 top-8",
-    "flex items-center justify-between",
+    "flex items-center justify-end",
     "gap-4 px-8",
     "pointer-events-none",
     "z-[1001]",
@@ -217,7 +224,8 @@ export const BubbleMenu = ({
         <div
           ref={overlayRef}
           className={[
-            "bubble-menu-items absolute",
+            "bubble-menu-items",
+            positionClass,
             "inset-0",
             "flex items-center justify-center",
             "pointer-events-none",

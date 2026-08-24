@@ -1,0 +1,159 @@
+---
+import type { Quote } from "../lib/background-quotes/engine";
+
+interface Props {
+  quotes: readonly Quote[];
+}
+
+const { quotes } = Astro.props;
+---
+
+<div
+  id="quote-field"
+  class="absolute inset-0 z-0 pointer-events-none"
+  aria-hidden="true"
+  data-quotes={JSON.stringify(quotes)}
+>
+</div>
+
+<style is:global>
+  @reference "../styles/app.css";
+
+  .reveal-mask {
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      transparent 37%,
+      black 41%,
+      black 66%,
+      transparent 69%
+    );
+    mask-size: 300%;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      transparent 37%,
+      black 41%,
+      black 66%,
+      transparent 69%
+    );
+    -webkit-mask-size: 300%;
+  }
+
+  .quote-bg {
+    transform: translateY(-50%);
+  }
+</style>
+
+<script>
+  import {
+    createQuoteQueue,
+    durationForQuote,
+    fitLeftPercent,
+    FONTS,
+    laneTops,
+    LANE_COUNT,
+    pickFont,
+    pickFontSizeRem,
+    type Quote,
+    type QuoteQueue,
+    randomBetween,
+  } from "../lib/background-quotes/engine";
+
+  const REVEAL_KEYFRAMES: Keyframe[] = [
+    { maskPosition: "100%", WebkitMaskPosition: "100%" },
+    { maskPosition: "0%", WebkitMaskPosition: "0%" },
+  ];
+
+  const field = document.getElementById("quote-field");
+  const quotesData: Quote[] = field
+    ? JSON.parse(field.dataset.quotes ?? "[]")
+    : [];
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  // Builds one fixed vertical lane: only one quote ever occupies this
+  // band, so lanes can never overlap each other regardless of rotation.
+  function createLane(container: HTMLElement, queue: QuoteQueue, top: number) {
+    const lane = document.createElement("div");
+    lane.className = "quote-bg absolute w-fit";
+    lane.style.top = `${top}%`;
+
+    const p = document.createElement("p");
+    p.className =
+      "relative whitespace-nowrap text-foreground-subtle/25 mix-blend-exclusion";
+    // Skipped under reduced motion: text stays plainly visible and only
+    // swaps on a plain interval below, with no reveal/hide animation.
+    if (!prefersReducedMotion) p.classList.add("reveal-mask");
+    const text = document.createTextNode("");
+    const cite = document.createElement("cite");
+    cite.className = "not-italic text-[0.7em] opacity-70";
+    p.append(text, cite);
+
+    lane.append(p);
+    container.appendChild(lane);
+
+    let current: Quote | null = null;
+    let durationMs = 0;
+    const applyQuote = () => {
+      current = queue.next(current);
+      durationMs = durationForQuote(current, quotesData) * 1000;
+      text.textContent = current.text;
+      cite.textContent = ` — ${current.author}`;
+      lane.classList.remove(...FONTS);
+      lane.classList.add(pickFont());
+      lane.style.fontSize = `${pickFontSizeRem().toFixed(2)}rem`;
+
+      // Measure the rendered line (font/size/text already applied) so
+      // placement always keeps both edges inside the viewport — never
+      // just centered on a random point that could push it off-screen.
+      const fieldWidth = container.clientWidth;
+      const textWidth = lane.getBoundingClientRect().width;
+      lane.style.left = `${fitLeftPercent(fieldWidth, textWidth).toFixed(2)}%`;
+    };
+
+    applyQuote();
+
+    const initialDelayMs = randomBetween(0, durationMs);
+
+    if (!prefersReducedMotion) {
+      // One-shot hidden→visible→hidden animation per cycle. Swapping the
+      // quote only in `onfinish` ties the JS rotation to the exact same
+      // clock as the visible mask, so a swap can never land mid-reveal.
+      const cycle = (delayMs: number) => {
+        const animation = p.animate(REVEAL_KEYFRAMES, {
+          duration: durationMs,
+          delay: delayMs,
+          easing: "ease-in-out",
+          fill: "forwards",
+        });
+        animation.onfinish = () => {
+          applyQuote();
+          cycle(0);
+        };
+      };
+      cycle(initialDelayMs);
+    } else {
+      const tick = () => {
+        applyQuote();
+        setTimeout(tick, durationMs);
+      };
+      setTimeout(tick, initialDelayMs);
+    }
+  }
+
+  function scatterQuotes() {
+    if (!field || quotesData.length === 0) return;
+
+    const laneCount = Math.min(LANE_COUNT, quotesData.length);
+    const queue = createQuoteQueue(quotesData);
+    const tops = laneTops(laneCount);
+
+    for (let i = 0; i < laneCount; i++) {
+      createLane(field, queue, tops[i]);
+    }
+  }
+
+  scatterQuotes();
+</script>
