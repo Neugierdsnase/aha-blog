@@ -36,6 +36,7 @@ export const BubbleMenu = ({
   menuAriaLabel = "Toggle menu",
   menuBg = "#fff",
   menuContentColor = "#111",
+  useFixedPosition = true,
   items,
   animationEase = "back.out(1.5)",
   animationDuration = 0.5,
@@ -50,8 +51,14 @@ export const BubbleMenu = ({
 
   const menuItems = items?.length ? items : [];
 
+  // `fixed` pins the trigger + overlay to the viewport so the menu stays
+  // reachable and correctly covers the screen regardless of scroll
+  // position; `absolute` scrolls away with the page (opt-in only).
+  const positionClass = useFixedPosition ? "fixed" : "absolute";
+
   const containerClassName = [
     "bubble-menu",
+    positionClass,
     "left-0 right-0 top-8",
     "flex items-center justify-between",
     "gap-4 px-8",
@@ -177,7 +184,7 @@ export const BubbleMenu = ({
         style={style}
         aria-label="Main navigation"
       >
-        <ButtonGroup>
+        <ButtonGroup className="glass-nav p-1 pointer-events-auto">
           <Button
             variant="outline"
             type="button"
@@ -217,12 +224,13 @@ export const BubbleMenu = ({
         <div
           ref={overlayRef}
           className={[
-            "bubble-menu-items absolute",
+            "bubble-menu-items",
+            positionClass,
             "inset-0",
             "flex items-center justify-center",
             "pointer-events-none",
             "z-1000",
-            "bg-background/80",
+            "bg-background/80 backdrop-blur-sm",
           ].join(" ")}
           aria-hidden={!isMenuOpen}
         >
@@ -242,10 +250,7 @@ export const BubbleMenu = ({
               <li
                 key={idx}
                 role="none"
-                className={[
-                  "pill-col",
-                  "flex justify-center w-full",
-                ].join(" ")}
+                className={["pill-col", "flex justify-center w-full"].join(" ")}
               >
                 <a
                   role="menuitem"

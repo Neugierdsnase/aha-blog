@@ -21,16 +21,8 @@ const pages: { label: string; href: string }[] = [
   { label: "RSS", href: "/rss.xml" },
 ];
 
-const {
-  lang,
-  title,
-  description,
-  type,
-  pubDate,
-  updatedDate,
-  image,
-  author,
-} = Astro.props;
+const { lang, title, description, type, pubDate, updatedDate, image, author } =
+  Astro.props;
 ---
 
 <script is:inline>
@@ -69,17 +61,22 @@ const {
     lang={lang}
   />
   <body>
-    <nav class="flex justify-end items-center p-4">
-      <BubbleMenu
-        client:load
-        items={pages}
-        menuAriaLabel="Toggle navigation"
-        useFixedPosition={false}
-        animationEase="back.out(1.5)"
-        animationDuration={0.5}
-        staggerDelay={0.12}
-      />
-    </nav>
+    <div class="page-backdrop" aria-hidden="true"></div>
+
+    <BubbleMenu
+      client:load
+      items={pages}
+      menuAriaLabel="Toggle navigation"
+      useFixedPosition={true}
+      animationEase="back.out(1.5)"
+      animationDuration={0.5}
+      staggerDelay={0.12}
+    />
+
+    <!-- Matches the fixed nav's own height (top-8 offset + button row +
+         vertical margin) so page content starts clear of it instead of
+         sliding underneath. -->
+    <div class="h-18" aria-hidden="true"></div>
 
     <div
       id="body"

@@ -51,32 +51,48 @@ const backgroundQuotes = [
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION} lang="de">
-<div class="absolute inset-0 flex justify-center items-center overflow-clip">
+  <div class="absolute inset-0 flex justify-center items-center overflow-clip">
+    <div
+      id="quote-field"
+      class="absolute inset-0 z-0 pointer-events-none"
+      aria-hidden="true"
+    >
+    </div>
 
-<div
-  id="quote-field"
-  class="absolute inset-0 z-0 pointer-events-none"
-  aria-hidden="true"
->
-</div>
-
-<h1 class="relative z-10 text-5xl">Konstantin Kovar</h1>
-
-</div>
+    <h1 class="relative z-10 text-5xl">Konstantin Kovar</h1>
+  </div>
 </BaseLayout>
 
 <style is:global>
   @reference "../styles/app.css";
 
-  .reveal {
-    background-image: linear-gradient(to right, var(--color-background) 0%, var(--color-background) 37%, transparent 41%, transparent 66%, var(--color-background) 69%);
-    background-size: 300%;
+  .reveal-mask {
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      transparent 37%,
+      black 41%,
+      black 66%,
+      transparent 69%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      transparent 37%,
+      black 41%,
+      black 66%,
+      transparent 69%
+    );
+    mask-size: 300%;
+    -webkit-mask-size: 300%;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
   }
 
   .quote-bg {
     transform: translateY(-50%);
   }
-  </style>
+</style>
 
 <script define:vars={{ quotesData: backgroundQuotes }}>
   const FONTS = ["font-old", "font-soria", "font-galnoy", "font-serif"];
@@ -90,8 +106,8 @@ const backgroundQuotes = [
   const CENTER_GAP = 20;
   const FIELD_MARGIN_PX = 12;
   const REVEAL_KEYFRAMES = [
-    { backgroundPosition: "100%" },
-    { backgroundPosition: "0%" },
+    { maskPosition: "100%", WebkitMaskPosition: "100%" },
+    { maskPosition: "0%", WebkitMaskPosition: "0%" },
   ];
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
@@ -139,6 +155,10 @@ const backgroundQuotes = [
     lane.className = "quote-bg absolute w-fit";
     lane.style.top = `${top}%`;
 
+    // Skipped under reduced motion: no hide/reveal mask, quote stays
+    // plainly visible and only the text swaps on a plain interval below.
+    if (!prefersReducedMotion) lane.classList.add("reveal-mask");
+
     const p = document.createElement("p");
     p.className = "relative whitespace-nowrap text-foreground-subtle/25";
     const text = document.createTextNode("");
@@ -146,13 +166,7 @@ const backgroundQuotes = [
     cite.className = "not-italic text-[0.7em] opacity-70";
     p.append(text, cite);
 
-    // Skipped under reduced motion: no hide/reveal mask, quote stays
-    // plainly visible and only the text swaps on a plain interval below.
-    const overlay = prefersReducedMotion ? null : document.createElement("div");
-    if (overlay) overlay.className = "absolute inset-0 z-10 reveal";
-
     lane.append(p);
-    if (overlay) lane.append(overlay);
     field.appendChild(lane);
 
     let current = null;
@@ -181,12 +195,14 @@ const backgroundQuotes = [
 
     const initialDelayMs = randomBetween(0, REVEAL_DURATION_S) * 1000;
 
-    if (overlay) {
-      // One-shot hidden→visible→hidden animation per cycle. Swapping the
-      // quote only in `onfinish` ties the JS rotation to the exact same
-      // clock as the visible mask, so a swap can never land mid-reveal.
+    if (!prefersReducedMotion) {
+      // One-shot hidden→visible→hidden animation per cycle, driven by an
+      // animated mask so hidden text reveals the real page background
+      // instead of painting an opaque box over it. Swapping the quote
+      // only in `onfinish` ties the JS rotation to the exact same clock
+      // as the visible mask, so a swap can never land mid-reveal.
       const cycle = (delayMs) => {
-        const animation = overlay.animate(REVEAL_KEYFRAMES, {
+        const animation = lane.animate(REVEAL_KEYFRAMES, {
           duration: REVEAL_DURATION_S * 1000,
           delay: delayMs,
           easing: "ease-in-out",
