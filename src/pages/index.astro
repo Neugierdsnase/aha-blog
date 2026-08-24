@@ -53,22 +53,19 @@ const backgroundQuotes = [
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION} lang="de">
-<div class="fixed inset-0 flex justify-center items-center overflow-clip">
+  <div class="fixed inset-0 flex justify-center items-center overflow-clip">
+    <BackgroundQuotes quotes={backgroundQuotes} />
 
-<BackgroundQuotes quotes={backgroundQuotes} />
-
-<h1 class="relative z-10 text-5xl">
-  <GradientText
-    client:load
-    colors={["var(--color-foreground)", "var(--color-cherry-blossom-pink)"]}
-    animationSpeed={8}
-    showBorder={false}
-    className="!mx-0 !max-w-none !rounded-none !p-0 !backdrop-blur-none !cursor-default"
-  >
-    Konstantin Kovar
-  </GradientText>
-</h1>
-
-</div>
+    <h1 class="relative z-10 text-5xl">
+      <GradientText
+        client:load
+        colors={["var(--color-foreground)", "var(--color-cherry-blossom-pink)"]}
+        animationSpeed={8}
+        showBorder={false}
+        className="!mx-0 !max-w-none !rounded-none !p-0 !backdrop-blur-none !cursor-default"
+      >
+        Konstantin Kovar
+      </GradientText>
+    </h1>
+  </div>
 </BaseLayout>
-

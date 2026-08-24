@@ -21,16 +21,8 @@ const pages: { label: string; href: string }[] = [
   { label: "RSS", href: "/rss.xml" },
 ];
 
-const {
-  lang,
-  title,
-  description,
-  type,
-  pubDate,
-  updatedDate,
-  image,
-  author,
-} = Astro.props;
+const { lang, title, description, type, pubDate, updatedDate, image, author } =
+  Astro.props;
 ---
 
 <script is:inline>
@@ -69,6 +61,7 @@ const {
     lang={lang}
   />
   <body>
+    <div class="page-backdrop" aria-hidden="true"></div>
     <BubbleMenu
       client:load
       items={pages}

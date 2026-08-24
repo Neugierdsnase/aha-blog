@@ -184,7 +184,7 @@ export const BubbleMenu = ({
         style={style}
         aria-label="Main navigation"
       >
-        <ButtonGroup>
+        <ButtonGroup className="glass-nav p-1 pointer-events-auto">
           <Button
             variant="outline"
             type="button"
@@ -230,7 +230,7 @@ export const BubbleMenu = ({
             "flex items-center justify-center",
             "pointer-events-none",
             "z-1000",
-            "bg-background/80",
+            "bg-background/80 backdrop-blur-sm",
           ].join(" ")}
           aria-hidden={!isMenuOpen}
         >
@@ -250,10 +250,7 @@ export const BubbleMenu = ({
               <li
                 key={idx}
                 role="none"
-                className={[
-                  "pill-col",
-                  "flex justify-center w-full",
-                ].join(" ")}
+                className={["pill-col", "flex justify-center w-full"].join(" ")}
               >
                 <a
                   role="menuitem"
