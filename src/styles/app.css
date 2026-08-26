@@ -135,77 +135,6 @@
       background-color: var(--color-background);
     }
   }
-
-  /* Fixed, full-viewport gradient + film grain behind all content, so glass
-     surfaces like .glass-nav have something visible to blur. */
-  .page-backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    /* Fallback for browsers without gradient-color-space support: plain
-       sRGB interpolation between the same stops. */
-    background-image:
-      radial-gradient(
-        ellipse 80% 55% at 12% -10%,
-        color-mix(in oklch, var(--color-surface-high) 30%, transparent),
-        transparent 60%
-      ),
-      radial-gradient(
-        ellipse 65% 55% at 105% 0%,
-        color-mix(in oklch, var(--color-misty-rose) 20%, transparent),
-        transparent 55%
-      ),
-      linear-gradient(
-        180deg,
-        var(--color-background),
-        color-mix(
-            in oklch,
-            var(--color-background) 82%,
-            var(--color-black-bean) 18%
-          )
-          160%
-      );
-    /* Enhanced: interpolate through OKLCH so the pink/peach accents travel
-       to transparent (and the base tint darkens) without washing out gray
-       in between — see joshwcomeau.com/css/make-beautiful-gradients. */
-    background-image:
-      radial-gradient(
-        ellipse 80% 55% at 12% -10% in oklch,
-        color-mix(in oklch, var(--color-surface-high) 30%, transparent),
-        transparent 60%
-      ),
-      radial-gradient(
-        ellipse 65% 55% at 105% 0% in oklch,
-        color-mix(in oklch, var(--color-misty-rose) 20%, transparent),
-        transparent 55%
-      ),
-      linear-gradient(
-        180deg in oklch,
-        var(--color-background),
-        color-mix(
-            in oklch,
-            var(--color-background) 82%,
-            var(--color-black-bean) 18%
-          )
-          160%
-      );
-  }
-
-  /* Grain per css-tricks.com/grainy-gradients: raw SVG turbulence, pushed
-     from a smooth colorful cloud into stark black/white speckle via a
-     contrast + brightness boost, then blended over the gradient at low
-     opacity to keep it subtle. */
-  .page-backdrop::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    opacity: 0.05;
-    mix-blend-mode: overlay;
-    filter: contrast(170%) brightness(1000%);
-    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20200%20200'%3E%3Cfilter%20id%3D'noiseFilter'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'0.65'%20numOctaves%3D'3'%20stitchTiles%3D'stitch'%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D'100%25'%20height%3D'100%25'%20filter%3D'url(%23noiseFilter)'%2F%3E%3C%2Fsvg%3E");
-    background-size: 180px 180px;
-  }
 }
 
 @utility text-trim-* {
@@ -285,6 +214,19 @@
 @layer base {
   :root {
     font-size: 16px;
+  }
+
+  body {
+    @apply bg-background;
+    /* Positioned ancestor for .page-backdrop (PageBackdrop.astro), so its
+       `position: absolute; inset: 0` spans the actual document height
+       instead of just one viewport — otherwise it hard-cuts on any page
+       taller than its own box, exposing flat background beneath it.
+       `min-height` floors this at one viewport for pages (e.g. the
+       homepage) whose visible content is `position: fixed`/`absolute`
+       and so contributes nothing to body's own in-flow height. */
+    position: relative;
+    min-height: 100lvh;
   }
 
   h1,
@@ -374,11 +316,6 @@
   body {
     background: white !important;
     color: black !important;
-  }
-
-  /* No ink for the ambient gradient/grain layer */
-  .page-backdrop {
-    display: none !important;
   }
 
   /* Flatten color tokens to black-on-white */

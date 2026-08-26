@@ -2,6 +2,7 @@
 import BaseHead from "../components/BaseHead.astro";
 import { GOATCOUNTER_URL } from "../consts";
 import { BubbleMenu } from "@/components/BubbleMenu.tsx";
+import PageBackdrop from "../components/PageBackdrop.astro";
 
 type Props = {
   lang: "de" | "en";
@@ -61,7 +62,7 @@ const { lang, title, description, type, pubDate, updatedDate, image, author } =
     lang={lang}
   />
   <body>
-    <div class="page-backdrop" aria-hidden="true"></div>
+    <PageBackdrop />
     <BubbleMenu
       client:load
       items={pages}

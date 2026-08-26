@@ -47,7 +47,7 @@ export class TufteArticle extends LitElement {
         padding-top: 5rem;
         padding-bottom: 5rem;
         padding-left: 12.5%;
-        background-color: var(--tufte-background-color, #fffff8);
+        background-color: transparent;
         counter-reset: sidenote-counter;
       }
 
