@@ -9,6 +9,7 @@ export const bookGenres = [
   "cultural-studies",
   "drama",
   "economics",
+  "ethics",
   "fantasy",
   "fiction",
   "historical-fiction",
