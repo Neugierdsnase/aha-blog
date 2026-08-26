@@ -14,11 +14,9 @@ export interface Quote {
 
 export const FONTS = [
   "font-old",
-  "font-soria",
-  "font-galnoy",
   "font-serif",
 ] as const;
-export const MIN_SIZE_REM = 0.75;
+export const MIN_SIZE_REM = 1.25;
 export const MAX_SIZE_REM = 1.6;
 export const MIN_DURATION_S = 14;
 export const MAX_DURATION_S = 28;

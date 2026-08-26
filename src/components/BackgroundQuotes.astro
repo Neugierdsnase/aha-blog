@@ -82,7 +82,7 @@ const { quotes } = Astro.props;
 
     const p = document.createElement("p");
     p.className =
-      "relative whitespace-nowrap text-foreground-subtle/25 mix-blend-exclusion";
+      "relative whitespace-nowrap text-foreground-subtle/25 mix-blend-luminosity";
     // Skipped under reduced motion: text stays plainly visible and only
     // swaps on a plain interval below, with no reveal/hide animation.
     if (!prefersReducedMotion) p.classList.add("reveal-mask");
