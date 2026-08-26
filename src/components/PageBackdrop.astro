@@ -18,12 +18,11 @@
        sRGB interpolation between the same stops. */
     background-image: linear-gradient(
       177deg,
-      var(--color-cherry-blossom-pink),
       color-mix(
-          in oklch,
           var(--color-background) 82%,
-          var(--color-black-bean) 18%
-        )
+          var(--color-cherry-blossom-pink)
+        ),
+        var(--color-background)
         320lvh
     );
     /* Enhanced: interpolate through OKLCH so the pink/peach accents travel
@@ -38,15 +37,18 @@
       177deg in oklch,
       color-mix(
         in oklch,
-        var(--color-cherry-blossom-pink) 32%,
+        var(--color-cherry-blossom-pink) 42%,
         var(--color-background)
       ),
-      color-mix(
-          in oklch,
-          var(--color-cherry-blossom-pink) 22%,
-          var(--color-surface)
-        )
-        44lvh,
+      color-mix(in oklch,
+        color-mix(
+            in oklch,
+            var(--color-cherry-blossom-pink) 62%,
+            var(--color-surface)
+          ) 34%,
+        var(--color-background)
+      )
+      44lvh,
       color-mix(
           in oklch,
           var(--color-cherry-blossom-pink) 12%,
