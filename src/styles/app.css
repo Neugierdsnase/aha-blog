@@ -116,23 +116,67 @@
   }
 
   /* Frosted-glass surface for floating chrome such as the nav control
-     cluster; needs the .page-backdrop gradient behind it to read as glass. */
+     cluster; needs the .page-backdrop gradient behind it to read as glass.
+     Tinted a step darker than the page in light mode and a step lighter in
+     dark mode, so the bar reads as a distinct surface in both themes
+     instead of just darkening on top of the (already dark) page. */
   .glass-nav {
     @apply border border-foreground/15 shadow-lg;
     background-color: color-mix(
       in oklch,
-      var(--color-background) 55%,
+      color-mix(in oklch, var(--color-background) 80%, black 20%) 65%,
       transparent
     );
     backdrop-filter: blur(20px) saturate(160%);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
   }
 
+  .dark .glass-nav {
+    background-color: color-mix(
+      in oklch,
+      color-mix(in oklch, var(--color-background) 55%, white 45%) 65%,
+      transparent
+    );
+  }
+
+  /* Nav item list: a solid dropdown card below the trigger on mobile (a
+     horizontal row would overflow off-screen and become unreachable at
+     narrow widths); expands in place as a horizontal row beside the
+     trigger from the desktop breakpoint up. */
+  .nav-panel {
+    @apply absolute right-0 top-full mt-2 grid w-max max-w-[calc(100vw-4rem)] grid-rows-[0fr] overflow-hidden rounded-none border border-foreground/15 bg-background shadow-lg transition-[grid-template-rows] duration-300 ease-out;
+
+    @variant desktop {
+      position: static;
+      margin-top: 0;
+      width: auto;
+      max-width: none;
+      border-width: 0;
+      background-color: transparent;
+      box-shadow: none;
+      grid-template-rows: none;
+      grid-template-columns: 0fr;
+      transition-property: grid-template-columns;
+    }
+  }
+
+  .nav-panel[data-state="open"] {
+    grid-template-rows: 1fr;
+
+    @variant desktop {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @supports not (
     (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
   ) {
     .glass-nav {
-      background-color: var(--color-background);
+      background-color: color-mix(in oklch, var(--color-background) 85%, black 15%);
+    }
+
+    .dark .glass-nav {
+      background-color: color-mix(in oklch, var(--color-background) 85%, white 15%);
     }
   }
 }

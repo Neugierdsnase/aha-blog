@@ -31,7 +31,7 @@ export const Header: FunctionComponent<HeaderProps> = ({
     setActiveLanguage((prev) => (prev === "en" ? "de" : "en"));
 
   return (
-    <Menubar className="flex flex-row items-center justify-between p-8 bg-background">
+    <Menubar className="w-full flex flex-row items-center justify-between p-8 bg-background">
       <div className="flex gap-8 overflow-clip py-4">
         <p className="font-display text-3xl text-trim-both animated-heading hide-if-no-scroll-timeline">
           Konstantin Kovar

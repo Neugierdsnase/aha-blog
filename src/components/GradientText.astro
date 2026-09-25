@@ -1,0 +1,134 @@
+---
+interface Props {
+  class?: string;
+  colors?: string[];
+  animationSpeed?: number;
+  showBorder?: boolean;
+  direction?: "horizontal" | "vertical" | "diagonal";
+  pauseOnHover?: boolean;
+  yoyo?: boolean;
+}
+
+const {
+  class: className = "",
+  colors = ["#5227FF", "#FF9FFC", "#B497CF"],
+  animationSpeed = 8,
+  showBorder = false,
+  direction = "horizontal",
+  pauseOnHover = false,
+  yoyo = true,
+} = Astro.props;
+
+const gradientAngle =
+  direction === "horizontal"
+    ? "to right"
+    : direction === "vertical"
+      ? "to bottom"
+      : "to bottom right";
+// Duplicate first color at the end so the pan loops seamlessly.
+const gradientColors = [...colors, colors[0]].join(", ");
+const gradientSize =
+  direction === "horizontal"
+    ? "300% 100%"
+    : direction === "vertical"
+      ? "100% 300%"
+      : "300% 300%";
+// Diagonal only pans horizontally to avoid interference patterns.
+const panAxis = direction === "vertical" ? "y" : "x";
+---
+
+<div
+  class={`gradient-text relative mx-auto flex max-w-fit flex-row items-center justify-center rounded-[1.25rem] font-medium backdrop-blur transition-shadow duration-500 overflow-hidden cursor-pointer ${showBorder ? "gradient-text--border py-1 px-2" : ""} ${pauseOnHover ? "gradient-text--pause-on-hover" : ""} ${className}`}
+  data-pan-axis={panAxis}
+  data-yoyo={yoyo}
+  style={`--gradient-angle: ${gradientAngle}; --gradient-colors: ${gradientColors}; --gradient-size: ${gradientSize}; --gradient-duration: ${animationSpeed}s;`}
+>
+  <span
+    class="gradient-text__fill relative z-2 inline-block text-transparent bg-clip-text"
+  >
+    <slot />
+  </span>
+</div>
+
+<style>
+  @reference "../styles/app.css";
+
+  .gradient-text {
+    --gradient-direction: normal;
+  }
+
+  .gradient-text[data-yoyo="true"] {
+    --gradient-direction: alternate;
+  }
+
+  .gradient-text__fill,
+  .gradient-text--border {
+    animation-duration: var(--gradient-duration);
+    animation-direction: var(--gradient-direction);
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+  .gradient-text__fill {
+    background-image: linear-gradient(
+      var(--gradient-angle),
+      var(--gradient-colors)
+    );
+    background-size: var(--gradient-size);
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    animation-name: gradient-text-pan-x;
+  }
+
+  .gradient-text[data-pan-axis="y"] .gradient-text__fill {
+    animation-name: gradient-text-pan-y;
+  }
+
+  /* Animated gradient ring: a 1px transparent border reveals a second,
+     border-box-clipped gradient layer behind the padding-box-clipped
+     solid fill, so only the ring itself shows the moving gradient. */
+  .gradient-text--border {
+    border: 1px solid transparent;
+    background-image:
+      linear-gradient(var(--color-background), var(--color-background)),
+      linear-gradient(var(--gradient-angle), var(--gradient-colors));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-size: 100% 100%, var(--gradient-size);
+    animation-name: gradient-text-pan-x;
+  }
+
+  .gradient-text--border[data-pan-axis="y"] {
+    animation-name: gradient-text-pan-y;
+  }
+
+  .gradient-text--pause-on-hover:hover .gradient-text__fill,
+  .gradient-text--pause-on-hover.gradient-text--border:hover {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gradient-text__fill,
+    .gradient-text--border {
+      animation-duration: 0s;
+    }
+  }
+
+  @keyframes gradient-text-pan-x {
+    from {
+      background-position: 0% 50%;
+    }
+    to {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes gradient-text-pan-y {
+    from {
+      background-position: 50% 0%;
+    }
+    to {
+      background-position: 50% 100%;
+    }
+  }
+</style>

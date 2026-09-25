@@ -1,6 +1,6 @@
 ---
 import BackgroundQuotes from "../components/BackgroundQuotes.astro";
-import GradientText from "../components/GradientText";
+import GradientText from "../components/GradientText.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
@@ -49,7 +49,7 @@ const backgroundQuotes = [
     text: "... there's some good in this world, Mr. Frodo, and it's worth fighting for.",
     author: "Samwise Gamgee",
   },
-] as const;
+];
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION} lang="de">
@@ -58,11 +58,10 @@ const backgroundQuotes = [
 
     <h1 class="relative z-10 text-5xl">
       <GradientText
-        client:load
         colors={["var(--color-foreground)", "var(--color-cherry-blossom-pink)"]}
         animationSpeed={8}
         showBorder={false}
-        className="!mx-0 !max-w-none !rounded-none !p-0 !backdrop-blur-none !cursor-default"
+        class="mx-0! max-w-none! rounded-none! p-0! backdrop-blur-none! cursor-default!"
       >
         Konstantin Kovar
       </GradientText>

@@ -1,7 +1,8 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import { GOATCOUNTER_URL } from "../consts";
-import { BubbleMenu } from "@/components/BubbleMenu.tsx";
+import { GOATCOUNTER_URL, NAV_PAGES } from "../consts";
+import { HomeLink } from "@/components/HomeLink.tsx";
+import { NavMenu } from "@/components/NavMenu.tsx";
 import PageBackdrop from "../components/PageBackdrop.astro";
 
 type Props = {
@@ -15,15 +16,9 @@ type Props = {
   author?: string;
 };
 
-const pages: { label: string; href: string }[] = [
-  { label: "Über mich", href: "/about" },
-  { label: "Jüngst gelesen", href: "/book" },
-  { label: "Jüngst geschrieben", href: "/blog" },
-  { label: "RSS", href: "/rss.xml" },
-];
-
 const { lang, title, description, type, pubDate, updatedDate, image, author } =
   Astro.props;
+const isIndex = Astro.url.pathname === "/";
 ---
 
 <script is:inline>
@@ -63,15 +58,16 @@ const { lang, title, description, type, pubDate, updatedDate, image, author } =
   />
   <body>
     <PageBackdrop />
-    <BubbleMenu
-      client:load
-      items={pages}
-      menuAriaLabel="Toggle navigation"
-      useFixedPosition={true}
-      animationEase="back.out(1.5)"
-      animationDuration={0.5}
-      staggerDelay={0.12}
-    />
+    <nav
+      class="glass-nav fixed inset-x-0 top-8 z-[1001] flex items-center px-8 py-1"
+      style="view-transition-name: --nav;"
+      aria-label="Main navigation"
+    >
+      {!isIndex && <HomeLink />}
+      <div class="ml-auto">
+        <NavMenu client:load items={NAV_PAGES} menuAriaLabel="Toggle navigation" />
+      </div>
+    </nav>
 
     <!-- Matches the fixed nav's own height (top-8 offset + button row +
          vertical margin) so page content starts clear of it instead of
