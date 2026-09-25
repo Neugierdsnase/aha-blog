@@ -52,6 +52,7 @@ export const genreLabels: Record<BookGenre, string> = {
   "cultural-studies": "Kulturwissenschaft",
   drama: "Drama",
   economics: "Volkswirtschaft",
+  ethics: "Ethik",
   fantasy: "Fantasy",
   fiction: "Belletristik",
   "historical-fiction": "Historischer Roman",
