@@ -9,7 +9,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useEffect, useState } from "react";
 
-export const ColorModeToggle = () => {
+export type ColorModeToggleProps = {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+};
+
+export const ColorModeToggle = ({
+  open,
+  onOpenChange,
+}: ColorModeToggleProps = {}) => {
   const [theme, setThemeState] = useState<"theme-light" | "dark" | "system">(
     "theme-light",
   );
@@ -28,9 +36,9 @@ export const ColorModeToggle = () => {
   }, [theme]);
 
   return (
-    <DropdownMenu>
+    <DropdownMenu open={open} onOpenChange={onOpenChange}>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon" className="pointer-events-auto">
+        <Button variant="ghost" size="icon" className="pointer-events-auto">
           <Sun className="scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
           <Moon className="absolute scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
           <span className="sr-only">Toggle theme</span>

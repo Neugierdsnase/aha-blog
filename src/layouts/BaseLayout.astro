@@ -59,7 +59,7 @@ const isIndex = Astro.url.pathname === "/";
   <body>
     <PageBackdrop />
     <nav
-      class="glass-nav fixed inset-x-0 top-8 z-[1001] flex items-center px-8 py-1"
+      class="glass-nav fixed inset-x-0 top-8 z-1001 flex items-center px-8 py-1"
       style="view-transition-name: --nav;"
       aria-label="Main navigation"
     >
@@ -90,3 +90,38 @@ const isIndex = Astro.url.pathname === "/";
       src="//gc.zgo.at/count.js"></script>
   </body>
 </html>
+
+<style>
+  /* Frosted-glass background for the fixed nav bar; needs the
+     .page-backdrop gradient behind it to read as glass. Tinted a step
+     darker than the page in light mode and a step lighter in dark mode,
+     so the bar reads as a distinct surface in both themes instead of
+     just darkening on top of the (already dark) page. Border/shadow live
+     as Tailwind utilities on the <nav> itself; only the parts Tailwind
+     can't express cleanly (nested color-mix, vendor-prefixed
+     backdrop-filter, the dark-mode override, and the @supports fallback)
+     stay here. */
+  .glass-nav {
+    background-color: color-mix(in oklch,
+        color-mix(in oklch, var(--color-background) 80%, black 20%) 65%,
+        transparent);
+    backdrop-filter: blur(6px) saturate(260%);
+    -webkit-backdrop-filter: blur(6px) saturate(260%);
+  }
+
+  .dark .glass-nav {
+    background-color: color-mix(in oklch,
+        color-mix(in oklch, var(--color-background) 55%, white 45%) 65%,
+        transparent);
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass-nav {
+      background-color: color-mix(in oklch, var(--color-background) 85%, black 15%);
+    }
+
+    .dark .glass-nav {
+      background-color: color-mix(in oklch, var(--color-background) 85%, white 15%);
+    }
+  }
+</style>
