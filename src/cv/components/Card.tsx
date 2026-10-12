@@ -7,16 +7,6 @@ type CardProps = {
   activeLanguage: LanguageType;
   item: CvItemType;
 };
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 
 export const CvItemCard: FunctionComponent<CardProps> = ({
   item,
@@ -26,24 +16,24 @@ export const CvItemCard: FunctionComponent<CardProps> = ({
   const tagLine = getTranslation(activeLanguage, item.tagLine);
 
   return (
-    <Card className="card scrollfade">
-      <CardHeader>
-        <CardTitle
-          className="text-balance font-soria"
+    <div className="card card-border scrollfade bg-base-100">
+      <div className="card-body">
+        <h3
+          className="card-title text-balance font-soria"
           data-lang="en"
           dangerouslySetInnerHTML={{
             __html: label,
           }}
         />
         {item.tagLine && (
-          <CardDescription
-            className="text-balance"
+          <p
+            className="text-balance text-base-content/70"
             dangerouslySetInnerHTML={{
               __html: tagLine,
             }}
           />
         )}
-        <CardAction className="flex flex-nowrap items-center gap-2 whitespace-nowrap text-xs text-muted-foreground">
+        <div className="flex flex-nowrap items-center gap-2 whitespace-nowrap text-xs text-base-content/60">
           {dayjs(item.time?.from).format("MMMM YYYY")}
           <ArrowRightFromLine size="14" className="inline-block" />
           {item.time?.to && (
@@ -53,9 +43,7 @@ export const CvItemCard: FunctionComponent<CardProps> = ({
               {dayjs(item.time.to).format("MMMM YYYY")}
             </Fragment>
           )}
-        </CardAction>
-      </CardHeader>
-      <CardContent>
+        </div>
         <ul className="list-inside list-disc">
           {item?.list?.map((listItem) => {
             const itemLabel = getTranslation(activeLanguage, listItem.label);
@@ -71,18 +59,16 @@ export const CvItemCard: FunctionComponent<CardProps> = ({
             );
           })}
         </ul>
-      </CardContent>
-      <CardFooter>
-        <ul className="flex flex-wrap gap-4">
+        <div className="card-actions flex-wrap gap-4">
           {item.tags?.map((tag) => (
-            <Badge
+            <span
               key={tag}
-              className="badge bg-secondary whitespace-nowrap p-2"
+              className="badge badge-secondary whitespace-nowrap p-2"
               dangerouslySetInnerHTML={{ __html: tag }}
             />
           ))}
-        </ul>
-      </CardFooter>
-    </Card>
+        </div>
+      </div>
+    </div>
   );
 };

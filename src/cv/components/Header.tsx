@@ -6,13 +6,6 @@ import {
 } from "react";
 import { Languages } from "lucide-react";
 import { Dropdown } from "./Dropdown";
-import { Button } from "@/components/ui/button";
-import { Menubar } from "@/components/ui/menubar";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 type HeaderProps = {
   filterOptions: TagType[];
@@ -31,12 +24,12 @@ export const Header: FunctionComponent<HeaderProps> = ({
     setActiveLanguage((prev) => (prev === "en" ? "de" : "en"));
 
   return (
-    <Menubar className="w-full flex flex-row items-center justify-between p-8 bg-background">
+    <div className="navbar w-full flex-row items-center justify-between bg-base-100 p-8">
       <div className="flex gap-8 overflow-clip py-4">
         <p className="font-display text-3xl text-trim-both animated-heading hide-if-no-scroll-timeline">
           Konstantin Kovar
         </p>
-        <p className="font-serif text-2xl animated-tagline hidden lg:block text-muted-foreground hide-if-no-scroll-timeline">
+        <p className="font-serif text-2xl animated-tagline hidden lg:block text-base-content/60 hide-if-no-scroll-timeline">
           Curriculum Vitae
         </p>
       </div>
@@ -46,21 +39,17 @@ export const Header: FunctionComponent<HeaderProps> = ({
           setActiveFilters={setActiveFilters}
           options={filterOptions}
         />
-        <Tooltip>
-          <TooltipTrigger>
-            <Button
-              type="button"
-              variant="outline"
-              aria-label="Toggle between German and English"
-              data-side="bottom"
-              onClick={handleLanguageToggle}
-            >
-              <Languages />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>Toggle German/English</TooltipContent>
-        </Tooltip>
+        <div className="tooltip tooltip-bottom" data-tip="Toggle German/English">
+          <button
+            type="button"
+            className="btn btn-outline"
+            aria-label="Toggle between German and English"
+            onClick={handleLanguageToggle}
+          >
+            <Languages />
+          </button>
+        </div>
       </div>
-    </Menubar>
+    </div>
   );
 };

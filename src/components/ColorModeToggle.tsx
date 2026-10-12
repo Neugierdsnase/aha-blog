@@ -1,23 +1,7 @@
 import { Moon, Sun } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { useEffect, useState } from "react";
 
-export type ColorModeToggleProps = {
-  open?: boolean;
-  onOpenChange?: (open: boolean) => void;
-};
-
-export const ColorModeToggle = ({
-  open,
-  onOpenChange,
-}: ColorModeToggleProps = {}) => {
+export const ColorModeToggle = () => {
   const [theme, setThemeState] = useState<"theme-light" | "dark" | "system">(
     "theme-light",
   );
@@ -36,25 +20,37 @@ export const ColorModeToggle = ({
   }, [theme]);
 
   return (
-    <DropdownMenu open={open} onOpenChange={onOpenChange}>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="pointer-events-auto">
-          <Sun className="scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-          <Moon className="absolute scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setThemeState("theme-light")}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setThemeState("dark")}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setThemeState("system")}>
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className="dropdown dropdown-end">
+      <div
+        tabIndex={0}
+        role="button"
+        aria-label="Toggle theme"
+        className="btn btn-ghost btn-sm btn-square pointer-events-auto"
+      >
+        <Sun className="scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+        <Moon className="absolute scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+        <span className="sr-only">Toggle theme</span>
+      </div>
+      <ul
+        tabIndex={0}
+        className="menu dropdown-content menu-sm z-10 mt-2 w-36 bg-base-100 p-1.5 shadow-lg"
+      >
+        <li>
+          <button type="button" onClick={() => setThemeState("theme-light")}>
+            Light
+          </button>
+        </li>
+        <li>
+          <button type="button" onClick={() => setThemeState("dark")}>
+            Dark
+          </button>
+        </li>
+        <li>
+          <button type="button" onClick={() => setThemeState("system")}>
+            System
+          </button>
+        </li>
+      </ul>
+    </div>
   );
 };

@@ -5,13 +5,6 @@ import {
   type SetStateAction,
 } from "react";
 import { Check, Funnel } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
 
 type DropdownProps = {
   options: TagType[];
@@ -25,38 +18,36 @@ export const Dropdown: FunctionComponent<DropdownProps> = ({
   setActiveFilters,
 }) => {
   const handleFilterClick = (option: TagType) => {
-    setActiveFilters((prev) => {
-      if (prev.includes(option)) {
-        return prev.filter((o) => o !== option);
-      } else {
-        return [...prev, option];
-      }
-    });
+    setActiveFilters((prev) =>
+      prev.includes(option)
+        ? prev.filter((o) => o !== option)
+        : [...prev, option],
+    );
   };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline">
-          <Funnel />
-          Filter
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
+    <div className="dropdown">
+      <div tabIndex={0} role="button" className="btn btn-outline">
+        <Funnel />
+        Filter
+      </div>
+      <ul
+        tabIndex={0}
+        className="menu dropdown-content z-10 mt-2 w-48 bg-base-100 p-1.5 shadow-lg"
+      >
         {options.map((item) => {
           const isChecked = activeFilters.includes(item);
 
           return (
-            <DropdownMenuItem
-              key={item}
-              onClick={() => handleFilterClick(item)}
-            >
-              {isChecked && <Check />}
-              {item}
-            </DropdownMenuItem>
+            <li key={item}>
+              <button type="button" onClick={() => handleFilterClick(item)}>
+                {isChecked && <Check size={14} />}
+                {item}
+              </button>
+            </li>
           );
         })}
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </ul>
+    </div>
   );
 };

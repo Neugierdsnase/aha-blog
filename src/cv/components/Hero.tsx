@@ -1,4 +1,3 @@
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Cake, MapPin, Mail, Phone, Globe, UserRound } from "lucide-react";
 import type { FunctionComponent } from "react";
 import data, { getTranslation } from "../data";
@@ -75,10 +74,10 @@ export const Hero: FunctionComponent<HeroProps> = ({ activeLanguage }) => {
 
       <div className="scrollfade col-span-full lg:col-start-5 lg:col-span-8">
         <div className="flex flex-col gap-4">
-          <Card className="card bg-transparent border-0">
-            <CardHeader>
-              <CardTitle
-                className="font-soria"
+          <div className="card bg-transparent">
+            <div className="card-body">
+              <h2
+                className="card-title font-soria"
                 dangerouslySetInnerHTML={{
                   __html: getTranslation(activeLanguage, {
                     en: "At a Glance",
@@ -86,18 +85,18 @@ export const Hero: FunctionComponent<HeroProps> = ({ activeLanguage }) => {
                   }),
                 }}
               />
-            </CardHeader>
-            <CardContent
-              dangerouslySetInnerHTML={{
-                __html: getTranslation(activeLanguage, data.overviewText),
-              }}
-            />
-          </Card>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: getTranslation(activeLanguage, data.overviewText),
+                }}
+              />
+            </div>
+          </div>
         </div>
-        <Card className="card lg:col-start-5 lg:col-span-8 bg-transparent border-0">
-          <CardHeader>
-            <CardTitle
-              className="font-soria"
+        <div className="card lg:col-start-5 lg:col-span-8 bg-transparent">
+          <div className="card-body">
+            <h2
+              className="card-title font-soria"
               dangerouslySetInnerHTML={{
                 __html: getTranslation(activeLanguage, {
                   en: "About Me",
@@ -105,13 +104,13 @@ export const Hero: FunctionComponent<HeroProps> = ({ activeLanguage }) => {
                 }),
               }}
             />
-          </CardHeader>
-          <CardContent
-            dangerouslySetInnerHTML={{
-              __html: getTranslation(activeLanguage, data.introText),
-            }}
-          />
-        </Card>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: getTranslation(activeLanguage, data.introText),
+              }}
+            />
+          </div>
+        </div>
       </div>
     </>
   );
