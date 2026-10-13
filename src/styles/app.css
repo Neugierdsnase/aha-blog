@@ -2,19 +2,40 @@
 @plugin "daisyui" {
   themes: false;
 }
-
-@custom-variant dark (&:is(.dark *));
+@plugin "daisyui/theme" {
+  default: true;
+  color-scheme: "light";
+  --color-base-100: #201003;
+  --color-base-200: #251304;
+  --color-base-300: #2e1705;
+  --color-base-content: #f3f6f6;
+  --color-primary: #d9cab3;
+  --color-primary-content: #130902;
+  --color-secondary: #515d43;
+  --color-secondary-content: #f3f6f6;
+  --color-accent: #612f74;
+  --color-accent-content: #f3f6f6;
+  --color-neutral: #120902;
+  --color-neutral-content: #f3f6f6;
+  --color-info: #9fd4e5;
+  --color-info-content: #130902;
+  --color-success: #75d1b3;
+  --color-success-content: #130902;
+  --color-warning: #f2b27d;
+  --color-warning-content: #130902;
+  --color-error: #7a0039;
+  --color-error-content: #f3f6f6;
+  --radius-selector: 0.25rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.25rem;
+  --size-selector: 0.3125rem;
+  --size-field: 0.3125rem;
+  --border: 2px;
+  --depth: 0;
+  --noise: 1;
+}
 
 @theme {
-  --color-night: #121417;
-  --color-raisin-black: #2c262c;
-  --color-lavender-blush: #ffebf0;
-  --color-misty-rose: #fbdeda;
-  --color-black-bean: #29000a;
-  --color-cherry-blossom-pink: #ffadbc;
-
-  --color-surface-high: var(--color-cherry-blossom-pink);
-
   --breakpoint-desktop: calc(760px + 480px);
 
   --font-old: "Tinos NF", serif;
@@ -58,52 +79,6 @@
   display: none;
 }
 
-/* Shared list-item card styles used by PostListItem and BookListItem */
-@layer components {
-  .list-card {
-    @apply relative px-6 py-5 bg-background text-foreground no-underline border border-foreground/10 overflow-hidden transition-all duration-500;
-    display: grid;
-    gap: 0;
-
-    &::before {
-      content: "";
-      @apply absolute inset-0 bg-linear-to-r from-surface-high/0 via-surface-high/10 to-surface-high/0 opacity-0 transition-opacity duration-500;
-    }
-
-    &:hover::before,
-    &:focus-visible::before {
-      @apply opacity-100;
-    }
-
-    &:hover,
-    &:focus-visible {
-      @apply pl-8;
-
-      & .list-card-ornament {
-        @apply opacity-100 left-2;
-      }
-    }
-
-    &:focus-visible {
-      @apply outline-2 -outline-offset-2 outline-foreground/30;
-    }
-  }
-
-  .list-card-ornament {
-    @apply absolute left-0 top-1/2 -translate-y-1/2 opacity-0 transition-all duration-500 text-surface-high text-sm;
-
-    &::before {
-      content: "✦";
-    }
-  }
-
-  /* Shared metadata row used by ArticleMeta and SyndicationLinks */
-  .meta-row {
-    @apply flex flex-wrap gap-4 mb-8 text-foreground-subtle;
-    font-size: 1.1rem;
-  }
-}
-
 @utility text-trim-* {
   text-box-trim: --value("none", "trim-both", "trim-start", "trim-end");
 }
@@ -140,34 +115,6 @@
   }
 }
 
-@keyframes opacityOut {
-  40% {
-    opacity: 1;
-  }
-
-  60% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes opacityIn {
-  0% {
-    opacity: 0;
-  }
-
-  40% {
-    opacity: 0;
-  }
-
-  80% {
-    opacity: 1;
-  }
-}
-
 @keyframes shiftUp {
   0% {
     transform: translateY(3.5rem);
@@ -181,19 +128,6 @@
 @layer base {
   :root {
     font-size: 16px;
-  }
-
-  body {
-    @apply bg-background;
-    /* Positioned ancestor for .page-backdrop (PageBackdrop.astro), so its
-       `position: absolute; inset: 0` spans the actual document height
-       instead of just one viewport — otherwise it hard-cuts on any page
-       taller than its own box, exposing flat background beneath it.
-       `min-height` floors this at one viewport for pages (e.g. the
-       homepage) whose visible content is `position: fixed`/`absolute`
-       and so contributes nothing to body's own in-flow height. */
-    position: relative;
-    min-height: 100lvh;
   }
 
   h1,
@@ -214,18 +148,6 @@
   }
 
   @layer components {
-    @media (prefers-reduced-motion: reduce) {
-      .hide-if-no-scroll-timeline {
-        display: none;
-      }
-    }
-
-    @supports not (animation-timeline: scroll()) {
-      .hide-if-no-scroll-timeline {
-        display: none;
-      }
-    }
-
     @media not print and (prefers-reduced-motion: no-preference) {
       @supports (animation-timeline: scroll()) {
         .scrollfade {
@@ -304,7 +226,7 @@
   }
 
   /* Remove staggered card offset */
-  main>.card:nth-child(even) {
+  main > .card:nth-child(even) {
     transform: none !important;
   }
 
@@ -359,7 +281,7 @@
   .card,
   article,
   aside,
-  main>* {
+  main > * {
     break-inside: avoid;
     page-break-inside: avoid;
   }
@@ -384,77 +306,10 @@
     column-gap: 1.5rem;
   }
 
-  main>.card {
+  main > .card {
     break-inside: avoid;
     page-break-inside: avoid;
   }
-}
-
-/* Blog's own palette. Theme switching is done by toggling the .dark class
-   on <html> (see BaseLayout.astro), not prefers-color-scheme, so
-   light-dark() doesn't apply here. daisyUI's component classes (.btn,
-   .card, .dropdown-content, .menu, .tooltip, …) are wired to this same
-   palette below instead of daisyUI's own built-in themes. */
-:root {
-  --surface: var(--color-lavender-blush);
-  --page-background: var(--color-misty-rose);
-  --page-foreground: var(--color-black-bean);
-  --foreground-subtle: #3a3b3b;
-  --danger: oklch(0.5594 0.19 25.8625);
-  --danger-content: oklch(1 0 0);
-
-  /* daisyUI structural tokens: flat and square, matching rounded-none
-     elsewhere on the site. */
-  --radius-selector: 0px;
-  --radius-field: 0px;
-  --radius-box: 0px;
-  --size-selector: 0.25rem;
-  --size-field: 0.25rem;
-  --border: 1px;
-  --depth: 0;
-  --noise: 0;
-}
-
-.dark {
-  --surface: var(--color-night);
-  --page-background: var(--color-raisin-black);
-  --page-foreground: var(--color-lavender-blush);
-  --foreground-subtle: #bdbbbb;
-  --danger: oklch(0.6591 0.153 22.1703);
-  --danger-content: oklch(1 0 0);
-}
-
-@theme inline {
-  --color-surface: var(--surface);
-  --color-foreground-subtle: var(--foreground-subtle);
-  --color-foreground: var(--page-foreground);
-  --color-background: var(--page-background);
-
-  /* daisyUI semantic tokens, derived from the same palette above so every
-     daisyUI component (btn, card, dropdown, menu, tooltip, navbar, badge,
-     join) follows the site's flat light/dark theme automatically. */
-  --color-base-100: var(--page-background);
-  --color-base-200: color-mix(in oklch, var(--page-background) 85%, var(--page-foreground) 15%);
-  --color-base-300: color-mix(in oklch, var(--page-background) 78%, var(--page-foreground) 22%);
-  --color-base-content: var(--page-foreground);
-
-  --color-primary: var(--color-surface-high);
-  --color-primary-content: var(--color-black-bean);
-  --color-secondary: color-mix(in oklch, var(--page-background) 80%, var(--page-foreground) 20%);
-  --color-secondary-content: var(--page-foreground);
-  --color-accent: var(--color-surface-high);
-  --color-accent-content: var(--color-black-bean);
-  --color-neutral: var(--page-foreground);
-  --color-neutral-content: var(--page-background);
-
-  --color-info: var(--color-surface-high);
-  --color-info-content: var(--color-black-bean);
-  --color-success: var(--color-surface-high);
-  --color-success-content: var(--color-black-bean);
-  --color-warning: var(--color-surface-high);
-  --color-warning-content: var(--color-black-bean);
-  --color-error: var(--danger);
-  --color-error-content: var(--danger-content);
 }
 
 /* ── Tufte web components ──────────────────────────────────────────────────
@@ -481,8 +336,8 @@ tufte-newthought:not(:defined) {
 }
 
 tufte-article {
-  --tufte-text-color: var(--color-foreground);
-  --tufte-background-color: var(--color-background);
+  --tufte-text-color: var(--color-base-content);
+  --tufte-background-color: var(--color-base-100);
   --tufte-font-family: var(--font-serif);
-  --tufte-blockquote-border-color: var(--color-foreground-subtle);
+  --tufte-blockquote-border-color: var(--color-neutral);
 }
