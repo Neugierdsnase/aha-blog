@@ -38,22 +38,6 @@
   /* 30px */
 }
 
-@utility clear-descenders {
-  text-shadow:
-    var(--color-background) 0px -1px 0.5px,
-    var(--color-background) 0px -1.25px 0.5px,
-    var(--color-background) 0px -1.75px 0.5px,
-    var(--color-background) 0px -2px 0.5px,
-    var(--color-background) -4px 0px,
-    var(--color-background) -3px 0px,
-    var(--color-background) -2px 0px,
-    var(--color-background) -1px 0px,
-    var(--color-background) 1px 0px,
-    var(--color-background) 2px 0px,
-    var(--color-background) 3px 0px,
-    var(--color-background) 4.5px 0px;
-}
-
 @view-transition {
   navigation: auto;
 }
