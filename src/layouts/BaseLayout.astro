@@ -2,8 +2,7 @@
 import BaseHead from "../components/BaseHead.astro";
 import { GOATCOUNTER_URL, NAV_PAGES } from "../consts";
 import { HomeLink } from "@/components/HomeLink.tsx";
-import { NavMenu } from "@/components/NavMenu.tsx";
-import PageBackdrop from "../components/PageBackdrop.astro";
+import NavMenu from "@/components/NavMenu.astro";
 
 type Props = {
   lang: "de" | "en";
@@ -21,31 +20,7 @@ const { lang, title, description, type, pubDate, updatedDate, image, author } =
 const isIndex = Astro.url.pathname === "/";
 ---
 
-<script is:inline>
-  const getThemePreference = () => {
-    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-      return localStorage.getItem("theme");
-    }
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-  };
-  const isDark = getThemePreference() === "dark";
-  document.documentElement.classList[isDark ? "add" : "remove"]("dark");
-
-  if (typeof localStorage !== "undefined") {
-    const observer = new MutationObserver(() => {
-      const isDark = document.documentElement.classList.contains("dark");
-      localStorage.setItem("theme", isDark ? "dark" : "light");
-    });
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-  }
-</script>
-
-<html lang={lang}>
+<html lang={lang} class="dark">
   <BaseHead
     title={title + " vom Konstantin"}
     description={description}
@@ -57,22 +32,18 @@ const isIndex = Astro.url.pathname === "/";
     lang={lang}
   />
   <body>
-    <PageBackdrop />
+    <div id="nav-animation-anchor" class="absolute h-[50svh]"></div>
     <nav
-      class="glass-nav fixed inset-x-0 top-8 z-1001 flex items-center px-8 py-1"
+      id="main-nav"
+      class="fixed bg-background inset-x-8 rounded top-0 z-1001 flex items-center px-8 py-1"
       style="view-transition-name: --nav;"
       aria-label="Main navigation"
     >
       {!isIndex && <HomeLink />}
       <div class="ml-auto">
-        <NavMenu client:load items={NAV_PAGES} menuAriaLabel="Toggle navigation" />
+        <NavMenu items={NAV_PAGES} menuAriaLabel="Toggle navigation" />
       </div>
     </nav>
-
-    <!-- Matches the fixed nav's own height (top-8 offset + button row +
-         vertical margin) so page content starts clear of it instead of
-         sliding underneath. -->
-    <div class="h-18" aria-hidden="true"></div>
 
     <div
       id="body"
@@ -92,36 +63,54 @@ const isIndex = Astro.url.pathname === "/";
 </html>
 
 <style>
-  /* Frosted-glass background for the fixed nav bar; needs the
-     .page-backdrop gradient behind it to read as glass. Tinted a step
-     darker than the page in light mode and a step lighter in dark mode,
-     so the bar reads as a distinct surface in both themes instead of
-     just darkening on top of the (already dark) page. Border/shadow live
-     as Tailwind utilities on the <nav> itself; only the parts Tailwind
-     can't express cleanly (nested color-mix, vendor-prefixed
-     backdrop-filter, the dark-mode override, and the @supports fallback)
-     stay here. */
-  .glass-nav {
-    background-color: color-mix(in oklch,
-        color-mix(in oklch, var(--color-background) 80%, black 20%) 65%,
-        transparent);
-    backdrop-filter: blur(6px) saturate(260%);
-    -webkit-backdrop-filter: blur(6px) saturate(260%);
+  body {
+    timeline-scope: --nav-animationanchor;
   }
 
-  .dark .glass-nav {
-    background-color: color-mix(in oklch,
-        color-mix(in oklch, var(--color-background) 55%, white 45%) 65%,
-        transparent);
+  #nav-animation-anchor {
+    view-timeline: --nav-animationanchor;
   }
 
-  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .glass-nav {
-      background-color: color-mix(in oklch, var(--color-background) 85%, black 15%);
+  #body {
+    overflow-x: hidden;
+  }
+
+  @keyframes stickToTop {
+    0% {
+      border-radius: 4px;
+      top: 2rem;
+      left: 2rem;
+      right: 2rem;
     }
 
-    .dark .glass-nav {
-      background-color: color-mix(in oklch, var(--color-background) 85%, white 15%);
+    100% {
+      border-radius: 0px;
+      transform: translateY(0rem);
+      top: 0rem;
+      left: 0rem;
+      right: 0rem;
     }
+  }
+
+  @keyframes becomeOpaque {
+    0% {
+      background: color-mix(var(--color-background) 0%, rgba(0, 0, 0, 0) 100%);
+    }
+
+    50% {
+      background: color-mix(var(--color-background) 0%, rgba(0, 0, 0, 0) 100%);
+    }
+
+    55% {
+      background: color-mix(var(--color-background) 100%, rgba(0, 0, 0, 1) 0%);
+    }
+  }
+
+  #main-nav {
+    animation:
+      stickToTop forwards,
+      becomeOpaque forwards;
+    animation-timeline: --nav-animationanchor, --nav-animationanchor;
+    animation-range: exit, exit;
   }
 </style>

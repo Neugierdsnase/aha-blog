@@ -1,7 +1,5 @@
 import { Menu } from "lucide-react";
 
-import { ColorModeToggle } from "@/src/components/ColorModeToggle";
-
 export type NavMenuItem = {
   label: string;
   href: string;
@@ -49,6 +47,5 @@ export const NavMenu = ({
         </li>
       ))}
     </ul>
-    <ColorModeToggle />
   </div>
 );

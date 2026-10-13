@@ -1,0 +1,54 @@
+---
+import { Menu } from "lucide-react";
+
+export type NavMenuItem = {
+  label: string;
+  href: string;
+  ariaLabel?: string;
+};
+
+interface Props {
+  items: NavMenuItem[];
+  menuAriaLabel?: string;
+}
+
+const { items, menuAriaLabel = "Toggle navigation" } = Astro.props;
+---
+
+<div class="navbar w-auto gap-1 p-0">
+  <div class="dropdown dropdown-end desktop:hidden">
+    <div
+      tabindex="0"
+      role="button"
+      aria-label={menuAriaLabel}
+      class="btn btn-ghost btn-sm btn-square"
+    >
+      <Menu />
+    </div>
+    <ul
+      tabindex="0"
+      class="menu dropdown-content menu-sm z-10 mt-2 w-48 bg-base-100 p-1 shadow-lg"
+    >
+      {
+        items.map((item) => (
+          <li>
+            <a href={item.href} aria-label={item.ariaLabel ?? item.label}>
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <ul class="menu menu-horizontal hidden gap-1 p-0 desktop:flex">
+    {
+      items.map((item) => (
+        <li>
+          <a href={item.href} aria-label={item.ariaLabel ?? item.label}>
+            {item.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
