@@ -6,50 +6,84 @@ import { sanitizeViewTransitionName } from "../../utils/sanitizeViewTransitionNa
 type Props = BookPost;
 
 const { id, data } = Astro.props;
-const { title, subtitle, authors, releaseDate, genre, rating, modeOfConsumption } = data;
+const {
+  title,
+  subtitle,
+  authors,
+  releaseDate,
+  genre,
+  rating,
+  modeOfConsumption,
+} = data;
 const isAudiobook = modeOfConsumption === "audio";
 
 const transitionName = sanitizeViewTransitionName(title);
 const fullAuthors = authors.join(", ");
-const authorsDisplay = fullAuthors.length > 20 && authors.length > 1
-  ? `${authors[0]} et al.`
-  : fullAuthors;
+const authorsDisplay =
+  fullAuthors.length > 20 && authors.length > 1
+    ? `${authors[0]} et al.`
+    : fullAuthors;
 ---
 
-<li class="list-none">
-  <a href={"/book/" + id} class="list-card grid-cols-[1fr_auto] grid-rows-[auto_auto_auto_auto]">
-    <span class="list-card-ornament" aria-hidden="true"></span>
-    <span
-      class="font-display text-lg line-clamp-1 col-span-2"
-      style={`view-transition-name: --header-${transitionName};`}
-      >{title}</span
-    >
-    {subtitle && (
-      <span
-        class="font-galnoy italic text-sm text-foreground-subtle line-clamp-1 col-span-2 mt-0.5"
-        style={`view-transition-name: --subheader-${transitionName};`}
-        >{subtitle}</span
+<li class="card list-none bg-base-200">
+  <a href={"/book/" + id}>
+    <div class="card-title">
+      <p
+        class="font-display text-lg line-clamp-1"
+        style={`view-transition-name: --header-${transitionName};`}
       >
-    )}
-    <span class="text-xs text-foreground-subtle mt-2 flex items-center gap-2 overflow-hidden whitespace-nowrap text-ellipsis col-span-2">
-      <span class="font-serif" style={`view-transition-name: --author-${transitionName};`}>{authorsDisplay}</span>
-      <span class="text-surface-high text-[0.5em]" aria-hidden="true">&#xf0b8a;</span>
-      <span style={`view-transition-name: --release-date-${transitionName};`}>{releaseDate}</span>
-      {rating != null && (
-        <>
-          <span class="text-surface-high text-[0.5em]" aria-hidden="true">&#xf0b8a;</span>
-          <span class="font-old tabular-nums">{rating}/10</span>
-        </>
-      )}
-    </span>
-    {isAudiobook && (
-      <span class="text-xxs text-foreground-subtle/70 uppercase tracking-widest row-start-4 col-start-1 mt-1 self-end flex items-baseline gap-1" title="Hörbuch">
-        <span aria-hidden="true">󰋋</span>
-        <span class='text-foreground-subtle/40 '>nur</span>
-        <span>angehört</span>
-      </span>
-    )}
-    <span class="genre">{genreLabels[genre.primary] ?? genre.primary.replace("-", " ")}</span>
+        {title}
+      </p>
+      {
+        subtitle && (
+          <p
+            class="font-galnoy italic text-sm text-base-content line-clamp-1"
+            style={`view-transition-name: --subheader-${transitionName};`}
+          >
+            {subtitle}
+          </p>
+        )
+      }
+    </div>
+
+    <div class="card-content text-xs overflow-hidden">
+      <span
+        class="font-serif"
+        style={`view-transition-name: --author-${transitionName};`}
+        >{authorsDisplay}</span
+      >
+      <span class="text-surface-high text-[0.5em]" aria-hidden="true"
+        >&#xf0b8a;</span
+      >
+      <span style={`view-transition-name: --release-date-${transitionName};`}
+        >{releaseDate}</span
+      >
+      {
+        rating != null && (
+          <>
+            <span class="text-surface-high text-[0.5em]" aria-hidden="true">
+              &#xf0b8a;
+            </span>
+            <span class="font-old tabular-nums">{rating}/10</span>
+          </>
+        )
+      }
+      {
+        isAudiobook && (
+          <span
+            class="text-xxs text-base-content/70 uppercase tracking-widest row-start-4 col-start-1 mt-1 self-end flex items-baseline gap-1"
+            title="Hörbuch"
+          >
+            <span aria-hidden="true">󰋋</span>
+            <span class="text-base-content/40 ">nur</span>
+            <span>angehört</span>
+          </span>
+        )
+      }
+      <span class="genre"
+        >{genreLabels[genre.primary] ?? genre.primary.replace("-", " ")}</span
+      >
+    </div>
   </a>
 </li>
 
@@ -61,7 +95,7 @@ const authorsDisplay = fullAuthors.length > 20 && authors.length > 1
   }
 
   .genre {
-    @apply text-xxs text-foreground-subtle/70 uppercase tracking-widest
+    @apply text-xxs text-base-content/70 uppercase tracking-widest
       row-start-4 col-start-2 mt-1 self-end text-right;
     font-variant: small-caps;
   }

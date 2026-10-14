@@ -4,7 +4,6 @@
 }
 @plugin "daisyui/theme" {
   default: true;
-  color-scheme: "light";
   --color-base-100: #201003;
   --color-base-200: #251304;
   --color-base-300: #2e1705;

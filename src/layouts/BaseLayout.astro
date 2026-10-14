@@ -35,7 +35,7 @@ const isIndex = Astro.url.pathname === "/";
     <div id="nav-animation-anchor" class="absolute h-[50svh]"></div>
     <nav
       id="main-nav"
-      class="fixed bg-background inset-x-8 rounded top-0 z-1001 flex items-center px-8 py-1"
+      class="fixed inset-x-8 rounded top-0 z-1001 bg-base-100 flex items-center px-8 py-1"
       style="view-transition-name: --nav;"
       aria-label="Main navigation"
     >
@@ -94,15 +94,15 @@ const isIndex = Astro.url.pathname === "/";
 
   @keyframes becomeOpaque {
     0% {
-      background: color-mix(var(--color-background) 0%, rgba(0, 0, 0, 0) 100%);
+      background: color-mix(var(--color-base-100) 0%, rgba(0, 0, 0, 0) 100%);
     }
 
-    50% {
-      background: color-mix(var(--color-background) 0%, rgba(0, 0, 0, 0) 100%);
+    65% {
+      background: color-mix(var(--color-base-100) 0%, rgba(0, 0, 0, 0) 100%);
     }
 
-    55% {
-      background: color-mix(var(--color-background) 100%, rgba(0, 0, 0, 1) 0%);
+    69% {
+      background: color-mix(var(--color-base-100) 100%, rgba(0, 0, 0, 1) 0%);
     }
   }
 
