@@ -39,8 +39,8 @@ const books = (await getCollection("book"))
         position: fixed;
         opacity: 0;
         animation: becomeInvisible backwards;
-        animation-timeline: scroll(root block), scroll(root block);
-        animation-range: 0px 160px;
+        animation-timeline: --nav-animationanchor, --nav-animationanchor;
+        animation-range: exit;
       }
     }
   }
