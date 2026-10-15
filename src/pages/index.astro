@@ -30,6 +30,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <Card>
         <div slot="front">
           <p>Jüngst gelesen</p>
+          <div class="absolute book inset-0"></div>
         </div>
 
         <p slot="back" class="text-xs">
@@ -84,14 +85,26 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     -webkit-mask-repeat: no-repeat;
   }
 
+  .book {
+    background-color: var(--color-base-300);
+    mask-image: url("/img/book.min.svg");
+    mask-position: bottom right;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    -webkit-mask-image: url("/img/book.min.svg");
+    -webkit-mask-position: bottom right;
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+  }
+
   @media not print and (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: scroll()) {
       h1 {
         position: fixed;
         opacity: 0;
         animation: becomeInvisible backwards;
-        animation-timeline: --nav-animationanchor, --nav-animationanchor;
-        animation-range: exit;
+        animation-timeline: scroll(root block), scroll(root block);
+        animation-range: 0px 160px;
       }
     }
 
