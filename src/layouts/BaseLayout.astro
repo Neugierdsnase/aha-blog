@@ -32,7 +32,6 @@ const isIndex = Astro.url.pathname === "/";
     lang={lang}
   />
   <body>
-    <div id="nav-animation-anchor" class="absolute h-[44svh]"></div>
     <nav
       id="main-nav"
       class="fixed inset-x-8 rounded top-0 z-1001 bg-red-100 flex items-center px-8 py-1"
@@ -63,14 +62,6 @@ const isIndex = Astro.url.pathname === "/";
 </html>
 
 <style>
-  body {
-    timeline-scope: --nav-animationanchor;
-  }
-
-  #nav-animation-anchor {
-    view-timeline: --nav-animationanchor;
-  }
-
   #body {
     overflow-x: hidden;
   }
@@ -110,7 +101,9 @@ const isIndex = Astro.url.pathname === "/";
     animation:
       stickToTop forwards,
       becomeOpaque forwards;
-    animation-timeline: --nav-animationanchor, --nav-animationanchor;
-    animation-range: exit, exit;
+    animation-timeline: scroll(root block), scroll(root block);
+    animation-range:
+      0px 160px,
+      0px 160px;
   }
 </style>
