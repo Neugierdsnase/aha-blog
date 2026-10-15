@@ -16,43 +16,32 @@ const books = (await getCollection("book"))
   description="Die Bücher, die ich zuletzt gelesen habe."
   ><div
     id="hero"
-    class="relative grid grid-cols-1 grid-rows-1 place-items-center w-full overflow-clip h-[33svh]"
+    class="relative grid grid-cols-1 grid-rows-1 place-items-center w-full overflow-clip h-[44svh] max-w-screen"
   >
-    <h1 class="fixed z-10 col-start-1 row-start-1 text-5xl opacity-0">
-      Jüngst gelesen
-    </h1>
-    <div id="hero-image" class="absolute inset-0 z-20"></div>
+    <h1 class="z-10 text-5xl">Jüngst gelesen</h1>
+    <div id="hero-image" class="absolute inset-0 z-20 translate-y-12"></div>
   </div>
+  <div class="relative w-full z-20 h-22 bg-base-100"></div>
 
-  <ul class="p-4 desktop:p-0 grid grid-cols-1 gap-8 mt-22">
+  <ul class="p-4 desktop:p-0 grid grid-cols-1 gap-8">
     {books.map((book) => <BookListItem {...book} />)}
   </ul>
 </BaseLayout>
 
 <style>
-  @keyframes becomeInvisible {
-    0% {
-      opacity: 1;
-    }
-    24% {
-      opacity: 1;
-    }
-    25% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
-
   #hero-image {
-    background: url("/img/books-hero.png") center / cover no-repeat;
-    filter: sepia(80%);
+    background: url("/img/bookshelf.svg") center bottom / contain no-repeat;
   }
 
-  h1 {
-    animation: becomeInvisible backwards;
-    animation-timeline: --nav-animationanchor, --nav-animationanchor;
-    animation-range: exit;
+  @media not print and (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: scroll()) {
+      h1 {
+        position: fixed;
+        opacity: 0;
+        animation: becomeInvisible backwards;
+        animation-timeline: --nav-animationanchor, --nav-animationanchor;
+        animation-range: exit;
+      }
+    }
   }
 </style>

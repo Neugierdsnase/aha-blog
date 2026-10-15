@@ -3,6 +3,7 @@ import type { CvItemType, LanguageType } from "../types";
 import dayjs from "dayjs";
 import { ArrowRightFromLine, ArrowRightToLine } from "lucide-react";
 import { Fragment, type FunctionComponent } from "react";
+
 type CardProps = {
   activeLanguage: LanguageType;
   item: CvItemType;

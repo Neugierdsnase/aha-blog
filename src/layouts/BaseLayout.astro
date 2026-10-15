@@ -32,10 +32,10 @@ const isIndex = Astro.url.pathname === "/";
     lang={lang}
   />
   <body>
-    <div id="nav-animation-anchor" class="absolute h-[50svh]"></div>
+    <div id="nav-animation-anchor" class="absolute h-[44svh]"></div>
     <nav
       id="main-nav"
-      class="fixed inset-x-8 rounded top-0 z-1001 bg-base-100 flex items-center px-8 py-1"
+      class="fixed inset-x-8 rounded top-0 z-1001 bg-red-100 flex items-center px-8 py-1"
       style="view-transition-name: --nav;"
       aria-label="Main navigation"
     >
@@ -47,7 +47,7 @@ const isIndex = Astro.url.pathname === "/";
 
     <div
       id="body"
-      class="max-w-full p-2 desktop:p-8 w-full desktop:flex desktop:gap-12"
+      class="max-w-full desktop:p-8 w-full desktop:flex desktop:gap-12"
     >
       <main class="min-w-0 flex-1">
         <slot />
@@ -97,11 +97,11 @@ const isIndex = Astro.url.pathname === "/";
       background: color-mix(var(--color-base-100) 0%, rgba(0, 0, 0, 0) 100%);
     }
 
-    65% {
+    95% {
       background: color-mix(var(--color-base-100) 0%, rgba(0, 0, 0, 0) 100%);
     }
 
-    69% {
+    98% {
       background: color-mix(var(--color-base-100) 100%, rgba(0, 0, 0, 1) 0%);
     }
   }

@@ -69,6 +69,21 @@
   }
 }
 
+@keyframes becomeInvisible {
+  0% {
+    opacity: 1;
+  }
+  54% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 ::view-transition-new(--article-content) {
   animation: fade-in-content 0.6s ease 0.15s both;
 }
