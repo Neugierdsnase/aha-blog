@@ -6,9 +6,6 @@
     "useDefineForClassFields": false,
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./*"]
-    }
+    "baseUrl": "."
   }
 }
