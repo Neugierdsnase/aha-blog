@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import {
   createQuoteQueue,
   durationForQuote,
@@ -69,7 +69,11 @@ describe("pickFontSizeRem", () => {
 });
 
 describe("durationForQuote", () => {
-  const quotes = [quote("short"), quote("a".repeat(50)), quote("mid-length text here")];
+  const quotes = [
+    quote("short"),
+    quote("a".repeat(50)),
+    quote("mid-length text here"),
+  ];
 
   it("maps the shortest quote to the minimum duration", () => {
     expect(durationForQuote(quotes[0], quotes, 10, 20)).toBe(10);
@@ -179,7 +183,9 @@ describe("fitLeftPercent", () => {
       const leftPercent = fitLeftPercent(fieldWidth, textWidth, marginPx);
       const leftPx = (leftPercent / 100) * fieldWidth;
       expect(leftPx).toBeGreaterThanOrEqual(marginPx - 1e-9);
-      expect(leftPx).toBeLessThanOrEqual(fieldWidth - textWidth - marginPx + 1e-9);
+      expect(leftPx).toBeLessThanOrEqual(
+        fieldWidth - textWidth - marginPx + 1e-9,
+      );
     }
   });
 

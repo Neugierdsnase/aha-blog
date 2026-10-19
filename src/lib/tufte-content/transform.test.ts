@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import { transformTufteContent } from "./transform";
 
 /**
@@ -140,7 +140,9 @@ describe("transformTufteContent", () => {
         `<a href="#user-content-fnref-html-body" data-footnote-backref class="data-footnote-backref">↩</a>` +
         `</li></ol></section>`;
       const out = transformTufteContent(input);
-      expect(out).toContain('<tufte-sidenote note-id="user-content-fn-html-body">');
+      expect(out).toContain(
+        '<tufte-sidenote note-id="user-content-fn-html-body">',
+      );
       expect(out).toContain("<span>Raw HTML body</span>");
       expect(out).not.toContain("data-footnotes");
       expect(out).not.toContain("↩");
@@ -148,7 +150,9 @@ describe("transformTufteContent", () => {
     });
 
     it("leaves a plain <sup> that is not a footnote reference alone", () => {
-      const out = transformTufteContent("<tufte-paragraph>x<sup>2</sup></tufte-paragraph>");
+      const out = transformTufteContent(
+        "<tufte-paragraph>x<sup>2</sup></tufte-paragraph>",
+      );
       expect(out).toContain("<sup>2</sup>");
     });
   });

@@ -5,7 +5,6 @@
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
     "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    "baseUrl": "."
+    "jsxImportSource": "react"
   }
 }
