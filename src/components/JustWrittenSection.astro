@@ -1,0 +1,40 @@
+---
+import Card from "./Card/Card.astro";
+---
+
+<section id="just-written" class="w-full p-4">
+  <div class="w-full hidden desktop:block">
+    <Card>
+      <div slot="front">
+        <div class="absolute feathers inset-0"></div>
+        <p class="relative text-base-content font-lg">Jüngst geschrieben</p>
+      </div>
+
+      <p slot="back" class="text-xs">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum
+        repellat velit quae suscipit c.
+      </p>
+    </Card>
+  </div>
+
+  <div class="relative h-54 overflow-hidden desktop:hidden">
+    <h2 class="text-base-content text-xl text-left mb-4">Jüngst geschrieben</h2>
+    <div class="feathers float-right size-36"></div>
+  </div>
+</section>
+
+<style>
+  section {
+    animation: fadeIn backwards;
+    animation-timeline: view();
+    animation-range: entry;
+  }
+
+  .feathers {
+    background-color: var(--color-primary);
+    mask-image: url("/img/feather.svg");
+    mask-position: bottom right;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+  }
+</style>

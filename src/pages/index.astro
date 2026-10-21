@@ -1,7 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import Card from "../components/Card/Card.astro";
-import FeatherSVG from "../components/FeatherSVG.astro";
+import JustReadSection from "../components/JustReadSection.astro";
+import JustWrittenSection from "../components/JustWrittenSection.astro";
+import IntroductionSection from "../components/IntroductionSection.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
@@ -14,47 +15,25 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <h1 class="z-10 text-5xl">Konstantin Kovar</h1>
     <div
       aria-hidden="true"
-      class="hero-image absolute inset-x-0 bottom-0 top-1/3 z-0"
+      class="hero-image absolute inset-x-0 bottom-0 top-[round(33%,28px)] z-0"
     >
     </div>
     <div
-      class="hero-image absolute inset-x-0 bottom-0 top-[calc(33%+281px)] z-20"
+      class="hero-image-bottom absolute inset-x-0 bottom-0 h-7 z-20"
     >
     </div>
   </div>
 
   <div class="relative h-22 bg-base-100 z-20"></div>
 
-  <ul class="grid grid-cols-1 gap-8 p-12">
-    <li>
-      <Card>
-        <div slot="front">
-          <p>Jüngst gelesen</p>
-          <div class="absolute book inset-0"></div>
-        </div>
+<IntroductionSection />
 
-        <p slot="back" class="text-xs">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum
-          repellat velit quae suscipit c.
-        </p>
-      </Card>
-    </li>
-    <li>
-      <Card>
-        <div slot="front">
-          <p>Jüngst geschrieben</p>
-          <div class="absolute feathers inset-0">
-            <FeatherSVG />
-          </div>
-        </div>
+<div class="flex flex-col gap-8 w-full items-center py-8">
+<JustReadSection />
 
-        <p slot="back" class="text-xs">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum
-          repellat velit quae suscipit c.
-        </p>
-      </Card>
-    </li>
-  </ul>
+<JustWrittenSection />
+</div>
+
 </BaseLayout>
 
 <style>
@@ -73,28 +52,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
   }
 
-  .feathers {
-    background-color: var(--color-base-300);
-    mask-image: url("/img/feathers.min.svg");
-    mask-position: bottom right;
-    mask-size: contain;
-    mask-repeat: no-repeat;
-    -webkit-mask-image: url("/img/feathers.min.svg");
-    -webkit-mask-position: bottom right;
-    -webkit-mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-  }
-
-  .book {
-    background-color: var(--color-base-300);
-    mask-image: url("/img/book.min.svg");
-    mask-position: bottom right;
-    mask-size: contain;
-    mask-repeat: no-repeat;
-    -webkit-mask-image: url("/img/book.min.svg");
-    -webkit-mask-position: bottom right;
-    -webkit-mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
+  .hero-image-bottom {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='28' viewBox='0 0 56 28'%3E%3Cpath fill='%23201003' d='M0 28.008V14c.67 0 1.185.041 1.99.113a18 18 0 0 1 1.635.178c.191-.298.929-1.634 3.247-4.505L8.17 8.23c.94-.95 1.96-1.83 3.03-2.63.25-.253 1.472-1.018 1.65-1.15 1.12-.72 2.3-1.37 3.53-1.93.178-.066 1.671-.7 1.89-.78 1.3-.48 2.63-.87 4-1.15C22.16.39 26 .07 26 .07a28.4 28.4 0 0 1 4 0l3.72.52c1.38.28 2.72.67 4.01 1.15.13.092 1.558.56 1.89.78 1.23.56 2.41 1.2 3.54 1.93.326.192 1.487.978 1.64 1.15 1.07.8 2.09 1.68 3.03 2.63.212.217 1.315 1.4 1.4 1.51 1.03 1.2 2.368 3.086 3.188 4.446L54 14.07q1-.07 2-.07v13.985z'/%3E%3C/svg%3E");
   }
 
   @media not print and (prefers-reduced-motion: no-preference) {
@@ -107,38 +66,4 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         animation-range: exit;
       }
     }
-
-  @keyframes fadeInEven {
-    0% {
-      scale: 0.96;
-      opacity: 0;
-      transform: translate(-100px, 5px);
-    }
-
-    100% {
-      scale: 1;
-      opacity: 1;
-      transform: translate(0px, 0px);
-    }
-  }
-
-  @keyframes fadeIn {
-    0% {
-      scale: 0.96;
-      opacity: 0;
-      transform: translateY(5px);
-    }
-
-    100% {
-      scale: 1;
-      opacity: 1;
-      transform: translateY(0px);
-    }
-  }
-
-  li {
-    animation: fadeIn backwards;
-    animation-timeline: view();
-    animation-range: entry;
-  }
 </style>

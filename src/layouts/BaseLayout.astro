@@ -35,7 +35,7 @@ const isIndex = Astro.url.pathname === "/";
     <div id="nav-animation-anchor" class="absolute h-[44svh]"></div>
     <nav
       id="main-nav"
-      class="fixed inset-x-8 rounded top-0 z-1001 bg-red-100 flex items-center px-8 py-1"
+      class="fixed inset-x-8 rounded top-0 z-1001 flex items-center px-8 py-1 bg-base-100"
       style="view-transition-name: --nav;"
       aria-label="Main navigation"
     >
@@ -45,10 +45,7 @@ const isIndex = Astro.url.pathname === "/";
       </div>
     </nav>
 
-    <div
-      id="body"
-      class="max-w-full desktop:p-8 w-full desktop:flex desktop:gap-12"
-    >
+    <div id="body" class="max-w-full w-full desktop:flex desktop:gap-12">
       <main class="min-w-0 flex-1">
         <slot />
       </main>
@@ -77,14 +74,12 @@ const isIndex = Astro.url.pathname === "/";
 
   @keyframes stickToTop {
     0% {
-      border-radius: 4px;
       top: 2rem;
       left: 2rem;
       right: 2rem;
     }
 
     100% {
-      border-radius: 0px;
       transform: translateY(0rem);
       top: 0rem;
       left: 0rem;
