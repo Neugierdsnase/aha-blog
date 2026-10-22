@@ -93,6 +93,10 @@
   display: none;
 }
 
+@utility content-container {
+  @apply w-11/12 desktop:w-300 mx-auto;
+}
+
 @utility text-trim-* {
   text-box-trim: --value("none", "trim-both", "trim-start", "trim-end");
 }
@@ -223,10 +227,11 @@
 
   /* Flatten color tokens to black-on-white */
   * {
-    --color-surface: white;
-    --color-background: white;
+    --color-base-100: white;
+    --color-base-200: white;
+    --color-base-300: white;
     --color-foreground: black;
-    --color-foreground-subtle: #444;
+    --color-foreground-subtle: #222222;
     background-color: transparent !important;
     color: black !important;
     box-shadow: none !important;
