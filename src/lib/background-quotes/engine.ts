@@ -12,10 +12,7 @@ export interface Quote {
   readonly author: string;
 }
 
-export const FONTS = [
-  "font-old",
-  "font-serif",
-] as const;
+export const FONTS = ["font-old", "font-serif"] as const;
 export const MIN_SIZE_REM = 1.25;
 export const MAX_SIZE_REM = 1.6;
 export const MIN_DURATION_S = 14;
@@ -110,7 +107,11 @@ export interface LaneTopsOptions {
  */
 export function laneTops(
   count: number,
-  { topMin = TOP_MIN, topMax = TOP_MAX, centerGap = CENTER_GAP }: LaneTopsOptions = {},
+  {
+    topMin = TOP_MIN,
+    topMax = TOP_MAX,
+    centerGap = CENTER_GAP,
+  }: LaneTopsOptions = {},
 ): number[] {
   if (count === 1) return [topMin];
 

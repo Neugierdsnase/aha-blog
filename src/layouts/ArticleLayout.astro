@@ -30,15 +30,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   updatedDate={updatedDate}
   image={heroImage}
 >
-  {
-    isBlog ? (
-      <BlogPostArticle {...props} url={canonicalURL.toString()}>
-        <slot />
-      </BlogPostArticle>
-    ) : (
-      <BookReviewArticle {...props} url={canonicalURL.toString()}>
-        <slot />
-      </BookReviewArticle>
-    )
-  }
+  {isBlog ? (
+    <BlogPostArticle {...props} url={canonicalURL.toString()}>
+      <slot />
+    </BlogPostArticle>
+  ) : (
+    <BookReviewArticle {...props} url={canonicalURL.toString()}>
+      <slot />
+    </BookReviewArticle>
+  )}
 </BaseLayout>

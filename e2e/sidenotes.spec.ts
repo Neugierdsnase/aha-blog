@@ -12,7 +12,7 @@ test("GFM footnotes are transformed to tufte-sidenote components", async ({
 
   // Wait for the Tufte web components to be defined
   await page.waitForFunction(
-    () => customElements.get("tufte-sidenote") !== undefined
+    () => customElements.get("tufte-sidenote") !== undefined,
   );
 
   // Transformation should create tufte-sidenote elements
@@ -26,7 +26,7 @@ test("GFM footnotes are transformed to tufte-sidenote components", async ({
   // Original GFM footnote markup should be removed
   await expect(page.locator("section.footnotes")).toHaveCount(0);
   await expect(
-    page.locator('sup:has(a[href^="#user-content-fn-"])')
+    page.locator('sup:has(a[href^="#user-content-fn-"])'),
   ).toHaveCount(0);
 });
 

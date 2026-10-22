@@ -11,20 +11,16 @@ const { updatedDate, url } = Astro.props;
 
 <!-- Microformat metadata -->
 <div class="article-meta meta-row">
-  {
-    updatedDate && (
-      <time class="dt-updated" datetime={updatedDate.toISOString()}>
-        (updated: <FormattedDate date={updatedDate} />)
-      </time>
-    )
-  }
-  {
-    url && (
-      <a class="u-url" href={url} style="display:none;">
-        {url}
-      </a>
-    )
-  }
+  {updatedDate && (
+    <time class="dt-updated" datetime={updatedDate.toISOString()}>
+      (updated: <FormattedDate date={updatedDate} />)
+    </time>
+  )}
+  {url && (
+    <a class="u-url" href={url} style="display:none;">
+      {url}
+    </a>
+  )}
 </div>
 
 <style>

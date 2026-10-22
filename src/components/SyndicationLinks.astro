@@ -6,18 +6,16 @@ interface Props {
 const { syndication } = Astro.props;
 ---
 
-{
-  syndication && syndication.length > 0 && (
-    <div class="syndication-links meta-row">
-      <span>Also on:</span>
-      {syndication.map((link) => (
-        <a href={link.url} class="u-syndication" rel="syndication">
-          {link.name}
-        </a>
-      ))}
-    </div>
-  )
-}
+{syndication && syndication.length > 0 && (
+  <div class="syndication-links meta-row">
+    <span>Also on:</span>
+    {syndication.map((link) => (
+      <a href={link.url} class="u-syndication" rel="syndication">
+        {link.name}
+      </a>
+    ))}
+  </div>
+)}
 
 <style>
   .syndication-links {

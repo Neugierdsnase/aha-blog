@@ -1,4 +1,4 @@
-import { css } from 'lit';
+import { css } from "lit";
 
 /**
  * Shared Tufte CSS styles for web components.
@@ -32,7 +32,12 @@ export const baseStyles = css`
   :host {
     font-family: var(
       --tufte-font-family,
-      Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif
+      Palatino,
+      "Palatino Linotype",
+      "Palatino LT STD",
+      "Book Antiqua",
+      Georgia,
+      serif
     );
     font-size: var(--tufte-font-size, 15px);
     color: var(--tufte-text-color, #111);

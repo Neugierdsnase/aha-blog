@@ -1,6 +1,6 @@
-import { LitElement, html, css } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import { baseStyles, linkStyles } from './styles.js';
+import { LitElement, html, css } from "lit";
+import { customElement } from "lit/decorators.js";
+import { baseStyles, linkStyles } from "./styles.js";
 
 /**
  * Tufte Paragraph component - body text with Tufte typography.
@@ -24,7 +24,7 @@ import { baseStyles, linkStyles } from './styles.js';
  * </tufte-article>
  * ```
  */
-@customElement('tufte-paragraph')
+@customElement("tufte-paragraph")
 export class TufteParagraph extends LitElement {
   static styles = [
     baseStyles,
@@ -75,6 +75,6 @@ export class TufteParagraph extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'tufte-paragraph': TufteParagraph;
+    "tufte-paragraph": TufteParagraph;
   }
 }

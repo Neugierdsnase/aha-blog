@@ -18,7 +18,13 @@ const transitionName = sanitizeViewTransitionName(title);
   >
     {title}
   </tufte-h1>
-  {subtitle && <tufte-subtitle style=`view-transition-name: --subheader-${transitionName};`>{subtitle}</tufte-subtitle>}
+  {subtitle && (
+    <tufte-subtitle
+      style=`view-transition-name: --subheader-${transitionName};`
+    >
+      {subtitle}
+    </tufte-subtitle>
+  )}
 </div>
 
 <style>

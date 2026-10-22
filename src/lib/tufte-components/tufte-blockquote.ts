@@ -1,6 +1,6 @@
-import { LitElement, html, css } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import { baseStyles } from './styles.js';
+import { LitElement, html, css } from "lit";
+import { customElement } from "lit/decorators.js";
+import { baseStyles } from "./styles.js";
 
 /**
  * Tufte Blockquote component - quoted passages with Tufte typography.
@@ -30,7 +30,7 @@ import { baseStyles } from './styles.js';
  * </tufte-blockquote>
  * ```
  */
-@customElement('tufte-blockquote')
+@customElement("tufte-blockquote")
 export class TufteBlockquote extends LitElement {
   static styles = [
     baseStyles,
@@ -43,7 +43,8 @@ export class TufteBlockquote extends LitElement {
         margin: 2rem 1rem;
         padding-left: 1rem;
         font-size: 1.4rem;
-        border-left: 2px solid var(--tufte-blockquote-border-color, currentColor);
+        border-left: 2px solid
+          var(--tufte-blockquote-border-color, currentColor);
       }
 
       ::slotted(tufte-paragraph) {
@@ -77,6 +78,6 @@ export class TufteBlockquote extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'tufte-blockquote': TufteBlockquote;
+    "tufte-blockquote": TufteBlockquote;
   }
 }

@@ -1,6 +1,6 @@
-import { LitElement, html, css } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
-import { baseStyles, sidenoteStyles } from './styles.js';
+import { LitElement, html, css } from "lit";
+import { customElement, property, state } from "lit/decorators.js";
+import { baseStyles, sidenoteStyles } from "./styles.js";
 
 /**
  * Tufte Margin Note component - unnumbered notes in the margin.
@@ -14,7 +14,7 @@ import { baseStyles, sidenoteStyles } from './styles.js';
  * </p>
  * ```
  */
-@customElement('tufte-marginnote')
+@customElement("tufte-marginnote")
 export class TufteMarginnote extends LitElement {
   static styles = [
     baseStyles,
@@ -34,16 +34,16 @@ export class TufteMarginnote extends LitElement {
    * Unique ID for this margin note (auto-generated if not provided)
    */
   @property({ type: String })
-  noteId = '';
+  noteId = "";
 
   /**
    * Symbol to use for toggle (default: ⊕)
    */
   @property({ type: String })
-  symbol = '⊕';
+  symbol = "⊕";
 
   @state()
-  private _generatedId = '';
+  private _generatedId = "";
 
   connectedCallback() {
     super.connectedCallback();
@@ -59,8 +59,14 @@ export class TufteMarginnote extends LitElement {
   render() {
     return html`
       <span class="marginnote-wrapper">
-        <label for="${this.noteIdentifier}" class="margin-toggle">${this.symbol}</label>
-        <input type="checkbox" id="${this.noteIdentifier}" class="margin-toggle" />
+        <label for="${this.noteIdentifier}" class="margin-toggle"
+          >${this.symbol}</label
+        >
+        <input
+          type="checkbox"
+          id="${this.noteIdentifier}"
+          class="margin-toggle"
+        />
         <span class="marginnote"><slot></slot></span>
       </span>
     `;
@@ -69,6 +75,6 @@ export class TufteMarginnote extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'tufte-marginnote': TufteMarginnote;
+    "tufte-marginnote": TufteMarginnote;
   }
 }

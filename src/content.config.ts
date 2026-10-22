@@ -30,7 +30,7 @@ const blog = defineCollection({
         z.object({
           name: z.string(), // e.g., "Mastodon", "Twitter", etc.
           url: z.string().url(),
-        })
+        }),
       )
       .optional(),
   }),

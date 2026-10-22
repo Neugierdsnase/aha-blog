@@ -14,7 +14,10 @@ export async function GET(context: APIContext) {
     pubDate: post.data.pubDate,
     link: `/blog/${post.id}/`,
     author: "Konstantin",
-    categories: [post.data.lang, ...(post.data.featured ? ["featured"] : [])].filter(Boolean),
+    categories: [
+      post.data.lang,
+      ...(post.data.featured ? ["featured"] : []),
+    ].filter(Boolean),
     customData: `<language>${post.data.lang}</language>`,
   }));
 

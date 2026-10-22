@@ -5,15 +5,8 @@ import BookHeading from "./BookHeading.astro";
 
 type Props = CollectionEntry<"book">["data"] & ArticleLinkProps;
 
-const {
-  title,
-  subtitle,
-  authors,
-  releaseDate,
-  finishedDate,
-  author,
-  url,
-} = Astro.props;
+const { title, subtitle, authors, releaseDate, finishedDate, author, url } =
+  Astro.props;
 ---
 
 <Article date={finishedDate} {author} {url}>

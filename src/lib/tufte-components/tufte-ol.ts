@@ -1,6 +1,6 @@
-import { LitElement, html, css } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import { baseStyles } from './styles.js';
+import { LitElement, html, css } from "lit";
+import { customElement } from "lit/decorators.js";
+import { baseStyles } from "./styles.js";
 
 /**
  * Tufte ordered list - Tufte typography for numbered lists.
@@ -24,7 +24,7 @@ import { baseStyles } from './styles.js';
  * </tufte-ol>
  * ```
  */
-@customElement('tufte-ol')
+@customElement("tufte-ol")
 export class TufteOrderedList extends LitElement {
   static styles = [
     baseStyles,
@@ -52,12 +52,14 @@ export class TufteOrderedList extends LitElement {
   ];
 
   render() {
-    return html`<ol><slot></slot></ol>`;
+    return html`<ol>
+      <slot></slot>
+    </ol>`;
   }
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'tufte-ol': TufteOrderedList;
+    "tufte-ol": TufteOrderedList;
   }
 }

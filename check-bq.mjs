@@ -9,6 +9,8 @@ await p.goto("http://localhost:4321/test-content/sidenotes-test", {
 await p.addStyleTag({
   content: "astro-dev-toolbar { display: none !important; }",
 });
-await p.getByTestId("article-container").screenshot({ path: "check-hidden.png" });
+await p
+  .getByTestId("article-container")
+  .screenshot({ path: "check-hidden.png" });
 console.log("wrote check-hidden.png");
 await b.close();

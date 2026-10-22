@@ -29,26 +29,22 @@ const { items, menuAriaLabel = "Toggle navigation" } = Astro.props;
       tabindex="0"
       class="menu dropdown-content menu-sm z-10 mt-2 w-48 bg-base-300 p-1 shadow-lg"
     >
-      {
-        items.map((item) => (
-          <li>
-            <a href={item.href} aria-label={item.ariaLabel ?? item.label}>
-              {item.label}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </div>
-  <ul class="menu menu-horizontal hidden gap-1 p-0 desktop:flex">
-    {
-      items.map((item) => (
+      {items.map((item) => (
         <li>
           <a href={item.href} aria-label={item.ariaLabel ?? item.label}>
             {item.label}
           </a>
         </li>
-      ))
-    }
+      ))}
+    </ul>
+  </div>
+  <ul class="menu menu-horizontal hidden gap-1 p-0 desktop:flex">
+    {items.map((item) => (
+      <li>
+        <a href={item.href} aria-label={item.ariaLabel ?? item.label}>
+          {item.label}
+        </a>
+      </li>
+    ))}
   </ul>
 </div>

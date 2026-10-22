@@ -5,15 +5,8 @@ import PostHeading from "./PostHeading.astro";
 
 type Props = CollectionEntry<"blog">["data"] & ArticleLinkProps;
 
-const {
-  title,
-  subtitle,
-  pubDate,
-  updatedDate,
-  syndication,
-  author,
-  url,
-} = Astro.props;
+const { title, subtitle, pubDate, updatedDate, syndication, author, url } =
+  Astro.props;
 ---
 
 <Article date={pubDate} {updatedDate} {author} {url} {syndication}>

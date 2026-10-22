@@ -1,6 +1,6 @@
-import { LitElement, html, css } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import { baseStyles } from './styles.js';
+import { LitElement, html, css } from "lit";
+import { customElement } from "lit/decorators.js";
+import { baseStyles } from "./styles.js";
 
 /**
  * Tufte Subtitle component - the italic subtitle that follows an article title.
@@ -18,7 +18,7 @@ import { baseStyles } from './styles.js';
  * <tufte-subtitle>A short, descriptive subtitle</tufte-subtitle>
  * ```
  */
-@customElement('tufte-subtitle')
+@customElement("tufte-subtitle")
 export class TufteSubtitle extends LitElement {
   static styles = [
     baseStyles,
@@ -42,6 +42,6 @@ export class TufteSubtitle extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'tufte-subtitle': TufteSubtitle;
+    "tufte-subtitle": TufteSubtitle;
   }
 }

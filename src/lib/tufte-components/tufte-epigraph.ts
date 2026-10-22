@@ -1,6 +1,6 @@
-import { LitElement, html, css } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import { baseStyles } from './styles.js';
+import { LitElement, html, css } from "lit";
+import { customElement } from "lit/decorators.js";
+import { baseStyles } from "./styles.js";
 
 /**
  * Tufte Epigraph component - chapter epigraphs with quotes.
@@ -17,7 +17,7 @@ import { baseStyles } from './styles.js';
  * </tufte-epigraph>
  * ```
  */
-@customElement('tufte-epigraph')
+@customElement("tufte-epigraph")
 export class TufteEpigraph extends LitElement {
   static styles = [
     baseStyles,
@@ -65,6 +65,6 @@ export class TufteEpigraph extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'tufte-epigraph': TufteEpigraph;
+    "tufte-epigraph": TufteEpigraph;
   }
 }

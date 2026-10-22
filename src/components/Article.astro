@@ -25,42 +25,37 @@ const {
 ---
 
 <tufte-article data-testid="article-container" class="h-entry">
-    <section>
-      <slot name="heading" />
+  <section>
+    <slot name="heading" />
 
-      <ArticleMeta {updatedDate} {url} />
+    <ArticleMeta {updatedDate} {url} />
 
-      <SyndicationLinks {syndication} />
+    <SyndicationLinks {syndication} />
 
-      <div class="e-content" style="view-transition-name: --article-content;">
-        <slot />
-      </div>
+    <div class="e-content" style="view-transition-name: --article-content;">
+      <slot />
+    </div>
 
-      {
-        (author || date) && (
-          <p class="text-foreground-subtle">
-            {
-              author && (
-                <span class="p-author h-card">
-                  <a class="p-name u-url" href="/">
-                    {author}
-                  </a>
-                </span>
-              )
-            }
-            {
-              date && (
-                <time class="dt-published" datetime={date.toISOString()}>
-                  {', '}<FormattedDate date={date} />
-                </time>
-              )
-            }
-          </p>
-        )
-      }
+    {(author || date) && (
+      <p class="text-foreground-subtle">
+        {author && (
+          <span class="p-author h-card">
+            <a class="p-name u-url" href="/">
+              {author}
+            </a>
+          </span>
+        )}
+        {date && (
+          <time class="dt-published" datetime={date.toISOString()}>
+            {", "}
+            <FormattedDate date={date} />
+          </time>
+        )}
+      </p>
+    )}
 
-      {url && <Webmentions url={url} client:idle />}
-    </section>
+    {url && <Webmentions url={url} client:idle />}
+  </section>
 </tufte-article>
 
 <script>

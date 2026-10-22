@@ -1,6 +1,6 @@
-import { LitElement, html, css } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import { baseStyles, linkStyles } from './styles.js';
+import { LitElement, html, css } from "lit";
+import { customElement } from "lit/decorators.js";
+import { baseStyles, linkStyles } from "./styles.js";
 
 /**
  * Tufte level-3 heading - a subsection heading.
@@ -17,7 +17,7 @@ import { baseStyles, linkStyles } from './styles.js';
  * <tufte-h3>A Subsection</tufte-h3>
  * ```
  */
-@customElement('tufte-h3')
+@customElement("tufte-h3")
 export class TufteHeading3 extends LitElement {
   static styles = [
     baseStyles,
@@ -42,6 +42,6 @@ export class TufteHeading3 extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'tufte-h3': TufteHeading3;
+    "tufte-h3": TufteHeading3;
   }
 }

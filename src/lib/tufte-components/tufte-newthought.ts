@@ -1,6 +1,6 @@
-import { LitElement, html, css } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import { baseStyles } from './styles.js';
+import { LitElement, html, css } from "lit";
+import { customElement } from "lit/decorators.js";
+import { baseStyles } from "./styles.js";
 
 /**
  * Tufte New Thought component - small caps for starting sections.
@@ -14,7 +14,7 @@ import { baseStyles } from './styles.js';
  * </p>
  * ```
  */
-@customElement('tufte-newthought')
+@customElement("tufte-newthought")
 export class TufteNewthought extends LitElement {
   static styles = [
     baseStyles,
@@ -33,6 +33,6 @@ export class TufteNewthought extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'tufte-newthought': TufteNewthought;
+    "tufte-newthought": TufteNewthought;
   }
 }

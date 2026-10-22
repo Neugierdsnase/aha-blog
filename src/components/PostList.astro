@@ -12,16 +12,12 @@ const { posts, basePath, heading } = Astro.props;
 ---
 
 <section class="h-feed">
-  <h2
-    class="p-name px-4 desktop:p-0 font-display text-5xl underline underline-offset-2 mb-8"
-  >
+  <h2 class="p-name px-4 desktop:p-0 font-display text-5xl underline underline-offset-2 mb-8">
     {heading}
   </h2>
   <ul class="grid grid-cols-1 gap-8 list-none p-0">
-    {
-      posts.map((post) => (
-        <PostListItem id={post.id} data={post.data} basePath={basePath} />
-      ))
-    }
+    {posts.map((post) => (
+      <PostListItem id={post.id} data={post.data} basePath={basePath} />
+    ))}
   </ul>
 </section>

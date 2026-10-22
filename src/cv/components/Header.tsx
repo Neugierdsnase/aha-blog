@@ -39,7 +39,10 @@ export const Header: FunctionComponent<HeaderProps> = ({
           setActiveFilters={setActiveFilters}
           options={filterOptions}
         />
-        <div className="tooltip tooltip-bottom" data-tip="Toggle German/English">
+        <div
+          className="tooltip tooltip-bottom"
+          data-tip="Toggle German/English"
+        >
           <button
             type="button"
             className="btn btn-outline"

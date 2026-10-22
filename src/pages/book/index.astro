@@ -14,7 +14,8 @@ const books = (await getCollection("book"))
   lang="de"
   title="Jüngst gelesen"
   description="Die Bücher, die ich zuletzt gelesen habe."
-  ><div
+>
+  <div
     id="hero"
     class="relative grid grid-cols-1 grid-rows-1 place-items-center w-full overflow-clip h-[44svh] max-w-screen"
   >
@@ -24,7 +25,9 @@ const books = (await getCollection("book"))
   <div class="relative w-full z-20 h-22 bg-base-100"></div>
 
   <ul class="p-4 desktop:p-0 grid grid-cols-1 gap-8">
-    {books.map((book) => <BookListItem {...book} />)}
+    {books.map((book) => (
+      <BookListItem {...book} />
+    ))}
   </ul>
 </BaseLayout>
 
