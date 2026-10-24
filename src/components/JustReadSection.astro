@@ -3,23 +3,10 @@ import Card from "./Card/Card.astro";
 ---
 
 <section id="just-read" class="w-full p-4">
-  <div class="w-full hidden desktop:block">
-    <Card>
-      <div slot="front">
-        <div class="absolute book inset-0"></div>
-        <p class="relative text-base-content font-lg">Jüngst gelesen</p>
-      </div>
-
-      <p slot="back" class="text-xs">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum
-        repellat velit quae suscipit c.
-      </p>
-    </Card>
-  </div>
-
-  <div class="relative h-54 overflow-hidden desktop:hidden">
+  <div class="relative h-54 overflow-hidden">
     <h2 class="text-base-content text-xl text-right mb-4">Jüngst gelesen</h2>
-    <div class="book float-left size-36"></div>
+    <div class="book float-left size-36 mr-4"></div>
+    <p>Zu jedem Buch oder Büchlein, das ich lese, pflege ich mir Notizen zu machen. Manchmal auch nicht. Dann schreibe ich kurz über das Buch. Oder lang. Je nachdem wie ausgiebig die Notizen waren.</p>
   </div>
 </section>
 
