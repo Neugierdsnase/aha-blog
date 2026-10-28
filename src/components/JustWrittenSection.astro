@@ -3,23 +3,11 @@ import Card from "./Card/Card.astro";
 ---
 
 <section id="just-written" class="w-full p-4">
-  <div class="w-full hidden desktop:block">
-    <Card>
-      <div slot="front">
-        <div class="absolute feathers inset-0"></div>
-        <p class="relative text-base-content font-lg">Jüngst geschrieben</p>
-      </div>
-
-      <p slot="back" class="text-xs">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum
-        repellat velit quae suscipit c.
-      </p>
-    </Card>
-  </div>
-
-  <div class="relative h-54 overflow-hidden desktop:hidden">
+  <div class="relative h-54">
     <h2 class="text-base-content text-xl text-left mb-4">Jüngst geschrieben</h2>
     <div class="feathers float-right size-36"></div>
+    <p>Manchmal habe ich Gedanken. Kein Mensch kann sie wissen, kein Jäger sie schießen. Andere Male sind sie es wert, geteilt zu werden.</p> 
+    <a href="/blog" class='btn btn-ghost hover:btn-primary mt-4'>Gedanken reinziehen </a>
   </div>
 </section>
 
