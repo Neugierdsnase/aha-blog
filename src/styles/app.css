@@ -44,6 +44,7 @@
   --font-serif:
     "Tinos NF", Palatino, "Palatino Linotype", "Palatino LT STD",
     "Book Antiqua", Georgia, serif;
+  --font-datatype: "Datatype", sans-serif;
 
   --text-xxs: 0.825rem;
   --text-xs: 1rem;
