@@ -25,49 +25,46 @@ const authorsDisplay =
     : fullAuthors;
 ---
 
-<li class="card list-none bg-base-200">
-  <a href={"/book/" + id}>
-    <div class="card-title">
-      <p
-        class="font-display text-lg line-clamp-1"
+<li class="card list-none bg-base-200 @container">
+<div class="p-4 pt-6">
+      <h2 class="text-balance">
+      <span
+        class="font-display text-lg inline"
         style={`view-transition-name: --header-${transitionName};`}
       >
         {title}
-      </p>
+        </span>
       {subtitle && (
-        <p
-          class="font-galnoy italic text-sm text-base-content line-clamp-1"
+        <span
+          class="font-galnoy italic text-sm font-medium text-base-content block text-balance"
           style={`view-transition-name: --subheader-${transitionName};`}
         >
           {subtitle}
-        </p>
+        </span>
       )}
-    </div>
+      </h2>
 
-    <div class="card-content text-xs overflow-hidden">
+      <div class="uppercase text-primary/70 my-4 tracking-widest">
+        {genreLabels[genre.primary] ?? genre.primary.replace("-", " ")}
+      </div>
+      
+      <span class="max-w-2/3 float-left">
       <span
-        class="font-serif"
         style={`view-transition-name: --author-${transitionName};`}
       >
         {authorsDisplay}
       </span>
-      <span class="text-surface-high text-[0.5em]" aria-hidden="true">
-        &#xf0b8a;
-      </span>
+      <span class="mx-1 text-secondary">󰣏</span>
       <span style={`view-transition-name: --release-date-${transitionName};`}>
         {releaseDate}
       </span>
       {rating != null && (
-        <>
-          <span class="text-surface-high text-[0.5em]" aria-hidden="true">
-            &#xf0b8a;
-          </span>
-          <span class="font-old tabular-nums">{rating}/10</span>
-        </>
+      <span class="mx-1 text-secondary">󰣏</span>
+          <span class="font-datatype">{`{p:${rating * 10}}`}</span>
       )}
       {isAudiobook && (
         <span
-          class="text-xxs text-base-content/70 uppercase tracking-widest row-start-4 col-start-1 mt-1 self-end flex items-baseline gap-1"
+          class="text-xxs text-base-primary/70 uppercase tracking-widest row-start-4 col-start-1 mt-1 self-end flex items-baseline gap-1"
           title="Hörbuch"
         >
           <span aria-hidden="true">󰋋</span>
@@ -75,23 +72,11 @@ const authorsDisplay =
           <span>angehört</span>
         </span>
       )}
-      <span class="genre">
-        {genreLabels[genre.primary] ?? genre.primary.replace("-", " ")}
       </span>
-    </div>
+
+  <a class="btn btn-sm btn-secondary float-right" href={"/book/" + id}>
+  Notizen lesen
   </a>
+</div>
 </li>
 
-<style>
-  @reference "../../styles/app.css";
-
-  .smallcaps {
-    font-variant: small-caps;
-  }
-
-  .genre {
-    @apply text-xxs text-base-content/70 uppercase tracking-widest
-      row-start-4 col-start-2 mt-1 self-end text-right;
-    font-variant: small-caps;
-  }
-</style>
