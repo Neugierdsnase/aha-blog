@@ -20,9 +20,9 @@ const books = (await getCollection("book"))
     class="relative grid grid-cols-1 grid-rows-1 place-items-center w-full overflow-clip h-[44svh] max-w-screen"
   >
     <h1 class="z-10 text-5xl translate-y-[-2vw]">Jüngst gelesen</h1>
-    <div id="hero-image" class="absolute inset-0 z-20 translate-y-12"></div>
+    <div id="hero-image" class="absolute inset-x-0 min-w-92 mx-auto max-w-lg bottom-0 h-90 z-20"></div>
   </div>
-  <div class="relative w-full z-20 h-22 bg-base-100"></div>
+  <div class="relative w-full z-20 h-22 bottom-0 bg-base-100"></div>
 
   <ul class="p-4 desktop:p-0 grid grid-cols-1 gap-8">
     {books.map((book) => (

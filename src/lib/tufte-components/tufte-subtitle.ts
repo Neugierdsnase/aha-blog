@@ -30,7 +30,7 @@ export class TufteSubtitle extends LitElement {
         margin-bottom: 1rem;
         font-size: 1.8rem;
         line-height: 1;
-        font-family: var(--font-sans);
+        font-family: var(--font-galnoy);
       }
     `,
   ];
