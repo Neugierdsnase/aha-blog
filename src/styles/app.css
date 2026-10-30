@@ -31,7 +31,7 @@
   --size-field: 0.3125rem;
   --border: 2px;
   --depth: 0;
-  --noise: 1;
+  --noise: 0;
 }
 
 @theme {
