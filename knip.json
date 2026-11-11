@@ -1,4 +1,9 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
-  "tags": ["-lintignore"]
+  "entry": ["src/lib/tufte-components/index.ts"],
+  "ignoreFiles": [
+    "src/lib/tufte-content/transform.test.ts",
+    "vite.config.ts",
+    "vitest.config.ts"
+  ]
 }
