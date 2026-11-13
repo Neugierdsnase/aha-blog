@@ -103,10 +103,9 @@ const isIndex = Astro.url.pathname === "/";
   }
 
   #main-nav {
-    animation:
-      stickToTop forwards,
-      becomeOpaque forwards;
-    animation-timeline: --nav-animationanchor, --nav-animationanchor;
+    animation-name: stickToTop, becomeOpaque;
+    animation-fill-mode: forwards, forwards;
+    animation-timeline: --nav-animationanchor;
     animation-range: exit, exit;
   }
 </style>
