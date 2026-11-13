@@ -41,8 +41,9 @@ const books = (await getCollection("book"))
       h1 {
         position: fixed;
         opacity: 0;
-        animation: becomeInvisible backwards;
-        animation-timeline: --nav-animationanchor, --nav-animationanchor;
+        animation-name: becomeInvisible;
+        animation-fill-mode: backwards;
+        animation-timeline: --nav-animationanchor;
         animation-range: exit;
       }
     }
