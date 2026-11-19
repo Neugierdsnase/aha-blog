@@ -26,14 +26,14 @@ const authorsDisplay =
 ---
 
 <li class="card list-none bg-base-200 @container">
-<div class="p-4 pt-6">
-      <h2 class="text-balance">
+  <div class="p-4 pt-6">
+    <h2 class="text-balance">
       <span
         class="font-display text-lg inline"
         style={`view-transition-name: --header-${transitionName};`}
       >
         {title}
-        </span>
+      </span>
       {subtitle && (
         <span
           class="font-galnoy italic text-sm font-medium text-base-content block text-balance"
@@ -42,16 +42,14 @@ const authorsDisplay =
           {subtitle}
         </span>
       )}
-      </h2>
+    </h2>
 
-      <div class="uppercase text-primary/70 my-4 tracking-widest">
-        {genreLabels[genre.primary] ?? genre.primary.replace("-", " ")}
-      </div>
-      
-      <span class="max-w-2/3 float-left">
-      <span
-        style={`view-transition-name: --author-${transitionName};`}
-      >
+    <div class="uppercase text-primary/70 my-4 tracking-widest">
+      {genreLabels[genre.primary] ?? genre.primary.replace("-", " ")}
+    </div>
+
+    <span class="max-w-2/3 float-left">
+      <span style={`view-transition-name: --author-${transitionName};`}>
         {authorsDisplay}
       </span>
       <span class="mx-1 text-secondary">󰣏</span>
@@ -59,8 +57,10 @@ const authorsDisplay =
         {releaseDate}
       </span>
       {rating != null && (
-      <span class="mx-1 text-secondary">󰣏</span>
+        <>
+          <span class="mx-1 text-secondary">󰣏</span>
           <span class="font-datatype">{`{p:${rating * 10}}`}</span>
+        </>
       )}
       {isAudiobook && (
         <span
@@ -72,11 +72,10 @@ const authorsDisplay =
           <span>angehört</span>
         </span>
       )}
-      </span>
+    </span>
 
-  <a class="btn btn-sm btn-secondary float-right" href={"/book/" + id}>
-  Notizen lesen
-  </a>
-</div>
+    <a class="btn btn-sm btn-secondary float-right" href={"/book/" + id}>
+      Notizen lesen
+    </a>
+  </div>
 </li>
-
